@@ -2,3 +2,6 @@ Vs code => "..." en haut à gauche => Terminal => New terminal =>
 git add .
 git commit -m ".." (message que je veux entre "")
 git push origin master
+
+MAINTENANT si j'ai update depuis mon tel, pour synchro le pc avec les modifs:
+git pull origin master
