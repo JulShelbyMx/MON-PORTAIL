@@ -815,3 +815,20 @@ footer {
     background-color: #e0a800;
     transform: scale(1.05);
 }
+
+.ranking-button {
+    padding: 15px 25px;
+    background-color: green;
+    color: #0a0a0a;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Pirata One', sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: 2px solid #0a0a0a;
+}
+.ranking-button:hover {
+    background-color: green;
+    transform: scale(1.05);
+}

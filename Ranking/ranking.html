@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking Manga/Anime - Jul's Portal</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="shortcut icon" href="../images/logopage.png" />
+    <style>
+        body {
+            background: #0a0a0a url('../images/images-ranking/ocean-background.jpg') repeat;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ranking-hero {
+            background: url('../images/images-ranking/ranking-hero-treasure.jpg') no-repeat center center/cover;
+            height: 35vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            border-bottom: 8px solid #ffb300;
+            box-shadow: 0 0 20px rgba(255, 179, 0, 0.8);
+        }
+
+        .ranking-hero-content {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #ffb300;
+        }
+
+        .ranking-hero h2 {
+            font-family: 'Pirata One', sans-serif;
+            font-size: 48px;
+            color: #ffb300;
+            text-shadow: 3px 3px 8px #000;
+            margin: 0;
+        }
+
+        .ranking-hero p {
+            font-size: 20px;
+            color: #ddd;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .return-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 12px 25px;
+            background-color: #ffb300;
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 10px;
+            font-family: 'Pirata One', sans-serif;
+            font-size: 20px;
+            border: 3px solid #0a0a0a;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .return-button:hover {
+            background-color: #e0a800;
+            transform: scale(1.1);
+        }
+
+        .ranking-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        .tier {
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 15px;
+            background: rgba(34, 34, 34, 0.95);
+            box-shadow: 0 0 20px rgba(255, 179, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #ffb300;
+        }
+
+        .tier::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #ffb300, #ff4444);
+        }
+
+        .tier h3 {
+            font-family: 'Pirata One', sans-serif;
+            font-size: 32px;
+            color: #ffb300;
+            text-align: center;
+            margin: 0 0 25px;
+            background: url('../images/images-ranking/tier-background.jpg') repeat;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
+            text-shadow: 2px 2px 5px #000;
+        }
+
+        .tier ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tier li {
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            line-height: 1.8;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 179, 0, 0.4);
+            transition: background 0.3s ease, transform 0.3s ease;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .tier li:hover {
+            background: rgba(255, 179, 0, 0.2);
+            transform: translateX(10px);
+        }
+
+        .tier li img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 20px;
+            border: 2px solid #ffb300;
+            box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .tier li:hover img {
+            transform: scale(1.1);
+        }
+
+        .tier li strong {
+            color: #ff4444;
+            font-size: 20px;
+            text-shadow: 1px 1px 3px #000;
+        }
+
+        .tier ul ul {
+            margin-left: 100px;
+            font-size: 16px;
+            color: #ddd;
+        }
+
+        .tier ul ul li {
+            display: block;
+            padding: 10px 0;
+            background: none;
+        }
+
+        .tier ul ul ul {
+            margin-left: 20px;
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        .ssss-tier { background: linear-gradient(135deg, rgba(255, 179, 0, 0.95), rgba(255, 68, 68, 0.95)); }
+        .sss-tier { background: rgba(255, 179, 0, 0.9); }
+        .ss-tier { background: rgba(255, 102, 102, 0.9); }
+        .s-tier { background: rgba(255, 153, 153, 0.9); }
+        .a-tier { background: rgba(135, 206, 235, 0.9); }
+        .b-tier { background: rgba(173, 216, 230, 0.9); }
+        .c-tier { background: rgba(102, 102, 102, 0.9); }
+        .d-tier { background: rgba(68, 68, 68, 0.9); }
+        .e-tier { background: rgba(51, 51, 51, 0.9); }
+        .todo-tier { background: rgba(26, 26, 26, 0.9); }
+
+        @media (max-width: 768px) {
+            .ranking-hero h2 { font-size: 36px; }
+            .tier h3 { font-size: 28px; }
+            .tier li { font-size: 16px; flex-direction: column; align-items: flex-start; }
+            .tier li img { width: 60px; height: 60px; margin-bottom: 10px; }
+            .tier li strong { font-size: 18px; }
+            .tier ul ul { margin-left: 20px; font-size: 14px; }
+            .tier ul ul ul { font-size: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .ranking-hero h2 { font-size: 28px; }
+            .tier h3 { font-size: 24px; }
+            .tier li { font-size: 14px; }
+            .tier li img { width: 50px; height: 50px; }
+            .tier li strong { font-size: 16px; }
+            .tier ul ul { font-size: 12px; }
+            .tier ul ul ul { font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+    <section class="ranking-hero">
+        <div class="ranking-hero-content">
+            <h2>Manga/Anime Ranking</h2>
+            <p>"My personal treasure chest of manga and anime greatness!"</p>
+            <a href="../index.html" class="return-button">BACK</a>
+        </div>
+    </section>
+
+    <div class="ranking-container">
+        <div class="tier ssss-tier">
+            <h3>✧ SSSS (God-tier)</h3>
+            <ul>
+                <li>
+                    <img src="../images/images-ranking/one-piece.jpg" alt="One Piece">
+                    <div><strong>ONE PIECE (Eiichiro Oda)</strong>: À jour | Manga: À jour
+                        <ul>
+                            <li>Monsters (Eiichiro Oda): Fini | Manga: Fini</li>
+                            <li>One Piece Log: Fish-man Island (Toei Animation): Fini</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/dragon-ball.webp" alt="Dragon Ball">
+                    <div><strong>DRAGON BALL (Akira Toriyama🕊️)</strong>: Fini
+                        <ul>
+                            <li>Dragon Ball Z (Akira Toriyama🕊️): Fini</li>
+                            <li>Dragon Ball GT (Toei Animation): Fini</li>
+                            <li>Dragon Ball Super (Akira Toriyama🕊️ / Toyotaro): À jour | Manga: À jour</li>
+                            <li>Super Dragon Ball Heroes (promotional anime): À jour (Fini?)</li>
+                            <li>Dragon Ball Daima (Toei Animation): Fini</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tier sss-tier">
+            <h3>★★★ SSS</h3>
+            <ul>
+                <li>
+                    <img src="../images/images-ranking/naruto.jpg" alt="Naruto">
+                    <div><strong>NARUTO (Masashi Kishimoto)</strong>: Fini
+                        <ul>
+                            <li>Naruto Shippuden (Masashi Kishimoto): Fini | Manga: Fini</li>
+                            <li>Boruto (M. Kishimoto / Mikio Ikemoto): À jour | Manga: À jour (tous les 20 du mois)</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/bleach.webp" alt="Bleach">
+                    <div><strong>BLEACH (Tite Kubo)</strong>: Fini
+                        <ul>
+                            <li>Burn the Witch (Tite Kubo): Fini? | Manga: ?</li>
+                            <li>Bleach Thousand-Year Blood War (Tite Kubo): À jour | Manga: Fini
+                                <ul>
+                                    <li>The Blood Warfare (part1): Fini</li>
+                                    <li>The Separation (part2): Fini</li>
+                                    <li>The Conflict (part3): Fini</li>
+                                    <li>The Calamity (part4): Pas de date?</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tier ss-tier">
+            <h3>★★ SS</h3>
+            <ul>
+                <li>
+                    <img src="../images/images-ranking/snk.jpg" alt="Shingeki no Kyojin">
+                    <div><strong>SHINGEKI NO KYOJIN (Hajime Isayama)</strong>: Fini | Manga: Fini</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/vinland-saga.png" alt="Vinland Saga">
+                    <div><strong>VINLAND SAGA (Makoto Yukimura)</strong>: À jour | Manga: À jour</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/berserk.jpg" alt="Berserk">
+                    <div><strong>BERSERK (Kentaro Miura🕊️ / Kouji Mori)</strong>: Remake non-officiel été 2025 par StudioECLYPSE | Manga: À jour</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tier s-tier">
+            <h3>★ S</h3>
+            <ul>
+                <li>
+                    <img src="../images/images-ranking/jojo.jpg" alt="JoJo's Bizarre Adventure">
+                    <div><strong>JOJO'S BIZARRE ADVENTURES (Hirohiko Araki)</strong>: En cours | Manga: ?
+                        <ul>
+                            <li>Phantom Blood (part1): Fini</li>
+                            <li>Battle Tendency (part2): Fini</li>
+                            <li>Stardust Crusaders (part3): Fini</li>
+                            <li>Diamond is Unbreakable (part4): Fini</li>
+                            <li>Golden Wind (part5): En cours</li>
+                            <li>Stone Ocean (part6): À voir</li>
+                            <li>Steel Ball Run (part7): À voir</li>
+                            <li>Jojolion (part8): À voir</li>
+                            <li>The Jojolands (part9): À voir</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tier a-tier">
+            <h3>A</h3>
+            <ul>
+                <li>
+                    <img src="../images/images-ranking/black-clover.jpg" alt="Black Clover">
+                    <div><strong>BLACK CLOVER (Yūki Tabata)</strong>: Fini? | Manga: À jour</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/fairy-tail.webp" alt="Fairy Tail">
+                    <div><strong>FAIRY TAIL (Hiro Mashima)</strong>: À jour | Manga: Fini
+                        <ul>
+                            <li>100 Years Quest (Hiro Mashima): À jour | Manga: À jour</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/my-hero-academia.jpg" alt="My Hero Academia">
+                    <div><strong>MY HERO ACADEMIA (Kōhei Horikoshi)</strong>: À jour | Manga: Fini</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/hunter-x-hunter.jpg" alt="Hunter x Hunter">
+                    <div><strong>HUNTER X HUNTER (Yoshihiro Togashi)</strong>: À jour (Suite?) | Manga: En cours?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/demon-slayer.jpg" alt="Demon Slayer">
+                    <div><strong>DEMON SLAYER (Koyoharu Gotōge)</strong>: À jour | Manga: Fini</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/jujutsu-kaisen.jpg" alt="Jujutsu Kaisen">
+                    <div><strong>JUJUTSU KAISEN (Gege Akutami)</strong>: À jour | Manga: Fini</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tier b-tier">
+            <h3>B</h3>
+            <ul>
+                <li>
+                    <img src="../images/images-ranking/death-note.webp" alt="Death Note">
+                    <div><strong>DEATH NOTE (Tsugumi Ohba / Takeshi Obata)</strong>: Fini | Manga: Fini</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/high-school-dxd.webp" alt="High School DxD">
+                    <div><strong>HIGH SCHOOL DXD (Ichiei Ishibumi / Miyama-Zero)</strong>: À jour | Light Novel: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/fire-force.webp" alt="Fire Force">
+                    <div><strong>FIRE FORCE (Atsushi Ōkubo)</strong>: À jour | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/assassination-classroom.jpg" alt="Assassination Classroom">
+                    <div><strong>ASSASSINATION CLASSROOM (Yūsei Matsui)</strong>: Fini | Manga: Fini</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/tokyo-ghoul.jpg" alt="Tokyo Ghoul">
+                    <div><strong>TOKYO GHOUL (Sui Ishida)</strong>: À jour | Manga: ?
+                        <ul>
+                            <li>Tokyo Ghoul:RE (Sui Ishida): Fini | Manga: ?</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/solo-leveling.webp" alt="Solo Leveling">
+                    <div><strong>SOLO LEVELING (Chugong)</strong>: À jour | Manhwa: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/mirai-nikki.webp" alt="Mirai Nikki">
+                    <div><strong>MIRAI NIKKI (Sakae Esuno)</strong>: Fini | Manga: Fini</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/nana.jpg" alt="Nana">
+                    <div><strong>NANA (Ai Yazawa)</strong>: À jour (Pas d’annonce) | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/dr-stone.webp" alt="Dr. Stone">
+                    <div><strong>DR. STONE (Riichiro Inagaki / Boichi)</strong>: À jour | Manga: ?</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tier c-tier">
+            <h3>C</h3>
+            <ul>
+                <li>
+                    <img src="../images/images-ranking/tokyo-revengers.jpg" alt="Tokyo Revengers">
+                    <div><strong>TOKYO REVENGERS (Ken Wakui)</strong>: À jour | Manga: Fini</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/eminence-in-shadow.webp" alt="The Eminence in Shadow">
+                    <div><strong>THE EMINENCE IN SHADOW (Daisuke Aizawa)</strong>: À jour | Light Novel: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/bunny-girl-senpai.jpg" alt="Rascal Does Not Dream">
+                    <div><strong>RASCAL DOES NOT DREAM OF BUNNY GIRL SENPAI (Hajime Kamoshida)</strong>: Fini? | Light Novel: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/carnets-de-l'apothicaire.webp" alt="Les Carnets de l’Apothicaire">
+                    <div><strong>LES CARNETS DE L’APOTHICAIRE (Natsu Hyūga / Itsuki Nanao)</strong>: À jour | Light Novel: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/promised-neverland.webp" alt="The Promised Neverland">
+                    <div><strong>THE PROMISED NEVERLAND (Kaiu Shirai / Posuka Demizu)</strong>: Suite? | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/ouran-host-club.jpg" alt="Ouran High School Host Club">
+                    <div><strong>OURAN HIGH SCHOOL HOST CLUB (Bisco Hatori)</strong>: Fini? | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/maid-sama.jpg" alt="The President is a Maid">
+                    <div><strong>THE PRESIDENT IS A MAID/Kaichou wa Maid-sama (Hiro Fujiwara)</strong>: Fini | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/peach-girl.webp" alt="Peach Girl">
+                    <div><strong>PEACH GIRL (Miwa Ueda)</strong>: Fini | Manga: Fini</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tier d-tier">
+            <h3>D</h3>
+            <ul>
+                <li>
+                    <img src="../images/images-ranking/edens-zero.jpg" alt="Edens Zero">
+                    <div><strong>EDENS ZERO (Hiro Mashima)</strong>: À jour | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/hells-paradise.jpg" alt="Hell's Paradise">
+                    <div><strong>HELL'S PARADISE (Yūji Kaku)</strong>: À jour | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/one-punch-man.webp" alt="One Punch Man">
+                    <div><strong>ONE PUNCH MAN (ONE / Yūsuke Murata)</strong>: À jour (Suite un jour?) | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/ninja-kamui.jpg" alt="Ninja Kamui">
+                    <div><strong>NINJA KAMUI (Sunghoo Park)</strong>: Fini? | Pas de manga?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/failure-frame.webp" alt="Failure Frame">
+                    <div><strong>FAILURE FRAME (Kaoru Shinozaki)</strong>: À jour | Light Novel: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/dandadan.webp" alt="Dandadan">
+                    <div><strong>DANDADAN (Yukinobu Tatsu)</strong>: En cours | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/servamp.webp" alt="Servamp">
+                    <div><strong>SERVAMP (Tanaka Strike)</strong>: En cours | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/kaifuku.webp" alt="Kaifuku Jutsushi no Yarinaoshi">
+                    <div><strong>KAIFUKU JUTSUSHI NO YARINAOSHI (Rui Tsukiyo / Shiokonbu)</strong>: Saison 2? Pas d'annonce? | Manga: Suite?</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tier e-tier">
+            <h3>E</h3>
+            <ul>
+                <li>
+                    <img src="../images/images-ranking/hyoka.jpg" alt="Hyōka">
+                    <div><strong>HYŌKA (Honobu Yonezawa)</strong>: Fini</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/nagatoro.webp" alt="Nagatoro">
+                    <div><strong>NAGATORO (Nanashi)</strong>: Saison 3? | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/fuufu-miman.webp" alt="Fuufu Ijou Koibito Miman">
+                    <div><strong>FUUFU IJOU KOIBITO MIMAN (Yuki Kanamaru)</strong>: Saison 1 finie, S2? | Manga: 30 (pas de VF)</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/my-dress-up-darling.webp" alt="My Dress-Up Darling">
+                    <div><strong>MY DRESS UP DARLING (Shinichi Fukuda)</strong>: Saison 2? | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/inukai-san.webp" alt="My Life as Inukai-san's Dog">
+                    <div><strong>MY LIFE AS INUKAI-SAN'S DOG (Gosei Furukawa)</strong>: À jour | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/tenpuru.webp" alt="Tenpuru">
+                    <div><strong>TENPURU (Yoshioka Kimitake)</strong>: À jour | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/100-girlfriends.jpg" alt="The 100 Girlfriends">
+                    <div><strong>THE 100 GIRLFRIENDS (Rikito Nakamura / Yukiko Nozawa)</strong>: À jour | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/demon-slave.webp" alt="Demon Slave">
+                    <div><strong>DEMON SLAVE (Takahiro / Yohei Takemura)</strong>: À jour | Manga: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/yosuga-no-sora.webp" alt="Yosuga no Sora">
+                    <div><strong>YOSUGA NO SORA (Sphere)</strong>: Fini</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/gods-games-we-play.webp" alt="God's Games We Play">
+                    <div><strong>GOD'S GAMES WE PLAY (Kei Sazane)</strong>: À jour | Light Novel: ?</div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/kiss-him-not-me.webp" alt="Kiss Him, Not Me">
+                    <div><strong>KISS HIM NOT ME! (Junko)</strong>: Fini? Saison 2? | Manga: ?</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tier todo-tier">
+            <h3>ANIMES À VOIR + SCANS À LIRE + FILMS</h3>
+            <ul>
+                <li>
+                    <div><strong>BLUE EXORCIST (Kazue Kato)</strong></div>
+                </li>
+                <li>
+                    <div><strong>SWORD ART ONLINE (Reki Kawahara)</strong></div>
+                </li>
+                <li>
+                    <div><strong>FULL METAL ALCHEMIST (Hiromu Arakawa)</strong></div>
+                </li>
+                <li>
+                    <div><strong>THE SEVEN DEADLY SINS (Nakaba Suzuki)</strong></div>
+                </li>
+                <li>
+                    <div><strong>FRIEREN (Kanehito Yamada / Tsukasa Abe)</strong></div>
+                </li>
+                <li>
+                    <div><strong>SPY X FAMILY (Tatsuya Endo)</strong></div>
+                </li>
+                <li>
+                    <div><strong>DARLING IN THE FRANXX (Trigger / A-1 Pictures)</strong></div>
+                </li>
+                <li>
+                    <div><strong>AKAME GA KILL (Takahiro / Tetsuya Tashiro)</strong></div>
+                </li>
+                <li>
+                    <div><strong>YOUR LIE IN APRIL (film) (Naoshi Arakawa)</strong></div>
+                </li>
+                <li>
+                    <div><strong>VAGABOND (Takehiko Inoue)</strong> {MANGA!}</div>
+                </li>
+                <li>
+                    <div><strong>PARASYTE (Hitoshi Iwaaki)</strong></div>
+                </li>
+                <li>
+                    <div><strong>SUMMERTIME RENDERING (Yasuki Tanaka)</strong></div>
+                </li>
+                <li>
+                    <div><strong>AO HARU RIDE (Io Sakisaka)</strong></div>
+                </li>
+                <li>
+                    <div><strong>CLASSROOM OF THE ELITE (Shōgo Kinugasa)</strong></div>
+                </li>
+                <li>
+                    <div><strong>FOOD WARS (Yūto Tsukuda / Shun Saeki)</strong></div>
+                </li>
+                <li>
+                    <div><strong>MAHOU SHOUJO MADOKA MAGICA (Gen Urobuchi)</strong></div>
+                </li>
+                <li>
+                    <div><strong>BLOOD-C (Kotone Ranmaru)</strong></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
