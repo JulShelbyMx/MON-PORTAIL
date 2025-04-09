@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streaming - One Piece - Jul's Portal</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="shortcut icon" href="../images/logopage.png" />
+
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .streaming-hero {
+            background: url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
+            height: 30vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .return-button {
+            padding: 15px 25px;
+            background-color: #ffb300;
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-family: 'Pirata One', sans-serif;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: 2px solid #0a0a0a;
+        }
+        .return-button:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
+        }
+        .streaming-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .season-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .season-card {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            width: 200px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        .season-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        .season-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .season-card h3 {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #ffb300;
+            font-family: 'Pirata One', sans-serif;
+        }
+        .season-card a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">One Piece Streaming</div>
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Search a season..." autocomplete="off">
+            <button id="search-button"><img src="../images/search-bar-logo.png" alt="Search Logo"></button>
+            <ul id="search-suggestions" class="suggestions-list"></ul>
+        </div>
+    </header>
+
+    <section class="streaming-hero">
+        <div class="streaming-hero-content">
+            <a href="../index.html" class="return-button">BACK</a>
+        </div>
+    </section>
+
+    <div class="streaming-container">
+        <div class="season-list" id="season-list"></div>
+    </div>
+
+    <script src="streaming.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const seasons = generateStreamingLinks();
+            const seasonList = document.getElementById('season-list');
+            const searchBar = document.getElementById('search-bar');
+            const searchButton = document.getElementById('search-button');
+            const suggestionsList = document.getElementById('search-suggestions');
+        
+            // Générer les cartes des saisons
+            seasons.forEach((season, index) => {
+                const seasonCard = document.createElement('div');
+                seasonCard.className = 'season-card';
+                seasonCard.innerHTML = `
+                    <a href="season${index + 1}.html">
+                        <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${season.name}">
+                        <h3>${season.name}</h3>
+                    </a>
+                `;
+                seasonList.appendChild(seasonCard);
+            });
+        
+            // Fonction pour afficher les suggestions avec images
+            function showSuggestions(query) {
+                suggestionsList.innerHTML = '';
+                if (!query) {
+                    suggestionsList.style.display = 'none';
+                    return;
+                }
+        
+                const filteredSeasons = seasons.filter(season =>
+                    season.name.toLowerCase().includes(query.toLowerCase())
+                );
+        
+                if (filteredSeasons.length === 0) {
+                    suggestionsList.style.display = 'none';
+                    return;
+                }
+        
+                filteredSeasons.forEach((season, index) => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `
+                        <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${season.name}">
+                        <span>${season.name}</span>
+                    `;
+                    li.dataset.index = seasons.indexOf(season);
+                    li.addEventListener('click', () => {
+                        scrollToCard(season.name);
+                        suggestionsList.style.display = 'none';
+                        searchBar.value = season.name;
+                    });
+                    suggestionsList.appendChild(li);
+                });
+        
+                suggestionsList.style.display = 'block';
+            }
+        
+            // Fonction pour scroller vers une carte
+            function scrollToCard(seasonName) {
+                const seasonCard = Array.from(document.querySelectorAll('.season-card')).find(card =>
+                    card.querySelector('h3').textContent.toLowerCase() === seasonName.toLowerCase()
+                );
+                if (seasonCard) {
+                    seasonCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    seasonCard.classList.add('highlight');
+                    setTimeout(() => seasonCard.classList.remove('highlight'), 2000);
+                }
+            }
+        
+            // Style pour surligner temporairement la carte trouvée
+            const style = document.createElement('style');
+            style.textContent = `
+                .season-card.highlight {
+                    box-shadow: 0 0 20px #ffb300;
+                    transform: scale(1.1);
+                    transition: all 0.3s ease;
+                }
+            `;
+            document.head.appendChild(style);
+        
+            // Événement pour la saisie dans la barre de recherche
+            let activeSuggestion = -1;
+            searchBar.addEventListener('input', (e) => {
+                activeSuggestion = -1;
+                showSuggestions(e.target.value);
+            });
+        
+            // Événement pour le clic sur le bouton de recherche
+            searchButton.addEventListener('click', () => {
+                const query = searchBar.value.trim();
+                if (query) {
+                    scrollToCard(query);
+                    suggestionsList.style.display = 'none';
+                }
+            });
+        
+            // Navigation au clavier
+            searchBar.addEventListener('keydown', (e) => {
+                const suggestions = suggestionsList.querySelectorAll('li');
+                if (suggestions.length === 0) return;
+        
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    activeSuggestion = Math.min(activeSuggestion + 1, suggestions.length - 1);
+                    updateActiveSuggestion(suggestions);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    activeSuggestion = Math.max(activeSuggestion - 1, -1);
+                    updateActiveSuggestion(suggestions);
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (activeSuggestion >= 0) {
+                        suggestions[activeSuggestion].click();
+                    } else {
+                        scrollToCard(searchBar.value.trim());
+                        suggestionsList.style.display = 'none';
+                    }
+                }
+            });
+        
+            function updateActiveSuggestion(suggestions) {
+                suggestions.forEach((suggestion, index) => {
+                    suggestion.classList.toggle('active', index === activeSuggestion);
+                });
+                if (activeSuggestion >= 0) {
+                    suggestions[activeSuggestion].scrollIntoView({ block: 'nearest' });
+                    searchBar.value = suggestions[activeSuggestion].querySelector('span').textContent;
+                }
+            }
+        
+            // Cacher les suggestions quand on clique ailleurs
+            document.addEventListener('click', (e) => {
+                if (!searchBar.contains(e.target) && !suggestionsList.contains(e.target)) {
+                    suggestionsList.style.display = 'none';
+                }
+            });
+        });
+        </script>
+
+
+
+</body>
+</html>

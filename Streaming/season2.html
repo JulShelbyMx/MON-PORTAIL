@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alabasta Saga - Jul's Streaming</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="shortcut icon" href="../images/logopage.png" />
+    <style>
+        body {
+            background-color: #111;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .streaming-hero {
+            height: 30vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+            background-color: #111; /* Fond de secours */
+        }
+        .return-button {
+            padding: 15px 25px;
+            background-color: #ffb300;
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 20px;
+            font-family: 'Pirata One', sans-serif;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border: 2px solid #0a0a0a;
+        }
+        .return-button:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
+        }
+        .streaming-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .episode-selector {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .episode-selector select {
+            padding: 10px;
+            font-size: 16px;
+            background-color: #222;
+            color: white;
+            border: 2px solid #ffb300;
+            border-radius: 8px;
+            font-family: 'Pirata One', sans-serif;
+        }
+        .video-player {
+            text-align: center;
+        }
+        .video-player iframe {
+            width: 100%;
+            max-width: 800px;
+            height: 450px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .episode-details {
+            background: url('../images/categories-texture-parchemin.avif') no-repeat center center/cover;
+            padding: 15px;
+            border-radius: 10px;
+            border: 3px solid #ffb300;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .episode-details h2 {
+            font-family: 'Pirata One', sans-serif;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">One Piece Seasons</div>
+    </header>
+
+    <section class="streaming-hero">
+        <div class="streaming-hero-content">
+            <a href="streaming.html" class="return-button">BACK TO SEASONS</a>
+        </div>
+    </section>
+
+    <div class="streaming-container">
+        <div class="episode-selector">
+            <select id="episode-select"></select>
+        </div>
+
+        <div class="video-player" id="video-player"></div>
+
+        <div class="episode-details" id="episode-details">
+            <h2>Episode 1 - Alabasta</h2>
+        </div>
+    </div>
+
+    <script src="streaming.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const seasons = generateStreamingLinks();
+            const seasonIndex = 1; 
+            const season = seasons[seasonIndex];
+            const episodeSelect = document.getElementById('episode-select');
+            const videoPlayer = document.getElementById('video-player');
+            const episodeDetails = document.getElementById('episode-details');
+            const streamingHero = document.querySelector('.streaming-hero');
+
+            // Appliquer dynamiquement le background à .streaming-hero
+            streamingHero.style.backgroundImage = `url("${season.thumbnail || '../images/default-season-placeholder.jpg'}")`;
+
+            // Remplir le sélecteur avec les épisodes
+            season.episodes.forEach(episode => {
+                const option = document.createElement('option');
+                option.value = episode.episode;
+                option.textContent = `Episode ${episode.episode}`;
+                episodeSelect.appendChild(option);
+            });
+
+            // Afficher le premier épisode par défaut
+            const firstEpisode = season.episodes[0];
+            videoPlayer.innerHTML = `<iframe src="${firstEpisode.videoUrl}" allowfullscreen></iframe>`;
+            episodeDetails.innerHTML = `<h2>Episode ${firstEpisode.episode} - ${season.name}</h2>`;
+
+            // Changer d’épisode avec le sélecteur
+            episodeSelect.addEventListener('change', (e) => {
+                const selectedEpisode = season.episodes.find(ep => ep.episode == e.target.value);
+                videoPlayer.innerHTML = `<iframe src="${selectedEpisode.videoUrl}" allowfullscreen></iframe>`;
+                episodeDetails.innerHTML = `<h2>Episode ${selectedEpisode.episode} - ${season.name}</h2>`;
+            });
+        });
+    </script>
+
+<script>
+    // Bloquer les pop-ups
+    window.open = function() {
+        console.log("Tentative de pop-up bloquée");
+        return null; // Empêche l'ouverture de nouvelles fenêtres
+    };
+
+    // Surcharger window.alert pour bloquer les alertes publicitaires
+    window.alert = function() {
+        console.log("Alerte bloquée");
+        return null;
+    };
+
+    // Observer les iframes pour détecter des changements suspects
+    document.addEventListener('DOMContentLoaded', () => {
+        const iframes = document.getElementsByTagName('iframe');
+        for (let iframe of iframes) {
+            iframe.addEventListener('load', () => {
+                // On ne peut pas accéder au contenu directement, mais on peut limiter les interactions
+                iframe.style.pointerEvents = 'auto'; // Permet de cliquer dans l’iframe, mais pas hors
+            });
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable - Moorside High School</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="timetable.css">
+    <link rel="shortcut icon" href="../images/logopage.png" />
+</head>
+<body>
+    <header>
+        <div class="logo">Eliya's Timetable - Year 9 [2024-2025]</div>
+    </header>
+
+    <section class="timetable-hero">
+        <div class="timetable-hero-content">
+            <a href="../index.html" class="return-button">BACK</a>
+        </div>
+    </section>
+
+    <div class="timetable-container">
+        <div id="holiday-message" class="holiday-message" style="display: none;"></div>
+        <div class="timetable-container">
+            <div id="holiday-message" class="holiday-message" style="display: none;"></div>
+            <div id="holiday-options" class="holiday-options" style="display: none;">
+                <button id="show-return-timetable" class="toggle-button" style="display: none;">Show the timetable for the first week back</button>
+                <button id="show-week-timetable" class="toggle-button" style="display: none;">Show the timetable for this week</button>
+            </div>
+
+        <div class="timetable-toggle">
+            <button id="toggle-button" class="toggle-button">Switch to Week B</button>
+            <div class="day-navigation" id="day-navigation">
+                <button id="prev-day" class="nav-button">&lt;=</button>
+                <span id="current-day" class="current-day"></span>
+                <button id="next-day" class="nav-button">=&gt;</button>
+            </div>
+        </div>
+
+        <!-- Week A -->
+        <div id="timetable-week-a">
+            <h2>Week A</h2>
+            <table class="timetable-table">
+                <thead>
+                    <tr>
+                        <th>
+                            Time <span id="time-zone-a">[UK]</span>
+                            <button id="toggle-time-a" class="time-toggle-button">Switch to FR</button>
+                        </th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                        <td>9PH/Tu</td>
+                        <td>9PH/Tu</td>
+                        <td>9PH/Tu</td>
+                        <td>9PH/Tu</td>
+                        <td>9PH/Tu</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                        <td>9cd/EnE</td>
+                        <td>9cd/CoE</td>
+                        <td>9cd/ArE</td>
+                        <td>9cd/HiE</td>
+                        <td>9cd/ScR</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                        <td>9d/PeR</td>
+                        <td>9cd/MaE</td>
+                        <td>9cd/MaE</td>
+                        <td>9cd/DmE</td>
+                        <td>9cd/PsE</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="10:55-11:55">10:55-11:55</td>
+                        <td>9cd/SpE</td>
+                        <td>9cd/EnE</td>
+                        <td>9cd/GgE</td>
+                        <td>9cd/ReE</td>
+                        <td>9cd/HiE</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                        <td>9cd/MaE</td>
+                        <td>9cd/MuE</td>
+                        <td>9cd/Mess</td>
+                        <td>9cd/FrE</td>
+                        <td>9cd/GgE</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                        <td>Lunch + 9PH/Rt</td>
+                        <td>Lunch + 9PH/Rt</td>
+                        <td>Lunch + 9PH/Rt</td>
+                        <td>Lunch + 9PH/Rt</td>
+                        <td>Lunch + 9PH/Rt</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                        <td>9cd/ScR</td>
+                        <td>9cd/ScR</td>
+                        <td>9cd/EnE</td>
+                        <td>9cd/EnE</td>
+                        <td>9cd/MaE</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Week B -->
+        <div id="timetable-week-b" style="display: none;">
+            <h2>Week B</h2>
+            <table class="timetable-table">
+                <thead>
+                    <tr>
+                        <th>
+                            Time <span id="time-zone-b">[UK]</span>
+                            <button id="toggle-time-b" class="time-toggle-button">Switch to FR</button>
+                        </th>
+                        <th>Monday</th>
+                        <th>Tuesday</th>
+                        <th>Wednesday</th>
+                        <th>Thursday</th>
+                        <th>Friday</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                        <td>9PH/Tu</td>
+                        <td>9PH/Tu</td>
+                        <td>9PH/Tu</td>
+                        <td>9PH/Tu</td>
+                        <td>9PH/Tu</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                        <td>9cd/PsE</td>
+                        <td>9cd/TcR</td>
+                        <td>9cd/EnE</td>
+                        <td>9cd/ScR</td>
+                        <td>9cd/ScR</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                        <td>9d/MaE</td>
+                        <td>9cd/GgE</td>
+                        <td>9cd/Mess</td>
+                        <td>9cd/EnE</td>
+                        <td>9cd/HiE</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="10:55-11:55">10:55-11:55</td>
+                        <td>9cd/CoE</td>
+                        <td>9cd/EnE</td>
+                        <td>9cd/ArE</td>
+                        <td>9cd/DmE</td>
+                        <td>9cd/MaE</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                        <td>9cd/PeR</td>
+                        <td>9cd/MaE</td>
+                        <td>9cd/SpE</td>
+                        <td>9cd/FrE</td>
+                        <td>9cd/GgE</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                        <td>Lunch + 9PH/Rt</td>
+                        <td>Lunch + 9PH/Rt</td>
+                        <td>Lunch + 9PH/Rt</td>
+                        <td>Lunch + 9PH/Rt</td>
+                        <td>Lunch + 9PH/Rt</td>
+                    </tr>
+                    <tr>
+                        <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                        <td>9cd/EnE</td>
+                        <td>9cd/MuE</td>
+                        <td>9cd/ScR</td>
+                        <td>9cd/MaE</td>
+                        <td>9cd/ReE</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="timetable.js"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+body {
+    background-color: #111;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.timetable-hero {
+    background: url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.return-button {
+    padding: 15px 25px;
+    background-color: #ffb300;
+    color: #0a0a0a;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Pirata One', sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: 2px solid #0a0a0a;
+}
+
+.return-button:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+}
+
+.timetable-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.timetable-toggle {
+    margin-bottom: 20px;
+}
+
+.toggle-button {
+    padding: 10px 20px;
+    background-color: #87CEEB; /* Bleu ciel */
+    color: #0a0a0a;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Pirata One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #ADD8E6; /* Bleu ciel plus clair */
+}
+
+.timetable-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #222;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.timetable-table th, .timetable-table td {
+    padding: 15px;
+    border: 1px solid #87CEEB; /* Bleu ciel */
+    text-align: center;
+    font-family: 'Pirata One', sans-serif;
+}
+
+.timetable-table th {
+    background-color: #87CEEB; /* Bleu ciel */
+    color: #0a0a0a;
+    font-size: 18px;
+}
+
+.holiday-message {
+    background: #222;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #87CEEB; /* Bleu ciel */
+    font-size: 18px;
+    font-family: 'Pirata One', sans-serif;
+    margin-bottom: 20px;
+}
+
+/* Conteneur pour les boutons d'options pendant les vacances/jours fériés */
+.holiday-options {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* Réutilisation du style .toggle-button pour les nouveaux boutons */
+.toggle-button {
+    padding: 10px 20px;
+    background-color: #87CEEB; /* Bleu ciel */
+    color: #0a0a0a;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Pirata One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.toggle-button:hover {
+    background-color: #ADD8E6; /* Bleu ciel plus clair */
+}
+
+.day-navigation {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    display: none; /* Masqué par défaut */
+}
+
+.nav-button {
+    padding: 5px 10px;
+    background-color: #87CEEB; /* Bleu ciel */
+    color: #0a0a0a;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Pirata One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.nav-button:hover {
+    background-color: #ADD8E6; /* Bleu ciel plus clair */
+}
+
+.current-day {
+    font-size: 18px;
+    font-family: 'Pirata One', sans-serif;
+    color: white;
+}
+
+.time-toggle-button {
+    margin-left: 5px;
+    padding: 3px 8px;
+    background-color: #1a6482; /* Bleu ciel */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: 'Pirata One', sans-serif;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.time-toggle-button:hover {
+    background-color: #ADD8E6; /* Bleu ciel plus clair */
+}
+
+#time-zone-a, #time-zone-b {
+    color: black;
+    font-size: 14px;
+}
+
+.current-lesson {
+    border: 2px solid red !important;
+    background-color: rgba(255, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Media query pour tablettes et grands téléphones (768px et moins) */
+@media (max-width: 768px) {
+    .timetable-table th:not(:first-child),
+    .timetable-table td:not(:first-child) {
+        display: none;
+    }
+
+    .timetable-table th.current-day,
+    .timetable-table td.current-day {
+        display: table-cell;
+    }
+
+    #day-navigation {
+        display: flex !important;
+    }
+
+    .time-toggle-button {
+        font-size: 12px;
+        padding: 2px 6px;
+    }
+
+    #time-zone-a, #time-zone-b {
+        font-size: 12px;
+    }
+
+    .timetable-hero {
+        height: 25vh;
+    }
+
+    .holiday-options {
+        flex-direction: column; /* Les boutons s'empilent sur mobile */
+        gap: 5px;
+    }
+
+    .toggle-button {
+        font-size: 14px; /* Texte plus petit sur mobile */
+        padding: 8px 16px;
+    }
+}
+
+/* Media query pour petits téléphones (480px et moins) */
+@media (max-width: 480px) {
+    .timetable-table th,
+    .timetable-table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .nav-button {
+        padding: 3px 8px;
+        font-size: 14px;
+    }
+
+    .current-day {
+        font-size: 16px;
+    }
+
+    .time-toggle-button {
+        font-size: 10px;
+        padding: 2px 5px;
+    }
+
+    #time-zone-a, #time-zone-b {
+        font-size: 10px;
+    }
+
+    .timetable-hero {
+        height: 20vh;
+    }
+
+    .toggle-button {
+        font-size: 12px; /* Encore plus petit pour petits écrans */
+        padding: 6px 12px;
+    }
+}
