@@ -7,323 +7,390 @@
     <link rel="stylesheet" href="../styles.css">
     <link rel="shortcut icon" href="../images/logopage.png" />
     
-<style>
-   /* Réinitialisation globale */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+    <style>
+        /* Réinitialisation globale */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* Styles de base */
-body {
-    background: #0a0a0a url('../images/images-ranking/ocean-background.jpg') repeat;
-    color: #fff;
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-}
+        /* Styles de base */
+        body {
+            background: #0a0a0a url('../images/images-ranking/ocean-background.jpg') repeat;
+            color: #fff;
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
 
-/* Header et bouton Back */
-.ranking-hero {
-    background: url('../images/images-ranking/ranking-hero-treasure.jpg') no-repeat center center/cover;
-    height: 35vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    border-bottom: 8px solid #ffb300;
-    box-shadow: 0 0 20px rgba(255, 179, 0, 0.8);
-}
+        /* Header et bouton Back */
+        .ranking-hero {
+            background: url('../images/images-ranking/ranking-hero-treasure.jpg') no-repeat center top/cover;
+            height: 50vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1000;
+            border-bottom: 3px solid #ffb300;
+            box-shadow: 0 0 20px rgba(255, 179, 0, 0.8);
+        }
 
-.ranking-hero-content {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.85);
-    padding: 25px;
-    border-radius: 15px;
-    border: 2px solid #ffb300;
-}
+        .ranking-hero-content {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #ffb300;
+        }
 
-.ranking-hero h2 {
-    font-family: 'Pirata One', sans-serif;
-    font-size: 48px;
-    color: #ffb300;
-    text-shadow: 3px 3px 8px #000;
-    margin: 0;
-}
+        .ranking-hero h2 {
+            font-family: 'Pirata One', sans-serif;
+            font-size: 48px;
+            color: #ffb300;
+            text-shadow: 3px 3px 8px #000;
+            margin: 0;
+        }
 
-.ranking-hero p {
-    font-size: 20px;
-    color: #ddd;
-    text-shadow: 1px 1px 3px #000;
-}
+        .ranking-hero p {
+            font-size: 20px;
+            color: #ddd;
+            text-shadow: 1px 1px 3px #000;
+        }
 
-.return-button {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    padding: 12px 25px;
-    background-color: #ffb300;
-    color: #0a0a0a;
-    text-decoration: none;
-    border-radius: 10px;
-    font-family: 'Pirata One', sans-serif;
-    font-size: 20px;
-    border: 3px solid #0a0a0a;
-    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-}
+        .return-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 12px 25px;
+            background-color: #ffb300;
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 10px;
+            font-family: 'Pirata One', sans-serif;
+            font-size: 20px;
+            border: 3px solid #0a0a0a;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
 
-.return-button:hover {
-    background-color: #e0a800;
-    transform: scale(1.1);
-    box-shadow: 0 4px 15px rgba(255, 179, 0, 0.6); /* Ajout d’une ombre au hover */
-}
+        .return-button:hover {
+            background-color: #e0a800;
+            transform: scale(1.1);
+        }
 
-/* Conteneur principal */
-.ranking-container {
-    max-width: 1200px;
-    margin: 50px auto;
-    padding: 20px;
-}
+        /* Conteneur principal */
+        .ranking-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
 
-/* Tiers */
-.tier {
-    margin-bottom: 40px;
-    padding: 20px;
-    border-radius: 15px;
-    background: rgba(34, 34, 34, 0.95);
-    box-shadow: 0 0 20px rgba(255, 179, 0, 0.6);
-    border: 2px solid #ffb300;
-    position: relative;
-}
+        /* Tiers */
+        .tier {
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 15px;
+            background: rgba(34, 34, 34, 0.95);
+            box-shadow: 0 0 20px rgba(255, 179, 0, 0.6);
+            border: 2px solid #ffb300;
+        }
 
-.tier::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    background: linear-gradient(90deg, #ffb300, #ff4444);
-}
+        .tier h3 {
+            font-family: 'Pirata One', sans-serif;
+            font-size: 32px;
+            color: #ffb300;
+            text-align: center;
+            margin: 0 0 25px;
+            background: url('../images/images-ranking/tier-background.jpg') repeat;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
+            text-shadow: 2px 2px 5px #000;
+        }
 
-.tier h3 {
-    font-family: 'Pirata One', sans-serif;
-    font-size: 32px;
-    color: #ffb300;
-    text-align: center;
-    margin: 0 0 20px;
-    background: url('../images/images-ranking/tier-background.jpg') repeat;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.7);
-    text-shadow: 2px 2px 5px #000;
-}
+        .tier ul {
+            list-style: none;
+            padding: 0;
+        }
 
-.tier ul {
-    list-style: none;
-    padding: 0;
-}
+        /* Cartes principales et sous-parties */
+        .tier li {
+            display: flex;
+            align-items: flex-start;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
 
-.tier li {
-    display: flex;
-    align-items: flex-start; /* Alignement en haut pour éviter les décalages */
-    font-size: 18px;
-    line-height: 1.8;
-    padding: 15px;
-    border-bottom: 1px solid rgba(255, 179, 0, 0.4);
-    background: rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    margin-bottom: 10px;
-    transition: background 0.3s ease;
-}
+        .tier li img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 25px;
+            border: 2px solid #ffb300;
+            box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
+        }
 
-.tier li:hover {
-    background: rgba(0, 0, 0, 0.7); /* Effet hover subtil */
-}
+        .tier li .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
 
-.tier li img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-right: 20px;
-    border: 2px solid #ffb300;
-    box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
-}
+        .tier li .title-status {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 10px;
+        }
 
-.tier li .content {
-    flex: 1; /* Prend tout l’espace restant */
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
+        .tier li strong {
+            color: #ff4444;
+            font-size: 20px;
+            text-shadow: 1px 1px 3px #000;
+        }
 
-.tier li .title-status {
-    display: flex;
-    flex-wrap: wrap; /* Permet au texte de passer à la ligne */
-    align-items: center;
-    gap: 8px;
-}
+        /* Statut anime */
+        .tier li .status-anime {
+            font-size: 16px;
+            padding: 3px 8px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-.tier li strong {
-    color: #ff4444;
-    font-size: 20px;
-    text-shadow: 1px 1px 3px #000;
-}
+        .tier li .status-anime::before {
+            content: "🎬 Anime";
+            font-size: 14px;
+            color: #ddd;
+        }
 
-.tier li .status-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 5px;
-}
+        .tier li .status-anime .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 5px;
+        }
 
-.tier li .status {
-    font-size: 16px;
-}
+        /* Statut manga */
+        .tier li .status-manga {
+            font-size: 16px;
+            padding: 3px 8px;
+            border-radius: 5px;
+            background: rgba(255, 179, 0, 0.2);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
 
-.tier li .author {
-    font-size: 14px;
-    color: #ddd;
-}
+        .tier li .status-manga::before {
+            content: "📘 Manga";
+            font-size: 14px;
+            color: #ddd;
+        }
 
-.tier ul ul {
-    margin-left: 30px; /* Indentation plus modérée */
-    font-size: 16px;
-    color: #ddd;
-}
+        .tier li .status-manga .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-left: 5px;
+        }
 
-.tier ul ul li {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 0;
-    background: none;
-    border-bottom: none;
-}
+        .tier li .author {
+            font-size: 14px;
+            color: #ddd;
+        }
 
-.tier ul ul ul {
-    margin-left: 20px;
-    font-size: 14px;
-    color: #bbb;
-}
+        /* Sous-listes */
+        .tier ul ul {
+            margin-left: 25px;
+            padding: 10px;
+            background: rgba(255, 179, 0, 0.1);
+            border-radius: 8px;
+            border-left: 3px solid #ffb300;
+        }
 
-/* Couleurs des statuts (inchangées) */
-.status-a-jour, .status-a-jour-manga { color: #00ff00; }
-.status-a-jour-dot, .status-a-jour-manga-dot { background-color: #00ff00; }
-.status-en-cours, .status-en-cours-manga { color: #ff8800; }
-.status-en-cours-dot, .status-en-cours-manga-dot { background-color: #ff8800; }
-.status-a-voir, .status-a-voir-manga { color: #ff0000; }
-.status-a-voir-dot, .status-a-voir-manga-dot { background-color: #ff0000; }
-.status-q, .status-q-manga { color: #D3D3D3; }
-.status-q-dot, .status-q-manga-dot { background-color: #666; }
+        .tier ul ul li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 0;
+            font-size: 16px;
+            color: #ddd;
+        }
 
-/* Couleurs des tiers (inchangées) */
-.ssss-tier { background: linear-gradient(135deg, rgba(255, 179, 0, 0.95), rgba(255, 68, 68, 0.95)); }
-.sss-tier { background: rgba(255, 179, 0, 0.9); }
-.ss-tier { background: rgba(255, 102, 102, 0.9); }
-.s-tier { background: rgba(255, 153, 153, 0.9); }
-.a-tier { background: rgba(135, 206, 235, 0.9); }
-.b-tier { background: rgba(173, 216, 230, 0.9); }
-.c-tier { background: rgba(102, 102, 102, 0.9); }
-.d-tier { background: rgba(68, 68, 68, 0.9); }
-.e-tier { background: rgba(51, 51, 51, 0.9); }
-.todo-tier { background: rgba(26, 26, 26, 0.9); }
+        .tier ul ul ul {
+            margin-left: 20px;
+            font-size: 14px;
+            color: #bbb;
+        }
 
-/* Media Query pour mobile (max-width: 768px) */
-@media (max-width: 768px) {
-    .ranking-hero h2 {
-        font-size: 36px;
-    }
-    .return-button {
-        font-size: 18px;
-        padding: 10px 20px;
-    }
-    .ranking-container {
-        padding: 15px;
-        margin: 20px auto;
-        width: 95%;
-    }
-    .tier h3 {
-        font-size: 26px;
-        padding: 10px;
-    }
-    .tier li {
-        flex-direction: column;
-        align-items: flex-start;
-        font-size: 16px;
-        padding: 12px;
-    }
-    .tier li img {
-        width: 60px;
-        height: auto;
-        margin: 0 0 10px 0;
-        max-width: 100%;
-    }
-    .tier li strong {
-        font-size: 18px;
-    }
-    .tier li .status {
-        font-size: 14px;
-    }
-    .tier li .author {
-        font-size: 12px;
-    }
-    .tier ul ul {
-        margin-left: 15px;
-        font-size: 14px;
-    }
-    .tier ul ul ul {
-        margin-left: 10px;
-        font-size: 12px;
-    }
-}
+        /* Couleurs des statuts */
+        .status-a-jour, .status-a-jour-manga {
+            color: #00ff00;
+        }
+        .status-a-jour-dot, .status-a-jour-manga-dot {
+            background-color: #00ff00;
+        }
+        .status-en-cours, .status-en-cours-manga {
+            color: #ff8800;
+        }
+        .status-en-cours-dot, .status-en-cours-manga-dot {
+            background-color: #ff8800;
+        }
+        .status-a-voir, .status-a-voir-manga {
+            color: #ff0000;
+        }
+        .status-a-voir-dot, .status-a-voir-manga-dot {
+            background-color: #ff0000;
+        }
+        .status-q, .status-q-manga {
+            color: #D3D3D3;
+        }
+        .status-q-dot, .status-q-manga-dot {
+            background-color: #666;
+        }
+        .status-fini, .status-fini-manga {
+            color: #00FFFF; /* Cyan clair pour le statut "Fini" */
+        }
+        .status-fini-dot, .status-fini-manga-dot {
+            background-color: #00FFFF; /* Dot en cyan clair */
+        }
 
-/* Media Query pour petits écrans (max-width: 480px) */
-@media (max-width: 480px) {
-    .ranking-hero h2 {
-        font-size: 28px;
-    }
-    .return-button {
-        font-size: 16px;
-        padding: 8px 15px;
-    }
-    .tier h3 {
-        font-size: 22px;
-        padding: 8px;
-    }
+        /* Couleurs des tiers */
+        .ssss-tier {
+            background: linear-gradient(135deg, rgba(255, 179, 0, 0.95), rgba(255, 68, 68, 0.95));
+        }
+        .sss-tier {
+            background: rgba(255, 179, 0, 0.9);
+        }
+        .ss-tier {
+            background: rgba(255, 102, 102, 0.9);
+        }
+        .s-tier {
+            background: rgba(255, 153, 153, 0.9);
+        }
+        .a-tier {
+            background: rgba(135, 206, 235, 0.9);
+        }
+        .b-tier {
+            background: rgba(173, 216, 230, 0.9);
+        }
+        .c-tier {
+            background: rgba(102, 102, 102, 0.9);
+        }
+        .d-tier {
+            background: rgba(68, 68, 68, 0.9);
+        }
+        .e-tier {
+            background: rgba(51, 51, 51, 0.9);
+        }
+        .todo-tier {
+            background: rgba(26, 26, 26, 0.9);
+        }
 
-    .tier li {
-        font-size: 14px;
-        padding: 10px;
-    }
+        /* Media Query pour mobile (max-width: 768px) */
+        @media (max-width: 768px) {
+            .ranking-hero h2 {
+                font-size: 36px;
+            }
+            .return-button {
+                font-size: 18px;
+                padding: 10px 20px;
+            }
+            .ranking-container {
+                padding: 15px;
+                margin: 20px auto;
+                width: 95%;
+            }
+            .tier h3 {
+                font-size: 26px;
+                padding: 10px;
+            }
+            .tier li {
+                flex-direction: column;
+                align-items: flex-start;
+                font-size: 16px;
+                padding: 15px;
+            }
+            .tier li img {
+                width: 60px;
+                height: auto;
+                margin: 0 0 15px 0;
+                max-width: 100%;
+            }
+            .tier li strong {
+                font-size: 18px;
+            }
+            .tier li .status-anime, .tier li .status-manga {
+                font-size: 14px;
+                padding: 2px 6px;
+            }
+            .tier li .status-anime::before, .tier li .status-manga::before {
+                font-size: 12px;
+            }
+            .tier li .author {
+                font-size: 12px;
+            }
+            .tier ul ul {
+                margin-left: 15px;
+                font-size: 14px;
+            }
+            .tier ul ul ul {
+                margin-left: 10px;
+                font-size: 12px;
+            }
+        }
 
-    .tier li img {
-        width: 50px;
-    }
-
-    .tier li strong {
-        font-size: 16px;
-    }
-    .tier li .status {
-        font-size: 12px;
-    }
-
-    .tier li .author {
-        font-size: 11px;
-    }
-
-    .tier ul ul {
-        margin-left: 10px;
-        font-size: 12px;
-    }
-
-    .tier ul ul ul {
-        font-size: 11px;
-    }
-}
-</style>
+        /* Media Query pour petits écrans (max-width: 480px) */
+        @media (max-width: 480px) {
+            .ranking-hero h2 {
+                font-size: 28px;
+            }
+            .return-button {
+                font-size: 16px;
+                padding: 8px 15px;
+            }
+            .tier h3 {
+                font-size: 22px;
+                padding: 8px;
+            }
+            .tier li {
+                font-size: 14px;
+                padding: 12px;
+            }
+            .tier li img {
+                width: 50px;
+            }
+            .tier li strong {
+                font-size: 16px;
+            }
+            .tier li .status-anime, .tier li .status-manga {
+                font-size: 12px;
+            }
+            .tier li .author {
+                font-size: 11px;
+            }
+            .tier ul ul {
+                margin-left: 10px;
+                font-size: 12px;
+            }
+            .tier ul ul ul {
+                font-size: 11px;
+            }
+        }
+    </style>
 </head>
 <body>
     <section class="ranking-hero">
@@ -334,6 +401,7 @@ body {
     </section>
 
     <div class="ranking-container">
+        <!-- SSSS Tier -->
         <div class="tier ssss-tier">
             <h3>✧ SSSS (God-tier)</h3>
             <ul>
@@ -342,27 +410,25 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>ONE PIECE</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">À jour</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour</span>
                         </div>
                         <div class="author">Auteur : Eiichiro Oda</div>
                         <ul>
                             <li>
-                                <span>Monsters (Eiichiro Oda)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span> | Manga: <span class="sub-status">
-                                    <span class="status-dot status-a-jour-manga-dot"></span>
-                                    <span class="status status-a-jour-manga">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Monsters</strong>
+                                    <div class="author">Auteur : Eiichiro Oda</div>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                    <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
+                                </div>
                             </li>
                             <li>
-                                <span>One Piece Log: Fish-man Island (Toei Animation)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>One Piece Log: Fish-man Island</strong>
+                                    <div class="author">Par : Toei Animation</div>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -372,48 +438,45 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>DRAGON BALL</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Akira Toriyama🕊️</div>
                         <ul>
                             <li>
-                                <span>Dragon Ball Z (Akira Toriyama🕊️)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Dragon Ball Z</strong>
+                                    <div class="author">Auteur : Akira Toriyama🕊️</div>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Dragon Ball GT (Toei Animation)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Dragon Ball GT</strong>
+                                    <div class="author">Auteur : Toei Animation</div>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Dragon Ball Super (Akira Toriyama🕊️ / Toyotaro)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">À jour</span>
-                                </span> | Manga: <span class="sub-status">
-                                    <span class="status-dot status-a-jour-manga-dot"></span>
-                                    <span class="status status-a-jour-manga">À jour</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Dragon Ball Super</strong>
+                                    <div class="author">Auteurs : Akira Toriyama🕊️ / Toyotaro</div>
+                                    <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                                    <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Super Dragon Ball Heroes (promotional anime)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">À jour (Fini?)</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Super Dragon Ball Heroes</strong>
+                                    <div class="author">Type : promotional anime</div>
+                                    <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Fini?)</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Dragon Ball Daima (Toei Animation)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Dragon Ball Daima (Toei Animation)</strong>
+                                    <div class="author">Par : Toei Animation</div>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -421,6 +484,7 @@ body {
             </ul>
         </div>
 
+        <!-- SSS Tier -->
         <div class="tier sss-tier">
             <h3>★★★ SSS</h3>
             <ul>
@@ -429,30 +493,25 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>NARUTO</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Masashi Kishimoto</div>
                         <ul>
                             <li>
-                                <span>Naruto Shippuden (Masashi Kishimoto)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span> | Manga: <span class="sub-status">
-                                    <span class="status-dot status-a-jour-manga-dot"></span>
-                                    <span class="status status-a-jour-manga">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Naruto Shippuden</strong>
+                                    <div class="author">Auteur : Masashi Kishimoto</div>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                    <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Boruto (M. Kishimoto / Mikio Ikemoto)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">À jour</span>
-                                </span> | Manga: <span class="sub-status">
-                                    <span class="status-dot status-a-jour-manga-dot"></span>
-                                    <span class="status status-a-jour-manga">À jour (tous les 20 du mois)</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Boruto</strong>
+                                    <div class="author">Auteurs : Masashi Kishimoto / Mikio Ikemoto</div>
+                                    <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                                    <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour (tous les 20 du mois)</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -462,58 +521,47 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>BLEACH</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                            <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour</span>
                         </div>
                         <div class="author">Auteur : Tite Kubo</div>
                         <ul>
                             <li>
-                                <span>Burn the Witch (Tite Kubo)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini?</span>
-                                </span> | Manga: <span class="sub-status">
-                                    <span class="status-dot status-q-manga-dot"></span>
-                                    <span class="status status-q-manga">?</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Burn the Witch (Tite Kubo)</strong>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini?</span>
+                                    <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Bleach Thousand-Year Blood War (Tite Kubo)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">À jour</span>
-                                </span> | Manga: <span class="sub-status">
-                                    <span class="status-dot status-a-jour-manga-dot"></span>
-                                    <span class="status status-a-jour-manga">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Bleach Thousand-Year Blood War (Tite Kubo)</strong>
+                                    <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                                </div>
                                 <ul>
                                     <li>
-                                        <span>The Blood Warfare (part1)</span>
-                                        <span class="sub-sub-status">
-                                            <span class="status-dot status-a-jour-dot"></span>
-                                            <span class="status status-a-jour">Fini</span>
-                                        </span>
+                                        <div class="title-status">
+                                            <strong>The Blood Warfare (part1)</strong>
+                                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                        </div>
                                     </li>
                                     <li>
-                                        <span>The Separation (part2)</span>
-                                        <span class="sub-sub-status">
-                                            <span class="status-dot status-a-jour-dot"></span>
-                                            <span class="status status-a-jour">Fini</span>
-                                        </span>
+                                        <div class="title-status">
+                                            <strong>The Separation (part2)</strong>
+                                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                        </div>
                                     </li>
                                     <li>
-                                        <span>The Conflict (part3)</span>
-                                        <span class="sub-sub-status">
-                                            <span class="status-dot status-a-jour-dot"></span>
-                                            <span class="status status-a-jour">Fini</span>
-                                        </span>
+                                        <div class="title-status">
+                                            <strong>The Conflict (part3)</strong>
+                                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                        </div>
                                     </li>
                                     <li>
-                                        <span>The Calamity (part4)</span>
-                                        <span class="sub-sub-status">
-                                            <span class="status-dot status-a-voir-dot"></span>
-                                            <span class="status status-a-voir">Pas de date?</span>
-                                        </span>
+                                        <div class="title-status">
+                                            <strong>The Calamity (part4)</strong>
+                                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> Pas de date?</span>
+                                        </div>
                                     </li>
                                 </ul>
                             </li>
@@ -523,6 +571,7 @@ body {
             </ul>
         </div>
 
+        <!-- SS Tier -->
         <div class="tier ss-tier">
             <h3>★★ SS</h3>
             <ul>
@@ -531,8 +580,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>SHINGEKI NO KYOJIN</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                            <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Hajime Isayama</div>
                     </div>
@@ -542,8 +591,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>VINLAND SAGA</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">À jour</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour</span>
                         </div>
                         <div class="author">Auteur : Makoto Yukimura</div>
                     </div>
@@ -553,8 +602,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>BERSERK</strong>
-                            <span class="status-dot status-en-cours-dot"></span>
-                            <span class="status status-en-cours">Remake non-officiel été 2025 par StudioECLYPSE</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">À jour</span>
+                            <span class="status-en-cours status-anime"><span class="status-en-cours-dot status-dot"></span> Remake non-officiel été 2025 par StudioECLYPSE</span>
+                            <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour</span>
                         </div>
                         <div class="author">Auteur : Kentaro Miura🕊️ / Kouji Mori</div>
                     </div>
@@ -562,6 +611,7 @@ body {
             </ul>
         </div>
 
+        <!-- S Tier -->
         <div class="tier s-tier">
             <h3>★ S</h3>
             <ul>
@@ -570,73 +620,64 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>JOJO'S BIZARRE ADVENTURES</strong>
-                            <span class="status-dot status-en-cours-dot"></span>
-                            <span class="status status-en-cours">En cours</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-en-cours status-anime"><span class="status-en-cours-dot status-dot"></span> En cours</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Hirohiko Araki</div>
                         <ul>
                             <li>
-                                <span>Phantom Blood (part1)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Phantom Blood (part1)</strong>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Battle Tendency (part2)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Battle Tendency (part2)</strong>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Stardust Crusaders (part3)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Stardust Crusaders (part3)</strong>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Diamond is Unbreakable (part4)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Diamond is Unbreakable (part4)</strong>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Golden Wind (part5)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-en-cours-dot"></span>
-                                    <span class="status status-en-cours">En cours</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Golden Wind (part5)</strong>
+                                    <span class="status-en-cours status-anime"><span class="status-en-cours-dot status-dot"></span> En cours</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Stone Ocean (part6)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-voir-dot"></span>
-                                    <span class="status status-a-voir">À voir</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Stone Ocean (part6)</strong>
+                                    <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Steel Ball Run (part7)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-voir-dot"></span>
-                                    <span class="status status-a-voir">À voir</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Steel Ball Run (part7)</strong>
+                                    <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                                </div>
                             </li>
                             <li>
-                                <span>Jojolion (part8)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-voir-dot"></span>
-                                    <span class="status status-a-voir">À voir</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Jojolion (part8)</strong>
+                                    <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                                </div>
                             </li>
                             <li>
-                                <span>The Jojolands (part9)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-voir-dot"></span>
-                                    <span class="status status-a-voir">À voir</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>The Jojolands (part9)</strong>
+                                    <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -644,6 +685,7 @@ body {
             </ul>
         </div>
 
+        <!-- A Tier -->
         <div class="tier a-tier">
             <h3>A</h3>
             <ul>
@@ -652,8 +694,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>BLACK CLOVER</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini?</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">À jour</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini?</span>
+                            <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour</span>
                         </div>
                         <div class="author">Auteur : Yūki Tabata</div>
                     </div>
@@ -663,20 +705,18 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>FAIRY TAIL</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Hiro Mashima</div>
                         <ul>
                             <li>
-                                <span>100 Years Quest (Hiro Mashima)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">À jour</span>
-                                </span> | Manga: <span class="sub-status">
-                                    <span class="status-dot status-a-jour-manga-dot"></span>
-                                    <span class="status status-a-jour-manga">À jour</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>100 Years Quest</strong>
+                                    <div class="author">Auteur : Hiro Mashima</div>
+                                    <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                                    <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -686,8 +726,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>MY HERO ACADEMIA</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Kōhei Horikoshi</div>
                     </div>
@@ -697,8 +737,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>HUNTER X HUNTER</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour (Suite?)</span> | Manga: <span class="status-dot status-en-cours-manga-dot"></span> <span class="status status-en-cours-manga">En cours?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Suite?)</span>
+                            <span class="status-en-cours-manga status-manga"><span class="status-en-cours-manga-dot status-dot"></span> En cours?</span>
                         </div>
                         <div class="author">Auteur : Yoshihiro Togashi</div>
                     </div>
@@ -708,8 +748,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>DEMON SLAYER</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Koyoharu Gotōge</div>
                     </div>
@@ -719,8 +759,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>JUJUTSU KAISEN</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Gege Akutami</div>
                     </div>
@@ -728,6 +768,7 @@ body {
             </ul>
         </div>
 
+        <!-- B Tier -->
         <div class="tier b-tier">
             <h3>B</h3>
             <ul>
@@ -736,8 +777,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>DEATH NOTE</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                            <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Tsugumi Ohba / Takeshi Obata</div>
                     </div>
@@ -747,8 +788,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>HIGH SCHOOL DXD</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Ichiei Ishibumi / Miyama-Zero</div>
                     </div>
@@ -758,8 +799,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>FIRE FORCE</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Atsushi Ōkubo</div>
                     </div>
@@ -769,8 +810,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>ASSASSINATION CLASSROOM</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                            <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Yūsei Matsui</div>
                     </div>
@@ -780,20 +821,18 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>TOKYO GHOUL</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Sui Ishida</div>
                         <ul>
                             <li>
-                                <span>Tokyo Ghoul:RE (Sui Ishida)</span>
-                                <span class="sub-status">
-                                    <span class="status-dot status-a-jour-dot"></span>
-                                    <span class="status status-a-jour">Fini</span>
-                                </span> | Manga: <span class="sub-status">
-                                    <span class="status-dot status-q-manga-dot"></span>
-                                    <span class="status status-q-manga">?</span>
-                                </span>
+                                <div class="title-status">
+                                    <strong>Tokyo Ghoul:RE</strong>
+                                    <div class="author">Auteur : Sui Ishida</div>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                    <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -803,8 +842,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>SOLO LEVELING</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manhwa: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Chugong</div>
                     </div>
@@ -814,8 +853,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>MIRAI NIKKI</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                            <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Sakae Esuno</div>
                     </div>
@@ -825,8 +864,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>NANA</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour (Pas d’annonce)</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Pas d’annonce)</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Ai Yazawa</div>
                     </div>
@@ -836,8 +875,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>DR. STONE</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Riichiro Inagaki / Boichi</div>
                     </div>
@@ -845,6 +884,7 @@ body {
             </ul>
         </div>
 
+        <!-- C Tier -->
         <div class="tier c-tier">
             <h3>C</h3>
             <ul>
@@ -853,8 +893,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>TOKYO REVENGERS</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Ken Wakui</div>
                     </div>
@@ -864,8 +904,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>THE EMINENCE IN SHADOW</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Daisuke Aizawa</div>
                     </div>
@@ -875,8 +915,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>RASCAL DOES NOT DREAM OF BUNNY GIRL SENPAI</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini?</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini?</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Hajime Kamoshida</div>
                     </div>
@@ -886,8 +926,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>LES CARNETS DE L’APOTHICAIRE</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Natsu Hyūga / Itsuki Nanao</div>
                     </div>
@@ -897,8 +937,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>THE PROMISED NEVERLAND</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">Suite?</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> Suite?</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Kaiu Shirai / Posuka Demizu</div>
                     </div>
@@ -908,8 +948,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>OURAN HIGH SCHOOL HOST CLUB</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini?</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini?</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Bisco Hatori</div>
                     </div>
@@ -919,8 +959,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>THE PRESIDENT IS A MAID/Kaichou wa Maid-sama</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Hiro Fujiwara</div>
                     </div>
@@ -930,8 +970,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>PEACH GIRL</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                            <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Miwa Ueda</div>
                     </div>
@@ -939,6 +979,7 @@ body {
             </ul>
         </div>
 
+        <!-- D Tier -->
         <div class="tier d-tier">
             <h3>D</h3>
             <ul>
@@ -947,8 +988,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>EDENS ZERO</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Hiro Mashima</div>
                     </div>
@@ -958,8 +999,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>HELL'S PARADISE</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Yūji Kaku</div>
                     </div>
@@ -969,8 +1010,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>ONE PUNCH MAN</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour (Suite un jour?)</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Suite un jour?)</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : ONE / Yūsuke Murata</div>
                     </div>
@@ -980,8 +1021,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>NINJA KAMUI</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini?</span> | Pas de manga?
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini?</span>
                         </div>
                         <div class="author">Auteur : Sunghoo Park</div>
                     </div>
@@ -991,8 +1031,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>FAILURE FRAME</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Kaoru Shinozaki</div>
                     </div>
@@ -1002,8 +1042,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>DANDADAN</strong>
-                            <span class="status-dot status-en-cours-dot"></span>
-                            <span class="status status-en-cours">En cours</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-en-cours status-anime"><span class="status-en-cours-dot status-dot"></span> En cours</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Yukinobu Tatsu</div>
                     </div>
@@ -1013,8 +1053,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>SERVAMP</strong>
-                            <span class="status-dot status-en-cours-dot"></span>
-                            <span class="status status-en-cours">En cours</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-en-cours status-anime"><span class="status-en-cours-dot status-dot"></span> En cours</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Tanaka Strike</div>
                     </div>
@@ -1024,8 +1064,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>KAIFUKU JUTSUSHI NO YARINAOSHI</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Saison 2? Pas d'annonce?</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Suite?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Saison 2? Pas d'annonce?</span>
+                            <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> Suite?</span>
                         </div>
                         <div class="author">Auteur : Rui Tsukiyo / Shiokonbu</div>
                     </div>
@@ -1033,6 +1073,7 @@ body {
             </ul>
         </div>
 
+        <!-- E Tier -->
         <div class="tier e-tier">
             <h3>E</h3>
             <ul>
@@ -1041,8 +1082,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>HYŌKA</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Honobu Yonezawa</div>
                     </div>
@@ -1052,8 +1092,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>NAGATORO</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Saison 3?</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Saison 3?</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Nanashi</div>
                     </div>
@@ -1063,8 +1103,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>FUUFU IJOU KOIBITO MIMAN</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Saison 1 finie, S2?</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">30 (pas de VF)</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Saison 1 finie, S2?</span>
+                            <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> 30 (pas de VF)</span>
                         </div>
                         <div class="author">Auteur : Yuki Kanamaru</div>
                     </div>
@@ -1074,8 +1114,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>MY DRESS UP DARLING</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Saison 2?</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Saison 2?</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Shinichi Fukuda</div>
                     </div>
@@ -1085,8 +1125,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>MY LIFE AS INUKAI-SAN'S DOG</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Gosei Furukawa</div>
                     </div>
@@ -1096,8 +1136,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>TENPURU</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Yoshioka Kimitake</div>
                     </div>
@@ -1107,8 +1147,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>THE 100 GIRLFRIENDS</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Rikito Nakamura / Yukiko Nozawa</div>
                     </div>
@@ -1118,8 +1158,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>DEMON SLAVE</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Takahiro / Yohei Takemura</div>
                     </div>
@@ -1129,8 +1169,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>YOSUGA NO SORA</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                         </div>
                         <div class="author">Auteur : Sphere</div>
                     </div>
@@ -1140,8 +1179,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>GOD'S GAMES WE PLAY</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">À jour</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Kei Sazane</div>
                     </div>
@@ -1151,8 +1190,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>KISS HIM NOT ME!</strong>
-                            <span class="status-dot status-a-jour-dot"></span>
-                            <span class="status status-a-jour">Fini? Saison 2?</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Fini? Saison 2?</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Junko</div>
                     </div>
@@ -1160,6 +1199,7 @@ body {
             </ul>
         </div>
 
+        <!-- To-Do Tier -->
         <div class="tier todo-tier">
             <h3>ANIMES À VOIR + SCANS À LIRE + FILMS</h3>
             <ul>
@@ -1167,8 +1207,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>BLUE EXORCIST</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Kazue Kato</div>
                     </div>
@@ -1177,8 +1216,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>SWORD ART ONLINE</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Reki Kawahara</div>
                     </div>
@@ -1187,8 +1225,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>FULL METAL ALCHEMIST</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Hiromu Arakawa</div>
                     </div>
@@ -1197,8 +1234,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>THE SEVEN DEADLY SINS</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Nakaba Suzuki</div>
                     </div>
@@ -1207,8 +1243,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>FRIEREN</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Kanehito Yamada / Tsukasa Abe</div>
                     </div>
@@ -1217,8 +1252,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>SPY X FAMILY</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Tatsuya Endo</div>
                     </div>
@@ -1227,8 +1261,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>DARLING IN THE FRANXX</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Trigger / A-1 Pictures</div>
                     </div>
@@ -1237,8 +1270,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>AKAME GA KILL</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Takahiro / Tetsuya Tashiro</div>
                     </div>
@@ -1247,8 +1279,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>YOUR LIE IN APRIL (film)</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Naoshi Arakawa</div>
                     </div>
@@ -1257,8 +1288,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>VAGABOND</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À lire {MANGA!}</span>
+                            <span class="status-a-voir status-manga"><span class="status-a-voir-dot status-dot"></span> À lire {MANGA!}</span>
                         </div>
                         <div class="author">Auteur : Takehiko Inoue</div>
                     </div>
@@ -1267,8 +1297,7 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>PARASYTE</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Hitoshi Iwaaki</div>
                     </div>
@@ -1277,8 +1306,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>SUMMERTIME RENDERING</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir-dot status-dot"></span>
+                            <span class="status-a-voir status-anime">À voir</span>
                         </div>
                         <div class="author">Auteur : Yasuki Tanaka</div>
                     </div>
@@ -1287,8 +1316,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>AO HARU RIDE</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir-dot status-dot"></span>
+                            <span class="status-a-voir status-anime">À voir</span>
                         </div>
                         <div class="author">Auteur : Io Sakisaka</div>
                     </div>
@@ -1297,8 +1326,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>CLASSROOM OF THE ELITE</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir-dot status-dot"></span>
+                            <span class="status-a-voir status-anime">À voir</span>
                         </div>
                         <div class="author">Auteur : Shōgo Kinugasa</div>
                     </div>
@@ -1307,8 +1336,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>FOOD WARS</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir-dot status-dot"></span>
+                            <span class="status-a-voir status-anime">À voir</span>
                         </div>
                         <div class="author">Auteur : Yūto Tsukuda / Shun Saeki</div>
                     </div>
@@ -1317,8 +1346,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>MAHOU SHOUJO MADOKA MAGICA</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir-dot status-dot"></span>
+                            <span class="status-a-voir status-anime">À voir</span>
                         </div>
                         <div class="author">Auteur : Gen Urobuchi</div>
                     </div>
@@ -1327,8 +1356,8 @@ body {
                     <div class="content">
                         <div class="title-status">
                             <strong>BLOOD-C</strong>
-                            <span class="status-dot status-a-voir-dot"></span>
-                            <span class="status status-a-voir">À voir</span>
+                            <span class="status-a-voir-dot status-dot"></span>
+                            <span class="status-a-voir status-anime">À voir</span>
                         </div>
                         <div class="author">Auteur : Kotone Ranmaru</div>
                     </div>
@@ -1336,5 +1365,7 @@ body {
             </ul>
         </div>
     </div>
+
+    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92e3d4de3f8f9ae2',t:'MTc0NDMwNDc1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
