@@ -251,28 +251,117 @@
         .todo-tier { background: rgba(26, 26, 26, 0.9); }
 
         @media (max-width: 768px) {
-            .ranking-hero h2 { font-size: 36px; }
-            .tier h3 { font-size: 28px; }
-            .tier li { font-size: 16px; flex-direction: column; align-items: flex-start; }
-            .tier li img { width: 60px; height: 60px; margin-bottom: 10px; }
-            .tier li strong { font-size: 18px; }
-            .tier li .status { font-size: 14px; }
-            .tier li .author { font-size: 12px; }
-            .tier ul ul { margin-left: 20px; font-size: 14px; }
-            .tier ul ul ul { font-size: 12px; }
-        }
+    /* Ajustement du titre principal */
+    .ranking-hero h2 {
+        font-size: 36px;
+    }
 
-        @media (max-width: 480px) {
-            .ranking-hero h2 { font-size: 28px; }
-            .tier h3 { font-size: 24px; }
-            .tier li { font-size: 14px; }
-            .tier li img { width: 50px; height: 50px; }
-            .tier li strong { font-size: 16px; }
-            .tier li .status { font-size: 12px; }
-            .tier li .author { font-size: 11px; }
-            .tier ul ul { font-size: 12px; }
-            .tier ul ul ul { font-size: 11px; }
-        }
+    /* Ajustement des conteneurs de tier */
+    .tier h3 {
+        font-size: 28px;
+        padding: 10px; /* Réduit pour éviter un effet "tassé" */
+    }
+
+    /* Optimisation des éléments de liste */
+    .tier li {
+        font-size: 16px;
+        flex-direction: column;
+        align-items: center; /* Centre les éléments pour éviter les décalages */
+        padding: 10px; /* Réduit le padding */
+    }
+
+    /* Ajustement des images */
+    .tier li img {
+        width: 60px;
+        height: auto; /* Maintient les proportions */
+        margin: 0 0 10px 0; /* Supprime margin-right et centre verticalement */
+        max-width: 100%; /* Évite les débordements */
+    }
+
+    /* Ajustement du texte */
+    .tier li strong {
+        font-size: 18px;
+    }
+    .tier li .status {
+        font-size: 14px;
+    }
+    .tier li .author {
+        font-size: 12px;
+    }
+
+    /* Réduction des marges des sous-listes */
+    .tier ul ul {
+        margin-left: 10px; /* Réduit la marge pour mieux s’adapter */
+        font-size: 14px;
+    }
+    .tier ul ul ul {
+        font-size: 12px;
+        margin-left: 5px; /* Encore plus réduit */
+    }
+
+    /* Ajustement du conteneur global */
+    .ranking-container {
+        padding: 10px;
+        margin: 20px auto;
+        width: 95%; /* Prend presque toute la largeur */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Ajustement du titre principal */
+    .ranking-hero h2 {
+        font-size: 28px;
+    }
+
+    /* Ajustement des conteneurs de tier */
+    .tier h3 {
+        font-size: 24px;
+        padding: 8px; /* Encore plus compact */
+    }
+
+    /* Optimisation des éléments de liste */
+    .tier li {
+        font-size: 14px;
+        flex-direction: column;
+        align-items: center;
+        padding: 8px; /* Encore plus réduit */
+    }
+
+    /* Ajustement des images */
+    .tier li img {
+        width: 50px;
+        height: auto;
+        margin: 0 0 8px 0; /* Réduit encore l’espace */
+    }
+
+    /* Ajustement du texte */
+    .tier li strong {
+        font-size: 16px;
+    }
+    .tier li .status {
+        font-size: 12px;
+    }
+    .tier li .author {
+        font-size: 11px;
+    }
+
+    /* Réduction des sous-listes */
+    .tier ul ul {
+        margin-left: 5px; /* Très compact */
+        font-size: 12px;
+    }
+    .tier ul ul ul {
+        font-size: 11px;
+        margin-left: 5px;
+    }
+
+    /* Ajustement du conteneur global */
+    .ranking-container {
+        padding: 8px;
+        margin: 15px auto;
+        width: 95%;
+    }
+}
     </style>
 </head>
 <body>
