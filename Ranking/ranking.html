@@ -250,93 +250,124 @@
         .e-tier { background: rgba(51, 51, 51, 0.9); }
         .todo-tier { background: rgba(26, 26, 26, 0.9); }
 
-        @media (max-width: 768px) {
-    /* Ajustement du titre principal */
-    .ranking-hero h2 {
-        font-size: 36px;
-    }
+        /* Réinitialisation globale pour éviter les marges par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    /* Ajustement des conteneurs de tier */
-    .tier h3 {
-        font-size: 28px;
-        padding: 10px; /* Réduit pour éviter un effet "tassé" */
-    }
-
-    /* Optimisation des éléments de liste */
-    .tier li {
-        font-size: 16px;
-        flex-direction: column;
-        align-items: center; /* Centre les éléments pour éviter les décalages */
-        padding: 10px; /* Réduit le padding */
-    }
-
-    /* Ajustement des images */
-    .tier li img {
-        width: 60px;
-        height: auto; /* Maintient les proportions */
-        margin: 0 0 10px 0; /* Supprime margin-right et centre verticalement */
-        max-width: 100%; /* Évite les débordements */
-    }
-
-    /* Ajustement du texte */
-    .tier li strong {
-        font-size: 18px;
-    }
-    .tier li .status {
-        font-size: 14px;
-    }
-    .tier li .author {
-        font-size: 12px;
-    }
-
-    /* Réduction des marges des sous-listes */
-    .tier ul ul {
-        margin-left: 10px; /* Réduit la marge pour mieux s’adapter */
-        font-size: 14px;
-    }
-    .tier ul ul ul {
-        font-size: 12px;
-        margin-left: 5px; /* Encore plus réduit */
-    }
-
-    /* Ajustement du conteneur global */
+/* Base pour mobile (max-width: 768px comme point de départ) */
+@media (max-width: 768px) {
+    /* Conteneur global */
     .ranking-container {
         padding: 10px;
-        margin: 20px auto;
-        width: 95%; /* Prend presque toute la largeur */
+        margin: 0 auto;
+        width: 100%; /* Prend toute la largeur disponible */
+        max-width: 100%; /* Évite tout débordement */
+    }
+
+    /* Héros */
+    .ranking-hero h2 {
+        font-size: 32px; /* Plus petit mais lisible */
+    }
+
+    /* Titres des tiers */
+    .tier h3 {
+        font-size: 24px;
+        padding: 8px;
+        text-align: center;
+    }
+
+    /* Éléments de liste */
+    .tier li {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; /* Alignement à gauche pour le texte */
+        padding: 12px;
+        border-bottom: 1px solid rgba(255, 179, 0, 0.4);
+        overflow: hidden; /* Empêche le débordement */
+    }
+
+    /* Gestion des images */
+    .tier li img {
+        width: 60px;
+        height: auto;
+        margin: 0 0 10px 0; /* Espace uniquement en bas */
+        border-radius: 8px;
+        max-width: 100%;
+    }
+
+    /* Contenu textuel */
+    .tier li .content {
+        width: 100%; /* Prend toute la largeur disponible */
+        max-width: 100%; /* Évite les débordements */
+        word-wrap: break-word; /* Coupe les mots trop longs */
+        overflow-wrap: break-word; /* Compatibilité */
+    }
+
+    /* Titre et statut */
+    .tier li .title-status {
+        display: flex;
+        flex-wrap: wrap; /* Permet au texte de passer à la ligne si trop long */
+        gap: 5px;
+        align-items: center;
+    }
+    .tier li strong {
+        font-size: 16px;
+        flex: 1 1 auto; /* S’adapte à l’espace */
+    }
+    .tier li .status {
+        font-size: 14px;
+    }
+    .tier li .author {
+        font-size: 12px;
+        margin-top: 5px;
+    }
+
+    /* Sous-listes */
+    .tier ul ul {
+        margin-left: 10px;
+        font-size: 14px;
+        padding-left: 5px;
+    }
+    .tier ul ul li {
+        padding: 5px 0;
+        word-wrap: break-word; /* Gère les longs titres */
+    }
+    .tier ul ul ul {
+        margin-left: 5px;
+        font-size: 12px;
     }
 }
 
+/* Ajustements pour écrans encore plus petits (max-width: 480px) */
 @media (max-width: 480px) {
-    /* Ajustement du titre principal */
+    /* Héros */
     .ranking-hero h2 {
-        font-size: 28px;
-    }
-
-    /* Ajustement des conteneurs de tier */
-    .tier h3 {
         font-size: 24px;
-        padding: 8px; /* Encore plus compact */
     }
 
-    /* Optimisation des éléments de liste */
+    /* Titres des tiers */
+    .tier h3 {
+        font-size: 20px;
+        padding: 6px;
+    }
+
+    /* Éléments de liste */
     .tier li {
-        font-size: 14px;
-        flex-direction: column;
-        align-items: center;
-        padding: 8px; /* Encore plus réduit */
+        padding: 10px;
     }
 
-    /* Ajustement des images */
+    /* Images */
     .tier li img {
         width: 50px;
-        height: auto;
-        margin: 0 0 8px 0; /* Réduit encore l’espace */
+        margin-bottom: 8px;
     }
 
-    /* Ajustement du texte */
+    /* Contenu textuel */
     .tier li strong {
-        font-size: 16px;
+        font-size: 14px;
     }
     .tier li .status {
         font-size: 12px;
@@ -345,23 +376,40 @@
         font-size: 11px;
     }
 
-    /* Réduction des sous-listes */
+    /* Sous-listes */
     .tier ul ul {
-        margin-left: 5px; /* Très compact */
+        margin-left: 5px;
         font-size: 12px;
     }
     .tier ul ul ul {
         font-size: 11px;
-        margin-left: 5px;
-    }
-
-    /* Ajustement du conteneur global */
-    .ranking-container {
-        padding: 8px;
-        margin: 15px auto;
-        width: 95%;
     }
 }
+
+/* Bonus : Ajout pour desktop (min-width: 769px) */
+@media (min-width: 769px) {
+    .ranking-container {
+        max-width: 1200px;
+        margin: 50px auto;
+    }
+    .tier li {
+        flex-direction: row; /* Retour à l’alignement horizontal */
+        align-items: center;
+    }
+    .tier li img {
+        width: 80px;
+        margin-right: 20px;
+        margin-bottom: 0;
+    }
+    .tier li .content {
+        flex: 1;
+    }
+    .tier ul ul {
+        margin-left: 100px; /* Rétablit la marge d’origine */
+    }
+}
+
+
     </style>
 </head>
 <body>
