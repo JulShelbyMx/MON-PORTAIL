@@ -816,19 +816,33 @@ footer {
     transform: scale(1.05);
 }
 
-.ranking-button {
-    padding: 15px 25px;
+#ranking-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
     background-color: green;
     color: #0a0a0a;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 20px;
-    font-family: 'Pirata One', sans-serif;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
     border: 2px solid #0a0a0a;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 2000;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none; /* Supprime tout soulignement pour <a> */
+    display: flex; /* Utilise Flexbox pour centrer */
+    align-items: center; /* Centre verticalement */
+    justify-content: center; /* Centre horizontalement */
+    line-height: 1; /* Évite tout décalage lié à la hauteur de ligne */
 }
-.ranking-button:hover {
-    background-color: green;
-    transform: scale(1.05);
+
+#ranking-button:hover {
+    background-color: darkgreen;
+    transform: scale(1.1);
+}
+
+#ranking-button:focus {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
 }

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranking Manga/Anime - Jul's Portal</title>
+    <title>Ranking - Jul's Portal</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="shortcut icon" href="../images/logopage.png" />
     <style>
@@ -121,15 +121,10 @@
             line-height: 1.8;
             padding: 15px;
             border-bottom: 1px solid rgba(255, 179, 0, 0.4);
-            transition: background 0.3s ease, transform 0.3s ease;
             background: rgba(0, 0, 0, 0.5);
         }
 
-        .tier li:hover {
-            background: rgba(255, 179, 0, 0.2);
-            transform: translateX(10px);
-        }
-
+        /* Suppression des effets de survol */
         .tier li img {
             width: 80px;
             height: 80px;
@@ -138,17 +133,42 @@
             margin-right: 20px;
             border: 2px solid #ffb300;
             box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
-            transition: transform 0.3s ease;
-        }
-
-        .tier li:hover img {
-            transform: scale(1.1);
         }
 
         .tier li strong {
             color: #ff4444;
             font-size: 20px;
             text-shadow: 1px 1px 3px #000;
+        }
+
+        /* Styles pour la mise en page et les statuts */
+        .tier li .content {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .tier li .title-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tier li .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .tier li .status {
+            font-size: 16px;
+        }
+
+        .tier li .author {
+            font-size: 14px;
+            color: #fff;
         }
 
         .tier ul ul {
@@ -158,7 +178,9 @@
         }
 
         .tier ul ul li {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             padding: 10px 0;
             background: none;
         }
@@ -167,6 +189,54 @@
             margin-left: 20px;
             font-size: 14px;
             color: #bbb;
+        }
+
+        .tier ul ul li .sub-status,
+        .tier ul ul ul li .sub-sub-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Couleurs des statuts et pastilles */
+        .status-a-jour,
+        .status-a-jour-manga {
+            color: #00ff00; /* Vert pour "À jour" */
+        }
+
+        .status-a-jour-dot,
+        .status-a-jour-manga-dot {
+            background-color: #00ff00;
+        }
+
+        .status-en-cours,
+        .status-en-cours-manga {
+            color: #ff8800; /* Orange pour "En cours" */
+        }
+
+        .status-en-cours-dot,
+        .status-en-cours-manga-dot {
+            background-color: #ff8800;
+        }
+
+        .status-a-voir,
+        .status-a-voir-manga {
+            color: #ff0000; /* Rouge pour "À voir/À lire" */
+        }
+
+        .status-a-voir-dot,
+        .status-a-voir-manga-dot {
+            background-color: #ff0000;
+        }
+
+        .status-q,
+        .status-q-manga {
+            color: #D3D3D3; /* Blanc pour le texte, pour qu'il soit lisible */
+        }
+
+        .status-q-dot,
+        .status-q-manga-dot {
+            background-color: #666; /* Gris moyen pour la pastille, visible sur fond sombre */
         }
 
         .ssss-tier { background: linear-gradient(135deg, rgba(255, 179, 0, 0.95), rgba(255, 68, 68, 0.95)); }
@@ -186,6 +256,8 @@
             .tier li { font-size: 16px; flex-direction: column; align-items: flex-start; }
             .tier li img { width: 60px; height: 60px; margin-bottom: 10px; }
             .tier li strong { font-size: 18px; }
+            .tier li .status { font-size: 14px; }
+            .tier li .author { font-size: 12px; }
             .tier ul ul { margin-left: 20px; font-size: 14px; }
             .tier ul ul ul { font-size: 12px; }
         }
@@ -196,6 +268,8 @@
             .tier li { font-size: 14px; }
             .tier li img { width: 50px; height: 50px; }
             .tier li strong { font-size: 16px; }
+            .tier li .status { font-size: 12px; }
+            .tier li .author { font-size: 11px; }
             .tier ul ul { font-size: 12px; }
             .tier ul ul ul { font-size: 11px; }
         }
@@ -205,7 +279,6 @@
     <section class="ranking-hero">
         <div class="ranking-hero-content">
             <h2>Manga/Anime Ranking</h2>
-            <p>"My personal treasure chest of manga and anime greatness!"</p>
             <a href="../index.html" class="return-button">BACK</a>
         </div>
     </section>
@@ -216,22 +289,82 @@
             <ul>
                 <li>
                     <img src="../images/images-ranking/one-piece.jpg" alt="One Piece">
-                    <div><strong>ONE PIECE (Eiichiro Oda)</strong>: À jour | Manga: À jour
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>ONE PIECE</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">À jour</span>
+                        </div>
+                        <div class="author">Auteur : Eiichiro Oda</div>
                         <ul>
-                            <li>Monsters (Eiichiro Oda): Fini | Manga: Fini</li>
-                            <li>One Piece Log: Fish-man Island (Toei Animation): Fini</li>
+                            <li>
+                                <span>Monsters (Eiichiro Oda)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span> | Manga: <span class="sub-status">
+                                    <span class="status-dot status-a-jour-manga-dot"></span>
+                                    <span class="status status-a-jour-manga">Fini</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>One Piece Log: Fish-man Island (Toei Animation)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/dragon-ball.webp" alt="Dragon Ball">
-                    <div><strong>DRAGON BALL (Akira Toriyama🕊️)</strong>: Fini
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>DRAGON BALL</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Akira Toriyama🕊️</div>
                         <ul>
-                            <li>Dragon Ball Z (Akira Toriyama🕊️): Fini</li>
-                            <li>Dragon Ball GT (Toei Animation): Fini</li>
-                            <li>Dragon Ball Super (Akira Toriyama🕊️ / Toyotaro): À jour | Manga: À jour</li>
-                            <li>Super Dragon Ball Heroes (promotional anime): À jour (Fini?)</li>
-                            <li>Dragon Ball Daima (Toei Animation): Fini</li>
+                            <li>
+                                <span>Dragon Ball Z (Akira Toriyama🕊️)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Dragon Ball GT (Toei Animation)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Dragon Ball Super (Akira Toriyama🕊️ / Toyotaro)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">À jour</span>
+                                </span> | Manga: <span class="sub-status">
+                                    <span class="status-dot status-a-jour-manga-dot"></span>
+                                    <span class="status status-a-jour-manga">À jour</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Super Dragon Ball Heroes (promotional anime)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">À jour (Fini?)</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Dragon Ball Daima (Toei Animation)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -243,24 +376,95 @@
             <ul>
                 <li>
                     <img src="../images/images-ranking/naruto.jpg" alt="Naruto">
-                    <div><strong>NARUTO (Masashi Kishimoto)</strong>: Fini
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>NARUTO</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Masashi Kishimoto</div>
                         <ul>
-                            <li>Naruto Shippuden (Masashi Kishimoto): Fini | Manga: Fini</li>
-                            <li>Boruto (M. Kishimoto / Mikio Ikemoto): À jour | Manga: À jour (tous les 20 du mois)</li>
+                            <li>
+                                <span>Naruto Shippuden (Masashi Kishimoto)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span> | Manga: <span class="sub-status">
+                                    <span class="status-dot status-a-jour-manga-dot"></span>
+                                    <span class="status status-a-jour-manga">Fini</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Boruto (M. Kishimoto / Mikio Ikemoto)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">À jour</span>
+                                </span> | Manga: <span class="sub-status">
+                                    <span class="status-dot status-a-jour-manga-dot"></span>
+                                    <span class="status status-a-jour-manga">À jour (tous les 20 du mois)</span>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/bleach.webp" alt="Bleach">
-                    <div><strong>BLEACH (Tite Kubo)</strong>: Fini
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>BLEACH</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Tite Kubo</div>
                         <ul>
-                            <li>Burn the Witch (Tite Kubo): Fini? | Manga: ?</li>
-                            <li>Bleach Thousand-Year Blood War (Tite Kubo): À jour | Manga: Fini
+                            <li>
+                                <span>Burn the Witch (Tite Kubo)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini?</span>
+                                </span> | Manga: <span class="sub-status">
+                                    <span class="status-dot status-q-manga-dot"></span>
+                                    <span class="status status-q-manga">?</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Bleach Thousand-Year Blood War (Tite Kubo)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">À jour</span>
+                                </span> | Manga: <span class="sub-status">
+                                    <span class="status-dot status-a-jour-manga-dot"></span>
+                                    <span class="status status-a-jour-manga">Fini</span>
+                                </span>
                                 <ul>
-                                    <li>The Blood Warfare (part1): Fini</li>
-                                    <li>The Separation (part2): Fini</li>
-                                    <li>The Conflict (part3): Fini</li>
-                                    <li>The Calamity (part4): Pas de date?</li>
+                                    <li>
+                                        <span>The Blood Warfare (part1)</span>
+                                        <span class="sub-sub-status">
+                                            <span class="status-dot status-a-jour-dot"></span>
+                                            <span class="status status-a-jour">Fini</span>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>The Separation (part2)</span>
+                                        <span class="sub-sub-status">
+                                            <span class="status-dot status-a-jour-dot"></span>
+                                            <span class="status status-a-jour">Fini</span>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>The Conflict (part3)</span>
+                                        <span class="sub-sub-status">
+                                            <span class="status-dot status-a-jour-dot"></span>
+                                            <span class="status status-a-jour">Fini</span>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>The Calamity (part4)</span>
+                                        <span class="sub-sub-status">
+                                            <span class="status-dot status-a-voir-dot"></span>
+                                            <span class="status status-a-voir">Pas de date?</span>
+                                        </span>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -274,15 +478,36 @@
             <ul>
                 <li>
                     <img src="../images/images-ranking/snk.jpg" alt="Shingeki no Kyojin">
-                    <div><strong>SHINGEKI NO KYOJIN (Hajime Isayama)</strong>: Fini | Manga: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>SHINGEKI NO KYOJIN</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Hajime Isayama</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/vinland-saga.png" alt="Vinland Saga">
-                    <div><strong>VINLAND SAGA (Makoto Yukimura)</strong>: À jour | Manga: À jour</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>VINLAND SAGA</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">À jour</span>
+                        </div>
+                        <div class="author">Auteur : Makoto Yukimura</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/berserk.jpg" alt="Berserk">
-                    <div><strong>BERSERK (Kentaro Miura🕊️ / Kouji Mori)</strong>: Remake non-officiel été 2025 par StudioECLYPSE | Manga: À jour</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>BERSERK</strong>
+                            <span class="status-dot status-en-cours-dot"></span>
+                            <span class="status status-en-cours">Remake non-officiel été 2025 par StudioECLYPSE</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">À jour</span>
+                        </div>
+                        <div class="author">Auteur : Kentaro Miura🕊️ / Kouji Mori</div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -292,17 +517,77 @@
             <ul>
                 <li>
                     <img src="../images/images-ranking/jojo.jpg" alt="JoJo's Bizarre Adventure">
-                    <div><strong>JOJO'S BIZARRE ADVENTURES (Hirohiko Araki)</strong>: En cours | Manga: ?
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>JOJO'S BIZARRE ADVENTURES</strong>
+                            <span class="status-dot status-en-cours-dot"></span>
+                            <span class="status status-en-cours">En cours</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Hirohiko Araki</div>
                         <ul>
-                            <li>Phantom Blood (part1): Fini</li>
-                            <li>Battle Tendency (part2): Fini</li>
-                            <li>Stardust Crusaders (part3): Fini</li>
-                            <li>Diamond is Unbreakable (part4): Fini</li>
-                            <li>Golden Wind (part5): En cours</li>
-                            <li>Stone Ocean (part6): À voir</li>
-                            <li>Steel Ball Run (part7): À voir</li>
-                            <li>Jojolion (part8): À voir</li>
-                            <li>The Jojolands (part9): À voir</li>
+                            <li>
+                                <span>Phantom Blood (part1)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Battle Tendency (part2)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Stardust Crusaders (part3)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Diamond is Unbreakable (part4)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Golden Wind (part5)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-en-cours-dot"></span>
+                                    <span class="status status-en-cours">En cours</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Stone Ocean (part6)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-voir-dot"></span>
+                                    <span class="status status-a-voir">À voir</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Steel Ball Run (part7)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-voir-dot"></span>
+                                    <span class="status status-a-voir">À voir</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>Jojolion (part8)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-voir-dot"></span>
+                                    <span class="status status-a-voir">À voir</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span>The Jojolands (part9)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-voir-dot"></span>
+                                    <span class="status status-a-voir">À voir</span>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -314,31 +599,81 @@
             <ul>
                 <li>
                     <img src="../images/images-ranking/black-clover.jpg" alt="Black Clover">
-                    <div><strong>BLACK CLOVER (Yūki Tabata)</strong>: Fini? | Manga: À jour</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>BLACK CLOVER</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini?</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">À jour</span>
+                        </div>
+                        <div class="author">Auteur : Yūki Tabata</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/fairy-tail.webp" alt="Fairy Tail">
-                    <div><strong>FAIRY TAIL (Hiro Mashima)</strong>: À jour | Manga: Fini
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>FAIRY TAIL</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Hiro Mashima</div>
                         <ul>
-                            <li>100 Years Quest (Hiro Mashima): À jour | Manga: À jour</li>
+                            <li>
+                                <span>100 Years Quest (Hiro Mashima)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">À jour</span>
+                                </span> | Manga: <span class="sub-status">
+                                    <span class="status-dot status-a-jour-manga-dot"></span>
+                                    <span class="status status-a-jour-manga">À jour</span>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/my-hero-academia.jpg" alt="My Hero Academia">
-                    <div><strong>MY HERO ACADEMIA (Kōhei Horikoshi)</strong>: À jour | Manga: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>MY HERO ACADEMIA</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Kōhei Horikoshi</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/hunter-x-hunter.jpg" alt="Hunter x Hunter">
-                    <div><strong>HUNTER X HUNTER (Yoshihiro Togashi)</strong>: À jour (Suite?) | Manga: En cours?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>HUNTER X HUNTER</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour (Suite?)</span> | Manga: <span class="status-dot status-en-cours-manga-dot"></span> <span class="status status-en-cours-manga">En cours?</span>
+                        </div>
+                        <div class="author">Auteur : Yoshihiro Togashi</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/demon-slayer.jpg" alt="Demon Slayer">
-                    <div><strong>DEMON SLAYER (Koyoharu Gotōge)</strong>: À jour | Manga: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>DEMON SLAYER</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Koyoharu Gotōge</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/jujutsu-kaisen.jpg" alt="Jujutsu Kaisen">
-                    <div><strong>JUJUTSU KAISEN (Gege Akutami)</strong>: À jour | Manga: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>JUJUTSU KAISEN</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Gege Akutami</div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -348,43 +683,114 @@
             <ul>
                 <li>
                     <img src="../images/images-ranking/death-note.webp" alt="Death Note">
-                    <div><strong>DEATH NOTE (Tsugumi Ohba / Takeshi Obata)</strong>: Fini | Manga: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>DEATH NOTE</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Tsugumi Ohba / Takeshi Obata</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/high-school-dxd.webp" alt="High School DxD">
-                    <div><strong>HIGH SCHOOL DXD (Ichiei Ishibumi / Miyama-Zero)</strong>: À jour | Light Novel: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>HIGH SCHOOL DXD</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Ichiei Ishibumi / Miyama-Zero</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/fire-force.webp" alt="Fire Force">
-                    <div><strong>FIRE FORCE (Atsushi Ōkubo)</strong>: À jour | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>FIRE FORCE</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Atsushi Ōkubo</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/assassination-classroom.jpg" alt="Assassination Classroom">
-                    <div><strong>ASSASSINATION CLASSROOM (Yūsei Matsui)</strong>: Fini | Manga: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>ASSASSINATION CLASSROOM</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Yūsei Matsui</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/tokyo-ghoul.jpg" alt="Tokyo Ghoul">
-                    <div><strong>TOKYO GHOUL (Sui Ishida)</strong>: À jour | Manga: ?
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>TOKYO GHOUL</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Sui Ishida</div>
                         <ul>
-                            <li>Tokyo Ghoul:RE (Sui Ishida): Fini | Manga: ?</li>
+                            <li>
+                                <span>Tokyo Ghoul:RE (Sui Ishida)</span>
+                                <span class="sub-status">
+                                    <span class="status-dot status-a-jour-dot"></span>
+                                    <span class="status status-a-jour">Fini</span>
+                                </span> | Manga: <span class="sub-status">
+                                    <span class="status-dot status-q-manga-dot"></span>
+                                    <span class="status status-q-manga">?</span>
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/solo-leveling.webp" alt="Solo Leveling">
-                    <div><strong>SOLO LEVELING (Chugong)</strong>: À jour | Manhwa: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>SOLO LEVELING</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manhwa: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Chugong</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/mirai-nikki.webp" alt="Mirai Nikki">
-                    <div><strong>MIRAI NIKKI (Sakae Esuno)</strong>: Fini | Manga: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>MIRAI NIKKI</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Sakae Esuno</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/nana.jpg" alt="Nana">
-                    <div><strong>NANA (Ai Yazawa)</strong>: À jour (Pas d’annonce) | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>NANA</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour (Pas d’annonce)</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Ai Yazawa</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/dr-stone.webp" alt="Dr. Stone">
-                    <div><strong>DR. STONE (Riichiro Inagaki / Boichi)</strong>: À jour | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>DR. STONE</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Riichiro Inagaki / Boichi</div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -394,35 +800,91 @@
             <ul>
                 <li>
                     <img src="../images/images-ranking/tokyo-revengers.jpg" alt="Tokyo Revengers">
-                    <div><strong>TOKYO REVENGERS (Ken Wakui)</strong>: À jour | Manga: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>TOKYO REVENGERS</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Ken Wakui</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/eminence-in-shadow.webp" alt="The Eminence in Shadow">
-                    <div><strong>THE EMINENCE IN SHADOW (Daisuke Aizawa)</strong>: À jour | Light Novel: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>THE EMINENCE IN SHADOW</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Daisuke Aizawa</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/bunny-girl-senpai.jpg" alt="Rascal Does Not Dream">
-                    <div><strong>RASCAL DOES NOT DREAM OF BUNNY GIRL SENPAI (Hajime Kamoshida)</strong>: Fini? | Light Novel: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>RASCAL DOES NOT DREAM OF BUNNY GIRL SENPAI</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini?</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Hajime Kamoshida</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/carnets-de-l'apothicaire.webp" alt="Les Carnets de l’Apothicaire">
-                    <div><strong>LES CARNETS DE L’APOTHICAIRE (Natsu Hyūga / Itsuki Nanao)</strong>: À jour | Light Novel: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>LES CARNETS DE L’APOTHICAIRE</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Natsu Hyūga / Itsuki Nanao</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/promised-neverland.webp" alt="The Promised Neverland">
-                    <div><strong>THE PROMISED NEVERLAND (Kaiu Shirai / Posuka Demizu)</strong>: Suite? | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>THE PROMISED NEVERLAND</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">Suite?</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Kaiu Shirai / Posuka Demizu</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/ouran-host-club.jpg" alt="Ouran High School Host Club">
-                    <div><strong>OURAN HIGH SCHOOL HOST CLUB (Bisco Hatori)</strong>: Fini? | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>OURAN HIGH SCHOOL HOST CLUB</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini?</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Bisco Hatori</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/maid-sama.jpg" alt="The President is a Maid">
-                    <div><strong>THE PRESIDENT IS A MAID/Kaichou wa Maid-sama (Hiro Fujiwara)</strong>: Fini | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>THE PRESIDENT IS A MAID/Kaichou wa Maid-sama</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Hiro Fujiwara</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/peach-girl.webp" alt="Peach Girl">
-                    <div><strong>PEACH GIRL (Miwa Ueda)</strong>: Fini | Manga: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>PEACH GIRL</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Miwa Ueda</div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -432,35 +894,91 @@
             <ul>
                 <li>
                     <img src="../images/images-ranking/edens-zero.jpg" alt="Edens Zero">
-                    <div><strong>EDENS ZERO (Hiro Mashima)</strong>: À jour | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>EDENS ZERO</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Hiro Mashima</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/hells-paradise.jpg" alt="Hell's Paradise">
-                    <div><strong>HELL'S PARADISE (Yūji Kaku)</strong>: À jour | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>HELL'S PARADISE</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Yūji Kaku</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/one-punch-man.webp" alt="One Punch Man">
-                    <div><strong>ONE PUNCH MAN (ONE / Yūsuke Murata)</strong>: À jour (Suite un jour?) | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>ONE PUNCH MAN</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour (Suite un jour?)</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : ONE / Yūsuke Murata</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/ninja-kamui.jpg" alt="Ninja Kamui">
-                    <div><strong>NINJA KAMUI (Sunghoo Park)</strong>: Fini? | Pas de manga?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>NINJA KAMUI</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini?</span> | Pas de manga?
+                        </div>
+                        <div class="author">Auteur : Sunghoo Park</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/failure-frame.webp" alt="Failure Frame">
-                    <div><strong>FAILURE FRAME (Kaoru Shinozaki)</strong>: À jour | Light Novel: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>FAILURE FRAME</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Kaoru Shinozaki</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/dandadan.webp" alt="Dandadan">
-                    <div><strong>DANDADAN (Yukinobu Tatsu)</strong>: En cours | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>DANDADAN</strong>
+                            <span class="status-dot status-en-cours-dot"></span>
+                            <span class="status status-en-cours">En cours</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Yukinobu Tatsu</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/servamp.webp" alt="Servamp">
-                    <div><strong>SERVAMP (Tanaka Strike)</strong>: En cours | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>SERVAMP</strong>
+                            <span class="status-dot status-en-cours-dot"></span>
+                            <span class="status status-en-cours">En cours</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Tanaka Strike</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/kaifuku.webp" alt="Kaifuku Jutsushi no Yarinaoshi">
-                    <div><strong>KAIFUKU JUTSUSHI NO YARINAOSHI (Rui Tsukiyo / Shiokonbu)</strong>: Saison 2? Pas d'annonce? | Manga: Suite?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>KAIFUKU JUTSUSHI NO YARINAOSHI</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Saison 2? Pas d'annonce?</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">Suite?</span>
+                        </div>
+                        <div class="author">Auteur : Rui Tsukiyo / Shiokonbu</div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -470,47 +988,124 @@
             <ul>
                 <li>
                     <img src="../images/images-ranking/hyoka.jpg" alt="Hyōka">
-                    <div><strong>HYŌKA (Honobu Yonezawa)</strong>: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>HYŌKA</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Honobu Yonezawa</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/nagatoro.webp" alt="Nagatoro">
-                    <div><strong>NAGATORO (Nanashi)</strong>: Saison 3? | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>NAGATORO</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Saison 3?</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Nanashi</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/fuufu-miman.webp" alt="Fuufu Ijou Koibito Miman">
-                    <div><strong>FUUFU IJOU KOIBITO MIMAN (Yuki Kanamaru)</strong>: Saison 1 finie, S2? | Manga: 30 (pas de VF)</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>FUUFU IJOU KOIBITO MIMAN</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Saison 1 finie, S2?</span> | Manga: <span class="status-dot status-a-jour-manga-dot"></span> <span class="status status-a-jour-manga">30 (pas de VF)</span>
+                        </div>
+                        <div class="author">Auteur : Yuki Kanamaru</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/my-dress-up-darling.webp" alt="My Dress-Up Darling">
-                    <div><strong>MY DRESS UP DARLING (Shinichi Fukuda)</strong>: Saison 2? | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>MY DRESS UP DARLING</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Saison 2?</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Shinichi Fukuda</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/inukai-san.webp" alt="My Life as Inukai-san's Dog">
-                    <div><strong>MY LIFE AS INUKAI-SAN'S DOG (Gosei Furukawa)</strong>: À jour | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>MY LIFE AS INUKAI-SAN'S DOG</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Gosei Furukawa</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/tenpuru.webp" alt="Tenpuru">
-                    <div><strong>TENPURU (Yoshioka Kimitake)</strong>: À jour | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>TENPURU</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Yoshioka Kimitake</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/100-girlfriends.jpg" alt="The 100 Girlfriends">
-                    <div><strong>THE 100 GIRLFRIENDS (Rikito Nakamura / Yukiko Nozawa)</strong>: À jour | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>THE 100 GIRLFRIENDS</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Rikito Nakamura / Yukiko Nozawa</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/demon-slave.webp" alt="Demon Slave">
-                    <div><strong>DEMON SLAVE (Takahiro / Yohei Takemura)</strong>: À jour | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>DEMON SLAVE</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Takahiro / Yohei Takemura</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/yosuga-no-sora.webp" alt="Yosuga no Sora">
-                    <div><strong>YOSUGA NO SORA (Sphere)</strong>: Fini</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>YOSUGA NO SORA</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini</span>
+                        </div>
+                        <div class="author">Auteur : Sphere</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/gods-games-we-play.webp" alt="God's Games We Play">
-                    <div><strong>GOD'S GAMES WE PLAY (Kei Sazane)</strong>: À jour | Light Novel: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>GOD'S GAMES WE PLAY</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">À jour</span> | Light Novel: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Kei Sazane</div>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/kiss-him-not-me.webp" alt="Kiss Him, Not Me">
-                    <div><strong>KISS HIM NOT ME! (Junko)</strong>: Fini? Saison 2? | Manga: ?</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>KISS HIM NOT ME!</strong>
+                            <span class="status-dot status-a-jour-dot"></span>
+                            <span class="status status-a-jour">Fini? Saison 2?</span> | Manga: <span class="status-dot status-q-manga-dot"></span> <span class="status status-q-manga">?</span>
+                        </div>
+                        <div class="author">Auteur : Junko</div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -519,55 +1114,174 @@
             <h3>ANIMES À VOIR + SCANS À LIRE + FILMS</h3>
             <ul>
                 <li>
-                    <div><strong>BLUE EXORCIST (Kazue Kato)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>BLUE EXORCIST</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Kazue Kato</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>SWORD ART ONLINE (Reki Kawahara)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>SWORD ART ONLINE</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Reki Kawahara</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>FULL METAL ALCHEMIST (Hiromu Arakawa)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>FULL METAL ALCHEMIST</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Hiromu Arakawa</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>THE SEVEN DEADLY SINS (Nakaba Suzuki)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>THE SEVEN DEADLY SINS</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Nakaba Suzuki</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>FRIEREN (Kanehito Yamada / Tsukasa Abe)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>FRIEREN</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Kanehito Yamada / Tsukasa Abe</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>SPY X FAMILY (Tatsuya Endo)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>SPY X FAMILY</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Tatsuya Endo</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>DARLING IN THE FRANXX (Trigger / A-1 Pictures)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>DARLING IN THE FRANXX</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Trigger / A-1 Pictures</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>AKAME GA KILL (Takahiro / Tetsuya Tashiro)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>AKAME GA KILL</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Takahiro / Tetsuya Tashiro</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>YOUR LIE IN APRIL (film) (Naoshi Arakawa)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>YOUR LIE IN APRIL (film)</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Naoshi Arakawa</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>VAGABOND (Takehiko Inoue)</strong> {MANGA!}</div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>VAGABOND</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À lire {MANGA!}</span>
+                        </div>
+                        <div class="author">Auteur : Takehiko Inoue</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>PARASYTE (Hitoshi Iwaaki)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>PARASYTE</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Hitoshi Iwaaki</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>SUMMERTIME RENDERING (Yasuki Tanaka)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>SUMMERTIME RENDERING</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Yasuki Tanaka</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>AO HARU RIDE (Io Sakisaka)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>AO HARU RIDE</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Io Sakisaka</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>CLASSROOM OF THE ELITE (Shōgo Kinugasa)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>CLASSROOM OF THE ELITE</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Shōgo Kinugasa</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>FOOD WARS (Yūto Tsukuda / Shun Saeki)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>FOOD WARS</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Yūto Tsukuda / Shun Saeki</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>MAHOU SHOUJO MADOKA MAGICA (Gen Urobuchi)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>MAHOU SHOUJO MADOKA MAGICA</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Gen Urobuchi</div>
+                    </div>
                 </li>
                 <li>
-                    <div><strong>BLOOD-C (Kotone Ranmaru)</strong></div>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>BLOOD-C</strong>
+                            <span class="status-dot status-a-voir-dot"></span>
+                            <span class="status status-a-voir">À voir</span>
+                        </div>
+                        <div class="author">Auteur : Kotone Ranmaru</div>
+                    </div>
                 </li>
             </ul>
         </div>
