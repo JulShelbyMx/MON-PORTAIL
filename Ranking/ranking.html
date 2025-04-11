@@ -87,19 +87,21 @@
 }
 
 /* Add the yellow border above the text box */
-.ranking-hero-content::before {
+.ranking-hero::before {
     content: '';
     position: absolute;
-    top: -25px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 90vw;
-    max-width: 1264px;
+    top: calc(100% - 110px); /* Positionne la barre juste au-dessus de .ranking-hero-content */
+    left: 0;
+    right: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: auto;
     height: 6px;
     background: #ffb300;
     box-shadow: 0 0 10px rgba(255, 179, 0, 0.8);
     z-index: 1002;
 }
+
 
 .ranking-hero h2 {
     font-family: 'Pirata One', sans-serif;
