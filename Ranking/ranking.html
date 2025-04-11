@@ -18,6 +18,7 @@
         /* Styles de base */
         body {
             background: #0a0a0a url('../images/images-ranking/background.jpg') repeat;
+            background-size: 100% auto;
             color: #fff;
             font-family: 'Arial', sans-serif;
             line-height: 1.6;
@@ -25,61 +26,87 @@
             padding: 0;
         }
 
-        /* Header et bouton Back */
-        .ranking-hero {
-            background: url('../images/images-ranking/ranking-hero.jpg') no-repeat center top/cover;
-            height: 50vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            z-index: 1000;
-            border-bottom: 3px solid #ffb300;
-            box-shadow: 0 0 20px rgba(255, 179, 0, 0.8);
-        }
+       /* Header et bouton Back */
+  /* Header et bouton Back */
+.ranking-hero {
+    background: url('../images/images-ranking/ranking-hero.jpg') no-repeat center top/cover;
+    height: 50vh;
+    min-height: 400px; /* Ensure enough height for layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Primary method to push content to the bottom */
+    align-items: center; /* Center horizontally */
+    text-align: center;
+    position: relative;
+    z-index: 1000;
+}
 
-        .ranking-hero-content {
-            text-align: center;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px solid #ffb300;
-        }
+.ranking-hero-content {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.85);
+    padding: 2px;
+    border-radius: 20px;
+    border: 2px solid #ffb300;
+    position: relative; /* For the ::before pseudo-element */
+    width: fit-content; /* Prevent stretching */
+    z-index: 1001; /* Ensure the content is above other elements */
+    /* Fallback: Absolute positioning to force the text to the bottom */
+    position: absolute;
+    bottom: 20px; /* Place at the bottom with some spacing */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    margin: 0; /* Remove margin since we’re using absolute positioning */
+}
 
-        .ranking-hero h2 {
-            font-family: 'Pirata One', sans-serif;
-            font-size: 48px;
-            color: #ffb300;
-            text-shadow: 3px 3px 8px #000;
-            margin: 0;
-        }
+.return-button {
+    position: absolute;
+    top: 20px !important; /* Force le positionnement en haut */
+    left: 20px !important; /* Force le positionnement à gauche */
+    transform: none !important; /* Annule tout transform hérité ou appliqué */
+    padding: 12px 25px;
+    background-color: #ffb300;
+    color: #0a0a0a;
+    text-decoration: none;
+    border-radius: 10px;
+    font-family: 'Pirata One', sans-serif;
+    font-size: 20px;
+    border: 3px solid #0a0a0a;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    z-index: 1003; /* Au-dessus de tout */
+}
 
-        .ranking-hero p {
-            font-size: 20px;
-            color: #ddd;
-            text-shadow: 1px 1px 3px #000;
-        }
+.return-button:hover {
+    background-color: #e0a800;
+    transform: scale(1.1) !important; /* Garde l'effet de scale au hover */
+}
 
-        .return-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 12px 25px;
-            background-color: #ffb300;
-            color: #0a0a0a;
-            text-decoration: none;
-            border-radius: 10px;
-            font-family: 'Pirata One', sans-serif;
-            font-size: 20px;
-            border: 3px solid #0a0a0a;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
+.return-button:focus {
+    outline: none;
+    box-shadow: 0 0 5px 2px #ffb300; /* Visibilité du focus */
+}
 
-        .return-button:hover {
-            background-color: #e0a800;
-            transform: scale(1.1);
-        }
+/* Add the yellow border above the text box */
+.ranking-hero-content::before {
+    content: '';
+    position: absolute;
+    top: -25px; /* Move further up for better spacing */
+    left: 50%;
+    transform: translateX(-50%); /* Center horizontally */
+    width: 1264px; /* Wider than the text box for a more prominent look */
+    height: 6px; /* Thicker border */
+    background: #ffb300; /* Yellow color */
+    z-index: 1002; /* Ensure the border is visible */
+}
+
+.ranking-hero h2 {
+    font-family: 'Pirata One', sans-serif;
+    font-size: 30px;
+    color: #ffb300;
+    text-shadow: 3px 3px 8px #000;
+    margin: 0;
+    padding: 8px;
+}
 
         /* Conteneur principal */
         .ranking-container {
@@ -301,110 +328,152 @@
         }
 
         /* Media Query pour mobile (max-width: 768px) */
-        @media (max-width: 768px) {
-            .ranking-hero {
-                height: 35vh;
-            }
-            
-            .ranking-hero h2 {
-                font-size: 36px;
-            }
-            .return-button {
-                font-size: 18px;
-                padding: 10px 20px;
-            }
-            .ranking-container {
-                padding: 15px;
-                margin: 20px auto;
-                width: 95%;
-            }
-            .tier h3 {
-                font-size: 26px;
-                padding: 10px;
-            }
-            .tier li {
-                flex-direction: column;
-                align-items: flex-start;
-                font-size: 16px;
-                padding: 15px;
-            }
-            .tier li img {
-                width: 60px;
-                height: auto;
-                margin: 0 0 15px 0;
-                max-width: 100%;
-            }
-            .tier li strong {
-                font-size: 18px;
-            }
-            .tier li .status-anime, .tier li .status-manga {
-                font-size: 14px;
-                padding: 2px 6px;
-            }
-            .tier li .status-anime::before, .tier li .status-manga::before {
-                font-size: 12px;
-            }
-            .tier li .author {
-                font-size: 12px;
-            }
-            .tier ul ul {
-                margin-left: 15px;
-                font-size: 14px;
-            }
-            .tier ul ul ul {
-                margin-left: 10px;
-                font-size: 12px;
-            }
-        }
+       /* Media Query pour mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    .ranking-hero {
+        height: 20vh; /* Slightly taller than before for better visibility of Shenron */
+        background-position: center 20%; /* Adjust Shenron's position to avoid cutting off */
+    }
+    
+    .ranking-hero-content {
+        padding: 4px; /* Slightly more padding for better readability */
+        margin-bottom: 8px; /* Adjust spacing above the yellow border */
+    }
 
-        /* Media Query pour petits écrans (max-width: 480px) */
-        @media (max-width: 480px) {
-            .ranking-hero {
-                height: 25vh;
-            }
-            
-            .ranking-hero h2 {
-                font-size: 28px;
-            }
-            .return-button {
-                font-size: 16px;
-                padding: 8px 15px;
-            }
-            .tier h3 {
-                font-size: 22px;
-                padding: 8px;
-            }
-            .tier li {
-                font-size: 14px;
-                padding: 12px;
-            }
-            .tier li img {
-                width: 50px;
-            }
-            .tier li strong {
-                font-size: 16px;
-            }
-            .tier li .status-anime, .tier li .status-manga {
-                font-size: 12px;
-            }
-            .tier li .author {
-                font-size: 11px;
-            }
-            .tier ul ul {
-                margin-left: 10px;
-                font-size: 12px;
-            }
-            .tier ul ul ul {
-                font-size: 11px;
-            }
-        }
+    .ranking-hero h2 {
+        font-size: 24px; /* Reduced from 36px for better fit */
+        padding: 6px; /* Adjust padding to match smaller font */
+    }
+
+    .return-button {
+        font-size: 16px; /* Slightly smaller for mobile */
+        padding: 8px 15px; /* Adjusted padding */
+        top: 15px; /* Move closer to the top edge */
+        left: 15px; /* Move closer to the left edge */
+    }
+
+    .ranking-container {
+        padding: 15px;
+        margin: 20px auto;
+        width: 90%; /* Slightly reduced width for better fit */
+        max-width: 600px; /* Ensure it doesn’t stretch too wide */
+    }
+
+    .tier h3 {
+        font-size: 26px;
+        padding: 10px;
+    }
+
+    .tier li {
+        flex-direction: column;
+        align-items: flex-start;
+        font-size: 16px;
+        padding: 15px;
+    }
+
+    .tier li img {
+        width: 60px;
+        height: auto;
+        margin: 0 0 15px 0;
+        max-width: 100%;
+    }
+
+    .tier li strong {
+        font-size: 18px;
+    }
+
+    .tier li .status-anime, .tier li .status-manga {
+        font-size: 14px;
+        padding: 2px 6px;
+    }
+
+    .tier li .status-anime::before, .tier li .status-manga::before {
+        font-size: 12px;
+    }
+
+    .tier li .author {
+        font-size: 12px;
+    }
+
+    .tier ul ul {
+        margin-left: 15px;
+        font-size: 14px;
+    }
+
+    .tier ul ul ul {
+        margin-left: 10px;
+        font-size: 12px;
+    }
+}
+
+/* Media Query pour petits écrans (max-width: 480px) */
+@media (max-width: 480px) {
+    .ranking-hero {
+        height: 15vh;
+        background-position: center 10%; /* Further adjust Shenron's position */
+    }
+
+    .ranking-hero-content {
+        padding: 2px;
+        margin-bottom: 5px; /* Less margin for smaller screens */
+        border-radius: 15px; /* Slightly smaller border radius */
+    }
+
+    .ranking-hero h2 {
+        font-size: 20px; /* Reduced from 28px for better fit */
+        padding: 4px;
+    }
+
+    .return-button {
+        font-size: 14px; /* Smaller font for very small screens */
+        padding: 6px 12px; /* Smaller padding */
+        top: 10px; /* Closer to the top */
+        left: 10px; /* Closer to the left */
+        border-radius: 8px; /* Slightly smaller border radius */
+    }
+
+    .tier h3 {
+        font-size: 22px;
+        padding: 8px;
+    }
+
+    .tier li {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .tier li img {
+        width: 50px;
+    }
+
+    .tier li strong {
+        font-size: 16px;
+    }
+
+    .tier li .status-anime, .tier li .status-manga {
+        font-size: 12px;
+    }
+
+    .tier li .author {
+        font-size: 11px;
+    }
+
+    .tier ul ul {
+        margin-left: 10px;
+        font-size: 12px;
+    }
+
+    .tier ul ul ul {
+        font-size: 11px;
+    }
+}
     </style>
 </head>
 <body>
     <section class="ranking-hero">
+        <a href="../index.html" class="return-button">BACK</a>
         <div class="ranking-hero-content">
             <h2>Manga/Anime Ranking</h2>
-            <a href="../index.html" class="return-button">BACK</a>
         </div>
     </section>
 
