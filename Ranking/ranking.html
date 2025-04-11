@@ -90,7 +90,22 @@
 .ranking-hero::before {
     content: '';
     position: absolute;
-    top: calc(100% - 110px); /* Positionne la barre juste au-dessus de .ranking-hero-content */
+    top: calc(100% - 103px); /* Positionne la barre juste au-dessus de .ranking-hero-content */
+    left: 0;
+    right: 0;
+    margin-left: 5px;
+    margin-right: 5px;
+    width: auto;
+    height: 6px;
+    background: #ffb300;
+    box-shadow: 0 0 10px rgba(255, 179, 0, 0.8);
+    z-index: 1002;
+}
+
+.ranking-hero::after {
+    content: '';
+    position: absolute;
+    top: calc(100% - 10px); /* Positionne la barre juste en dessous de .ranking-hero-content */
     left: 0;
     right: 0;
     margin-left: 5px;
