@@ -350,8 +350,9 @@
        /* Media Query pour mobile (max-width: 768px) */
        @media (max-width: 768px) {
     .ranking-hero {
-        height: 10vh;
-        background-position: center 20%;
+        height: 15vh;
+        background-position: center 30%;
+        background-size: cover;
     }
     
     .ranking-hero-content {
@@ -375,14 +376,14 @@
         margin-left: 10px;
         margin-right: 10px;
         height: 4px;
-        top: calc(100% - 85px); /* Ajusté pour mobile */
+        top: calc(100% - 69px);
     }
 
     .ranking-hero::after {
         margin-left: 10px;
         margin-right: 10px;
         height: 4px;
-        top: calc(100% - 20px); /* Ajusté pour mobile */
+        top: calc(100% - 15px);
     }
 
     .ranking-container {
@@ -392,7 +393,6 @@
         max-width: 600px;
     }
 
-    /* Autres styles inchangés */
     .tier h3 {
         font-size: 26px;
         padding: 10px;
@@ -440,11 +440,11 @@
     }
 }
 
-/* Media Query pour petits écrans (max-width: 480px) */
 @media (max-width: 480px) {
     .ranking-hero {
-        height: 5vh;
-        background-position: center 10%;
+        height: 15vh;
+        background-position: center 20%;
+        background-size: cover;
     }
 
     .ranking-hero-content {
@@ -470,17 +470,16 @@
         margin-left: 5px;
         margin-right: 5px;
         height: 3px;
-        top: calc(100% - 77px); /* Ajusté pour petits écrans */
+        top: calc(100% - 63px);
     }
 
     .ranking-hero::after {
         margin-left: 5px;
         margin-right: 5px;
         height: 3px;
-        top: calc(100% - 20px); /* Ajusté pour petits écrans */
+        top: calc(100% - 15px);
     }
 
-    /* Autres styles inchangés */
     .tier h3 {
         font-size: 22px;
         padding: 8px;
