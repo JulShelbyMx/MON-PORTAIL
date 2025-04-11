@@ -348,36 +348,51 @@
 
         /* Media Query pour mobile (max-width: 768px) */
        /* Media Query pour mobile (max-width: 768px) */
-@media (max-width: 768px) {
+       @media (max-width: 768px) {
     .ranking-hero {
-        height: 20vh; /* Slightly taller than before for better visibility of Shenron */
-        background-position: center 20%; /* Adjust Shenron's position to avoid cutting off */
+        height: 20vh;
+        background-position: center 20%;
     }
     
     .ranking-hero-content {
-        padding: 4px; /* Slightly more padding for better readability */
-        margin-bottom: 8px; /* Adjust spacing above the yellow border */
+        padding: 4px;
+        margin-bottom: 8px;
     }
 
     .ranking-hero h2 {
-        font-size: 24px; /* Reduced from 36px for better fit */
-        padding: 6px; /* Adjust padding to match smaller font */
+        font-size: 24px;
+        padding: 6px;
     }
 
     .return-button {
-        font-size: 16px; /* Slightly smaller for mobile */
-        padding: 8px 15px; /* Adjusted padding */
-        top: 15px; /* Move closer to the top edge */
-        left: 15px; /* Move closer to the left edge */
+        font-size: 16px;
+        padding: 8px 15px;
+        top: 15px;
+        left: 15px;
+    }
+
+    .ranking-hero::before {
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 4px;
+        top: calc(100% - 85px); /* Ajusté pour mobile */
+    }
+
+    .ranking-hero::after {
+        margin-left: 10px;
+        margin-right: 10px;
+        height: 4px;
+        top: calc(100% - 15px); /* Ajusté pour mobile */
     }
 
     .ranking-container {
         padding: 15px;
         margin: 20px auto;
-        width: 90%; /* Slightly reduced width for better fit */
-        max-width: 600px; /* Ensure it doesn’t stretch too wide */
+        width: 90%;
+        max-width: 600px;
     }
 
+    /* Autres styles inchangés */
     .tier h3 {
         font-size: 26px;
         padding: 10px;
@@ -429,28 +444,43 @@
 @media (max-width: 480px) {
     .ranking-hero {
         height: 15vh;
-        background-position: center 10%; /* Further adjust Shenron's position */
+        background-position: center 10%;
     }
 
     .ranking-hero-content {
         padding: 2px;
-        margin-bottom: 5px; /* Less margin for smaller screens */
-        border-radius: 15px; /* Slightly smaller border radius */
+        margin-bottom: 5px;
+        border-radius: 15px;
     }
 
     .ranking-hero h2 {
-        font-size: 20px; /* Reduced from 28px for better fit */
+        font-size: 20px;
         padding: 4px;
     }
 
     .return-button {
-        font-size: 14px; /* Smaller font for very small screens */
-        padding: 6px 12px; /* Smaller padding */
-        top: 10px; /* Closer to the top */
-        left: 10px; /* Closer to the left */
-        border-radius: 8px; /* Slightly smaller border radius */
+        font-size: 14px;
+        padding: 6px 12px;
+        top: 10px;
+        left: 10px;
+        border-radius: 8px;
     }
 
+    .ranking-hero::before {
+        margin-left: 5px;
+        margin-right: 5px;
+        height: 3px;
+        top: calc(100% - 77px); /* Ajusté pour petits écrans */
+    }
+
+    .ranking-hero::after {
+        margin-left: 5px;
+        margin-right: 5px;
+        height: 3px;
+        top: calc(100% - 15px); /* Ajusté pour petits écrans */
+    }
+
+    /* Autres styles inchangés */
     .tier h3 {
         font-size: 22px;
         padding: 8px;
