@@ -1260,8 +1260,8 @@ function generateStreamingLinks() {
         episodes: [
         { episode: 1123, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5869127'},
         { episode: 1124, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5870323'},
-        { episode: 1125, videoUrl: ''},
-
+        { episode: 1125, videoUrl: 'http://video.sibnet.ru/shell.php?videoid=5878182'},
+        { episode: 1126, videoUrl: ''},
 
     ]
 },
