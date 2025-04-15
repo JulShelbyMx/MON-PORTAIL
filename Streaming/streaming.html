@@ -291,12 +291,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mettre à jour l’interface utilisateur
     function updateUI(user) {
         if (user) {
+            console.log('Utilisateur connecté:', user.email, user.user_metadata);
             userStatus.textContent = `Connecté : ${user.email}`;
             loginBtn.style.display = 'none';
             signupBtn.style.display = 'none';
             logoutBtn.style.display = 'inline-block';
             loadHistory(user, seasons);
         } else {
+            console.log('Aucun utilisateur connecté');
             userStatus.textContent = 'Non connecté';
             loginBtn.style.display = 'inline-block';
             signupBtn.style.display = 'inline-block';
@@ -311,26 +313,22 @@ document.addEventListener('DOMContentLoaded', () => {
             historyContent.textContent = 'Non connecté';
             return;
         }
-        user.getUserMetadata().then(metadata => {
-            const history = metadata.history || {};
-            if (history.season && history.episode) {
-                const seasonIndex = seasons.findIndex(s => s.name === history.season);
-                if (seasonIndex !== -1) {
-                    historyContent.innerHTML = `
-                        Dernier épisode vu : <a href="season${seasonIndex + 1}.html#episode${history.episode}">
-                            ${history.season} - Episode ${history.episode}
-                        </a>
-                    `;
-                } else {
-                    historyContent.textContent = 'Historique non valide.';
-                }
+        const history = user.user_metadata && user.user_metadata.history ? user.user_metadata.history : {};
+        console.log('Historique chargé:', history);
+        if (history.season && history.episode) {
+            const seasonIndex = seasons.findIndex(s => s.name === history.season);
+            if (seasonIndex !== -1) {
+                historyContent.innerHTML = `
+                    Dernier épisode vu : <a href="season${seasonIndex + 1}.html#episode${history.episode}">
+                        ${history.season} - Episode ${history.episode}
+                    </a>
+                `;
             } else {
-                historyContent.textContent = 'Aucun épisode regardé récemment.';
+                historyContent.textContent = 'Historique non valide.';
             }
-        }).catch(err => {
-            console.error('Erreur chargement métadonnées:', err);
-            historyContent.textContent = 'Erreur lors du chargement de l’historique.';
-        });
+        } else {
+            historyContent.textContent = 'Aucun épisode regardé récemment.';
+        }
     }
 
     // Gérer l’état initial
