@@ -1,8 +1,0 @@
-[build]
-publish = "."
-
-[[redirects]]
-from = "/.netlify/identity/confirm/*"
-to = "/streaming.html"
-status = 200
-force = true
