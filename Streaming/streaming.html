@@ -82,29 +82,28 @@
             display: block;
         }
 
-
         .auth-container, #history {
-  max-width: 400px;
-  margin: 20px auto;
-  padding: 20px;
-  background: grey;
-  border-radius: 8px;
-  color: #fff;
-  text-align: center;
-}
-button {
-  background: #ffb300;
-  border: none;
-  padding: 8px;
-  margin: 5px;
-  cursor: pointer;
-}
-button:hover {
-  background: #ffb300;
-}
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background: grey;
+            border-radius: 8px;
+            color: #fff;
+            text-align: center;
+        }
+        button {
+            background: #ffb300;
+            border: none;
+            padding: 8px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #ffb300;
+        }
 
-/* Style pour l’historique */
-.history-card {
+        /* Style for history */
+        .history-card {
             display: flex;
             align-items: center;
             background: #222;
@@ -145,7 +144,6 @@ button:hover {
             display: flex;
             align-items: center;
         }
-
     </style>
 </head>
 <body>
@@ -153,7 +151,7 @@ button:hover {
         <div class="logo">One Piece Streaming</div>
         <div class="search-container">
             <input type="text" id="search-bar" placeholder="Search a season..." autocomplete="off">
-            <button id="search-button"><img src="../images/search-bar-logo.png" alt="Search Logo"></button>
+            <button id="search-button"><img src="../images/search-bar-logo.png" alt="Search Icon"></button>
             <ul id="search-suggestions" class="suggestions-list"></ul>
         </div>
     </header>
@@ -165,14 +163,14 @@ button:hover {
     </section>
 
     <div class="auth-container">
-        <p id="user-status">Non connecté</p>
-        <button id="login-btn" onclick="netlifyIdentity.open('login')">Se connecter</button>
-        <button id="signup-btn" onclick="netlifyIdentity.open('signup')">S'inscrire</button>
-        <button id="logout-btn" onclick="netlifyIdentity.logout()" style="display:none;">Déconnexion</button>
+        <p id="user-status">Not logged in</p>
+        <button id="login-btn" onclick="netlifyIdentity.open('login')">Log in</button>
+        <button id="signup-btn" onclick="netlifyIdentity.open('signup')">Sign up</button>
+        <button id="logout-btn" onclick="netlifyIdentity.logout()" style="display:none;">Log out</button>
     </div>
     <div id="history">
-        <h2>Reprendre le visionnage</h2>
-        <p id="history-content">Aucun historique pour le moment.</p>
+        <h2>Resume watching</h2>
+        <p id="history-content">No history yet.</p>
     </div>
 
     <div class="streaming-container">
@@ -180,7 +178,6 @@ button:hover {
     </div>
 
     <script src="streaming.js"></script>
-
 
     <script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -195,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logout-btn');
     const historyContent = document.getElementById('history-content');
 
-    // Générer les cartes des saisons
+    // Generate season cards
     seasons.forEach((season, index) => {
         const seasonCard = document.createElement('div');
         seasonCard.className = 'season-card';
@@ -208,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
         seasonList.appendChild(seasonCard);
     });
 
-    // Fonction pour afficher les suggestions avec images
+    // Function to display suggestions with images
     function showSuggestions(query) {
         suggestionsList.innerHTML = '';
         if (!query) {
@@ -243,7 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
         suggestionsList.style.display = 'block';
     }
 
-    // Fonction pour scroller vers une carte
+    // Function to scroll to a card
     function scrollToCard(seasonName) {
         const seasonCard = Array.from(document.querySelectorAll('.season-card')).find(card =>
             card.querySelector('h3').textContent.toLowerCase() === seasonName.toLowerCase()
@@ -255,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Style pour surligner temporairement la carte trouvée
+    // Style to temporarily highlight the found card
     const style = document.createElement('style');
     style.textContent = `
         .season-card.highlight {
@@ -266,14 +263,14 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    // Événement pour la saisie dans la barre de recherche
+    // Event for search bar input
     let activeSuggestion = -1;
     searchBar.addEventListener('input', (e) => {
         activeSuggestion = -1;
         showSuggestions(e.target.value);
     });
 
-    // Événement pour le clic sur le bouton de recherche
+    // Event for search button click
     searchButton.addEventListener('click', () => {
         const query = searchBar.value.trim();
         if (query) {
@@ -282,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Navigation au clavier
+    // Keyboard navigation
     searchBar.addEventListener('keydown', (e) => {
         const suggestions = suggestionsList.querySelectorAll('li');
         if (suggestions.length === 0) return;
@@ -316,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Cacher les suggestions quand on clique ailleurs
+    // Hide suggestions when clicking elsewhere
     document.addEventListener('click', (e) => {
         if (!searchBar.contains(e.target) && !suggestionsList.contains(e.target)) {
             suggestionsList.style.display = 'none';
@@ -325,38 +322,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Netlify Identity
     if (typeof netlifyIdentity === 'undefined') {
-        console.error('Netlify Identity non chargé');
-        userStatus.textContent = 'Erreur : Netlify Identity non chargé';
+        console.error('Netlify Identity not loaded');
+        userStatus.textContent = 'Error: Netlify Identity not loaded';
         return;
     }
 
-    // Mettre à jour l’interface utilisateur
+    // Update user interface
     function updateUI(user) {
         if (user) {
-            console.log('Utilisateur connecté:', user.email, user.user_metadata);
-            userStatus.textContent = `Connecté : ${user.email}`;
+            console.log('User logged in:', user.email, user.user_metadata);
+            userStatus.textContent = `Logged in: ${user.email}`;
             loginBtn.style.display = 'none';
             signupBtn.style.display = 'none';
             logoutBtn.style.display = 'inline-block';
             loadHistory(user, seasons);
         } else {
-            console.log('Aucun utilisateur connecté');
-            userStatus.textContent = 'Non connecté';
+            console.log('No user logged in');
+            userStatus.textContent = 'Not logged in';
             loginBtn.style.display = 'inline-block';
             signupBtn.style.display = 'inline-block';
             logoutBtn.style.display = 'none';
-            historyContent.textContent = 'Aucun historique pour le moment.';
+            historyContent.textContent = 'No history yet.';
         }
     }
 
-    // Charger l'historique
+    // Load history
     function loadHistory(user, seasons) {
         if (!user) {
-            historyContent.textContent = 'Non connecté';
+            historyContent.textContent = 'Not logged in';
             return;
         }
         const history = user.user_metadata && user.user_metadata.history ? user.user_metadata.history : {};
-        console.log('Historique chargé:', history);
+        console.log('History loaded:', history);
         if (history.season && history.episode) {
             const seasonIndex = seasons.findIndex(s => s.name === history.season);
             if (seasonIndex !== -1) {
@@ -366,56 +363,56 @@ document.addEventListener('DOMContentLoaded', () => {
                         <a href="season${seasonIndex + 1}.html#episode${history.episode}">
                             <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${history.season}">
                             <div class="history-info">
-                                <h3>Dernier épisode vu</h3>
+                                <h3>Last episode watched</h3>
                                 <p>${history.season} - Episode ${history.episode}</p>
                             </div>
                         </a>
                     </div>
                 `;
             } else {
-                historyContent.textContent = 'Historique non valide.';
+                historyContent.textContent = 'Invalid history.';
             }
         } else {
-            historyContent.textContent = 'Aucun épisode regardé récemment.';
+            historyContent.textContent = 'No episodes watched recently.';
         }
     }
 
-    // Gérer l’état initial
+    // Handle initial state
     netlifyIdentity.on('init', (user) => {
-        console.log('Événement init:', user);
+        console.log('Init event:', user);
         updateUI(user);
     });
 
-    // Gérer la connexion
+    // Handle login
     netlifyIdentity.on('login', (user) => {
-        console.log('Événement login:', user);
+        console.log('Login event:', user);
         updateUI(user);
         netlifyIdentity.close();
     });
 
-    // Gérer la déconnexion
+    // Handle logout
     netlifyIdentity.on('logout', () => {
-        console.log('Événement logout');
+        console.log('Logout event');
         updateUI(null);
     });
 
-    // Gérer l’inscription
+    // Handle signup
     netlifyIdentity.on('signup', (user) => {
-        console.log('Événement signup:', user);
+        console.log('Signup event:', user);
         updateUI(user);
         netlifyIdentity.close();
     });
 
-    // Vérifier l’état en continu
+    // Continuously check state
     const checkUser = () => {
         const user = netlifyIdentity.currentUser();
-        console.log('Vérification utilisateur:', user);
+        console.log('User check:', user);
         updateUI(user);
     };
 
-    // Vérifier immédiatement et à intervalles
+    // Check immediately and at intervals
     checkUser();
-    setInterval(checkUser, 5000); // Vérifie toutes les 5 secondes
+    setInterval(checkUser, 5000); // Checks every 5 seconds
 });
 
 </script>
