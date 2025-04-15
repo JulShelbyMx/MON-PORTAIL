@@ -126,11 +126,11 @@ button:hover {
         <button id="login-btn" onclick="netlifyIdentity.open('login')">Se connecter</button>
         <button id="signup-btn" onclick="netlifyIdentity.open('signup')">S'inscrire</button>
         <button id="logout-btn" onclick="netlifyIdentity.logout()" style="display:none;">Déconnexion</button>
-      </div>
-      <div id="history">
+    </div>
+    <div id="history">
         <h2>Reprendre le visionnage</h2>
         <p id="history-content">Aucun historique pour le moment.</p>
-      </div>
+    </div>
 
     <div class="streaming-container">
         <div class="season-list" id="season-list"></div>
@@ -140,7 +140,16 @@ button:hover {
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        // Fonction pour générer les liens des saisons
+function generateStreamingLinks() {
+    return [
+        { name: "East Blue Saga (Season 1)", thumbnail: "../images/season1.jpg" },
+        { name: "Alabasta Saga (Season 2)", thumbnail: "../images/season2.jpg" },
+        // ... ajoute tes autres saisons ici
+    ];
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     const seasons = generateStreamingLinks();
     const seasonList = document.getElementById('season-list');
     const searchBar = document.getElementById('search-bar');
@@ -287,6 +296,51 @@ button:hover {
         return;
     }
 
+    // Mettre à jour l’interface utilisateur
+    function updateUI(user) {
+        if (user) {
+            userStatus.textContent = `Connecté : ${user.email}`;
+            loginBtn.style.display = 'none';
+            signupBtn.style.display = 'none';
+            logoutBtn.style.display = 'inline-block';
+            loadHistory(user, seasons);
+        } else {
+            userStatus.textContent = 'Non connecté';
+            loginBtn.style.display = 'inline-block';
+            signupBtn.style.display = 'inline-block';
+            logoutBtn.style.display = 'none';
+            historyContent.textContent = 'Aucun historique pour le moment.';
+        }
+    }
+
+    // Charger l'historique
+    function loadHistory(user, seasons) {
+        if (!user) {
+            historyContent.textContent = 'Non connecté';
+            return;
+        }
+        user.getUserMetadata().then(metadata => {
+            const history = metadata.history || {};
+            if (history.season && history.episode) {
+                const seasonIndex = seasons.findIndex(s => s.name === history.season);
+                if (seasonIndex !== -1) {
+                    historyContent.innerHTML = `
+                        Dernier épisode vu : <a href="season${seasonIndex + 1}.html#episode${history.episode}">
+                            ${history.season} - Episode ${history.episode}
+                        </a>
+                    `;
+                } else {
+                    historyContent.textContent = 'Historique non valide.';
+                }
+            } else {
+                historyContent.textContent = 'Aucun épisode regardé récemment.';
+            }
+        }).catch(err => {
+            console.error('Erreur chargement métadonnées:', err);
+            historyContent.textContent = 'Erreur lors du chargement de l’historique.';
+        });
+    }
+
     // Gérer l’état initial
     netlifyIdentity.on('init', (user) => {
         updateUI(user);
@@ -309,57 +363,23 @@ button:hover {
         netlifyIdentity.close();
     });
 
-    // Forcer une vérification après confirmation
-    netlifyIdentity.on('identity.confirm', (user) => {
-        updateUI(user);
-        netlifyIdentity.close();
-    });
-
-    // Mettre à jour l’interface utilisateur
-    function updateUI(user) {
+    // Vérifier l’état en continu
+    const checkUser = () => {
+        const user = netlifyIdentity.currentUser();
         if (user) {
-            userStatus.textContent = `Connecté : ${user.email}`;
-            loginBtn.style.display = 'none';
-            signupBtn.style.display = 'none';
-            logoutBtn.style.display = 'inline-block';
-            loadHistory(user, seasons);
-        } else {
-            userStatus.textContent = 'Non connecté';
-            loginBtn.style.display = 'inline-block';
-            signupBtn.style.display = 'inline-block';
-            logoutBtn.style.display = 'none';
-            historyContent.textContent = 'Aucun historique pour le moment.';
-        }
-    }
-
-    // Charger l'historique
-    function loadHistory(user, seasons) {
-        const history = user.user_metadata.history || {};
-        if (history.season && history.episode) {
-            const seasonIndex = seasons.findIndex(s => s.name === history.season);
-            if (seasonIndex !== -1) {
-                historyContent.innerHTML = `
-                    Dernier épisode vu : <a href="season${seasonIndex + 1}.html#episode${history.episode}">
-                        ${history.season} - Episode ${history.episode}
-                    </a>
-                `;
-            } else {
-                historyContent.textContent = 'Historique non valide.';
-            }
-        } else {
-            historyContent.textContent = 'Aucun épisode regardé récemment.';
-        }
-    }
-
-    // Vérifier l’état après chargement
-    setTimeout(() => {
-        const currentUser = netlifyIdentity.currentUser();
-        if (currentUser) {
-            currentUser.getUserMetadata().then(metadata => {
-                updateUI({ ...currentUser, user_metadata: metadata });
+            user.getUserMetadata().then(metadata => {
+                updateUI({ ...user, user_metadata: metadata });
+            }).catch(err => {
+                console.error('Erreur vérification utilisateur:', err);
             });
+        } else {
+            updateUI(null);
         }
-    }, 1000); // Délai pour s’assurer que l’état est à jour
+    };
+
+    // Vérifier immédiatement et à intervalles
+    checkUser();
+    setInterval(checkUser, 5000); // Vérifie toutes les 5 secondes
 });
 
 </script>

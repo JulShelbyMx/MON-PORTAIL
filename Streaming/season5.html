@@ -6,6 +6,7 @@
     <title>Thriller Back Saga - Jul's Streaming</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="shortcut icon" href="../images/logopage.png" />
+    <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
         body {
             background-color: #111;
@@ -138,27 +139,40 @@
 
            // Changer d’épisode avec le sélecteur
            episodeSelect.addEventListener('change', (e) => {
-                const selectedEpisode = season.episodes.find(ep => ep.episode == e.target.value);
-                videoPlayer.innerHTML = `<iframe src="${selectedEpisode.videoUrl}" allowfullscreen></iframe>`;
-                episodeDetails.innerHTML = `<h2>Episode ${selectedEpisode.episode} - ${season.name}</h2>`;
+        const selectedEpisode = season.episodes.find(ep => ep.episode == e.target.value);
+        if (!selectedEpisode) {
+            console.error('Épisode non trouvé:', e.target.value);
+            return;
+        }
+        videoPlayer.innerHTML = `<iframe src="${selectedEpisode.videoUrl}" allowfullscreen></iframe>`;
+        episodeDetails.innerHTML = `<h2>Episode ${selectedEpisode.episode} - ${season.name}</h2>`;
 
-                // Sauvegarder l'historique
-                const user = netlifyIdentity.currentUser();
-                if (user) {
-                    user.update({
-                    data: {
-                        history: {
+        // Sauvegarder l'historique
+        const user = netlifyIdentity.currentUser();
+        if (user) {
+            console.log('Tentative de sauvegarde historique:', {
+                season: season.name,
+                episode: selectedEpisode.episode,
+                videoUrl: selectedEpisode.videoUrl,
+            });
+            user.update({
+                data: {
+                    history: {
                         season: season.name,
                         episode: selectedEpisode.episode,
                         videoUrl: selectedEpisode.videoUrl,
-                        },
                     },
-                    }).then(() => {
-                    console.log('Historique mis à jour');
-                    });
-                }
+                },
+            }).then(() => {
+                console.log('Historique mis à jour avec succès');
+            }).catch(err => {
+                console.error('Erreur mise à jour historique:', err);
             });
-        });
+        } else {
+            console.log('Aucun utilisateur connecté pour sauvegarder l’historique');
+        }
+    });
+});
     </script>
 
     
