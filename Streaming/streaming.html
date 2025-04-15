@@ -103,6 +103,49 @@ button:hover {
   background: #ffb300;
 }
 
+/* Style pour l’historique */
+.history-card {
+            display: flex;
+            align-items: center;
+            background: #222;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        .history-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+        .history-card img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+        .history-card .history-info {
+            text-align: left;
+        }
+        .history-card h3 {
+            margin: 0;
+            font-size: 14px;
+            color: #ffb300;
+            font-family: 'Pirata One', sans-serif;
+        }
+        .history-card p {
+            margin: 5px 0 0;
+            font-size: 12px;
+            color: #fff;
+        }
+        .history-card a {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            align-items: center;
+        }
+
     </style>
 </head>
 <body>
@@ -140,7 +183,6 @@ button:hover {
 
 
     <script>
-
 document.addEventListener('DOMContentLoaded', () => {
     const seasons = generateStreamingLinks();
     const seasonList = document.getElementById('season-list');
@@ -318,10 +360,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (history.season && history.episode) {
             const seasonIndex = seasons.findIndex(s => s.name === history.season);
             if (seasonIndex !== -1) {
+                const season = seasons[seasonIndex];
                 historyContent.innerHTML = `
-                    Dernier épisode vu : <a href="season${seasonIndex + 1}.html#episode${history.episode}">
-                        ${history.season} - Episode ${history.episode}
-                    </a>
+                    <div class="history-card">
+                        <a href="season${seasonIndex + 1}.html#episode${history.episode}">
+                            <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${history.season}">
+                            <div class="history-info">
+                                <h3>Dernier épisode vu</h3>
+                                <p>${history.season} - Episode ${history.episode}</p>
+                            </div>
+                        </a>
+                    </div>
                 `;
             } else {
                 historyContent.textContent = 'Historique non valide.';

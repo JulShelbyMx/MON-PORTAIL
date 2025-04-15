@@ -132,13 +132,34 @@
                 episodeSelect.appendChild(option);
             });
 
-            // Afficher le premier épisode par défaut
-            const firstEpisode = season.episodes[0];
-            videoPlayer.innerHTML = `<iframe src="${firstEpisode.videoUrl}" allowfullscreen></iframe>`;
-            episodeDetails.innerHTML = `<h2>Episode ${firstEpisode.episode} - ${season.name}</h2>`;
+            // Fonction pour charger un épisode
+    function loadEpisode(episodeNumber) {
+        const selectedEpisode = season.episodes.find(ep => ep.episode == episodeNumber);
+        if (!selectedEpisode) {
+            console.error('Épisode non trouvé:', episodeNumber);
+            return;
+        }
+        episodeSelect.value = selectedEpisode.episode;
+        videoPlayer.innerHTML = `<iframe src="${selectedEpisode.videoUrl}" allowfullscreen></iframe>`;
+        episodeDetails.innerHTML = `<h2>Episode ${selectedEpisode.episode} - ${season.name}</h2>`;
+    }
 
-           // Changer d’épisode avec le sélecteur
-           episodeSelect.addEventListener('change', (e) => {
+    // Charger l’épisode depuis l’URL (ex. #episode1125)
+    const hash = window.location.hash; // ex. "#episode1125"
+    if (hash) {
+        const episodeNumber = hash.replace('#episode', '');
+        if (season.episodes.some(ep => ep.episode == episodeNumber)) {
+            loadEpisode(episodeNumber);
+        } else {
+            console.log('Épisode dans l’URL non valide:', episodeNumber);
+            loadEpisode(season.episodes[0].episode); // Par défaut, premier épisode
+        }
+    } else {
+        loadEpisode(season.episodes[0].episode); // Par défaut, premier épisode
+    }
+
+    // Changer d’épisode avec le sélecteur
+    episodeSelect.addEventListener('change', (e) => {
         const selectedEpisode = season.episodes.find(ep => ep.episode == e.target.value);
         if (!selectedEpisode) {
             console.error('Épisode non trouvé:', e.target.value);
