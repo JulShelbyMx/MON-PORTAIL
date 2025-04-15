@@ -6,6 +6,7 @@
     <title>Streaming - One Piece - Jul's Portal</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="shortcut icon" href="../images/logopage.png" />
+    <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 
     <style>
         body {
@@ -120,12 +121,6 @@ button:hover {
         </div>
     </section>
 
-    <div class="streaming-container">
-        <div class="season-list" id="season-list"></div>
-    </div>
-
-    <script src="streaming.js"></script>
-
     <div class="auth-container">
         <p id="user-status">Non connecté</p>
         <button id="login-btn" onclick="netlifyIdentity.open('login')">Se connecter</button>
@@ -136,6 +131,13 @@ button:hover {
         <h2>Reprendre le visionnage</h2>
         <p id="history-content">Aucun historique pour le moment.</p>
       </div>
+
+    <div class="streaming-container">
+        <div class="season-list" id="season-list"></div>
+    </div>
+
+    <script src="streaming.js"></script>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -275,7 +277,6 @@ button:hover {
         });
         </script>
 
-<script src="https://julportal.netlify.app/.netlify/identity"></script>
 
 <script>
 // Initialiser Netlify Identity
