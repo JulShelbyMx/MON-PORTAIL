@@ -142,6 +142,22 @@
                 const selectedEpisode = season.episodes.find(ep => ep.episode == e.target.value);
                 videoPlayer.innerHTML = `<iframe src="${selectedEpisode.videoUrl}" allowfullscreen></iframe>`;
                 episodeDetails.innerHTML = `<h2>Episode ${selectedEpisode.episode} - ${season.name}</h2>`;
+
+                // Sauvegarder l'historique
+                const user = netlifyIdentity.currentUser();
+                if (user) {
+                    user.update({
+                    data: {
+                        history: {
+                        season: season.name,
+                        episode: selectedEpisode.episode,
+                        videoUrl: selectedEpisode.videoUrl,
+                        },
+                    },
+                    }).then(() => {
+                    console.log('Historique mis à jour');
+                    });
+                }
             });
         });
     </script>

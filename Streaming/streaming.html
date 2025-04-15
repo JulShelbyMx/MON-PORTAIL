@@ -80,6 +80,28 @@
             color: inherit;
             display: block;
         }
+
+
+        .auth-container, #history {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background: grey;
+  border-radius: 8px;
+  color: #fff;
+  text-align: center;
+}
+button {
+  background: #ffb300;
+  border: none;
+  padding: 8px;
+  margin: 5px;
+  cursor: pointer;
+}
+button:hover {
+  background: #ffb300;
+}
+
     </style>
 </head>
 <body>
@@ -103,6 +125,17 @@
     </div>
 
     <script src="streaming.js"></script>
+
+    <div class="auth-container">
+        <p id="user-status">Non connecté</p>
+        <button id="login-btn" onclick="netlifyIdentity.open('login')">Se connecter</button>
+        <button id="signup-btn" onclick="netlifyIdentity.open('signup')">S'inscrire</button>
+        <button id="logout-btn" onclick="netlifyIdentity.logout()" style="display:none;">Déconnexion</button>
+      </div>
+      <div id="history">
+        <h2>Reprendre le visionnage</h2>
+        <p id="history-content">Aucun historique pour le moment.</p>
+      </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -242,7 +275,64 @@
         });
         </script>
 
+<script src="https://julportal.netlify.app/.netlify/identity"></script>
 
+<script>
+// Initialiser Netlify Identity
+    netlifyIdentity.on('init', (user) => {
+      const userStatus = document.getElementById('user-status');
+      const loginBtn = document.getElementById('login-btn');
+      const signupBtn = document.getElementById('signup-btn');
+      const logoutBtn = document.getElementById('logout-btn');
+    
+      if (user) {
+        userStatus.textContent = `Connecté : ${user.email}`;
+        loginBtn.style.display = 'none';
+        signupBtn.style.display = 'none';
+        logoutBtn.style.display = 'inline-block';
+        loadHistory(user);
+      } else {
+        userStatus.textContent = 'Non connecté';
+        loginBtn.style.display = 'inline-block';
+        signupBtn.style.display = 'inline-block';
+        logoutBtn.style.display = 'none';
+        document.getElementById('history-content').textContent = 'Aucun historique pour le moment.';
+      }
+    });
+    
+    netlifyIdentity.on('login', (user) => {
+      userStatus.textContent = `Connecté : ${user.email}`;
+      document.getElementById('login-btn').style.display = 'none';
+      document.getElementById('signup-btn').style.display = 'none';
+      document.getElementById('logout-btn').style.display = 'inline-block';
+      loadHistory(user);
+      netlifyIdentity.close();
+    });
+    
+    netlifyIdentity.on('logout', () => {
+      userStatus.textContent = 'Non connecté';
+      document.getElementById('login-btn').style.display = 'inline-block';
+      document.getElementById('signup-btn').style.display = 'inline-block';
+      document.getElementById('logout-btn').style.display = 'none';
+      document.getElementById('history-content').textContent = 'Aucun historique pour le moment.';
+    });
+    
+    // Charger l'historique
+    function loadHistory(user) {
+      const historyContent = document.getElementById('history-content');
+      const history = user.user_metadata.history || {};
+      if (history.season && history.episode) {
+        historyContent.innerHTML = `
+          Dernier épisode vu : <a href="season${seasons.findIndex(s => s.name === history.season) + 1}.html#episode${history.episode}">
+            ${history.season} - Episode ${history.episode}
+          </a>
+        `;
+      } else {
+        historyContent.textContent = 'Aucun épisode regardé récemment.';
+      }
+    }
+
+</script>
 
 </body>
 </html>
