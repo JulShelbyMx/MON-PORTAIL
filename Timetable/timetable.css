@@ -163,17 +163,18 @@ body {
 }
 
 .mobile-timetable-table th, .mobile-timetable-table td {
-    padding: 10px;
+    padding: 12px; /* Augmenté pour plus d'espace */
     border: 1px solid #87CEEB;
     text-align: center;
     font-family: 'Pirata One', sans-serif;
     white-space: nowrap; /* Empêche le texte de se retourner */
+    font-size: 16px; /* Taille de police augmentée */
 }
 
 .mobile-timetable-table th {
     background-color: #87CEEB; /* Fond bleu pour toute la ligne d'en-tête */
     color: #0a0a0a;
-    font-size: 16px;
+    font-size: 18px; /* Taille de police augmentée */
     position: sticky;
     left: 0;
     z-index: 1;
@@ -183,25 +184,35 @@ body {
 .mobile-timetable-table td:first-child {
     position: sticky;
     left: 0;
-    background: #222;
     z-index: 2;
-    min-width: 80px;
+    min-width: 100px; /* Largeur augmentée pour la colonne "Time" */
+}
+
+/* S'assurer que la cellule "Time" (première ligne, première colonne) reste bleue */
+.mobile-timetable-table thead th:first-child {
+    background-color: #87CEEB; /* Fond bleu pour la cellule "Time" */
+    z-index: 3; /* Priorité pour la cellule "Time" */
+}
+
+/* Fond gris pour les autres cellules de la première colonne (sauf "Time") */
+.mobile-timetable-table tbody td:first-child {
+    background: #222;
 }
 
 .mobile-timetable-table th:not(:first-child),
 .mobile-timetable-table td:not(:first-child) {
-    min-width: 100px; /* Largeur fixe pour chaque jour */
+    min-width: 120px; /* Largeur augmentée pour chaque jour */
 }
 
 /* Media query pour tablettes et grands téléphones (768px et moins) */
 @media (max-width: 768px) {
     .time-toggle-button {
-        font-size: 12px;
-        padding: 2px 6px;
+        font-size: 14px; /* Taille augmentée */
+        padding: 3px 8px;
     }
 
     #time-zone-a-mobile, #time-zone-b-mobile {
-        font-size: 12px;
+        font-size: 14px; /* Taille augmentée */
     }
 
     .timetable-hero {
@@ -214,8 +225,8 @@ body {
     }
 
     .toggle-button {
-        font-size: 14px; /* Texte plus petit sur mobile */
-        padding: 8px 16px;
+        font-size: 16px; /* Texte plus grand sur mobile */
+        padding: 10px 20px;
     }
 
     /* Ajuster la hauteur pour couvrir tout le planning */
@@ -228,12 +239,12 @@ body {
 /* Media query pour petits téléphones (480px et moins) */
 @media (max-width: 480px) {
     .time-toggle-button {
-        font-size: 10px;
-        padding: 2px 5px;
+        font-size: 12px; /* Ajusté pour petits écrans */
+        padding: 2px 6px;
     }
 
     #time-zone-a-mobile, #time-zone-b-mobile {
-        font-size: 10px;
+        font-size: 12px; /* Ajusté pour petits écrans */
     }
 
     .timetable-hero {
@@ -241,23 +252,23 @@ body {
     }
 
     .toggle-button {
-        font-size: 12px; /* Encore plus petit pour petits écrans */
-        padding: 6px 12px;
+        font-size: 14px; /* Ajusté pour petits écrans */
+        padding: 8px 16px;
     }
 
     .mobile-timetable-table th,
     .mobile-timetable-table td {
-        padding: 8px;
-        font-size: 12px;
+        padding: 10px; /* Légèrement réduit pour petits écrans */
+        font-size: 14px; /* Ajusté pour petits écrans */
     }
 
     .mobile-timetable-table th:first-child,
     .mobile-timetable-table td:first-child {
-        min-width: 70px;
+        min-width: 90px; /* Ajusté pour petits écrans */
     }
 
     .mobile-timetable-table th:not(:first-child),
     .mobile-timetable-table td:not(:first-child) {
-        min-width: 90px;
+        min-width: 110px; /* Ajusté pour petits écrans */
     }
 }
