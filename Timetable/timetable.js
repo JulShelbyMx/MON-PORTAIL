@@ -1,22 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const weekA = document.getElementById('timetable-week-a');
-    const weekB = document.getElementById('timetable-week-b');
-    const weekAMobile = document.getElementById('timetable-week-a-mobile');
-    const weekBMobile = document.getElementById('timetable-week-b-mobile');
+    const weekAContainer = document.getElementById('timetable-week-a');
+    const weekBContainer = document.getElementById('timetable-week-b');
+    const weekAMobileContainer = document.getElementById('timetable-week-a-mobile');
+    const weekBMobileContainer = document.getElementById('timetable-week-b-mobile');
     const toggleButton = document.getElementById('toggle-button');
     const holidayMessage = document.getElementById('holiday-message');
     const dayNavigation = document.getElementById('day-navigation');
     const prevDayButton = document.getElementById('prev-day');
     const nextDayButton = document.getElementById('next-day');
     const currentDaySpan = document.getElementById('current-day');
-    const toggleTimeA = document.getElementById('toggle-time-a');
-    const toggleTimeB = document.getElementById('toggle-time-b');
-    const toggleTimeAMobile = document.getElementById('toggle-time-a-mobile');
-    const toggleTimeBMobile = document.getElementById('toggle-time-b-mobile');
-    const timeZoneA = document.getElementById('time-zone-a');
-    const timeZoneB = document.getElementById('time-zone-b');
-    const timeZoneAMobile = document.getElementById('time-zone-a-mobile');
-    const timeZoneBMobile = document.getElementById('time-zone-b-mobile');
     const holidayOptions = document.getElementById('holiday-options');
     const showReturnTimetable = document.getElementById('show-return-timetable');
     const showWeekTimetable = document.getElementById('show-week-timetable');
@@ -24,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let isUKTime = true;
     let isManualDayChange = false;
     let currentWeek;
+    let weekA, weekB, weekAMobile, weekBMobile, toggleTimeA, toggleTimeB, toggleTimeAMobile, toggleTimeBMobile, timeZoneA, timeZoneB, timeZoneAMobile, timeZoneBMobile;
 
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
@@ -45,6 +38,340 @@ document.addEventListener('DOMContentLoaded', () => {
         holidayMessage.textContent = "It's the weekend!";
         holidayMessage.style.display = 'block';
     }
+
+    // Fonction pour générer les plannings dynamiquement
+    function generateTimetables() {
+        const isMobile = window.innerWidth <= 768;
+
+        if (!isMobile) {
+            // Générer le planning desktop
+            weekAContainer.innerHTML = `
+                <h2>Week A</h2>
+                <table class="timetable-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Time <span id="time-zone-a">[UK]</span>
+                                <button id="toggle-time-a" class="time-toggle-button">Switch to FR</button>
+                            </th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/CoE</td>
+                            <td>9cd/ArE</td>
+                            <td>9cd/HiE</td>
+                            <td>9cd/ScR</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                            <td>9d/PeR</td>
+                            <td>9cd/MaE</td>
+                            <td>9cd/MaE</td>
+                            <td>9cd/DmE</td>
+                            <td>9cd/PsE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="10:55-11:55">10:55-11:55</td>
+                            <td>9cd/SpE</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/GgE</td>
+                            <td>9cd/ReE</td>
+                            <td>9cd/HiE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                            <td>9cd/MaE</td>
+                            <td>9cd/MuE</td>
+                            <td>9cd/Mess</td>
+                            <td>9cd/FrE</td>
+                            <td>9cd/GgE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                            <td>9cd/ScR</td>
+                            <td>9cd/ScR</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/MaE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+            weekBContainer.innerHTML = `
+                <h2>Week B</h2>
+                <table class="timetable-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                Time <span id="time-zone-b">[UK]</span>
+                                <button id="toggle-time-b" class="time-toggle-button">Switch to FR</button>
+                            </th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                            <td>9cd/PsE</td>
+                            <td>9cd/TcR</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/ScR</td>
+                            <td>9cd/ScR</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                            <td>9d/MaE</td>
+                            <td>9cd/GgE</td>
+                            <td>9cd/Mess</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/HiE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="10:55-11:55">10:55-11:55</td>
+                            <td>9cd/CoE</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/ArE</td>
+                            <td>9cd/DmE</td>
+                            <td>9cd/MaE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                            <td>9cd/PeR</td>
+                            <td>9cd/MaE</td>
+                            <td>9cd/SpE</td>
+                            <td>9cd/FrE</td>
+                            <td>9cd/GgE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/MuE</td>
+                            <td>9cd/ScR</td>
+                            <td>9cd/MaE</td>
+                            <td>9cd/ReE</td>
+                        </tr>
+                    </tbody>
+                </table>
+            `;
+        } else {
+            // Générer le planning mobile
+            weekAMobileContainer.innerHTML = `
+                <h2>Week A</h2>
+                <div class="mobile-timetable-scroll">
+                    <table class="mobile-timetable-table">
+                        <thead>
+                            <tr>
+                                <th>Time <span id="time-zone-a-mobile">[UK]</span>
+                                    <button id="toggle-time-a-mobile" class="time-toggle-button">Switch to FR</button>
+                                </th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                                <td>9cd/EnE</td>
+                                <td>9cd/CoE</td>
+                                <td>9cd/ArE</td>
+                                <td>9cd/HiE</td>
+                                <td>9cd/ScR</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                                <td>9d/PeR</td>
+                                <td>9cd/MaE</td>
+                                <td>9cd/MaE</td>
+                                <td>9cd/DmE</td>
+                                <td>9cd/PsE</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="10:55-11:55">10:55-11:55</td>
+                                <td>9cd/SpE</td>
+                                <td>9cd/EnE</td>
+                                <td>9cd/GgE</td>
+                                <td>9cd/ReE</td>
+                                <td>9cd/HiE</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                                <td>9cd/MaE</td>
+                                <td>9cd/MuE</td>
+                                <td>9cd/Mess</td>
+                                <td>9cd/FrE</td>
+                                <td>9cd/GgE</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                                <td>Lunch + 9PH/Rt</td>
+                                <td>Lunch + 9PH/Rt</td>
+                                <td>Lunch + 9PH/Rt</td>
+                                <td>Lunch + 9PH/Rt</td>
+                                <td>Lunch + 9PH/Rt</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                                <td>9cd/ScR</td>
+                                <td>9cd/ScR</td>
+                                <td>9cd/EnE</td>
+                                <td>9cd/EnE</td>
+                                <td>9cd/MaE</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+            weekBMobileContainer.innerHTML = `
+                <h2>Week B</h2>
+                <div class="mobile-timetable-scroll">
+                    <table class="mobile-timetable-table">
+                        <thead>
+                            <tr>
+                                <th>Time <span id="time-zone-b-mobile">[UK]</span>
+                                    <button id="toggle-time-b-mobile" class="time-toggle-button">Switch to FR</button>
+                                </th>
+                                <th>Monday</th>
+                                <th>Tuesday</th>
+                                <th>Wednesday</th>
+                                <th>Thursday</th>
+                                <th>Friday</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                                <td>9cd/PsE</td>
+                                <td>9cd/TcR</td>
+                                <td>9cd/EnE</td>
+                                <td>9cd/ScR</td>
+                                <td>9cd/ScR</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                                <td>9d/MaE</td>
+                                <td>9cd/GgE</td>
+                                <td>9cd/Mess</td>
+                                <td>9cd/EnE</td>
+                                <td>9cd/HiE</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="10:55-11:55">10:55-11:55</td>
+                                <td>9cd/CoE</td>
+                                <td>9cd/EnE</td>
+                                <td>9cd/ArE</td>
+                                <td>9cd/DmE</td>
+                                <td>9cd/MaE</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                                <td>9cd/PeR</td>
+                                <td>9cd/MaE</td>
+                                <td>9cd/SpE</td>
+                                <td>9cd/FrE</td>
+                                <td>9cd/GgE</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                                <td>Lunch + 9PH/Rt</td>
+                                <td>Lunch + 9PH/Rt</td>
+                                <td>Lunch + 9PH/Rt</td>
+                                <td>Lunch + 9PH/Rt</td>
+                                <td>Lunch + 9PH/Rt</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                                <td>9cd/EnE</td>
+                                <td>9cd/MuE</td>
+                                <td>9cd/ScR</td>
+                                <td>9cd/MaE</td>
+                                <td>9cd/ReE</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            `;
+        }
+
+        // Initialiser les références après génération
+        weekA = weekAContainer.querySelector('.timetable-table');
+        weekB = weekBContainer.querySelector('.timetable-table');
+        weekAMobile = weekAMobileContainer.querySelector('.mobile-timetable-table');
+        weekBMobile = weekBMobileContainer.querySelector('.mobile-timetable-table');
+        toggleTimeA = document.getElementById('toggle-time-a');
+        toggleTimeB = document.getElementById('toggle-time-b');
+        toggleTimeAMobile = document.getElementById('toggle-time-a-mobile');
+        toggleTimeBMobile = document.getElementById('toggle-time-b-mobile');
+        timeZoneA = document.getElementById('time-zone-a');
+        timeZoneB = document.getElementById('time-zone-b');
+        timeZoneAMobile = document.getElementById('time-zone-a-mobile');
+        timeZoneBMobile = document.getElementById('time-zone-b-mobile');
+    }
+
+    // Générer les plannings au chargement
+    generateTimetables();
 
     function convertTime(timeStr) {
         if (timeStr.includes('(REG)')) {
@@ -81,39 +408,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateTimes() {
-        const timeCellsA = weekA.querySelectorAll('tbody td[data-uk-time]');
-        const timeCellsB = weekB.querySelectorAll('tbody td[data-uk-time]');
-        const timeCellsAMobile = weekAMobile.querySelectorAll('tbody td[data-uk-time]');
-        const timeCellsBMobile = weekBMobile.querySelectorAll('tbody td[data-uk-time]');
+        if (weekA) {
+            const timeCellsA = weekA.querySelectorAll('tbody td[data-uk-time]');
+            timeCellsA.forEach(cell => {
+                const ukTime = cell.getAttribute('data-uk-time');
+                cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
+            });
+            timeZoneA.textContent = isUKTime ? '[UK]' : '[FR]';
+            toggleTimeA.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
+        }
 
-        timeCellsA.forEach(cell => {
-            const ukTime = cell.getAttribute('data-uk-time');
-            cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
-        });
+        if (weekB) {
+            const timeCellsB = weekB.querySelectorAll('tbody td[data-uk-time]');
+            timeCellsB.forEach(cell => {
+                const ukTime = cell.getAttribute('data-uk-time');
+                cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
+            });
+            timeZoneB.textContent = isUKTime ? '[UK]' : '[FR]';
+            toggleTimeB.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
+        }
 
-        timeCellsB.forEach(cell => {
-            const ukTime = cell.getAttribute('data-uk-time');
-            cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
-        });
+        if (weekAMobile) {
+            const timeCellsAMobile = weekAMobile.querySelectorAll('tbody td[data-uk-time]');
+            timeCellsAMobile.forEach(cell => {
+                const ukTime = cell.getAttribute('data-uk-time');
+                cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
+            });
+            timeZoneAMobile.textContent = isUKTime ? '[UK]' : '[FR]';
+            toggleTimeAMobile.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
+        }
 
-        timeCellsAMobile.forEach(cell => {
-            const ukTime = cell.getAttribute('data-uk-time');
-            cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
-        });
-
-        timeCellsBMobile.forEach(cell => {
-            const ukTime = cell.getAttribute('data-uk-time');
-            cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
-        });
-
-        timeZoneA.textContent = isUKTime ? '[UK]' : '[FR]';
-        timeZoneB.textContent = isUKTime ? '[UK]' : '[FR]';
-        timeZoneAMobile.textContent = isUKTime ? '[UK]' : '[FR]';
-        timeZoneBMobile.textContent = isUKTime ? '[UK]' : '[FR]';
-        toggleTimeA.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
-        toggleTimeB.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
-        toggleTimeAMobile.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
-        toggleTimeBMobile.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
+        if (weekBMobile) {
+            const timeCellsBMobile = weekBMobile.querySelectorAll('tbody td[data-uk-time]');
+            timeCellsBMobile.forEach(cell => {
+                const ukTime = cell.getAttribute('data-uk-time');
+                cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
+            });
+            timeZoneBMobile.textContent = isUKTime ? '[UK]' : '[FR]';
+            toggleTimeBMobile.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
+        }
 
         highlightCurrentLesson();
         scrollToCurrentDay();
@@ -169,26 +502,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentDay = daysOfWeek[currentDayIndex];
         currentDaySpan.textContent = currentDay;
 
-        const tables = document.querySelectorAll('.timetable-table');
-        tables.forEach(table => {
-            const headers = table.querySelectorAll('th');
-            const rows = table.querySelectorAll('tbody tr');
-            headers.forEach((th, index) => {
-                th.classList.remove('current-day');
-                if (th.textContent.includes(currentDay)) {
-                    th.classList.add('current-day');
-                }
-            });
-            rows.forEach(row => {
-                const cells = row.querySelectorAll('td');
-                cells.forEach((td, index) => {
-                    td.classList.remove('current-day');
-                    if (index === currentDayIndex + 1) {
-                        td.classList.add('current-day');
+        if (weekA && weekB) {
+            const tables = document.querySelectorAll('.timetable-table');
+            tables.forEach(table => {
+                const headers = table.querySelectorAll('th');
+                const rows = table.querySelectorAll('tbody tr');
+                headers.forEach((th, index) => {
+                    th.classList.remove('current-day');
+                    if (th.textContent.includes(currentDay)) {
+                        th.classList.add('current-day');
                     }
                 });
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    cells.forEach((td, index) => {
+                        td.classList.remove('current-day');
+                        if (index === currentDayIndex + 1) {
+                            td.classList.add('current-day');
+                        }
+                    });
+                });
             });
-        });
+        }
 
         highlightCurrentLesson();
         scrollToCurrentDay();
@@ -197,8 +532,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function scrollToCurrentDay() {
         if (window.innerWidth > 768) return; // Ne s'applique que sur mobile
 
-        const activeTable = weekAMobile.style.display === 'block' ? weekAMobile : weekBMobile;
-        const scrollContainer = activeTable.querySelector('.mobile-timetable-scroll');
+        const activeTable = weekAMobileContainer.style.display === 'block' ? weekAMobile : weekBMobile;
+        const scrollContainer = activeTable.parentElement;
         const dayColumn = scrollContainer.querySelectorAll('th')[currentDayIndex + 1];
 
         if (dayColumn) {
@@ -230,11 +565,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const currentDay = daysOfWeek[currentDayIndex];
 
-        const activeTable = weekA.style.display === 'block' ? weekA : weekB;
-        const activeTableMobile = weekAMobile.style.display === 'block' ? weekAMobile : weekBMobile;
+        const activeTable = weekAContainer.style.display === 'block' ? weekA : weekB;
+        const activeTableMobile = weekAMobileContainer.style.display === 'block' ? weekAMobile : weekBMobile;
 
-        const timeCells = activeTable.querySelectorAll('tbody td[data-uk-time]');
-        const timeCellsMobile = activeTableMobile.querySelectorAll('tbody td[data-uk-time]');
+        const timeCells = activeTable ? activeTable.querySelectorAll('tbody td[data-uk-time]') : [];
+        const timeCellsMobile = activeTableMobile ? activeTableMobile.querySelectorAll('tbody td[data-uk-time]') : [];
         let currentLessonFound = false;
 
         timeCells.forEach((cell, index) => {
@@ -267,11 +602,45 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentLessonFound = true;
                 }
 
-                const rowMobile = timeCellsMobile[index].parentElement;
+                if (timeCellsMobile[index]) {
+                    const rowMobile = timeCellsMobile[index].parentElement;
+                    const cellsMobile = rowMobile.querySelectorAll('td');
+                    const lessonCellMobile = cellsMobile[currentDayIndex + 1];
+                    if (lessonCellMobile) {
+                        lessonCellMobile.classList.add('current-lesson');
+                    }
+                }
+            }
+        });
+
+        timeCellsMobile.forEach((cell, index) => {
+            const ukTime = cell.getAttribute('data-uk-time');
+
+            let startHour, startMinutes, endHour, endMinutes;
+            if (ukTime.includes('(REG)')) {
+                const times = ukTime.match(/\d{2}:\d{2}-\d{2}:\d{2}/)[0].split('-');
+                startHour = parseInt(times[0].split(':')[0], 10);
+                startMinutes = parseInt(times[0].split(':')[1], 10);
+                endHour = parseInt(times[1].split(':')[0], 10);
+                endMinutes = parseInt(times[1].split(':')[1], 10);
+            } else {
+                const times = ukTime.split('-');
+                startHour = parseInt(times[0].split(':')[0], 10);
+                startMinutes = parseInt(times[0].split(':')[1], 10);
+                endHour = parseInt(times[1].split(':')[0], 10);
+                endMinutes = parseInt(times[1].split(':')[1], 10);
+            }
+
+            const startTimeInMinutes = startHour * 60 + startMinutes;
+            const endTimeInMinutes = endHour * 60 + endMinutes;
+
+            if (currentTimeInMinutes >= startTimeInMinutes && currentTimeInMinutes <= endTimeInMinutes) {
+                const rowMobile = cell.parentElement;
                 const cellsMobile = rowMobile.querySelectorAll('td');
                 const lessonCellMobile = cellsMobile[currentDayIndex + 1];
                 if (lessonCellMobile) {
                     lessonCellMobile.classList.add('current-lesson');
+                    currentLessonFound = true;
                 }
             }
         });
@@ -309,10 +678,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     holidayMessage.style.display = 'none';
                     holidayOptions.style.display = 'none';
-                    weekA.style.display = currentWeek === 'A' ? 'block' : 'none';
-                    weekB.style.display = currentWeek === 'B' ? 'block' : 'none';
-                    weekAMobile.style.display = currentWeek === 'A' ? 'block' : 'none';
-                    weekBMobile.style.display = currentWeek === 'B' ? 'block' : 'none';
+                    weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+                    weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+                    weekAMobileContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+                    weekBMobileContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
                     toggleButton.style.display = 'block';
                     if (window.innerWidth > 768) {
                         dayNavigation.style.display = 'flex';
@@ -359,10 +728,10 @@ document.addEventListener('DOMContentLoaded', () => {
             holidayOptions.style.display = 'flex';
             showReturnTimetable.style.display = 'block';
             showWeekTimetable.style.display = 'none';
-            weekA.style.display = 'none';
-            weekB.style.display = 'none';
-            weekAMobile.style.display = 'none';
-            weekBMobile.style.display = 'none';
+            weekAContainer.style.display = 'none';
+            weekBContainer.style.display = 'none';
+            weekAMobileContainer.style.display = 'none';
+            weekBMobileContainer.style.display = 'none';
             toggleButton.style.display = 'none';
             dayNavigation.style.display = 'none';
 
@@ -370,10 +739,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 const returnDate = getReturnDate(currentHoliday.end);
                 currentWeek = getWeekType(returnDate);
                 currentDayIndex = returnDate.getUTCDay() - 1;
-                weekA.style.display = currentWeek === 'A' ? 'block' : 'none';
-                weekB.style.display = currentWeek === 'B' ? 'block' : 'none';
-                weekAMobile.style.display = currentWeek === 'A' ? 'block' : 'none';
-                weekBMobile.style.display = currentWeek === 'B' ? 'block' : 'none';
+                weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+                weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+                weekAMobileContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+                weekBMobileContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
                 toggleButton.style.display = 'block';
                 if (window.innerWidth > 768) {
                     dayNavigation.style.display = 'flex';
@@ -390,10 +759,10 @@ document.addEventListener('DOMContentLoaded', () => {
             holidayOptions.style.display = 'flex';
             showReturnTimetable.style.display = 'none';
             showWeekTimetable.style.display = 'block';
-            weekA.style.display = 'none';
-            weekB.style.display = 'none';
-            weekAMobile.style.display = 'none';
-            weekBMobile.style.display = 'none';
+            weekAContainer.style.display = 'none';
+            weekBContainer.style.display = 'none';
+            weekAMobileContainer.style.display = 'none';
+            weekBMobileContainer.style.display = 'none';
             toggleButton.style.display = 'none';
             dayNavigation.style.display = 'none';
 
@@ -406,10 +775,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 currentWeek = getWeekType(nextDate);
                 currentDayIndex = nextDate.getUTCDay() - 1;
-                weekA.style.display = currentWeek === 'A' ? 'block' : 'none';
-                weekB.style.display = currentWeek === 'B' ? 'block' : 'none';
-                weekAMobile.style.display = currentWeek === 'A' ? 'block' : 'none';
-                weekBMobile.style.display = currentWeek === 'B' ? 'block' : 'none';
+                weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+                weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+                weekAMobileContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+                weekBMobileContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
                 toggleButton.style.display = 'block';
                 if (window.innerWidth > 768) {
                     dayNavigation.style.display = 'flex';
@@ -423,25 +792,33 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    toggleTimeA.addEventListener('click', () => {
-        isUKTime = !isUKTime;
-        updateTimes();
-    });
+    if (toggleTimeA) {
+        toggleTimeA.addEventListener('click', () => {
+            isUKTime = !isUKTime;
+            updateTimes();
+        });
+    }
 
-    toggleTimeB.addEventListener('click', () => {
-        isUKTime = !isUKTime;
-        updateTimes();
-    });
+    if (toggleTimeB) {
+        toggleTimeB.addEventListener('click', () => {
+            isUKTime = !isUKTime;
+            updateTimes();
+        });
+    }
 
-    toggleTimeAMobile.addEventListener('click', () => {
-        isUKTime = !isUKTime;
-        updateTimes();
-    });
+    if (toggleTimeAMobile) {
+        toggleTimeAMobile.addEventListener('click', () => {
+            isUKTime = !isUKTime;
+            updateTimes();
+        });
+    }
 
-    toggleTimeBMobile.addEventListener('click', () => {
-        isUKTime = !isUKTime;
-        updateTimes();
-    });
+    if (toggleTimeBMobile) {
+        toggleTimeBMobile.addEventListener('click', () => {
+            isUKTime = !isUKTime;
+            updateTimes();
+        });
+    }
 
     const holidayReason = isHolidayOrClosure(today);
 
@@ -451,32 +828,32 @@ document.addEventListener('DOMContentLoaded', () => {
         currentWeek = getWeekType(today);
 
         if (currentWeek === 'A') {
-            weekA.style.display = 'block';
-            weekB.style.display = 'none';
-            weekAMobile.style.display = 'block';
-            weekBMobile.style.display = 'none';
+            weekAContainer.style.display = 'block';
+            weekBContainer.style.display = 'none';
+            weekAMobileContainer.style.display = 'block';
+            weekBMobileContainer.style.display = 'none';
             toggleButton.textContent = 'Switch to Week B';
         } else {
-            weekA.style.display = 'none';
-            weekB.style.display = 'block';
-            weekAMobile.style.display = 'none';
-            weekBMobile.style.display = 'block';
+            weekAContainer.style.display = 'none';
+            weekBContainer.style.display = 'block';
+            weekAMobileContainer.style.display = 'none';
+            weekBMobileContainer.style.display = 'block';
             toggleButton.textContent = 'Switch to Week A';
         }
 
         toggleButton.addEventListener('click', () => {
             if (currentWeek === 'A') {
-                weekA.style.display = 'none';
-                weekB.style.display = 'block';
-                weekAMobile.style.display = 'none';
-                weekBMobile.style.display = 'block';
+                weekAContainer.style.display = 'none';
+                weekBContainer.style.display = 'block';
+                weekAMobileContainer.style.display = 'none';
+                weekBMobileContainer.style.display = 'block';
                 toggleButton.textContent = 'Switch to Week A';
                 currentWeek = 'B';
             } else {
-                weekA.style.display = 'block';
-                weekB.style.display = 'none';
-                weekAMobile.style.display = 'block';
-                weekBMobile.style.display = 'none';
+                weekAContainer.style.display = 'block';
+                weekBContainer.style.display = 'none';
+                weekAMobileContainer.style.display = 'block';
+                weekBMobileContainer.style.display = 'none';
                 toggleButton.textContent = 'Switch to Week B';
                 currentWeek = 'A';
             }
@@ -495,6 +872,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         window.addEventListener('resize', () => {
+            generateTimetables();
+            if (currentWeek === 'A') {
+                weekAContainer.style.display = 'block';
+                weekBContainer.style.display = 'none';
+                weekAMobileContainer.style.display = 'block';
+                weekBMobileContainer.style.display = 'none';
+            } else {
+                weekAContainer.style.display = 'none';
+                weekBContainer.style.display = 'block';
+                weekAMobileContainer.style.display = 'none';
+                weekBMobileContainer.style.display = 'block';
+            }
             if (window.innerWidth > 768) {
                 dayNavigation.style.display = 'flex';
                 updateDayDisplay();

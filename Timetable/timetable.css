@@ -176,7 +176,7 @@ body {
 
 /* Styles pour le planning mobile */
 #timetable-week-a-mobile, #timetable-week-b-mobile {
-    display: none; /* Masqué par défaut, affiché uniquement sur mobile */
+    display: none; /* Masqué par défaut, affiché uniquement sur mobile via JS */
 }
 
 .mobile-timetable-scroll {
@@ -226,21 +226,7 @@ body {
 
 /* Media query pour tablettes et grands téléphones (768px et moins) */
 @media (max-width: 768px) {
-    /* Cacher le planning desktop */
-    #timetable-week-a, #timetable-week-b {
-        display: none;
-    }
-
-    /* Afficher le planning mobile */
-    #timetable-week-a-mobile, #timetable-week-b-mobile {
-        display: block;
-    }
-
-    /* Cacher les boutons de navigation de jour */
-    #day-navigation {
-        display: none !important;
-    }
-
+    /* Les plannings sont gérés dynamiquement via JS, donc pas besoin de styles de masquage ici */
     .time-toggle-button {
         font-size: 12px;
         padding: 2px 6px;
