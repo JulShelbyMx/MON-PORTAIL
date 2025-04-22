@@ -115,37 +115,6 @@ body {
     background-color: #ADD8E6; /* Bleu ciel plus clair */
 }
 
-.day-navigation {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    display: none; /* Masqué par défaut */
-}
-
-.nav-button {
-    padding: 5px 10px;
-    background-color: #87CEEB; /* Bleu ciel */
-    color: #0a0a0a;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: 'Pirata One', sans-serif;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.nav-button:hover {
-    background-color: #ADD8E6; /* Bleu ciel plus clair */
-}
-
-.current-day {
-    font-size: 18px;
-    font-family: 'Pirata One', sans-serif;
-    color: white;
-}
-
 .time-toggle-button {
     margin-left: 5px;
     padding: 3px 8px;
@@ -202,7 +171,7 @@ body {
 }
 
 .mobile-timetable-table th {
-    background-color: #87CEEB;
+    background-color: #87CEEB; /* Fond bleu pour toute la ligne d'en-tête */
     color: #0a0a0a;
     font-size: 16px;
     position: sticky;
@@ -226,7 +195,6 @@ body {
 
 /* Media query pour tablettes et grands téléphones (768px et moins) */
 @media (max-width: 768px) {
-    /* Les plannings sont gérés dynamiquement via JS, donc pas besoin de styles de masquage ici */
     .time-toggle-button {
         font-size: 12px;
         padding: 2px 6px;
@@ -259,15 +227,6 @@ body {
 
 /* Media query pour petits téléphones (480px et moins) */
 @media (max-width: 480px) {
-    .nav-button {
-        padding: 3px 8px;
-        font-size: 14px;
-    }
-
-    .current-day {
-        font-size: 16px;
-    }
-
     .time-toggle-button {
         font-size: 10px;
         padding: 2px 5px;
