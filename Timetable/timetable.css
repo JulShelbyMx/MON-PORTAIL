@@ -6,6 +6,17 @@ body {
     padding: 0;
 }
 
+.logo {
+    font-family: 'Pirata One', sans-serif;
+    font-size: 28px;
+    color: #87CEEB; /* Bleu ciel pour cohérence avec le thème */
+    text-align: center;
+    padding: 15px 0;
+    background-color: #222;
+    border-bottom: 2px solid #ffb300; /* Bordure jaune pour rappeler le bouton retour */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
 .timetable-hero {
     background: url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
     height: 30vh;
@@ -219,6 +230,11 @@ body {
 
 /* Media query pour tablettes et grands téléphones (768px et moins) */
 @media (max-width: 768px) {
+    .logo {
+        font-size: 24px; /* Taille réduite pour tablettes */
+        padding: 10px 0;
+    }
+
     .time-toggle-button {
         font-size: 16px; /* Taille encore augmentée */
         padding: 4px 10px;
@@ -276,6 +292,11 @@ body {
 
 /* Media query pour petits téléphones (480px et moins) */
 @media (max-width: 480px) {
+    .logo {
+        font-size: 20px; /* Taille réduite pour petits téléphones */
+        padding: 8px 0;
+    }
+
     .time-toggle-button {
         font-size: 14px; /* Ajusté pour petits écrans */
         padding: 3px 8px;
