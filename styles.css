@@ -45,6 +45,17 @@ header {
     object-fit: contain;
 }
 
+/* Bouton hamburger */
+.hamburger {
+    display: none; /* Caché par défaut */
+    background: none;
+    border: none;
+    color: #ffb300;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 2001;
+}
+
 /* Style des nouveaux boutons */
 .nav-buttons {
     display: flex;
@@ -521,13 +532,33 @@ footer {
         height: 30px;
     }
 
+    /* Afficher le bouton hamburger et cacher les boutons de navigation */
+    .hamburger {
+        display: block;
+    }
+
     .nav-buttons {
-        gap: 8px;
+        display: none; /* Caché par défaut sur mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #0a0a0a;
+        padding: 10px 0;
+        border-bottom: 2px solid #ffb300;
+        z-index: 2000;
+    }
+
+    .nav-buttons.active {
+        display: flex; /* Affiché quand le menu est ouvert */
     }
 
     .nav-button {
-        padding: 6px 10px;
-        font-size: 14px;
+        padding: 10px 20px;
+        margin: 5px 15px;
+        justify-content: center;
+        border-radius: 10px;
     }
 
     .nav-button i {
@@ -628,12 +659,12 @@ footer {
         height: 25px;
     }
 
-    .nav-buttons {
-        gap: 5px;
+    .hamburger {
+        font-size: 20px;
     }
 
     .nav-button {
-        padding: 5px 8px;
+        padding: 8px 15px;
         font-size: 12px;
     }
 

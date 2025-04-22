@@ -5,12 +5,44 @@ const searchButton = document.getElementById('search-button');
 const suggestionsList = document.getElementById('search-suggestions');
 const siteCards = document.querySelectorAll('.site-card');
 const backToTopButton = document.getElementById('back-to-top');
+const hamburger = document.querySelector('.hamburger');
+const navButtons = document.querySelector('.nav-buttons');
 
 // Vérification que les éléments essentiels existent pour éviter les erreurs
 if (!searchBar || !searchButton || !suggestionsList) {
     console.error('Un ou plusieurs éléments de la barre de recherche sont manquants dans le DOM.');
     throw new Error('Éléments de recherche manquants');
 }
+
+if (!hamburger || !navButtons) {
+    console.error('Éléments du menu hamburger manquants dans le DOM.');
+    throw new Error('Éléments du menu hamburger manquants');
+}
+
+// Gestion du menu hamburger
+hamburger.addEventListener('click', () => {
+    navButtons.classList.toggle('active');
+    hamburger.querySelector('i').classList.toggle('fa-bars');
+    hamburger.querySelector('i').classList.toggle('fa-times');
+});
+
+// Fermer le menu si on clique ailleurs
+document.addEventListener('click', (e) => {
+    if (!hamburger.contains(e.target) && !navButtons.contains(e.target)) {
+        navButtons.classList.remove('active');
+        hamburger.querySelector('i').classList.remove('fa-times');
+        hamburger.querySelector('i').classList.add('fa-bars');
+    }
+});
+
+// Fermer le menu après un clic sur un lien
+navButtons.querySelectorAll('.nav-button').forEach(button => {
+    button.addEventListener('click', () => {
+        navButtons.classList.remove('active');
+        hamburger.querySelector('i').classList.remove('fa-times');
+        hamburger.querySelector('i').classList.add('fa-bars');
+    });
+});
 
 // Fonction pour récupérer les cartes dynamiquement
 const getSiteCards = (carousel) => carousel.querySelectorAll('.site-card');
