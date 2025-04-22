@@ -174,10 +174,9 @@ body {
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
 }
 
-/* Styles pour le nouveau format mobile */
-.mobile-timetable-container {
+/* Styles pour le planning mobile */
+#timetable-week-a-mobile, #timetable-week-b-mobile {
     display: none; /* Masqué par défaut, affiché uniquement sur mobile */
-    margin-top: 20px;
 }
 
 .mobile-timetable-scroll {
@@ -227,18 +226,19 @@ body {
 
 /* Media query pour tablettes et grands téléphones (768px et moins) */
 @media (max-width: 768px) {
-    .timetable-table th:not(:first-child),
-    .timetable-table td:not(:first-child) {
+    /* Cacher le planning desktop */
+    #timetable-week-a, #timetable-week-b {
         display: none;
     }
 
-    .timetable-table th.current-day,
-    .timetable-table td.current-day {
-        display: table-cell;
+    /* Afficher le planning mobile */
+    #timetable-week-a-mobile, #timetable-week-b-mobile {
+        display: block;
     }
 
+    /* Cacher les boutons de navigation de jour */
     #day-navigation {
-        display: flex !important;
+        display: none !important;
     }
 
     .time-toggle-button {
@@ -246,7 +246,7 @@ body {
         padding: 2px 6px;
     }
 
-    #time-zone-a, #time-zone-b, #time-zone-a-mobile, #time-zone-b-mobile {
+    #time-zone-a-mobile, #time-zone-b-mobile {
         font-size: 12px;
     }
 
@@ -264,11 +264,6 @@ body {
         padding: 8px 16px;
     }
 
-    /* Afficher le nouveau format mobile */
-    .mobile-timetable-container {
-        display: block;
-    }
-
     /* Ajuster la hauteur pour couvrir tout le planning */
     .mobile-timetable-scroll {
         max-height: calc(100vh - 200px); /* Ajuster selon la hauteur de l'en-tête et des autres éléments */
@@ -278,12 +273,6 @@ body {
 
 /* Media query pour petits téléphones (480px et moins) */
 @media (max-width: 480px) {
-    .timetable-table th,
-    .timetable-table td {
-        padding: 10px;
-        font-size: 14px;
-    }
-
     .nav-button {
         padding: 3px 8px;
         font-size: 14px;
@@ -298,7 +287,7 @@ body {
         padding: 2px 5px;
     }
 
-    #time-zone-a, #time-zone-b, #time-zone-a-mobile, #time-zone-b-mobile {
+    #time-zone-a-mobile, #time-zone-b-mobile {
         font-size: 10px;
     }
 

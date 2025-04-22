@@ -35,7 +35,7 @@
             </div>
         </div>
 
-        <!-- Week A -->
+        <!-- Week A (Desktop) -->
         <div id="timetable-week-a">
             <h2>Week A</h2>
             <table class="timetable-table">
@@ -113,7 +113,7 @@
             </table>
         </div>
 
-        <!-- Week B -->
+        <!-- Week B (Desktop) -->
         <div id="timetable-week-b" style="display: none;">
             <h2>Week B</h2>
             <table class="timetable-table">
@@ -191,160 +191,161 @@
             </table>
         </div>
 
-        <!-- New Mobile-Friendly Timetable -->
-        <div class="mobile-timetable-container">
-            <!-- Week A Mobile -->
-            <div id="timetable-week-a-mobile">
-                <h2>Week A</h2>
-                <div class="mobile-timetable-scroll">
-                    <table class="mobile-timetable-table">
-                        <thead>
-                            <tr>
-                                <th>Time <span id="time-zone-a-mobile">[UK]</span></th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                                <td>9PH/Tu</td>
-                                <td>9PH/Tu</td>
-                                <td>9PH/Tu</td>
-                                <td>9PH/Tu</td>
-                                <td>9PH/Tu</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                                <td>9cd/EnE</td>
-                                <td>9cd/CoE</td>
-                                <td>9cd/ArE</td>
-                                <td>9cd/HiE</td>
-                                <td>9cd/ScR</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                                <td>9d/PeR</td>
-                                <td>9cd/MaE</td>
-                                <td>9cd/MaE</td>
-                                <td>9cd/DmE</td>
-                                <td>9cd/PsE</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                                <td>9cd/SpE</td>
-                                <td>9cd/EnE</td>
-                                <td>9cd/GgE</td>
-                                <td>9cd/ReE</td>
-                                <td>9cd/HiE</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                                <td>9cd/MaE</td>
-                                <td>9cd/MuE</td>
-                                <td>9cd/Mess</td>
-                                <td>9cd/FrE</td>
-                                <td>9cd/GgE</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="12:55-13:55">12:55-13:55</td>
-                                <td>Lunch + 9PH/Rt</td>
-                                <td>Lunch + 9PH/Rt</td>
-                                <td>Lunch + 9PH/Rt</td>
-                                <td>Lunch + 9PH/Rt</td>
-                                <td>Lunch + 9PH/Rt</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                                <td>9cd/ScR</td>
-                                <td>9cd/ScR</td>
-                                <td>9cd/EnE</td>
-                                <td>9cd/EnE</td>
-                                <td>9cd/MaE</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <!-- Week A (Mobile) -->
+        <div id="timetable-week-a-mobile">
+            <h2>Week A</h2>
+            <div class="mobile-timetable-scroll">
+                <table class="mobile-timetable-table">
+                    <thead>
+                        <tr>
+                            <th>Time <span id="time-zone-a-mobile">[UK]</span>
+                                <button id="toggle-time-a-mobile" class="time-toggle-button">Switch to FR</button>
+                            </th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/CoE</td>
+                            <td>9cd/ArE</td>
+                            <td>9cd/HiE</td>
+                            <td>9cd/ScR</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                            <td>9d/PeR</td>
+                            <td>9cd/MaE</td>
+                            <td>9cd/MaE</td>
+                            <td>9cd/DmE</td>
+                            <td>9cd/PsE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="10:55-11:55">10:55-11:55</td>
+                            <td>9cd/SpE</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/GgE</td>
+                            <td>9cd/ReE</td>
+                            <td>9cd/HiE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                            <td>9cd/MaE</td>
+                            <td>9cd/MuE</td>
+                            <td>9cd/Mess</td>
+                            <td>9cd/FrE</td>
+                            <td>9cd/GgE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                            <td>9cd/ScR</td>
+                            <td>9cd/ScR</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/MaE</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+        </div>
 
-            <!-- Week B Mobile -->
-            <div id="timetable-week-b-mobile" style="display: none;">
-                <h2>Week B</h2>
-                <div class="mobile-timetable-scroll">
-                    <table class="mobile-timetable-table">
-                        <thead>
-                            <tr>
-                                <th>Time <span id="time-zone-b-mobile">[UK]</span></th>
-                                <th>Monday</th>
-                                <th>Tuesday</th>
-                                <th>Wednesday</th>
-                                <th>Thursday</th>
-                                <th>Friday</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                                <td>9PH/Tu</td>
-                                <td>9PH/Tu</td>
-                                <td>9PH/Tu</td>
-                                <td>9PH/Tu</td>
-                                <td>9PH/Tu</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                                <td>9cd/PsE</td>
-                                <td>9cd/TcR</td>
-                                <td>9cd/EnE</td>
-                                <td>9cd/ScR</td>
-                                <td>9cd/ScR</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                                <td>9d/MaE</td>
-                                <td>9cd/GgE</td>
-                                <td>9cd/Mess</td>
-                                <td>9cd/EnE</td>
-                                <td>9cd/HiE</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                                <td>9cd/CoE</td>
-                                <td>9cd/EnE</td>
-                                <td>9cd/ArE</td>
-                                <td>9cd/DmE</td>
-                                <td>9cd/MaE</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                                <td>9cd/PeR</td>
-                                <td>9cd/MaE</td>
-                                <td>9cd/SpE</td>
-                                <td>9cd/FrE</td>
-                                <td>9cd/GgE</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="12:55-13:55">12:55-13:55</td>
-                                <td>Lunch + 9PH/Rt</td>
-                                <td>Lunch + 9PH/Rt</td>
-                                <td>Lunch + 9PH/Rt</td>
-                                <td>Lunch + 9PH/Rt</td>
-                                <td>Lunch + 9PH/Rt</td>
-                            </tr>
-                            <tr>
-                                <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                                <td>9cd/EnE</td>
-                                <td>9cd/MuE</td>
-                                <td>9cd/ScR</td>
-                                <td>9cd/MaE</td>
-                                <td>9cd/ReE</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <!-- Week B (Mobile) -->
+        <div id="timetable-week-b-mobile" style="display: none;">
+            <h2>Week B</h2>
+            <div class="mobile-timetable-scroll">
+                <table class="mobile-timetable-table">
+                    <thead>
+                        <tr>
+                            <th>Time <span id="time-zone-b-mobile">[UK]</span>
+                                <button id="toggle-time-b-mobile" class="time-toggle-button">Switch to FR</button>
+                            </th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                            <td>9PH/Tu</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                            <td>9cd/PsE</td>
+                            <td>9cd/TcR</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/ScR</td>
+                            <td>9cd/ScR</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                            <td>9d/MaE</td>
+                            <td>9cd/GgE</td>
+                            <td>9cd/Mess</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/HiE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="10:55-11:55">10:55-11:55</td>
+                            <td>9cd/CoE</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/ArE</td>
+                            <td>9cd/DmE</td>
+                            <td>9cd/MaE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                            <td>9cd/PeR</td>
+                            <td>9cd/MaE</td>
+                            <td>9cd/SpE</td>
+                            <td>9cd/FrE</td>
+                            <td>9cd/GgE</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                            <td>Lunch + 9PH/Rt</td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                            <td>9cd/EnE</td>
+                            <td>9cd/MuE</td>
+                            <td>9cd/ScR</td>
+                            <td>9cd/MaE</td>
+                            <td>9cd/ReE</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
