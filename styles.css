@@ -28,6 +28,18 @@ header {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.logo span {
     font-size: 28px;
     font-weight: bold;
     color: #ffb300;
@@ -45,14 +57,17 @@ header {
     display: flex;
     align-items: center;
     padding: 8px 15px;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: transparent;
+    color: #ffb300;
     text-decoration: none;
+    border: 2px solid #ffb300;
     border-radius: 20px;
     font-size: 16px;
     font-family: 'Arial', sans-serif;
     font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .nav-button i {
@@ -61,8 +76,24 @@ header {
 }
 
 .nav-button:hover {
-    background-color: #e0e0e0;
+    background-color: #ffb300;
+    color: #0a0a0a;
     transform: scale(1.05);
+}
+
+.nav-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 179, 0, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-button:hover::before {
+    left: 100%;
 }
 
 .search-container {
@@ -383,6 +414,15 @@ footer {
         padding: 10px 30px;
     }
 
+    .logo span {
+        font-size: 24px;
+    }
+
+    .logo-icon {
+        width: 35px;
+        height: 35px;
+    }
+
     .nav-buttons {
         gap: 10px;
     }
@@ -474,8 +514,13 @@ footer {
         padding: 8px 15px;
     }
 
-    .logo {
-        font-size: 22px;
+    .logo span {
+        font-size: 20px;
+    }
+
+    .logo-icon {
+        width: 30px;
+        height: 30px;
     }
 
     .nav-buttons {
@@ -576,8 +621,13 @@ footer {
         padding: 6px 10px;
     }
 
-    .logo {
-        font-size: 18px;
+    .logo span {
+        font-size: 16px;
+    }
+
+    .logo-icon {
+        width: 25px;
+        height: 25px;
     }
 
     .nav-buttons {
@@ -691,37 +741,6 @@ footer {
 }
 
 #back-to-top:focus {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
-}
-
-#ranking-button {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    background-color: green;
-    color: #0a0a0a;
-    border: 2px solid #0a0a0a;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    cursor: pointer;
-    z-index: 2000;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-}
-
-#ranking-button:hover {
-    background-color: darkgreen;
-    transform: scale(1.1);
-}
-
-#ranking-button:focus {
     outline: 2px solid #fff;
     outline-offset: 2px;
 }
