@@ -432,12 +432,33 @@ footer {
         height: 35px;
     }
 
+    /* Afficher le bouton hamburger et cacher les boutons de navigation */
+    .hamburger {
+        display: block;
+    }
+
     .nav-buttons {
-        gap: 10px;
+        display: none; /* Caché par défaut sur mobile/tablette */
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #0a0a0a;
+        padding: 10px 0;
+        border-bottom: 2px solid #ffb300;
+        z-index: 2000;
+    }
+
+    .nav-buttons.active {
+        display: flex; /* Affiché quand le menu est ouvert */
     }
 
     .nav-button {
-        padding: 6px 12px;
+        padding: 10px 20px;
+        margin: 5px 15px;
+        justify-content: center;
+        border-radius: 10px;
         font-size: 14px;
     }
 
@@ -532,16 +553,15 @@ footer {
         height: 30px;
     }
 
-    /* Afficher le bouton hamburger et cacher les boutons de navigation */
     .hamburger {
         display: block;
     }
 
     .nav-buttons {
-        display: none; /* Caché par défaut sur mobile */
+        display: none;
         flex-direction: column;
         position: absolute;
-        top: 70px;
+        top: 60px;
         left: 0;
         width: 100%;
         background-color: #0a0a0a;
@@ -551,7 +571,7 @@ footer {
     }
 
     .nav-buttons.active {
-        display: flex; /* Affiché quand le menu est ouvert */
+        display: flex;
     }
 
     .nav-button {
@@ -661,6 +681,16 @@ footer {
 
     .hamburger {
         font-size: 20px;
+        display: block;
+    }
+
+    .nav-buttons {
+        display: none;
+        top: 50px;
+    }
+
+    .nav-buttons.active {
+        display: flex;
     }
 
     .nav-button {
