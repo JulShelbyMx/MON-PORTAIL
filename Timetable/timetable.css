@@ -6,17 +6,6 @@ body {
     padding: 0;
 }
 
-.logo {
-    font-family: 'Pirata One', sans-serif;
-    font-size: 28px;
-    color: #87CEEB; /* Bleu ciel pour cohérence avec le thème */
-    text-align: center;
-    padding: 15px 0;
-    background-color: #222;
-    border-bottom: 2px solid #ffb300; /* Bordure jaune pour rappeler le bouton retour */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
-
 .timetable-hero {
     background: url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
     height: 30vh;
