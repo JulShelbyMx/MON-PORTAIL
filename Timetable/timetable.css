@@ -163,7 +163,7 @@ body {
     background-color: #ADD8E6; /* Bleu ciel plus clair */
 }
 
-#time-zone-a, #time-zone-b {
+#time-zone-a, #time-zone-b, #time-zone-a-mobile, #time-zone-b-mobile {
     color: black;
     font-size: 14px;
 }
@@ -172,6 +172,57 @@ body {
     border: 2px solid red !important;
     background-color: rgba(255, 0, 0, 0.2);
     box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+/* Styles pour le nouveau format mobile */
+.mobile-timetable-container {
+    display: none; /* Masqué par défaut, affiché uniquement sur mobile */
+    margin-top: 20px;
+}
+
+.mobile-timetable-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Pour un défilement fluide sur iOS */
+}
+
+.mobile-timetable-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #222;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.mobile-timetable-table th, .mobile-timetable-table td {
+    padding: 10px;
+    border: 1px solid #87CEEB;
+    text-align: center;
+    font-family: 'Pirata One', sans-serif;
+    white-space: nowrap; /* Empêche le texte de se retourner */
+}
+
+.mobile-timetable-table th {
+    background-color: #87CEEB;
+    color: #0a0a0a;
+    font-size: 16px;
+    position: sticky;
+    left: 0;
+    z-index: 1;
+}
+
+.mobile-timetable-table th:first-child,
+.mobile-timetable-table td:first-child {
+    position: sticky;
+    left: 0;
+    background: #222;
+    z-index: 2;
+    min-width: 80px;
+}
+
+.mobile-timetable-table th:not(:first-child),
+.mobile-timetable-table td:not(:first-child) {
+    min-width: 100px; /* Largeur fixe pour chaque jour */
 }
 
 /* Media query pour tablettes et grands téléphones (768px et moins) */
@@ -195,7 +246,7 @@ body {
         padding: 2px 6px;
     }
 
-    #time-zone-a, #time-zone-b {
+    #time-zone-a, #time-zone-b, #time-zone-a-mobile, #time-zone-b-mobile {
         font-size: 12px;
     }
 
@@ -211,6 +262,17 @@ body {
     .toggle-button {
         font-size: 14px; /* Texte plus petit sur mobile */
         padding: 8px 16px;
+    }
+
+    /* Afficher le nouveau format mobile */
+    .mobile-timetable-container {
+        display: block;
+    }
+
+    /* Ajuster la hauteur pour couvrir tout le planning */
+    .mobile-timetable-scroll {
+        max-height: calc(100vh - 200px); /* Ajuster selon la hauteur de l'en-tête et des autres éléments */
+        overflow-y: auto;
     }
 }
 
@@ -236,7 +298,7 @@ body {
         padding: 2px 5px;
     }
 
-    #time-zone-a, #time-zone-b {
+    #time-zone-a, #time-zone-b, #time-zone-a-mobile, #time-zone-b-mobile {
         font-size: 10px;
     }
 
@@ -247,5 +309,21 @@ body {
     .toggle-button {
         font-size: 12px; /* Encore plus petit pour petits écrans */
         padding: 6px 12px;
+    }
+
+    .mobile-timetable-table th,
+    .mobile-timetable-table td {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .mobile-timetable-table th:first-child,
+    .mobile-timetable-table td:first-child {
+        min-width: 70px;
+    }
+
+    .mobile-timetable-table th:not(:first-child),
+    .mobile-timetable-table td:not(:first-child) {
+        min-width: 90px;
     }
 }

@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     const weekA = document.getElementById('timetable-week-a');
     const weekB = document.getElementById('timetable-week-b');
+    const weekAMobile = document.getElementById('timetable-week-a-mobile');
+    const weekBMobile = document.getElementById('timetable-week-b-mobile');
     const toggleButton = document.getElementById('toggle-button');
     const holidayMessage = document.getElementById('holiday-message');
     const dayNavigation = document.getElementById('day-navigation');
@@ -11,6 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleTimeB = document.getElementById('toggle-time-b');
     const timeZoneA = document.getElementById('time-zone-a');
     const timeZoneB = document.getElementById('time-zone-b');
+    const timeZoneAMobile = document.getElementById('time-zone-a-mobile');
+    const timeZoneBMobile = document.getElementById('time-zone-b-mobile');
     const holidayOptions = document.getElementById('holiday-options');
     const showReturnTimetable = document.getElementById('show-return-timetable');
     const showWeekTimetable = document.getElementById('show-week-timetable');
@@ -23,7 +27,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Date manuelle prioritaire, sinon auto
     const manualDate = null;
-    // Pour auto, mets : const manualDate = null;
     const today = manualDate ? new Date(manualDate) : new Date();
     const bstToday = manualDate ? today : new Date(today.getTime() + 3600000); // BST seulement en auto
     const dayOfWeek = bstToday.getUTCDay();
@@ -78,6 +81,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateTimes() {
         const timeCellsA = weekA.querySelectorAll('tbody td[data-uk-time]');
         const timeCellsB = weekB.querySelectorAll('tbody td[data-uk-time]');
+        const timeCellsAMobile = weekAMobile.querySelectorAll('tbody td[data-uk-time]');
+        const timeCellsBMobile = weekBMobile.querySelectorAll('tbody td[data-uk-time]');
 
         timeCellsA.forEach(cell => {
             const ukTime = cell.getAttribute('data-uk-time');
@@ -89,12 +94,25 @@ document.addEventListener('DOMContentLoaded', () => {
             cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
         });
 
+        timeCellsAMobile.forEach(cell => {
+            const ukTime = cell.getAttribute('data-uk-time');
+            cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
+        });
+
+        timeCellsBMobile.forEach(cell => {
+            const ukTime = cell.getAttribute('data-uk-time');
+            cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
+        });
+
         timeZoneA.textContent = isUKTime ? '[UK]' : '[FR]';
         timeZoneB.textContent = isUKTime ? '[UK]' : '[FR]';
+        timeZoneAMobile.textContent = isUKTime ? '[UK]' : '[FR]';
+        timeZoneBMobile.textContent = isUKTime ? '[UK]' : '[FR]';
         toggleTimeA.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
         toggleTimeB.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
 
         highlightCurrentLesson();
+        scrollToCurrentDay();
     }
 
     function isHolidayOrClosure(date) {
@@ -169,10 +187,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         highlightCurrentLesson();
+        scrollToCurrentDay();
+    }
+
+    function scrollToCurrentDay() {
+        if (window.innerWidth > 768) return; // Ne s'applique que sur mobile
+
+        const activeTable = weekAMobile.style.display === 'block' ? weekAMobile : weekBMobile;
+        const scrollContainer = activeTable.querySelector('.mobile-timetable-scroll');
+        const dayColumn = scrollContainer.querySelectorAll('th')[currentDayIndex + 1];
+
+        if (dayColumn) {
+            const columnLeft = dayColumn.offsetLeft;
+            const containerWidth = scrollContainer.clientWidth;
+            const columnWidth = dayColumn.offsetWidth;
+            const scrollPosition = columnLeft - (containerWidth / 2) + (columnWidth / 2);
+            scrollContainer.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
     }
 
     function highlightCurrentLesson() {
-        const allCells = document.querySelectorAll('.timetable-table td');
+        const allCells = document.querySelectorAll('.timetable-table td, .mobile-timetable-table td');
         allCells.forEach(cell => cell.classList.remove('current-lesson'));
 
         if (isManualDayChange || manualDate) {
@@ -189,8 +227,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentDay = daysOfWeek[currentDayIndex];
 
         const activeTable = weekA.style.display === 'block' ? weekA : weekB;
+        const activeTableMobile = weekAMobile.style.display === 'block' ? weekAMobile : weekBMobile;
 
         const timeCells = activeTable.querySelectorAll('tbody td[data-uk-time]');
+        const timeCellsMobile = activeTableMobile.querySelectorAll('tbody td[data-uk-time]');
         let currentLessonFound = false;
 
         timeCells.forEach((cell, index) => {
@@ -221,6 +261,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (lessonCell) {
                     lessonCell.classList.add('current-lesson');
                     currentLessonFound = true;
+                }
+
+                const rowMobile = timeCellsMobile[index].parentElement;
+                const cellsMobile = rowMobile.querySelectorAll('td');
+                const lessonCellMobile = cellsMobile[currentDayIndex + 1];
+                if (lessonCellMobile) {
+                    lessonCellMobile.classList.add('current-lesson');
                 }
             }
         });
@@ -260,6 +307,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     holidayOptions.style.display = 'none';
                     weekA.style.display = currentWeek === 'A' ? 'block' : 'none';
                     weekB.style.display = currentWeek === 'B' ? 'block' : 'none';
+                    weekAMobile.style.display = currentWeek === 'A' ? 'block' : 'none';
+                    weekBMobile.style.display = currentWeek === 'B' ? 'block' : 'none';
                     toggleButton.style.display = 'block';
                     if (window.innerWidth <= 768) {
                         dayNavigation.style.display = 'flex';
@@ -309,6 +358,8 @@ document.addEventListener('DOMContentLoaded', () => {
             showWeekTimetable.style.display = 'none';
             weekA.style.display = 'none';
             weekB.style.display = 'none';
+            weekAMobile.style.display = 'none';
+            weekBMobile.style.display = 'none';
             toggleButton.style.display = 'none';
             dayNavigation.style.display = 'none';
 
@@ -318,6 +369,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentDayIndex = returnDate.getUTCDay() - 1;
                 weekA.style.display = currentWeek === 'A' ? 'block' : 'none';
                 weekB.style.display = currentWeek === 'B' ? 'block' : 'none';
+                weekAMobile.style.display = currentWeek === 'A' ? 'block' : 'none';
+                weekBMobile.style.display = currentWeek === 'B' ? 'block' : 'none';
                 toggleButton.style.display = 'block';
                 if (window.innerWidth <= 768) {
                     dayNavigation.style.display = 'flex';
@@ -334,6 +387,8 @@ document.addEventListener('DOMContentLoaded', () => {
             showWeekTimetable.style.display = 'block';
             weekA.style.display = 'none';
             weekB.style.display = 'none';
+            weekAMobile.style.display = 'none';
+            weekBMobile.style.display = 'none';
             toggleButton.style.display = 'none';
             dayNavigation.style.display = 'none';
 
@@ -342,6 +397,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentWeek = getWeekType(date);
                 weekA.style.display = currentWeek === 'A' ? 'block' : 'none';
                 weekB.style.display = currentWeek === 'B' ? 'block' : 'none';
+                weekAMobile.style.display = currentWeek === 'A' ? 'block' : 'none';
+                weekBMobile.style.display = currentWeek === 'B' ? 'block' : 'none';
                 toggleButton.style.display = 'block';
                 if (window.innerWidth <= 768) {
                     currentDayIndex = (currentDayIndex + 1) % 5;
@@ -376,10 +433,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentWeek === 'A') {
             weekA.style.display = 'block';
             weekB.style.display = 'none';
+            weekAMobile.style.display = 'block';
+            weekBMobile.style.display = 'none';
             toggleButton.textContent = 'Switch to Week B';
         } else {
             weekA.style.display = 'none';
             weekB.style.display = 'block';
+            weekAMobile.style.display = 'none';
+            weekBMobile.style.display = 'block';
             toggleButton.textContent = 'Switch to Week A';
         }
 
@@ -387,11 +448,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentWeek === 'A') {
                 weekA.style.display = 'none';
                 weekB.style.display = 'block';
+                weekAMobile.style.display = 'none';
+                weekBMobile.style.display = 'block';
                 toggleButton.textContent = 'Switch to Week A';
                 currentWeek = 'B';
             } else {
                 weekA.style.display = 'block';
                 weekB.style.display = 'none';
+                weekAMobile.style.display = 'block';
+                weekBMobile.style.display = 'none';
                 toggleButton.textContent = 'Switch to Week B';
                 currentWeek = 'A';
             }
