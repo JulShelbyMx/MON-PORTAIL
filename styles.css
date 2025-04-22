@@ -12,18 +12,18 @@ body {
     padding-top: 70px; /* Ajout d'un padding-top pour compenser la hauteur du header */
 }
 
-/* Barre de navigation avec des accents pirates */
+/* Barre de navigation */
 header {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     padding: 10px 20px;
     background-color: #0a0a0a;
     border-bottom: 2px solid #ffb300;
-    position: fixed; /* Changement pour fixer le header en haut */
-    top: 0; /* Position en haut de la page */
-    left: 0; /* Alignement à gauche */
-    width: 100%; /* Prend toute la largeur */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     z-index: 2000;
 }
 
@@ -33,71 +33,36 @@ header {
     color: #ffb300;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
     font-family: 'Pirata One', sans-serif;
-    margin-right: 10px; /* Réduction de la marge */
 }
 
-.timetable-button {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #87CEEB; /* Bleu ciel */
-    color: #0a0a0a;
+/* Style des nouveaux boutons */
+.nav-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    padding: 8px 15px;
+    background-color: #ffffff;
+    color: #000000;
     text-decoration: none;
-    border-radius: 5px;
-    font-size: 18px;
-    font-family: 'Pirata One', sans-serif;
+    border-radius: 20px;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    border: 2px solid #0a0a0a;
-    margin-left: 10px; /* Espace entre les boutons */
 }
 
-.timetable-button:hover {
-    background-color: #ADD8E6; /* Bleu ciel plus clair au survol */
+.nav-button i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.nav-button:hover {
+    background-color: #e0e0e0;
     transform: scale(1.05);
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 10px; /* Réduction du gap pour rapprocher les liens */
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 18px; /* Réduction de la taille de la police pour un rendu plus compact */
-    font-weight: bold;
-    position: relative;
-    padding: 0 5px;
-}
-
-nav ul li a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background-color: #ffb300; /* Soulignement doré */
-    transform: scaleX(0);
-    transform-origin: bottom right;
-    transition: transform 0.3s ease-out;
-}
-
-nav ul li a:hover::after {
-    transform: scaleX(1);
-    transform-origin: bottom left;
-}
-
-/* Style pour le bouton hamburger */
-.hamburger {
-    display: none; /* Masqué par défaut sur desktop */
-    background: none;
-    border: none;
-    color: #ffb300;
-    font-size: 24px;
-    cursor: pointer;
-    padding: 5px 10px;
 }
 
 .search-container {
@@ -105,7 +70,6 @@ nav ul li a:hover::after {
     align-items: center;
     gap: 10px;
     position: relative;
-    margin-left: 10px; /* Réduction de la marge */
 }
 
 #search-bar {
@@ -146,9 +110,9 @@ nav ul li a:hover::after {
 }
 
 #search-button img {
-    width: 20px; /* Taille de l'image */
-    height: 20px; /* Taille de l'image */
-    object-fit: contain; /* S'assure que l'image est bien proportionnée */
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
 }
 
 #search-button:hover {
@@ -166,7 +130,7 @@ nav ul li a:hover::after {
     list-style: none;
     max-height: 200px;
     overflow-y: auto;
-    z-index: 3000; /* z-index très élevé pour que les suggestions soient toujours visibles */
+    z-index: 3000;
     display: none;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -191,11 +155,11 @@ nav ul li a:hover::after {
 }
 
 .suggestions-list li img {
-    width: 40px; /* Taille miniature pour l’image */
+    width: 40px;
     height: 40px;
     border-radius: 4px;
     margin-right: 10px;
-    object-fit: cover; /* S’assure que l’image est bien proportionnée */
+    object-fit: cover;
 }
 
 .suggestions-list li span {
@@ -246,10 +210,10 @@ nav ul li a:hover::after {
     margin-bottom: 20px;
 }
 
-.bateau { 
-    position: relative; 
-    z-index: 2; 
-    width: 150px; 
+.bateau {
+    position: relative;
+    z-index: 2;
+    width: 150px;
 }
 
 .vague {
@@ -261,8 +225,8 @@ nav ul li a:hover::after {
     z-index: 1;
 }
 
-/* Sections catégories avec une touche aventure */
-.categories {  
+/* Sections catégories */
+.categories {
     padding: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
@@ -280,7 +244,7 @@ nav ul li a:hover::after {
     text-shadow: 2px 2px 4px black;
 }
 
-/* Carousel avec un effet de vague */
+/* Carousel */
 .carousel {
     display: flex;
     gap: 15px;
@@ -289,7 +253,6 @@ nav ul li a:hover::after {
     justify-content: flex-start;
 }
 
-/* Customisation de la barre de défilement pour Webkit */
 .carousel-container::-webkit-scrollbar {
     width: 14px;
 }
@@ -336,20 +299,13 @@ nav ul li a:hover::after {
     font-family: 'Pirata One', sans-serif;
 }
 
-/* Effets et animations supplémentaires */
+/* Animations */
 @keyframes wave {
-    0% {
-        transform: rotate(-10deg);
-    }
-    50% {
-        transform: rotate(10deg);
-    }
-    100% {
-        transform: rotate(-10deg);
-    }
+    0% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    100% { transform: rotate(-10deg); }
 }
 
-/* Un effet de vague pour la section héro */
 .hero-content {
     animation: wave 5s ease-in-out infinite;
 }
@@ -411,7 +367,6 @@ nav ul li a:hover::after {
     font-family: 'Pirata One', sans-serif;
 }
 
-
 footer {
     text-align: center;
     padding: 10px;
@@ -422,32 +377,23 @@ footer {
     bottom: 0;
 }
 
-/* Ajustements pour desktop */
-@media (min-width: 769px) {
-    nav ul {
-        display: flex !important; /* Toujours visible sur desktop */
-    }
-}
-
-/* 🔹 Adaptation pour les écrans jusqu'à 1024px (tablettes et petits écrans) */
-@media (max-width: 1024px) {  
-    /* 🔸 Navigation */
+/* Responsive */
+@media (max-width: 1024px) {
     header {
         padding: 10px 30px;
     }
 
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
+    .nav-buttons {
+        gap: 10px;
     }
 
-    nav ul li a {
-        font-size: 18px;
+    .nav-button {
+        padding: 6px 12px;
+        font-size: 14px;
     }
 
-    .search-container {
-        margin-top: 10px;
+    .nav-button i {
+        font-size: 16px;
     }
 
     #search-bar {
@@ -471,7 +417,6 @@ footer {
         font-size: 13px;
     }
 
-    /* 🔸 Hero section */
     .hero {
         height: 40vh;
         padding: 20px;
@@ -494,7 +439,6 @@ footer {
         height: 15%;
     }
 
-    /* 🔸 Carousel */
     .carousel-container {
         height: auto;
         overflow-x: auto;
@@ -515,74 +459,36 @@ footer {
         font-size: 10px;
     }
 
-    /* 🔸 Images et responsive */
     img {
         max-width: 100%;
         height: auto;
     }
 
-    /* 🔸 Ajustements généraux */
     .categories h2 {
         font-size: 24px;
     }
 }
 
-/* 🔹 Adaptation pour les écrans jusqu'à 768px (tablettes et grands téléphones) */
-@media (max-width: 768px) {  
-    /* 🔸 Navigation */
+@media (max-width: 768px) {
     header {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
         padding: 8px 15px;
     }
 
     .logo {
         font-size: 22px;
-        margin-right: 5px;
     }
 
-    /* Afficher le bouton hamburger */
-    .hamburger {
-        display: block;
-    }
-
-    /* Masquer la navigation par défaut */
-    nav {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #0a0a0a;
-        z-index: 1999;
-        display: none;
-    }
-
-    /* Afficher la navigation quand elle est active */
-    nav.active {
-        display: block;
-    }
-
-    nav ul {
-        flex-direction: column;
+    .nav-buttons {
         gap: 8px;
-        padding: 10px 15px;
     }
 
-    nav ul li a {
+    .nav-button {
+        padding: 6px 10px;
+        font-size: 14px;
+    }
+
+    .nav-button i {
         font-size: 16px;
-        display: block;
-        padding: 8px;
-        border-bottom: 1px solid #ffb300;
-    }
-
-    nav ul li:last-child a {
-        border-bottom: none;
-    }
-
-    .search-container {
-        margin-left: 5px;
-        gap: 5px;
     }
 
     #search-bar {
@@ -625,7 +531,6 @@ footer {
         color: #0a0a0a;
     }
 
-    /* 🔸 Hero section */
     .hero {
         height: 35vh;
     }
@@ -643,7 +548,6 @@ footer {
         height: 12%;
     }
 
-    /* 🔸 Carousel */
     .carousel-container {
         height: auto;
     }
@@ -657,7 +561,6 @@ footer {
         font-size: 9px;
     }
 
-    /* 🔸 Ajustements généraux */
     .categories h2 {
         font-size: 22px;
     }
@@ -668,9 +571,7 @@ footer {
     }
 }
 
-/* 🔹 Adaptation pour les écrans jusqu'à 480px (petits téléphones) */
-@media (max-width: 480px) {  
-    /* 🔸 Navigation */
+@media (max-width: 480px) {
     header {
         padding: 6px 10px;
     }
@@ -679,19 +580,17 @@ footer {
         font-size: 18px;
     }
 
-    .hamburger {
-        font-size: 20px;
-        padding: 3px 8px;
+    .nav-buttons {
+        gap: 5px;
     }
 
-    nav ul li a {
+    .nav-button {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
+
+    .nav-button i {
         font-size: 14px;
-        padding: 6px;
-    }
-
-    .search-container {
-        margin-left: 3px;
-        gap: 3px;
     }
 
     #search-bar {
@@ -729,7 +628,6 @@ footer {
         font-size: 10px;
     }
 
-    /* 🔸 Hero section */
     .hero {
         height: 30vh;
     }
@@ -747,7 +645,6 @@ footer {
         height: 10%;
     }
 
-    /* 🔸 Carousel */
     .carousel-container {
         height: auto;
     }
@@ -761,7 +658,6 @@ footer {
         font-size: 8px;
     }
 
-    /* 🔸 Ajustements généraux */
     .categories h2 {
         font-size: 20px;
     }
@@ -772,7 +668,7 @@ footer {
     }
 }
 
-/* 🔹 Styles pour le bouton "Retour en haut" */
+/* Bouton "Retour en haut" */
 #back-to-top {
     position: fixed;
     bottom: 20px;
@@ -799,23 +695,6 @@ footer {
     outline-offset: 2px;
 }
 
-.streaming-button {
-    padding: 15px 25px;
-    background-color: #ffb300;
-    color: #0a0a0a;
-    text-decoration: none;
-    border-radius: 10px;
-    font-size: 20px;
-    font-family: 'Pirata One', sans-serif;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    border: 2px solid #0a0a0a;
-}
-.streaming-button:hover {
-    background-color: #e0a800;
-    transform: scale(1.05);
-}
-
 #ranking-button {
     position: fixed;
     bottom: 20px;
@@ -830,11 +709,11 @@ footer {
     cursor: pointer;
     z-index: 2000;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    text-decoration: none; /* Supprime tout soulignement pour <a> */
-    display: flex; /* Utilise Flexbox pour centrer */
-    align-items: center; /* Centre verticalement */
-    justify-content: center; /* Centre horizontalement */
-    line-height: 1; /* Évite tout décalage lié à la hauteur de ligne */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
 
 #ranking-button:hover {

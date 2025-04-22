@@ -1,11 +1,10 @@
 // Sélection des éléments du DOM
-const carousels = document.querySelectorAll('.carousel-container'); // Tous les carousels
-const searchBar = document.getElementById('search-bar'); // Barre de recherche
-const searchButton = document.getElementById('search-button'); // Bouton de recherche
-const suggestionsList = document.getElementById('search-suggestions'); // Liste des suggestions
-const siteCards = document.querySelectorAll('.site-card'); // Toutes les cartes
-const streamingButton = document.getElementById('streaming-button'); // Bouton streaming
-const backToTopButton = document.getElementById('back-to-top'); // Bouton retour en haut
+const carousels = document.querySelectorAll('.carousel-container');
+const searchBar = document.getElementById('search-bar');
+const searchButton = document.getElementById('search-button');
+const suggestionsList = document.getElementById('search-suggestions');
+const siteCards = document.querySelectorAll('.site-card');
+const backToTopButton = document.getElementById('back-to-top');
 
 // Vérification que les éléments essentiels existent pour éviter les erreurs
 if (!searchBar || !searchButton || !suggestionsList) {
@@ -24,7 +23,7 @@ const updateCarouselSize = (carousel) => {
     const cardWidth = siteCards[0].offsetWidth + parseInt(window.getComputedStyle(siteCards[0]).marginRight);
     const totalWidth = siteCards.length * cardWidth;
 
-    carousel.style.width = `${totalWidth}px`; // Ajustement dynamique de la largeur
+    carousel.style.width = `${totalWidth}px`;
 };
 
 // Fonction pour récupérer la valeur actuelle de translateX
@@ -37,17 +36,14 @@ const getCurrentTranslateX = (carousel) => {
 carousels.forEach((carouselContainer) => {
     const carousel = carouselContainer.querySelector('.carousel');
 
-    // Vérification que le carousel existe
     if (!carousel) {
         console.error('Carousel manquant dans un carousel-container.');
         return;
     }
 
-    // Variables pour le drag-to-scroll
     let isMouseDown = false;
     let startX, scrollLeft;
 
-    // Lors du mousedown, on active le drag
     carouselContainer.addEventListener('mousedown', (e) => {
         isMouseDown = true;
         startX = e.pageX - carouselContainer.offsetLeft;
@@ -55,33 +51,29 @@ carousels.forEach((carouselContainer) => {
         carouselContainer.style.cursor = 'grabbing';
     });
 
-    // Lorsque la souris quitte l’élément
     carouselContainer.addEventListener('mouseleave', () => {
         isMouseDown = false;
         carouselContainer.style.cursor = 'grab';
     });
 
-    // Lors du mouseup, on désactive le drag
     carouselContainer.addEventListener('mouseup', () => {
         isMouseDown = false;
         carouselContainer.style.cursor = 'grab';
     });
 
-    // Lors du mouvement de la souris, on déplace le carousel
     carouselContainer.addEventListener('mousemove', (e) => {
         if (!isMouseDown) return;
         e.preventDefault();
         const x = e.pageX - carouselContainer.offsetLeft;
-        const walk = (x - startX) * 3; // Vitesse du défilement
+        const walk = (x - startX) * 3;
         carousel.scrollLeft = scrollLeft - walk;
     });
 
-    // Ajustement du carousel au chargement et au redimensionnement
     window.addEventListener('load', () => updateCarouselSize(carousel));
     window.addEventListener('resize', () => updateCarouselSize(carousel));
 });
 
-// Gestion des clics sur les site-cards (logs retirés)
+// Gestion des clics sur les site-cards
 siteCards.forEach(card => {
     card.addEventListener('click', async (e) => {
         const link = card.querySelector('a');
@@ -93,43 +85,35 @@ siteCards.forEach(card => {
 
 // Fonction pour scroller vers une carte et la surligner
 const scrollToCard = (card) => {
-    // Retire le surlignage de toutes les cartes
     siteCards.forEach(c => c.classList.remove('highlight'));
 
-    // Ajoute le surlignage à la carte trouvée
     card.classList.add('highlight');
 
-    // Trouve le carousel parent
     const carouselContainer = card.closest('.carousel-container');
     const carousel = carouselContainer.querySelector('.carousel');
 
-    // Vérification que le carousel existe
     if (!carouselContainer || !carousel) {
         console.error('Carousel ou carousel-container manquant pour la carte sélectionnée.');
         return;
     }
 
-    // Calcule la position de la carte par rapport au carousel
     const cardRect = card.getBoundingClientRect();
     const carouselRect = carouselContainer.getBoundingClientRect();
     const scrollPosition = card.offsetLeft - (carouselRect.width / 2) + (cardRect.width / 2);
 
-    // Scrolle doucement vers la carte
     carouselContainer.scrollTo({
         left: scrollPosition,
         behavior: 'smooth'
     });
 
-    // Scrolle aussi verticalement pour que la section soit visible
     const section = card.closest('.categories');
     if (section) {
         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 };
 
-// Fonction pour afficher les suggestions sous forme de mini site-card
+// Fonction pour afficher les suggestions
 const showSuggestions = (searchTerm) => {
-    // Vide la liste des suggestions
     suggestionsList.innerHTML = '';
 
     if (!searchTerm) {
@@ -137,7 +121,6 @@ const showSuggestions = (searchTerm) => {
         return;
     }
 
-    // Filtre les cartes correspondantes
     const matchingCards = Array.from(siteCards).filter(card => {
         const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
         const link = card.querySelector('a')?.href.toLowerCase() || '';
@@ -149,10 +132,9 @@ const showSuggestions = (searchTerm) => {
         return;
     }
 
-    // Crée une suggestion pour chaque carte correspondante
     matchingCards.forEach(card => {
         const title = card.querySelector('h3')?.textContent || 'Sans titre';
-        const imgSrc = card.querySelector('img')?.src || ''; // Récupère l’image de la carte
+        const imgSrc = card.querySelector('img')?.src || '';
 
         const li = document.createElement('li');
         li.innerHTML = `
@@ -160,25 +142,24 @@ const showSuggestions = (searchTerm) => {
             <span>${title}</span>
         `;
         li.addEventListener('click', () => {
-            scrollToCard(card); // Scrolle vers la carte quand on clique sur la suggestion
-            suggestionsList.classList.remove('show'); // Cache la liste après clic
-            searchBar.value = ''; // Vide la barre de recherche après clic
+            scrollToCard(card);
+            suggestionsList.classList.remove('show');
+            searchBar.value = '';
         });
 
         suggestionsList.appendChild(li);
     });
 
-    // Affiche la liste
     suggestionsList.classList.add('show');
 };
 
-// Recherche en temps réel (à chaque saisie)
+// Recherche en temps réel
 searchBar.addEventListener('input', () => {
     const searchTerm = searchBar.value.toLowerCase();
     showSuggestions(searchTerm);
 });
 
-// Recherche avec le bouton (scrolle vers le premier résultat)
+// Recherche avec le bouton
 searchButton.addEventListener('click', () => {
     const searchTerm = searchBar.value.toLowerCase();
     const firstMatch = Array.from(siteCards).find(card => {
@@ -190,39 +171,38 @@ searchButton.addEventListener('click', () => {
     if (firstMatch) {
         scrollToCard(firstMatch);
         suggestionsList.classList.remove('show');
-        searchBar.value = ''; // Vide la barre de recherche après clic
+        searchBar.value = '';
     } else {
         alert('Aucun résultat trouvé pour "' + searchTerm + '".');
     }
 });
 
 // Gestion de la navigation dans les suggestions avec les flèches
-let selectedIndex = -1; // Index de la suggestion actuellement sélectionnée (-1 = aucune)
+let selectedIndex = -1;
 
 searchBar.addEventListener('keydown', (e) => {
     const suggestions = suggestionsList.querySelectorAll('li');
 
-    if (suggestions.length === 0) return; // S'il n'y a pas de suggestions, on ne fait rien
+    if (suggestions.length === 0) return;
 
     if (e.key === 'ArrowDown') {
-        e.preventDefault(); // Empêche le défilement de la page
-        selectedIndex = Math.min(selectedIndex + 1, suggestions.length - 1); // Incrémente l'index
+        e.preventDefault();
+        selectedIndex = Math.min(selectedIndex + 1, suggestions.length - 1);
         updateSelectedSuggestion(suggestions);
         scrollSuggestionIntoView(suggestions[selectedIndex]);
     } else if (e.key === 'ArrowUp') {
-        e.preventDefault(); // Empêche le défilement de la page
-        selectedIndex = Math.max(selectedIndex - 1, -1); // Décrémente l'index
+        e.preventDefault();
+        selectedIndex = Math.max(selectedIndex - 1, -1);
         updateSelectedSuggestion(suggestions);
         if (selectedIndex >= 0) {
             scrollSuggestionIntoView(suggestions[selectedIndex]);
         }
     } else if (e.key === 'Enter' && selectedIndex >= 0) {
-        e.preventDefault(); // Empêche la soumission par défaut
-        suggestions[selectedIndex].click(); // Simule un clic sur la suggestion sélectionnée
+        e.preventDefault();
+        suggestions[selectedIndex].click();
     }
 });
 
-// Fonction pour mettre à jour la suggestion sélectionnée
 function updateSelectedSuggestion(suggestions) {
     suggestions.forEach((suggestion, index) => {
         if (index === selectedIndex) {
@@ -233,14 +213,13 @@ function updateSelectedSuggestion(suggestions) {
     });
 }
 
-// Fonction pour faire défiler la suggestion dans la vue
 function scrollSuggestionIntoView(suggestion) {
     suggestion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-// Recherche avec la touche "Entrée" (scrolle vers le premier résultat si aucune suggestion n'est sélectionnée)
+// Recherche avec "Entrée"
 searchBar.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter' && selectedIndex === -1) { // Si aucune suggestion n'est sélectionnée
+    if (e.key === 'Enter' && selectedIndex === -1) {
         const searchTerm = searchBar.value.toLowerCase();
         const firstMatch = Array.from(siteCards).find(card => {
             const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
@@ -251,52 +230,24 @@ searchBar.addEventListener('keypress', (e) => {
         if (firstMatch) {
             scrollToCard(firstMatch);
             suggestionsList.classList.remove('show');
-            searchBar.value = ''; // Vide la barre de recherche après clic
+            searchBar.value = '';
         } else {
             alert('Aucun résultat trouvé pour "' + searchTerm + '".');
         }
     }
 });
 
-// Réinitialiser l'index de sélection quand les suggestions changent
+// Réinitialiser l'index de sélection
 searchBar.addEventListener('input', () => {
-    selectedIndex = -1; // Réinitialise l'index quand l'utilisateur tape
+    selectedIndex = -1;
 });
 
 // Cacher la liste si on clique ailleurs
 document.addEventListener('click', (e) => {
     if (!searchBar.contains(e.target) && !suggestionsList.contains(e.target)) {
         suggestionsList.classList.remove('show');
-        selectedIndex = -1; // Réinitialise l'index quand la liste se ferme
+        selectedIndex = -1;
     }
-});
-
-// Gestion du menu hamburger
-const hamburger = document.querySelector('.hamburger');
-const nav = document.querySelector('nav');
-
-hamburger.addEventListener('click', () => {
-    nav.classList.toggle('active');
-});
-
-// Cacher la navigation si on clique ailleurs
-document.addEventListener('click', (e) => {
-    if (!hamburger.contains(e.target) && !nav.contains(e.target)) {
-        nav.classList.remove('active');
-    }
-});
-
-// Gestion des liens actifs
-const navLinks = document.querySelectorAll('nav ul li a');
-
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        nav.classList.remove('active');
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-    });
 });
 
 // Gestion du bouton "Retour en haut"
@@ -313,9 +264,4 @@ backToTopButton.addEventListener('click', () => {
         top: 0,
         behavior: 'smooth'
     });
-});
-
-// Gestion du bouton "Streaming"
-streamingButton.addEventListener('click', () => {
-    window.location.href = 'Streaming/streaming.html';
 });

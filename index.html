@@ -6,26 +6,27 @@
     <title>Jul's Portal</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="shortcut icon" href="images/logopage.png" />
+    <!-- Ajout de Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <header>
-        <a href="Streaming/streaming.html" class="streaming-button">🎥</a>
-        <a href="Timetable/timetable.html" class="timetable-button">📅</a>
-        <button class="hamburger" aria-label="Toggle navigation">☰</button>
-        <nav>
-            <ul>
-                <li><a href="#School">School</a></li>
-                <li><a href="#Professional">Professional</a></li>
-                <li><a href="#Eliya">Eliya</a></li>
-                <li><a href="#Streaming websites">Streaming websites</a></li>
-                <li><a href="#Social networks">Social networks</a></li>
-                <li><a href="#Gaming">Gaming</a></li>
-                <li><a href="#Others">Others</a></li>
-            </ul>
-        </nav>
+        <div class="logo">Jul's Portal</div>
+        <div class="nav-buttons">
+            <a href="Timetable/timetable.html" class="nav-button timetable-button">
+                <i class="fas fa-calendar-alt"></i> Calendrier
+            </a>
+            <a href="Streaming/streaming.html" class="nav-button streaming-button">
+                <i class="fas fa-video"></i> Streaming
+            </a>
+            <a href="Ranking/ranking.html" class="nav-button ranking-button">
+                <i class="fas fa-star"></i> Classement
+            </a>
+        </div>
         <div class="search-container">
-            <input type="text" id="search-bar" placeholder="Search..." autocomplete="off">
-            <button id="search-button"> <img src="images/search-bar-logo.png" alt="Search Logo">
+            <input type="text" id="search-bar" placeholder="Rechercher..." autocomplete="off">
+            <button id="search-button">
+                <img src="images/search-bar-logo.png" alt="Search Logo">
             </button>
             <ul id="search-suggestions" class="suggestions-list"></ul>
         </div>
@@ -602,7 +603,6 @@
 
 
 <button id="back-to-top" aria-label="Back to top">⇈</button>
-<a href="Ranking/ranking.html" id="ranking-button" aria-label="Ranking">⭐</a>
 
 <script src="script.js"></script>
 
@@ -610,6 +610,7 @@
     <p>© 2025 JulShelby, ChatGPT, others services used. All rights reserved.</p>
 </footer>
 
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93442542c88e6753',t:'MTc0NTMxNDY3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 
 </body>
 </html>
