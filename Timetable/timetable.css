@@ -163,18 +163,18 @@ body {
 }
 
 .mobile-timetable-table th, .mobile-timetable-table td {
-    padding: 12px; /* Augmenté pour plus d'espace */
+    padding: 12px;
     border: 1px solid #87CEEB;
     text-align: center;
     font-family: 'Pirata One', sans-serif;
     white-space: nowrap; /* Empêche le texte de se retourner */
-    font-size: 16px; /* Taille de police augmentée */
+    font-size: 16px;
 }
 
 .mobile-timetable-table th {
     background-color: #87CEEB; /* Fond bleu pour toute la ligne d'en-tête */
     color: #0a0a0a;
-    font-size: 18px; /* Taille de police augmentée */
+    font-size: 18px;
     position: sticky;
     left: 0;
     z-index: 1;
@@ -185,7 +185,7 @@ body {
     position: sticky;
     left: 0;
     z-index: 2;
-    min-width: 100px; /* Largeur augmentée pour la colonne "Time" */
+    min-width: 100px;
 }
 
 /* S'assurer que la cellule "Time" (première ligne, première colonne) reste bleue */
@@ -207,12 +207,12 @@ body {
 /* Media query pour tablettes et grands téléphones (768px et moins) */
 @media (max-width: 768px) {
     .time-toggle-button {
-        font-size: 14px; /* Taille augmentée */
-        padding: 3px 8px;
+        font-size: 16px; /* Taille encore augmentée */
+        padding: 4px 10px;
     }
 
     #time-zone-a-mobile, #time-zone-b-mobile {
-        font-size: 14px; /* Taille augmentée */
+        font-size: 16px; /* Taille encore augmentée */
     }
 
     .timetable-hero {
@@ -225,8 +225,8 @@ body {
     }
 
     .toggle-button {
-        font-size: 16px; /* Texte plus grand sur mobile */
-        padding: 10px 20px;
+        font-size: 18px; /* Texte encore plus grand sur mobile */
+        padding: 12px 24px;
     }
 
     /* Ajuster la hauteur pour couvrir tout le planning */
@@ -234,17 +234,37 @@ body {
         max-height: calc(100vh - 200px); /* Ajuster selon la hauteur de l'en-tête et des autres éléments */
         overflow-y: auto;
     }
+
+    .mobile-timetable-table th,
+    .mobile-timetable-table td {
+        padding: 14px; /* Augmenté pour plus d'espace */
+        font-size: 18px; /* Taille de police encore augmentée */
+    }
+
+    .mobile-timetable-table th {
+        font-size: 20px; /* Taille de police encore augmentée pour les en-têtes */
+    }
+
+    .mobile-timetable-table th:first-child,
+    .mobile-timetable-table td:first-child {
+        min-width: 120px; /* Largeur encore augmentée pour la colonne "Time" */
+    }
+
+    .mobile-timetable-table th:not(:first-child),
+    .mobile-timetable-table td:not(:first-child) {
+        min-width: 140px; /* Largeur encore augmentée pour chaque jour */
+    }
 }
 
 /* Media query pour petits téléphones (480px et moins) */
 @media (max-width: 480px) {
     .time-toggle-button {
-        font-size: 12px; /* Ajusté pour petits écrans */
-        padding: 2px 6px;
+        font-size: 14px; /* Ajusté pour petits écrans */
+        padding: 3px 8px;
     }
 
     #time-zone-a-mobile, #time-zone-b-mobile {
-        font-size: 12px; /* Ajusté pour petits écrans */
+        font-size: 14px; /* Ajusté pour petits écrans */
     }
 
     .timetable-hero {
@@ -252,23 +272,27 @@ body {
     }
 
     .toggle-button {
-        font-size: 14px; /* Ajusté pour petits écrans */
-        padding: 8px 16px;
+        font-size: 16px; /* Ajusté pour petits écrans */
+        padding: 10px 20px;
     }
 
     .mobile-timetable-table th,
     .mobile-timetable-table td {
-        padding: 10px; /* Légèrement réduit pour petits écrans */
-        font-size: 14px; /* Ajusté pour petits écrans */
+        padding: 12px; /* Légèrement réduit pour petits écrans */
+        font-size: 16px; /* Ajusté pour petits écrans */
+    }
+
+    .mobile-timetable-table th {
+        font-size: 18px; /* Ajusté pour petits écrans */
     }
 
     .mobile-timetable-table th:first-child,
     .mobile-timetable-table td:first-child {
-        min-width: 90px; /* Ajusté pour petits écrans */
+        min-width: 110px; /* Ajusté pour petits écrans */
     }
 
     .mobile-timetable-table th:not(:first-child),
     .mobile-timetable-table td:not(:first-child) {
-        min-width: 110px; /* Ajusté pour petits écrans */
+        min-width: 130px; /* Ajusté pour petits écrans */
     }
 }
