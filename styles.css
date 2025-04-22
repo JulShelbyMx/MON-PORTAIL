@@ -39,12 +39,10 @@ header {
     object-fit: contain;
 }
 
-.logo span {
-    font-size: 28px;
-    font-weight: bold;
-    color: #ffb300;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
-    font-family: 'Pirata One', sans-serif;
+.logo-text {
+    height: 40px; /* Ajuste la hauteur pour qu'elle corresponde à l'icône */
+    width: auto;
+    object-fit: contain;
 }
 
 /* Style des nouveaux boutons */
@@ -414,12 +412,12 @@ footer {
         padding: 10px 30px;
     }
 
-    .logo span {
-        font-size: 24px;
-    }
-
     .logo-icon {
         width: 35px;
+        height: 35px;
+    }
+
+    .logo-text {
         height: 35px;
     }
 
@@ -514,12 +512,12 @@ footer {
         padding: 8px 15px;
     }
 
-    .logo span {
-        font-size: 20px;
-    }
-
     .logo-icon {
         width: 30px;
+        height: 30px;
+    }
+
+    .logo-text {
         height: 30px;
     }
 
@@ -621,12 +619,12 @@ footer {
         padding: 6px 10px;
     }
 
-    .logo span {
-        font-size: 16px;
-    }
-
     .logo-icon {
         width: 25px;
+        height: 25px;
+    }
+
+    .logo-text {
         height: 25px;
     }
 
