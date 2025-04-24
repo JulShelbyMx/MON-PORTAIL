@@ -1326,7 +1326,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const seasonCard = document.createElement('div');
         seasonCard.className = 'season-card';
         seasonCard.innerHTML = `
-            <a href="season${index + 1}.html">
+            <a href="season${index}.html">
                 <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${season.name}">
                 <h3>${season.name}</h3>
             </a>
