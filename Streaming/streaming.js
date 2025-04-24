@@ -1297,8 +1297,6 @@ function generateStreamingLinks() {
     return seasons;
 }
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
     const seasons = generateStreamingLinks();
     const seasonList = document.getElementById('season-list');
@@ -1312,11 +1310,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const historyContent = document.getElementById('history-content');
     const hamburgerMenu = document.getElementById('hamburger-menu');
     const historyLogSidebar = document.getElementById('history-log-sidebar');
-    const closeSidebar = document.getElementById('close-sidebar');
 
-    // Check DOM elements
-    if (!seasonList || !historyContent || !userStatus || !hamburgerMenu || !historyLogSidebar || !closeSidebar) {
-        console.error('Missing DOM elements:', {
+    // Vérifier les éléments DOM
+    if (!seasonList || !historyContent || !userStatus || !hamburgerMenu || !historyLogSidebar) {
+        console.error('Éléments DOM manquants:', {
             seasonList, historyContent, userStatus, hamburgerMenu, historyLogSidebar, closeSidebar
         });
         return;
@@ -1326,7 +1323,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const seasonCard = document.createElement('div');
         seasonCard.className = 'season-card';
         seasonCard.innerHTML = `
-            <a href="season${index}.html">
+            <a href="season${index + 1}.html">
                 <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${season.name}">
                 <h3>${season.name}</h3>
             </a>
@@ -1436,52 +1433,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (typeof netlifyIdentity === 'undefined') {
-        console.error('Netlify Identity not loaded');
-        userStatus.textContent = 'Error: Netlify Identity not loaded';
+        console.error('Netlify Identity non chargé');
+        userStatus.textContent = 'Erreur : Netlify Identity non chargé';
         return;
     }
 
     function updateUI(user) {
         if (user) {
-            console.log('User logged in:', user.email, user.user_metadata);
-            userStatus.textContent = `Logged in: ${user.email}`;
+            console.log('Utilisateur connecté:', user.email, user.user_metadata);
+            userStatus.textContent = `Connecté : ${user.email}`;
             loginBtn.style.display = 'none';
             signupBtn.style.display = 'none';
             logoutBtn.style.display = 'inline-block';
             loadHistory(user, seasons);
             loadHistoryLog(user);
         } else {
-            console.log('No user logged in');
-            userStatus.textContent = 'Not logged in';
+            console.log('Aucun utilisateur connecté');
+            userStatus.textContent = 'Non connecté';
             loginBtn.style.display = 'inline-block';
             signupBtn.style.display = 'inline-block';
             logoutBtn.style.display = 'none';
-            historyContent.textContent = 'No history available at the moment.';
-            historyLogSidebar.innerHTML = '<p>Not logged in</p>';
+            historyContent.textContent = 'Aucun historique pour le moment.';
+            historyLogSidebar.innerHTML = '<p>Non connecté</p>';
         }
     }
 
     function loadHistory(user, seasons) {
         if (!user) {
-            historyContent.textContent = 'Not logged in';
+            historyContent.textContent = 'Non connecté';
             return;
         }
         const history = (user.user_metadata && user.user_metadata.history) || {};
-        console.log('History loaded:', history);
+        console.log('Historique chargé:', history);
         if (Object.keys(history).length === 0) {
-            historyContent.textContent = 'No episodes watched recently.';
+            historyContent.textContent = 'Aucun épisode regardé récemment.';
             return;
         }
 
         historyContent.innerHTML = '';
         Object.entries(history).forEach(([seasonName, episodeData]) => {
             if (!episodeData || !episodeData.episode) {
-                console.log('Invalid history data for:', seasonName);
+                console.log('Données d’historique invalides pour:', seasonName);
                 return;
             }
             const seasonIndex = seasons.findIndex(s => s.name === seasonName);
             if (seasonIndex === -1) {
-                console.log('Season not found in seasons:', seasonName);
+                console.log('Saison non trouvée dans seasons:', seasonName);
                 return;
             }
             const season = seasons[seasonIndex];
@@ -1491,7 +1488,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <a href="season${seasonIndex + 1}.html#episode${episodeData.episode}">
                     <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${seasonName}">
                     <div class="history-info">
-                        <h3>Last episode watched</h3>
+                        <h3>Dernier épisode vu</h3>
                         <p>${seasonName} - Episode ${episodeData.episode}</p>
                     </div>
                 </a>
@@ -1514,33 +1511,33 @@ document.addEventListener('DOMContentLoaded', () => {
                             history_log: user.user_metadata && user.user_metadata.history_log || []
                         }
                     }).then(() => {
-                        console.log(`History deleted for ${seasonName}`);
+                        console.log(`Historique supprimé pour ${seasonName}`);
                         loadHistory(user, seasons);
                     }).catch(err => {
-                        console.error('Error deleting history:', err);
+                        console.error('Erreur suppression historique:', err);
                     });
                 }
             });
         });
 
         if (!historyContent.hasChildNodes()) {
-            historyContent.textContent = 'No valid history.';
+            historyContent.textContent = 'Aucun historique valide.';
         }
     }
 
     function loadHistoryLog(user) {
         if (!user) {
-            historyLogSidebar.innerHTML = '<p>Not logged in</p>';
+            historyLogSidebar.innerHTML = '<p>Non connecté</p>';
             return;
         }
         const historyLog = (user.user_metadata && user.user_metadata.history_log) || [];
-        console.log('History log loaded:', historyLog);
+        console.log('Historique log chargé:', historyLog);
         if (historyLog.length === 0) {
-            historyLogSidebar.innerHTML = '<p>No complete history available at the moment.</p>';
+            historyLogSidebar.innerHTML = '<p>Aucun historique complet pour le moment.</p>';
             return;
         }
 
-        historyLogSidebar.innerHTML = '<h2>Complete History</h2><button class="close-sidebar" id="close-sidebar">Close</button>';
+        historyLogSidebar.innerHTML = '<h2>Historique complet</h2><button class="close-sidebar" id="close-sidebar">Fermer</button>';
         const ul = document.createElement('ul');
         ul.className = 'history-log-list';
         historyLog.forEach(log => {
@@ -1551,44 +1548,44 @@ document.addEventListener('DOMContentLoaded', () => {
         historyLogSidebar.appendChild(ul);
     }
 
-    // Hamburger menu handling
+    // Gestion du menu hamburger
     hamburgerMenu.addEventListener('click', () => {
-        console.log('Click on hamburger-menu');
+        console.log('Clic sur hamburger-menu');
         hamburgerMenu.classList.toggle('active');
         historyLogSidebar.classList.toggle('open');
     });
 
     closeSidebar.addEventListener('click', () => {
-        console.log('Click on close-sidebar');
+        console.log('Clic sur close-sidebar');
         hamburgerMenu.classList.remove('active');
         historyLogSidebar.classList.remove('open');
     });
 
     netlifyIdentity.on('init', (user) => {
-        console.log('Init event:', user);
+        console.log('Événement init:', user);
         updateUI(user);
     });
 
     netlifyIdentity.on('login', (user) => {
-        console.log('Login event:', user);
+        console.log('Événement login:', user);
         updateUI(user);
         netlifyIdentity.close();
     });
 
     netlifyIdentity.on('logout', () => {
-        console.log('Logout event');
+        console.log('Événement logout');
         updateUI(null);
     });
 
     netlifyIdentity.on('signup', (user) => {
-        console.log('Signup event:', user);
+        console.log('Événement signup:', user);
         updateUI(user);
         netlifyIdentity.close();
     });
 
     const checkUser = () => {
         const user = netlifyIdentity.currentUser();
-        console.log('User check:', user);
+        console.log('Vérification utilisateur:', user);
         updateUI(user);
     };
 
