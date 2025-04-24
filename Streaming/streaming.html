@@ -171,6 +171,7 @@
             flex-direction: column;
             justify-content: space-between;
             margin: 10px auto;
+            z-index: 1000;
         }
         .hamburger-menu span {
             display: block;
@@ -221,11 +222,24 @@
             border-radius: 4px;
             font-size: 12px;
         }
+        .close-sidebar {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .close-sidebar:hover {
+            background: #cc0000;
+        }
     </style>
 </head>
 <body>
     <div class="history-log-sidebar" id="history-log-sidebar">
-        <p>No full logs yet.</p>
+        <button class="close-sidebar" id="close-sidebar">Close</button>
+        <p>No full history yet.</p>
     </div>
     <header>
         <div class="logo">One Piece Streaming</div>
@@ -241,14 +255,14 @@
         </div>
     </section>
     <div class="auth-container">
-        <p id="user-status">Not logged in yet</p>
-        <button id="login-btn" onclick="netlifyIdentity.open('login')">Log in</button>
-        <button id="signup-btn" onclick="netlifyIdentity.open('signup')">Sign up</button>
-        <button id="logout-btn" onclick="netlifyIdentity.logout()" style="display:none;">Log out</button>
+        <p id="user-status">Not logged in</p>
+        <button id="login-btn" onclick="netlifyIdentity.open('login')">Log In</button>
+        <button id="signup-btn" onclick="netlifyIdentity.open('signup')">Sign Up</button>
+        <button id="logout-btn" onclick="netlifyIdentity.logout()" style="display:none;">Log Out</button>
     </div>
     <div id="history">
-        <h2>Resume where you stopped</h2>
-        <p id="history-content">No logs yet.</p>
+        <h2>Resume Watching</h2>
+        <p id="history-content">No history yet.</p>
         <div class="hamburger-menu" id="hamburger-menu">
             <span></span>
             <span></span>
