@@ -164,16 +164,13 @@
         }
         /* Hamburger menu */
         .hamburger-menu {
-            position: fixed;
-            top: 20px;
-            left: 20px;
             cursor: pointer;
-            z-index: 1000;
             width: 30px;
             height: 24px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            margin: 10px auto;
         }
         .hamburger-menu span {
             display: block;
@@ -239,11 +236,6 @@
     </style>
 </head>
 <body>
-    <div class="hamburger-menu" id="hamburger-menu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
     <div class="history-log-sidebar" id="history-log-sidebar">
         <button class="close-sidebar" id="close-sidebar">Close</button>
         <p>No full logs yet.</p>
@@ -256,26 +248,28 @@
             <ul id="search-suggestions" class="suggestions-list"></ul>
         </div>
     </header>
-
     <section class="streaming-hero">
         <div class="streaming-hero-content">
             <a href="../index.html" class="return-button">BACK</a>
         </div>
     </section>
-
-    <div class="streaming-container">
-        <div class="season-list" id="season-list"></div>
-    </div>
-
     <div class="auth-container">
-        <p id="user-status">Not logged in</p>
+        <p id="user-status">Not logged in yet</p>
         <button id="login-btn" onclick="netlifyIdentity.open('login')">Log in</button>
-        <button id="signup-btn" onclick="netlifyIdentity.open('signup')">Signup</button>
+        <button id="signup-btn" onclick="netlifyIdentity.open('signup')">Sign up</button>
         <button id="logout-btn" onclick="netlifyIdentity.logout()" style="display:none;">Log out</button>
     </div>
     <div id="history">
         <h2>Resume</h2>
-        <p id="history-content">No logs yet</p>
+        <p id="history-content">No logs yet.</p>
+        <div class="hamburger-menu" id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+    <div class="streaming-container">
+        <div class="season-list" id="season-list"></div>
     </div>
     <script defer src="streaming.js"></script>
 </body>
