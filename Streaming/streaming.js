@@ -1310,12 +1310,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const historyContent = document.getElementById('history-content');
     const hamburgerMenu = document.getElementById('hamburger-menu');
     const historyLogSidebar = document.getElementById('history-log-sidebar');
-    const closeSidebar = document.getElementById('close-sidebar');
 
     // Check DOM elements
-    if (!seasonList || !historyContent || !userStatus || !hamburgerMenu || !historyLogSidebar || !closeSidebar) {
+    if (!seasonList || !historyContent || !userStatus || !hamburgerMenu || !historyLogSidebar) {
         console.error('Missing DOM elements:', {
-            seasonList, historyContent, userStatus, hamburgerMenu, historyLogSidebar, closeSidebar
+            seasonList, historyContent, userStatus, hamburgerMenu, historyLogSidebar
         });
         return;
     }
@@ -1547,6 +1546,19 @@ document.addEventListener('DOMContentLoaded', () => {
             ul.appendChild(li);
         });
         historyLogSidebar.appendChild(ul);
+
+        // Re-attach close sidebar handler after DOM update
+        const closeSidebar = document.getElementById('close-sidebar');
+        if (closeSidebar) {
+            console.log('Close sidebar button found after loadHistoryLog');
+            closeSidebar.addEventListener('click', () => {
+                console.log('Close sidebar clicked');
+                hamburgerMenu.classList.remove('active');
+                historyLogSidebar.classList.remove('open');
+            });
+        } else {
+            console.error('Close sidebar button not found after loadHistoryLog');
+        }
     }
 
     // Hamburger menu handler
@@ -1554,13 +1566,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Hamburger menu clicked');
         hamburgerMenu.classList.toggle('active');
         historyLogSidebar.classList.toggle('open');
-    });
-
-    // Close sidebar handler
-    closeSidebar.addEventListener('click', () => {
-        console.log('Close sidebar clicked');
-        hamburgerMenu.classList.remove('active');
-        historyLogSidebar.classList.remove('open');
     });
 
     netlifyIdentity.on('init', (user) => {
