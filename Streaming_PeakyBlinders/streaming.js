@@ -77,6 +77,14 @@ function generateStreamingLinks() {
                 { episode: 5, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=6&episode=5&color=e600e6" },
                 { episode: 6, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=6&episode=6&color=e600e6" }
             ]
+        },
+
+        {
+            name: "Films",
+            thumbnail: "../images/placeholder-pbs7.jpg",
+            episodes: [
+                { episode: "Film", videoUrl: "" },
+            ]
         }
     ];
     return seasons;
