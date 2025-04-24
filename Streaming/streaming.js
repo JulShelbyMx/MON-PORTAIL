@@ -3,6 +3,29 @@
 function generateStreamingLinks() {
     const seasons = [
         {
+            name: "Films",
+            thumbnail: "../images/placeholder-films.webp",
+            episodes: [
+                { episode: "Le Film", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736383' },
+                { episode: "L'aventure de l'ile de l'horloge", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736389' },
+                { episode: "Le royaime de Chopper, l'étrange ile des animaux", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736395' },
+                { episode: "L'aventure sans issue", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736399' },
+                { episode: "La malédiction de l'épée sacrée", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736405' },
+                { episode: "Le baron Omatsuri et l'ile aux secrets", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736513' },
+                { episode: "Le mécha géant du chateau Katakuri", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736520' },
+                { episode: "Episode d'Alabasta : les pirates et la princesse du désert", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736749' },
+                { episode: "Episode de Chopper : le miracle des cerisiers en hiver", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736754' },
+                { episode: "Strong World", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4689347' },
+                { episode: "3D : A la poursuite du chapeau de paille", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736710' },
+                { episode: "Z", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4736758' },
+                { episode: "Gold", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4737433' },
+                { episode: "Stampede", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5255136' },
+                { episode: "Red", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5071307' },
+
+            ]     
+        },
+        
+        {
             name: "East Blue Saga (Season 1)",
             thumbnail: "../images/placeholder-eb.jpg",
             episodes: [

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Whole Cake Saga - Jul's Streaming</title>
+    <title>Films - Jul's Streaming</title>
     <link rel="stylesheet" href="../styles.css">
     <link rel="shortcut icon" href="../images/logopage.png" />
     <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
@@ -25,6 +25,7 @@
             background-size: cover;
             background-color: #111; /* Fond de secours */
         }
+
         .return-button {
             padding: 15px 25px;
             background-color: #ffb300;
@@ -106,7 +107,7 @@
         <div class="video-player" id="video-player"></div>
 
         <div class="episode-details" id="episode-details">
-            <h2>Episode 1 - Whole Cake</h2>
+            <h2>Film 1</h2>
         </div>
     </div>
 
@@ -114,7 +115,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const seasons = generateStreamingLinks();
-            const seasonIndex = 9; 
+            const seasonIndex = 0; // Saison 0
             const season = seasons[seasonIndex];
             const episodeSelect = document.getElementById('episode-select');
             const videoPlayer = document.getElementById('video-player');
@@ -128,7 +129,7 @@
             season.episodes.forEach(episode => {
                 const option = document.createElement('option');
                 option.value = episode.episode;
-                option.textContent = `Episode ${episode.episode}`;
+                option.textContent = `Film : ${episode.episode}`;
                 episodeSelect.appendChild(option);
             });
 
