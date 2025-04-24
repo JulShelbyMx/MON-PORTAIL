@@ -1526,40 +1526,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function loadHistoryLog(user) {
+        console.log('Loading history log for user:', user ? user.email : 'none');
         if (!user) {
             historyLogSidebar.innerHTML = '<p>Not logged in</p>';
             return;
         }
         const historyLog = (user.user_metadata && user.user_metadata.history_log) || [];
         console.log('Full history log loaded:', historyLog);
+        
+        // Initialize sidebar structure if empty
+        if (!historyLogSidebar.querySelector('.history-log-list')) {
+            historyLogSidebar.innerHTML = `
+                <button class="close-sidebar-btn">Close</button>
+                <h2>Full History</h2>
+                <ul class="history-log-list"></ul>
+            `;
+        }
+
+        // Update history list only
+        const historyLogList = historyLogSidebar.querySelector('.history-log-list');
         if (historyLog.length === 0) {
-            historyLogSidebar.innerHTML = '<p>No full history yet.</p>';
+            historyLogList.innerHTML = '<li>No full history yet.</li>';
             return;
         }
 
-        historyLogSidebar.innerHTML = '<h2>Full History</h2><button class="close-sidebar" id="close-sidebar">Close</button>';
-        const ul = document.createElement('ul');
-        ul.className = 'history-log-list';
+        historyLogList.innerHTML = '';
         historyLog.forEach(log => {
             const li = document.createElement('li');
             li.textContent = `${log.season}, Episode ${log.episode}, ${log.timestamp}, IP: ${log.ip}`;
-            ul.appendChild(li);
+            historyLogList.appendChild(li);
         });
-        historyLogSidebar.appendChild(ul);
-
-        // Re-attach close sidebar handler after DOM update
-        const closeSidebar = document.getElementById('close-sidebar');
-        if (closeSidebar) {
-            console.log('Close sidebar button found after loadHistoryLog');
-            closeSidebar.addEventListener('click', () => {
-                console.log('Close sidebar clicked');
-                hamburgerMenu.classList.remove('active');
-                historyLogSidebar.classList.remove('open');
-            });
-        } else {
-            console.error('Close sidebar button not found after loadHistoryLog');
-        }
     }
+
+    // Event delegation for close button
+    historyLogSidebar.addEventListener('click', (e) => {
+        if (e.target.classList.contains('close-sidebar-btn')) {
+            console.log('Close sidebar button clicked');
+            hamburgerMenu.classList.remove('active');
+            historyLogSidebar.classList.remove('open');
+        }
+    });
 
     // Hamburger menu handler
     hamburgerMenu.addEventListener('click', () => {
