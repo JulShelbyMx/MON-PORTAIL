@@ -1299,26 +1299,243 @@ function generateStreamingLinks() {
 
 
 
-   
- // Bloquer les pop-ups
-    window.open = function() {
-        console.log("Tentative de pop-up bloquée");
-        return null; // Empêche l'ouverture de nouvelles fenêtres
-    };
+document.addEventListener('DOMContentLoaded', () => {
+    const seasons = generateStreamingLinks();
+    const seasonList = document.getElementById('season-list');
+    const searchBar = document.getElementById('search-bar');
+    const searchButton = document.getElementById('search-button');
+    const suggestionsList = document.getElementById('search-suggestions');
+    const userStatus = document.getElementById('user-status');
+    const loginBtn = document.getElementById('login-btn');
+    const signupBtn = document.getElementById('signup-btn');
+    const logoutBtn = document.getElementById('logout-btn');
+    const historyContent = document.getElementById('history-content');
 
-    // Surcharger window.alert pour bloquer les alertes publicitaires
-    window.alert = function() {
-        console.log("Alerte bloquée");
-        return null;
-    };
+    // Générer les cartes des saisons
+    seasons.forEach((season, index) => {
+        const seasonCard = document.createElement('div');
+        seasonCard.className = 'season-card';
+        seasonCard.innerHTML = `
+            <a href="season${index}.html">
+                <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${season.name}">
+                <h3>${season.name}</h3>
+            </a>
+        `;
+        seasonList.appendChild(seasonCard);
+    });
 
-    // Observer les iframes pour détecter des changements suspects
-    document.addEventListener('DOMContentLoaded', () => {
-        const iframes = document.getElementsByTagName('iframe');
-        for (let iframe of iframes) {
-            iframe.addEventListener('load', () => {
-                // On ne peut pas accéder au contenu directement, mais on peut limiter les interactions
-                iframe.style.pointerEvents = 'auto'; // Permet de cliquer dans l’iframe, mais pas hors
+    // Fonction pour afficher les suggestions avec images
+    function showSuggestions(query) {
+        suggestionsList.innerHTML = '';
+        if (!query) {
+            suggestionsList.style.display = 'none';
+            return;
+        }
+
+        const filteredSeasons = seasons.filter(season =>
+            season.name.toLowerCase().includes(query.toLowerCase())
+        );
+
+        if (filteredSeasons.length === 0) {
+            suggestionsList.style.display = 'none';
+            return;
+        }
+
+        filteredSeasons.forEach((season, index) => {
+            const li = document.createElement('li');
+            li.innerHTML = `
+                <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${season.name}">
+                <span>${season.name}</span>
+            `;
+            li.dataset.index = seasons.indexOf(season);
+            li.addEventListener('click', () => {
+                scrollToCard(season.name);
+                suggestionsList.style.display = 'none';
+                searchBar.value = season.name;
             });
+            suggestionsList.appendChild(li);
+        });
+
+        suggestionsList.style.display = 'block';
+    }
+
+    // Fonction pour scroller vers une carte
+    function scrollToCard(seasonName) {
+        const seasonCard = Array.from(document.querySelectorAll('.season-card')).find(card =>
+            card.querySelector('h3').textContent.toLowerCase() === seasonName.toLowerCase()
+        );
+        if (seasonCard) {
+            seasonCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            seasonCard.classList.add('highlight');
+            setTimeout(() => seasonCard.classList.remove('highlight'), 2000);
+        }
+    }
+
+    // Style pour surligner temporairement la carte trouvée
+    const style = document.createElement('style');
+    style.textContent = `
+        .season-card.highlight {
+            box-shadow: 0 0 20px #ffb300;
+            transform: scale(1.1);
+            transition: all 0.3s ease;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Événement pour la saisie dans la barre de recherche
+    let activeSuggestion = -1;
+    searchBar.addEventListener('input', (e) => {
+        activeSuggestion = -1;
+        showSuggestions(e.target.value);
+    });
+
+    // Événement pour le clic sur le bouton de recherche
+    searchButton.addEventListener('click', () => {
+        const query = searchBar.value.trim();
+        if (query) {
+            scrollToCard(query);
+            suggestionsList.style.display = 'none';
         }
     });
+
+    // Navigation au clavier
+    searchBar.addEventListener('keydown', (e) => {
+        const suggestions = suggestionsList.querySelectorAll('li');
+        if (suggestions.length === 0) return;
+
+        if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            activeSuggestion = Math.min(activeSuggestion + 1, suggestions.length - 1);
+            updateActiveSuggestion(suggestions);
+        } else if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            activeSuggestion = Math.max(activeSuggestion - 1, -1);
+            updateActiveSuggestion(suggestions);
+        } else if (e.key === 'Enter') {
+            e.preventDefault();
+            if (activeSuggestion >= 0) {
+                suggestions[activeSuggestion].click();
+            } else {
+                scrollToCard(searchBar.value.trim());
+                suggestionsList.style.display = 'none';
+            }
+        }
+    });
+
+    function updateActiveSuggestion(suggestions) {
+        suggestions.forEach((suggestion, index) => {
+            suggestion.classList.toggle('active', index === activeSuggestion);
+        });
+        if (activeSuggestion >= 0) {
+            suggestions[activeSuggestion].scrollIntoView({ block: 'nearest' });
+            searchBar.value = suggestions[activeSuggestion].querySelector('span').textContent;
+        }
+    }
+
+    // Cacher les suggestions quand on clique ailleurs
+    document.addEventListener('click', (e) => {
+        if (!searchBar.contains(e.target) && !suggestionsList.contains(e.target)) {
+            suggestionsList.style.display = 'none';
+        }
+    });
+
+    // Netlify Identity
+    if (typeof netlifyIdentity === 'undefined') {
+        console.error('Netlify Identity non chargé');
+        userStatus.textContent = 'Erreur : Netlify Identity non chargé';
+        return;
+    }
+
+    // Mettre à jour l’interface utilisateur
+    function updateUI(user) {
+        if (user) {
+            console.log('Utilisateur connecté:', user.email, user.user_metadata);
+            userStatus.textContent = `Connecté : ${user.email}`;
+            loginBtn.style.display = 'none';
+            signupBtn.style.display = 'none';
+            logoutBtn.style.display = 'inline-block';
+            loadHistory(user, seasons);
+        } else {
+            console.log('Aucun utilisateur connecté');
+            userStatus.textContent = 'Non connecté';
+            loginBtn.style.display = 'inline-block';
+            signupBtn.style.display = 'inline-block';
+            logoutBtn.style.display = 'none';
+            historyContent.textContent = 'Aucun historique pour le moment.';
+        }
+    }
+
+    // Charger l'historique
+    function loadHistory(user, seasons) {
+        if (!user) {
+            historyContent.textContent = 'No logged in';
+            return;
+        }
+        const history = user.user_metadata && user.user_metadata.history ? user.user_metadata.history : {};
+        console.log('Logs loaded:', history);
+
+        if (Object.keys(history).length === 0) {
+            historyContent.textContent = 'No episode watched.';
+            return;
+        }
+
+        historyContent.innerHTML = ''; // Vider le contenu
+        Object.entries(history).forEach(([seasonName, episodeData]) => {
+            const seasonIndex = seasons.findIndex(s => s.name === seasonName);
+            if (seasonIndex === -1) {
+                console.log('Saison non trouvée dans seasons:', seasonName);
+                return;
+            }
+            const season = seasons[seasonIndex];
+            const card = document.createElement('div');
+            card.className = 'history-card';
+            card.innerHTML = `
+                <a href="season${seasonIndex + 1}.html#episode${episodeData.episode}">
+                    <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${seasonName}">
+                    <div class="history-info">
+                        <h3>Dernier épisode vu</h3>
+                        <p>${seasonName} - Episode ${episodeData.episode}</p>
+                    </div>
+                </a>
+            `;
+            historyContent.appendChild(card);
+        });
+    }
+
+    // Gérer l’état initial
+    netlifyIdentity.on('init', (user) => {
+        console.log('Événement init:', user);
+        updateUI(user);
+    });
+
+    // Gérer la connexion
+    netlifyIdentity.on('login', (user) => {
+        console.log('Événement login:', user);
+        updateUI(user);
+        netlifyIdentity.close();
+    });
+
+    // Gérer la déconnexion
+    netlifyIdentity.on('logout', () => {
+        console.log('Événement logout');
+        updateUI(null);
+    });
+
+    // Gérer l’inscription
+    netlifyIdentity.on('signup', (user) => {
+        console.log('Événement signup:', user);
+        updateUI(user);
+        netlifyIdentity.close();
+    });
+
+    // Vérifier l’état en continu
+    const checkUser = () => {
+        const user = netlifyIdentity.currentUser();
+        console.log('Vérification utilisateur:', user);
+        updateUI(user);
+    };
+
+    // Vérifier immédiatement et à intervalles
+    checkUser();
+    setInterval(checkUser, 5000); // Vérifie toutes les 5 secondes
+});
