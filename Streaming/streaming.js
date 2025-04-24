@@ -1310,13 +1310,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const signupBtn = document.getElementById('signup-btn');
     const logoutBtn = document.getElementById('logout-btn');
     const historyContent = document.getElementById('history-content');
+    const hamburgerMenu = document.getElementById('hamburger-menu');
+    const historyLogSidebar = document.getElementById('history-log-sidebar');
+    const closeSidebar = document.getElementById('close-sidebar');
 
-    // Générer les cartes des saisons
+    if (!seasonList || !historyContent || !userStatus || !hamburgerMenu || !historyLogSidebar) {
+        console.error('Éléments DOM manquants:', { seasonList, historyContent, userStatus, hamburgerMenu, historyLogSidebar });
+        return;
+    }
+
     seasons.forEach((season, index) => {
         const seasonCard = document.createElement('div');
         seasonCard.className = 'season-card';
         seasonCard.innerHTML = `
-            <a href="season${index}.html">
+            <a href="season${index + 1}.html">
                 <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${season.name}">
                 <h3>${season.name}</h3>
             </a>
@@ -1324,23 +1331,17 @@ document.addEventListener('DOMContentLoaded', () => {
         seasonList.appendChild(seasonCard);
     });
 
-    // Fonction pour afficher les suggestions avec images
     function showSuggestions(query) {
         suggestionsList.innerHTML = '';
         if (!query) {
             suggestionsList.style.display = 'none';
             return;
         }
-
-        const filteredSeasons = seasons.filter(season =>
-            season.name.toLowerCase().includes(query.toLowerCase())
-        );
-
+        const filteredSeasons = seasons.filter(season => season.name.toLowerCase().includes(query.toLowerCase()));
         if (filteredSeasons.length === 0) {
             suggestionsList.style.display = 'none';
             return;
         }
-
         filteredSeasons.forEach((season, index) => {
             const li = document.createElement('li');
             li.innerHTML = `
@@ -1355,11 +1356,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             suggestionsList.appendChild(li);
         });
-
         suggestionsList.style.display = 'block';
     }
 
-    // Fonction pour scroller vers une carte
     function scrollToCard(seasonName) {
         const seasonCard = Array.from(document.querySelectorAll('.season-card')).find(card =>
             card.querySelector('h3').textContent.toLowerCase() === seasonName.toLowerCase()
@@ -1371,7 +1370,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Style pour surligner temporairement la carte trouvée
     const style = document.createElement('style');
     style.textContent = `
         .season-card.highlight {
@@ -1382,14 +1380,12 @@ document.addEventListener('DOMContentLoaded', () => {
     `;
     document.head.appendChild(style);
 
-    // Événement pour la saisie dans la barre de recherche
     let activeSuggestion = -1;
     searchBar.addEventListener('input', (e) => {
         activeSuggestion = -1;
         showSuggestions(e.target.value);
     });
 
-    // Événement pour le clic sur le bouton de recherche
     searchButton.addEventListener('click', () => {
         const query = searchBar.value.trim();
         if (query) {
@@ -1398,11 +1394,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Navigation au clavier
     searchBar.addEventListener('keydown', (e) => {
         const suggestions = suggestionsList.querySelectorAll('li');
         if (suggestions.length === 0) return;
-
         if (e.key === 'ArrowDown') {
             e.preventDefault();
             activeSuggestion = Math.min(activeSuggestion + 1, suggestions.length - 1);
@@ -1432,21 +1426,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Cacher les suggestions quand on clique ailleurs
     document.addEventListener('click', (e) => {
         if (!searchBar.contains(e.target) && !suggestionsList.contains(e.target)) {
             suggestionsList.style.display = 'none';
         }
     });
 
-    // Netlify Identity
     if (typeof netlifyIdentity === 'undefined') {
         console.error('Netlify Identity non chargé');
         userStatus.textContent = 'Erreur : Netlify Identity non chargé';
         return;
     }
 
-    // Mettre à jour l’interface utilisateur
     function updateUI(user) {
         if (user) {
             console.log('Utilisateur connecté:', user.email, user.user_metadata);
@@ -1455,6 +1446,7 @@ document.addEventListener('DOMContentLoaded', () => {
             signupBtn.style.display = 'none';
             logoutBtn.style.display = 'inline-block';
             loadHistory(user, seasons);
+            loadHistoryLog(user);
         } else {
             console.log('Aucun utilisateur connecté');
             userStatus.textContent = 'Non connecté';
@@ -1462,25 +1454,28 @@ document.addEventListener('DOMContentLoaded', () => {
             signupBtn.style.display = 'inline-block';
             logoutBtn.style.display = 'none';
             historyContent.textContent = 'Aucun historique pour le moment.';
+            historyLogSidebar.innerHTML = '<p>Non connecté</p>';
         }
     }
 
-    // Charger l'historique
     function loadHistory(user, seasons) {
         if (!user) {
-            historyContent.textContent = 'No logged in';
+            historyContent.textContent = 'Non connecté';
             return;
         }
-        const history = user.user_metadata && user.user_metadata.history ? user.user_metadata.history : {};
-        console.log('Logs loaded:', history);
-
+        const history = (user.user_metadata && user.user_metadata.history) || {};
+        console.log('Historique chargé:', history);
         if (Object.keys(history).length === 0) {
-            historyContent.textContent = 'No episode watched.';
+            historyContent.textContent = 'Aucun épisode regardé récemment.';
             return;
         }
 
-        historyContent.innerHTML = ''; // Vider le contenu
+        historyContent.innerHTML = '';
         Object.entries(history).forEach(([seasonName, episodeData]) => {
+            if (!episodeData || !episodeData.episode) {
+                console.log('Données d’historique invalides pour:', seasonName);
+                return;
+            }
             const seasonIndex = seasons.findIndex(s => s.name === seasonName);
             if (seasonIndex === -1) {
                 console.log('Saison non trouvée dans seasons:', seasonName);
@@ -1497,45 +1492,100 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p>${seasonName} - Episode ${episodeData.episode}</p>
                     </div>
                 </a>
+                <button class="delete-history" data-season="${seasonName}">✖</button>
             `;
             historyContent.appendChild(card);
         });
+
+        // Gestion des suppressions
+        document.querySelectorAll('.delete-history').forEach(button => {
+            button.addEventListener('click', () => {
+                const seasonName = button.dataset.season;
+                const user = netlifyIdentity.currentUser();
+                if (user) {
+                    const currentHistory = (user.user_metadata && user.user_metadata.history) || {};
+                    const updatedHistory = { ...currentHistory };
+                    delete updatedHistory[seasonName];
+                    user.update({
+                        data: {
+                            history: updatedHistory,
+                            history_log: user.user_metadata && user.user_metadata.history_log || []
+                        }
+                    }).then(() => {
+                        console.log(`Historique supprimé pour ${seasonName}`);
+                        loadHistory(user, seasons); // Rafraîchir
+                    }).catch(err => {
+                        console.error('Erreur suppression historique:', err);
+                    });
+                }
+            });
+        });
+
+        if (!historyContent.hasChildNodes()) {
+            historyContent.textContent = 'Aucun historique valide.';
+        }
     }
 
-    // Gérer l’état initial
+    function loadHistoryLog(user) {
+        if (!user) {
+            historyLogSidebar.innerHTML = '<p>Non connecté</p>';
+            return;
+        }
+        const historyLog = (user.user_metadata && user.user_metadata.history_log) || [];
+        console.log('Historique log chargé:', historyLog);
+        if (historyLog.length === 0) {
+            historyLogSidebar.innerHTML = '<p>Aucun historique complet pour le moment.</p>';
+            return;
+        }
+
+        historyLogSidebar.innerHTML = '<h2>Historique complet</h2>';
+        const ul = document.createElement('ul');
+        ul.className = 'history-log-list';
+        historyLog.forEach(log => {
+            const li = document.createElement('li');
+            li.textContent = `${log.season}, Episode ${log.episode}, ${log.timestamp}, IP: ${log.ip}`;
+            ul.appendChild(li);
+        });
+        historyLogSidebar.appendChild(ul);
+    }
+
+    // Gestion du menu hamburger
+    hamburgerMenu.addEventListener('click', () => {
+        historyLogSidebar.classList.toggle('open');
+    });
+
+    closeSidebar.addEventListener('click', () => {
+        historyLogSidebar.classList.remove('open');
+    });
+
     netlifyIdentity.on('init', (user) => {
         console.log('Événement init:', user);
         updateUI(user);
     });
 
-    // Gérer la connexion
     netlifyIdentity.on('login', (user) => {
         console.log('Événement login:', user);
         updateUI(user);
         netlifyIdentity.close();
     });
 
-    // Gérer la déconnexion
     netlifyIdentity.on('logout', () => {
         console.log('Événement logout');
         updateUI(null);
     });
 
-    // Gérer l’inscription
     netlifyIdentity.on('signup', (user) => {
         console.log('Événement signup:', user);
         updateUI(user);
         netlifyIdentity.close();
     });
 
-    // Vérifier l’état en continu
     const checkUser = () => {
         const user = netlifyIdentity.currentUser();
         console.log('Vérification utilisateur:', user);
         updateUI(user);
     };
 
-    // Vérifier immédiatement et à intervalles
     checkUser();
-    setInterval(checkUser, 5000); // Vérifie toutes les 5 secondes
+    setInterval(checkUser, 5000);
 });

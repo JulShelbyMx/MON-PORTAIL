@@ -81,12 +81,11 @@
             color: inherit;
             display: block;
         }
-
         .auth-container, #history {
             max-width: 400px;
             margin: 20px auto;
             padding: 20px;
-            background: grey;
+            background: #1a1a1a;
             border-radius: 8px;
             color: #fff;
             text-align: center;
@@ -99,10 +98,8 @@
             cursor: pointer;
         }
         button:hover {
-            background: #ffb300;
+            background: #e0a800;
         }
-
-        /* Style for history */
         .history-card {
             display: flex;
             align-items: center;
@@ -112,6 +109,8 @@
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
             transition: transform 0.3s, box-shadow 0.3s;
             cursor: pointer;
+            margin: 10px 0;
+            position: relative;
         }
         .history-card:hover {
             transform: scale(1.02);
@@ -143,10 +142,98 @@
             color: inherit;
             display: flex;
             align-items: center;
+            width: 100%;
+        }
+        .delete-history {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .delete-history:hover {
+            background: #cc0000;
+        }
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+        }
+        .hamburger-menu span {
+            display: block;
+            width: 30px;
+            height: 4px;
+            background: #ffb300;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+        .history-log-sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: #1a1a1a;
+            padding: 20px;
+            transition: left 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+        .history-log-sidebar.open {
+            left: 0;
+        }
+        .history-log-sidebar h2 {
+            color: #ffb300;
+            font-family: 'Pirata One', sans-serif;
+            margin-top: 0;
+        }
+        .history-log-list {
+            list-style: none;
+            padding: 0;
+        }
+        .history-log-list li {
+            background: #222;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .close-sidebar {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .close-sidebar:hover {
+            background: #cc0000;
         }
     </style>
 </head>
 <body>
+    <div class="hamburger-menu" id="hamburger-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <div class="history-log-sidebar" id="history-log-sidebar">
+        <button class="close-sidebar" id="close-sidebar">Close</button>
+        <p>No logs available.</p>
+    </div>
+
     <header>
         <div class="logo">One Piece Streaming</div>
         <div class="search-container">

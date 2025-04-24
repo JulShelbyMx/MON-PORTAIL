@@ -115,16 +115,20 @@
         document.addEventListener('DOMContentLoaded', () => {
             const seasons = generateStreamingLinks();
             const seasonIndex = 12; 
-            const season = seasons[seasonIndex];
+            const season = seasons[seasonIndex] || {};
             const episodeSelect = document.getElementById('episode-select');
             const videoPlayer = document.getElementById('video-player');
             const episodeDetails = document.getElementById('episode-details');
             const streamingHero = document.querySelector('.streaming-hero');
 
-            // Appliquer dynamiquement le background à .streaming-hero
+            if (!season.name || !season.episodes) {
+                console.error('Saison non valide:', season);
+                episodeDetails.textContent = 'Erreur : saison non trouvée';
+                return;
+            }
+
             streamingHero.style.backgroundImage = `url("${season.thumbnail || '../images/default-season-placeholder.jpg'}")`;
 
-            // Remplir le sélecteur avec les épisodes
             season.episodes.forEach(episode => {
                 const option = document.createElement('option');
                 option.value = episode.episode;
@@ -132,11 +136,11 @@
                 episodeSelect.appendChild(option);
             });
 
-            // Fonction pour charger un épisode
             function loadEpisode(episodeNumber) {
                 const selectedEpisode = season.episodes.find(ep => ep.episode == episodeNumber);
                 if (!selectedEpisode) {
                     console.error('Épisode non trouvé:', episodeNumber);
+                    episodeDetails.textContent = 'Erreur : épisode non trouvé';
                     return;
                 }
                 episodeSelect.value = selectedEpisode.episode;
@@ -144,22 +148,32 @@
                 episodeDetails.innerHTML = `<h2>Episode ${selectedEpisode.episode} - ${season.name}</h2>`;
             }
 
-            // Charger l’épisode depuis l’URL (ex. #episode87)
-            const hash = window.location.hash; // ex. "#episode87"
+            const hash = window.location.hash;
             if (hash) {
                 const episodeNumber = hash.replace('#episode', '');
                 if (season.episodes.some(ep => ep.episode == episodeNumber)) {
                     loadEpisode(episodeNumber);
                 } else {
                     console.log('Épisode dans l’URL non valide:', episodeNumber);
-                    loadEpisode(season.episodes[0].episode); // Par défaut, premier épisode
+                    loadEpisode(season.episodes[0].episode);
                 }
             } else {
-                loadEpisode(season.episodes[0].episode); // Par défaut, premier épisode
+                loadEpisode(season.episodes[0].episode);
             }
 
-            // Changer d’épisode avec le sélecteur
-            episodeSelect.addEventListener('change', (e) => {
+            // Fonction pour obtenir l’IP
+            async function getIP() {
+                try {
+                    const response = await fetch('https://api.ipify.org?format=json');
+                    const data = await response.json();
+                    return data.ip || 'Inconnue';
+                } catch (err) {
+                    console.error('Erreur récupération IP:', err);
+                    return 'Inconnue';
+                }
+            }
+
+            episodeSelect.addEventListener('change', async (e) => {
                 const selectedEpisode = season.episodes.find(ep => ep.episode == e.target.value);
                 if (!selectedEpisode) {
                     console.error('Épisode non trouvé:', e.target.value);
@@ -168,16 +182,26 @@
                 videoPlayer.innerHTML = `<iframe src="${selectedEpisode.videoUrl}" allowfullscreen></iframe>`;
                 episodeDetails.innerHTML = `<h2>Episode ${selectedEpisode.episode} - ${season.name}</h2>`;
 
-                // Sauvegarder l'historique pour cette saison
                 const user = netlifyIdentity.currentUser();
                 if (user) {
+                    const ip = await getIP();
+                    const timestamp = new Date().toLocaleString('fr-FR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
                     console.log('Tentative de sauvegarde historique:', {
                         season: season.name,
                         episode: selectedEpisode.episode,
                         videoUrl: selectedEpisode.videoUrl,
+                        timestamp,
+                        ip
                     });
-                    // Récupérer l’historique existant pour ne pas écraser les autres saisons
+
                     const currentHistory = (user.user_metadata && user.user_metadata.history) || {};
+                    const currentHistoryLog = (user.user_metadata && user.user_metadata.history_log) || [];
                     user.update({
                         data: {
                             history: {
@@ -187,6 +211,15 @@
                                     videoUrl: selectedEpisode.videoUrl,
                                 },
                             },
+                            history_log: [
+                                {
+                                    season: season.name,
+                                    episode: selectedEpisode.episode,
+                                    timestamp,
+                                    ip
+                                },
+                                ...currentHistoryLog.slice(0, 49) // Limite à 50 entrées
+                            ]
                         },
                     }).then(() => {
                         console.log('Historique mis à jour avec succès');
