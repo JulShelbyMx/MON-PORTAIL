@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="../styles.css">
     <link rel="shortcut icon" href="../images/logopage.png" />
     <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
     <style>
         body {
             background-color: #111;
@@ -163,21 +162,37 @@
         .delete-history:hover {
             background: #cc0000;
         }
+        /* Hamburger menu */
         .hamburger-menu {
             position: fixed;
             top: 20px;
             left: 20px;
             cursor: pointer;
             z-index: 1000;
+            width: 30px;
+            height: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .hamburger-menu span {
             display: block;
-            width: 30px;
+            width: 100%;
             height: 4px;
             background: #ffb300;
-            margin: 5px 0;
+            border-radius: 2px;
             transition: all 0.3s ease;
         }
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+        /* Sidebar */
         .history-log-sidebar {
             position: fixed;
             top: 0;
@@ -231,14 +246,13 @@
     </div>
     <div class="history-log-sidebar" id="history-log-sidebar">
         <button class="close-sidebar" id="close-sidebar">Close</button>
-        <p>No logs available.</p>
+        <p>No full logs yet.</p>
     </div>
-
     <header>
         <div class="logo">One Piece Streaming</div>
         <div class="search-container">
             <input type="text" id="search-bar" placeholder="Search a season..." autocomplete="off">
-            <button id="search-button"><img src="../images/search-bar-logo.png" alt="Search Icon"></button>
+            <button id="search-button"><img src="../images/search-bar-logo.png" alt="Search Logo"></button>
             <ul id="search-suggestions" class="suggestions-list"></ul>
         </div>
     </header>
@@ -249,22 +263,20 @@
         </div>
     </section>
 
-    <div class="auth-container">
-        <p id="user-status">Not logged in</p>
-        <button id="login-btn" onclick="netlifyIdentity.open('login')">Log in</button>
-        <button id="signup-btn" onclick="netlifyIdentity.open('signup')">Sign up</button>
-        <button id="logout-btn" onclick="netlifyIdentity.logout()" style="display:none;">Log out</button>
-    </div>
-    <div id="history">
-        <h2>Resume watching</h2>
-        <p id="history-content">No history yet.</p>
-    </div>
-
     <div class="streaming-container">
         <div class="season-list" id="season-list"></div>
     </div>
 
-    <script src="streaming.js"></script>
-
+    <div class="auth-container">
+        <p id="user-status">Not logged in</p>
+        <button id="login-btn" onclick="netlifyIdentity.open('login')">Log in</button>
+        <button id="signup-btn" onclick="netlifyIdentity.open('signup')">Signup</button>
+        <button id="logout-btn" onclick="netlifyIdentity.logout()" style="display:none;">Log out</button>
+    </div>
+    <div id="history">
+        <h2>Resume</h2>
+        <p id="history-content">No logs yet</p>
+    </div>
+    <script defer src="streaming.js"></script>
 </body>
 </html>

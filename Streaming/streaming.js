@@ -1314,8 +1314,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const historyLogSidebar = document.getElementById('history-log-sidebar');
     const closeSidebar = document.getElementById('close-sidebar');
 
-    if (!seasonList || !historyContent || !userStatus || !hamburgerMenu || !historyLogSidebar) {
-        console.error('Éléments DOM manquants:', { seasonList, historyContent, userStatus, hamburgerMenu, historyLogSidebar });
+    // Vérifier les éléments DOM
+    if (!seasonList || !historyContent || !userStatus || !hamburgerMenu || !historyLogSidebar || !closeSidebar) {
+        console.error('Éléments DOM manquants:', {
+            seasonList, historyContent, userStatus, hamburgerMenu, historyLogSidebar, closeSidebar
+        });
         return;
     }
 
@@ -1497,7 +1500,6 @@ document.addEventListener('DOMContentLoaded', () => {
             historyContent.appendChild(card);
         });
 
-        // Gestion des suppressions
         document.querySelectorAll('.delete-history').forEach(button => {
             button.addEventListener('click', () => {
                 const seasonName = button.dataset.season;
@@ -1513,7 +1515,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }).then(() => {
                         console.log(`Historique supprimé pour ${seasonName}`);
-                        loadHistory(user, seasons); // Rafraîchir
+                        loadHistory(user, seasons);
                     }).catch(err => {
                         console.error('Erreur suppression historique:', err);
                     });
@@ -1538,7 +1540,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        historyLogSidebar.innerHTML = '<h2>Historique complet</h2>';
+        historyLogSidebar.innerHTML = '<h2>Historique complet</h2><button class="close-sidebar" id="close-sidebar">Fermer</button>';
         const ul = document.createElement('ul');
         ul.className = 'history-log-list';
         historyLog.forEach(log => {
@@ -1551,10 +1553,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Gestion du menu hamburger
     hamburgerMenu.addEventListener('click', () => {
+        console.log('Clic sur hamburger-menu');
+        hamburgerMenu.classList.toggle('active');
         historyLogSidebar.classList.toggle('open');
     });
 
     closeSidebar.addEventListener('click', () => {
+        console.log('Clic sur close-sidebar');
+        hamburgerMenu.classList.remove('active');
         historyLogSidebar.classList.remove('open');
     });
 
