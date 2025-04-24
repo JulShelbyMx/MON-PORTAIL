@@ -198,7 +198,7 @@
             width: 300px;
             height: 100%;
             background: #1a1a1a;
-            padding: 20px;
+            padding: 80px 20px 20px; /* Added padding-top to lower content */
             transition: left 0.3s ease;
             z-index: 999;
             overflow-y: auto;
@@ -206,10 +206,17 @@
         .history-log-sidebar.open {
             left: 0;
         }
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
         .history-log-sidebar h2 {
             color: #ffb300;
             font-family: 'Pirata One', sans-serif;
-            margin-top: 0;
+            margin: 0;
+            font-size: 20px;
         }
         .history-log-list {
             list-style: none;
@@ -226,10 +233,10 @@
             background: #ff4444;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 5px 10px;
             border-radius: 4px;
             cursor: pointer;
-            margin-bottom: 10px;
+            font-size: 14px;
         }
         .close-sidebar-btn:hover {
             background: #cc0000;
@@ -238,7 +245,10 @@
 </head>
 <body>
     <div class="history-log-sidebar" id="history-log-sidebar">
-        <button class="close-sidebar-btn">Close</button>
+        <div class="sidebar-header">
+            <h2>Full History</h2>
+            <button class="close-sidebar-btn">Close</button>
+        </div>
         <p>No full history yet.</p>
     </div>
     <header>

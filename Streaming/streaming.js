@@ -1537,8 +1537,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize sidebar structure if empty
         if (!historyLogSidebar.querySelector('.history-log-list')) {
             historyLogSidebar.innerHTML = `
-                <button class="close-sidebar-btn">Close</button>
-                <h2>Full History</h2>
+                <div class="sidebar-header">
+                    <h2>Full History</h2>
+                    <button class="close-sidebar-btn">Close</button>
+                </div>
                 <ul class="history-log-list"></ul>
             `;
         }
