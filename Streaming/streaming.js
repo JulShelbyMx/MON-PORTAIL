@@ -1555,11 +1555,6 @@ document.addEventListener('DOMContentLoaded', () => {
         historyLogSidebar.classList.toggle('open');
     });
 
-    closeSidebar.addEventListener('click', () => {
-        console.log('Clic sur close-sidebar');
-        hamburgerMenu.classList.remove('active');
-        historyLogSidebar.classList.remove('open');
-    });
 
     netlifyIdentity.on('init', (user) => {
         console.log('Événement init:', user);
