@@ -21,10 +21,8 @@ function generateStreamingLinks() {
                 { episode: "Gold", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=4737433' },
                 { episode: "Stampede", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5255136' },
                 { episode: "Red", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5071307' },
-
             ]     
-        },
-        
+        },     
         {
             name: "East Blue Saga (Season 1)",
             thumbnail: "../images/placeholder-eb.jpg",
@@ -1485,7 +1483,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'history-card';
             card.innerHTML = `
-                <a href="season${seasonIndex + 1}.html#episode${episodeData.episode}">
+                <a href="season${seasonIndex}.html#episode${episodeData.episode}">
                     <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${seasonName}">
                     <div class="history-info">
                         <h3>Last Episode Watched</h3>
