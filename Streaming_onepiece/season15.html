@@ -140,9 +140,10 @@
         </div>
     </div>
 
-    <script type="module">
-        import { generateStreamingLinks } from './streaming.js';
+    <div id="history-log-sidebar"></div>
 
+    <script src="streaming.js"></script>
+    <script>
         // Bloquer les pop-ups
         window.open = function() {
             console.log("Tentative de pop-up bloquée");
@@ -185,7 +186,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const seasons = generateStreamingLinks();
+            const seasons = window.generateStreamingLinks();
             const seasonIndex = seasons.findIndex(s => s.name === "Scans");
             const season = seasons[seasonIndex] || {};
             const chapterSelect = document.getElementById('chapter-select');
