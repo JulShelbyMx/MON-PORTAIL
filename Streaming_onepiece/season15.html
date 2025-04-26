@@ -228,7 +228,7 @@
                 // Convertir les URLs Google Drive pour affichage via proxy
                 pages = selectedChapter.imageUrls.map(convertGoogleDriveUrl);
                 if (!pages || pages.length === 0) {
-                    mangaViewer.innerHTML = '<p class="error-message">Erreur : aucune image disponible pour ce chapitre</p>';
+                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://picsum.photos/800/1200?text=Image+non+disponible'; this.alt='Image non disponible'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                     console.error('Aucune image pour le chapitre:', chapterNumber);
                     return;
                 }
