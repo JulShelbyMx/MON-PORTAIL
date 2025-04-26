@@ -1287,21 +1287,6 @@ function generateStreamingLinks() {
 
     ]
 },
-
-{
-    name: "Scans",
-    thumbnail: "../images/placeholder-scans.png",
-    chapters: [
-        // Copie ici le contenu de season15.json (généré par le script Python)
-        // Exemple pour 10 chapitres (remplace par les 1147 vrais liens) :
-        { chapter: 1, cbzUrl: 'https://mega.nz/file/M9AXRbjY#ZZVVO_eNGldhA_wbUxmCFh-XBiX5CwZSdr6ZgNXdOKc' },
-        { chapter: 2, cbzUrl: '' },
-    
-    ]
-}
-
-
-
 ]
 
     return seasons;

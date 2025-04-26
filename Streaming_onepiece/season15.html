@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="../images/logopage.png" />
     <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://stuk.github.io/jszip-utils/dist/jszip-utils.min.js"></script>
     <style>
         body {
             background-color: #111;
@@ -135,8 +136,9 @@
         </div>
     </div>
 
-    <script src="streaming.js"></script>
-    <script>
+    <script type="module">
+        import { generateMangaChapters, getIP } from './season15.js';
+
         // Bloquer les pop-ups
         window.open = function() {
             console.log("Tentative de pop-up bloquée");
@@ -148,9 +150,11 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            const seasons = generateStreamingLinks();
-            const seasonIndex = 15; // Saison 15 (Manga)
-            const season = seasons[seasonIndex] || {};
+            const season = {
+                name: "Season 15 (Manga)",
+                thumbnail: "../images/manga-placeholder.jpg",
+                chapters: generateMangaChapters()
+            };
             const chapterSelect = document.getElementById('chapter-select');
             const mangaViewer = document.getElementById('manga-viewer');
             const chapterDetails = document.getElementById('chapter-details');
@@ -185,32 +189,36 @@
                 chapterSelect.value = selectedChapter.chapter;
 
                 try {
-                    // Utiliser un proxy CORS pour contourner les restrictions de Mega
-                    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-                    const fetchUrl = proxyUrl + selectedChapter.cbzUrl;
-                    console.log('Fetching:', fetchUrl);
-                    const response = await fetch(fetchUrl, {
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest'
-                        }
+                    console.log('Fetching:', selectedChapter.cbzUrl);
+                    // Utiliser JSZipUtils.getBinaryContent
+                    const data = await new Promise((resolve, reject) => {
+                        JSZipUtils.getBinaryContent(selectedChapter.cbzUrl, (err, data) => {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                resolve(data);
+                            }
+                        });
                     });
-                    console.log('Response:', response);
-                    if (!response.ok) throw new Error(`Erreur réseau: ${response.status} ${response.statusText}`);
-                    const arrayBuffer = await response.arrayBuffer();
-                    console.log('ArrayBuffer size:', arrayBuffer.byteLength);
-                    const zip = await JSZip.loadAsync(arrayBuffer);
+                    console.log('Data size:', data.byteLength);
+
+                    const zip = await JSZip.loadAsync(data);
                     console.log('Zip files:', Object.keys(zip.files));
 
                     pages = [];
                     for (let file in zip.files) {
-                        if (file.match(/\.(jpg|jpeg|png)$/i)) {
+                        if (zip.files[file].dir) {
+                            console.log('Skipping directory:', file);
+                            continue;
+                        }
+                        if (file.match(/\.(jpg|jpeg|png|webp)$/i)) {
                             console.log('Found image:', file);
                             const blob = await zip.file(file).async('blob');
                             pages.push(URL.createObjectURL(blob));
                         }
                     }
                     if (pages.length === 0) {
-                        throw new Error('Aucune image trouvée dans le CBZ');
+                        throw new Error('Aucune image trouvée dans le CBZ. Vérifiez le format.');
                     }
                     pages.sort();
                     currentPage = 0;
@@ -264,8 +272,47 @@
                         });
                     }
                 } catch (error) {
-                    mangaViewer.innerHTML = `<p>Erreur: Impossible de charger le chapitre. Vérifiez le lien Mega. Détails: ${error.message}</p>`;
-                    console.error('Erreur complète:', error);
+                    // Fallback avec fetch si JSZipUtils échoue
+                    try {
+                        console.log('Fallback fetch:', selectedChapter.cbzUrl);
+                        const response = await fetch(selectedChapter.cbzUrl, { mode: 'cors' });
+                        console.log('Response:', response);
+                        if (!response.ok) throw new Error(`Erreur réseau: ${response.status} ${response.statusText}`);
+                        const contentType = response.headers.get('content-type');
+                        console.log('Content-Type:', contentType);
+                        if (!contentType.includes('application/zip') && !contentType.includes('application/octet-stream')) {
+                            const text = await response.text();
+                            console.log('Response body (first 200 chars):', text.substring(0, 200));
+                            throw new Error(`Réponse non-ZIP: ${contentType}`);
+                        }
+                        const arrayBuffer = await response.arrayBuffer();
+                        console.log('ArrayBuffer size:', arrayBuffer.byteLength);
+                        const zip = await JSZip.loadAsync(arrayBuffer);
+                        console.log('Zip files:', Object.keys(zip.files));
+
+                        pages = [];
+                        for (let file in zip.files) {
+                            if (zip.files[file].dir) {
+                                console.log('Skipping directory:', file);
+                                continue;
+                            }
+                            if (file.match(/\.(jpg|jpeg|png|webp)$/i)) {
+                                console.log('Found image:', file);
+                                const blob = await zip.file(file).async('blob');
+                                pages.push(URL.createObjectURL(blob));
+                            }
+                        }
+                        if (pages.length === 0) {
+                            throw new Error('Aucune image trouvée dans le CBZ. Vérifiez le format.');
+                        }
+                        pages.sort();
+                        currentPage = 0;
+                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page">`;
+                        chapterDetails.innerHTML = `<h2>Chapter ${selectedChapter.chapter} - ${season.name}</h2>`;
+                    } catch (fallbackError) {
+                        mangaViewer.innerHTML = `<p>Erreur: Impossible de charger le chapitre. Vérifiez le lien Mega. Détails: ${fallbackError.message}</p>`;
+                        console.error('Erreur complète:', fallbackError);
+                    }
                 }
             }
 
@@ -306,24 +353,6 @@
                 currentChapter = season.chapters.findIndex(ch => ch.chapter == e.target.value);
                 loadChapter(e.target.value);
             });
-
-            // Fonction pour obtenir l’IP
-            async function getIP() {
-                try {
-                    const response = await fetch('https://api.ipify.org?format=json');
-                    const data = await response.json();
-                    return data.ip || 'Inconnue';
-                } catch (err) {
-                    console.error('Erreur récupération IP:', err);
-                    return 'Inconnue';
-                }
-            }
-
-            // Protection par mot de passe
-            const password = prompt("Entrez le mot de passe :");
-            if (password !== "admin") {
-                document.body.innerHTML = "<h1>Accès refusé</h1>";
-            }
         });
     </script>
 </body>
