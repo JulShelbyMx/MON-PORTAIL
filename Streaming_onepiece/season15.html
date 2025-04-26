@@ -140,8 +140,9 @@
         </div>
     </div>
 
-    <script src="streaming.js"></script>
-    <script>
+    <script type="module">
+        import { generateStreamingLinks } from './streaming.js';
+
         // Bloquer les pop-ups
         window.open = function() {
             console.log("Tentative de pop-up bloquée");
@@ -164,7 +165,7 @@
             }
         }
 
-        // Fonction pour convertir les URLs Google Drive en URLs d'affichage
+        // Fonction pour convertir les URLs Google Drive en URLs proxy
         function convertGoogleDriveUrl(originalUrl) {
             let fileId;
             const viewMatch = originalUrl.match(/\/file\/d\/([^\/]+)/);
@@ -177,7 +178,7 @@
             }
 
             if (fileId) {
-                return `https://drive.google.com/uc?export=view&id=${fileId}`;
+                return `/.netlify/functions/proxy-image?id=${fileId}`;
             }
             console.warn('URL Google Drive non valide:', originalUrl);
             return originalUrl;
@@ -185,7 +186,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const seasons = generateStreamingLinks();
-            const seasonIndex = seasons.findIndex(s => s.name === "Scans"); // Trouver la saison "Scans"
+            const seasonIndex = seasons.findIndex(s => s.name === "Scans");
             const season = seasons[seasonIndex] || {};
             const chapterSelect = document.getElementById('chapter-select');
             const mangaViewer = document.getElementById('manga-viewer');
@@ -223,7 +224,7 @@
                 }
                 chapterSelect.value = selectedChapter.chapter;
 
-                // Convertir les URLs Google Drive pour affichage
+                // Convertir les URLs Google Drive pour affichage via proxy
                 pages = selectedChapter.imageUrls.map(convertGoogleDriveUrl);
                 if (!pages || pages.length === 0) {
                     mangaViewer.innerHTML = '<p class="error-message">Erreur : aucune image disponible pour ce chapitre</p>';
