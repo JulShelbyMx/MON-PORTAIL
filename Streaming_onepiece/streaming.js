@@ -1283,7 +1283,8 @@ window.generateStreamingLinks = function() {
         { episode: 1124, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5870323'},
         { episode: 1125, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5878182'},
         { episode: 1126, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5886456'},
-        { episode: 1127, videoUrl: ''},
+        { episode: 1127, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5894331'},
+        { episode: 1128, videoUrl: ''},
 
     ]
 },
@@ -19918,6 +19919,32 @@ window.generateStreamingLinks = function() {
               "https://drive.google.com/file/d/1W7egv3VsXEXiQch-fPqT6DknTn5P2OzF/view"
             ]
           },
+
+          {
+            "chapter": 1148.0,
+            "imageUrls": [
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              
+              
+            ]
+          },
+
         ]
     }
 ];
