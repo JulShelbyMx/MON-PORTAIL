@@ -20,8 +20,8 @@ exports.handler = async (event) => {
         const buffer = await response.buffer();
         // Redimensionner et compresser l'image avec sharp
         const optimizedImage = await sharp(buffer)
-            .resize({ width: 800 }) // Redimensionner à 800px de large (ajuste selon tes besoins)
-            .jpeg({ quality: 80 }) // Compresser en JPEG avec qualité 80%
+            .resize({ width: 600 }) // Réduire à 600px de large (au lieu de 800px)
+            .jpeg({ quality: 90 }) // Augmenter la qualité à 90% (au lieu de 80%)
             .toBuffer();
 
         return {

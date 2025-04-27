@@ -64,7 +64,7 @@
         }
         .manga-viewer img {
             width: 100%;
-            max-width: 800px;
+            max-width: 600px; /* Réduit de 800px à 600px pour correspondre à la nouvelle taille */
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -276,11 +276,11 @@
                 const img = new Image();
                 img.src = pages[currentPage];
                 img.onload = () => {
-                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x1200?text=Image+non+disponible'; this.alt='Image non disponible'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+non+disponible'; this.alt='Image non disponible'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                     loadingSpinner.classList.remove('active');
                 };
                 img.onerror = () => {
-                    mangaViewer.innerHTML = `<img src="https://via.placeholder.com/800x1200?text=Image+non+disponible" alt="Image non disponible">`;
+                    mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+non+disponible" alt="Image non disponible">`;
                     console.error('Erreur chargement image:', pages[currentPage]);
                     loadingSpinner.classList.remove('active');
                 };
@@ -364,11 +364,11 @@
                     const img = new Image();
                     img.src = pages[currentPage];
                     img.onload = () => {
-                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x1200?text=Image+non+disponible'; this.alt='Image non disponible'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+non+disponible'; this.alt='Image non disponible'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                         loadingSpinner.classList.remove('active');
                     };
                     img.onerror = () => {
-                        mangaViewer.innerHTML = `<img src="https://via.placeholder.com/800x1200?text=Image+non+disponible" alt="Image non disponible">`;
+                        mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+non+disponible" alt="Image non disponible">`;
                         console.error('Erreur chargement image:', pages[currentPage]);
                         loadingSpinner.classList.remove('active');
                     };
@@ -389,11 +389,11 @@
                     const img = new Image();
                     img.src = pages[currentPage];
                     img.onload = () => {
-                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/800x1200?text=Image+non+disponible'; this.alt='Image non disponible'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+non+disponible'; this.alt='Image non disponible'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                         loadingSpinner.classList.remove('active');
                     };
                     img.onerror = () => {
-                        mangaViewer.innerHTML = `<img src="https://via.placeholder.com/800x1200?text=Image+non+disponible" alt="Image non disponible">`;
+                        mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+non+disponible" alt="Image non disponible">`;
                         console.error('Erreur chargement image:', pages[currentPage]);
                         loadingSpinner.classList.remove('active');
                     };
