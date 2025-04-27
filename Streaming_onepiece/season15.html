@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,6 +58,26 @@
             border: 2px solid #ffb300;
             border-radius: 8px;
             font-family: 'Pirata One', sans-serif;
+        }
+        .chapter-navigation-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .chapter-navigation-buttons button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            background-color: #ffb300;
+            color: #0a0a0a;
+            border: 2px solid #0a0a0a;
+            border-radius: 8px;
+            font-family: 'Pirata One', sans-serif;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .chapter-navigation-buttons button:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
         }
         .manga-viewer {
             text-align: center;
@@ -158,6 +178,11 @@
     <div class="streaming-container">
         <div class="chapter-selector">
             <select id="chapter-select"></select>
+        </div>
+
+        <div class="chapter-navigation-buttons">
+            <button id="prev-chapter">Previous Chapter</button>
+            <button id="next-chapter">Next Chapter</button>
         </div>
 
         <div class="loading-spinner" id="loading-spinner"></div>
@@ -441,7 +466,7 @@
 
                     // Réinitialiser le curseur quand la souris sort de l'image
                     img.addEventListener('mouseleave', () => {
-                        img.classList.remove('left-half', 'right-half');
+                        imgwark.classList.remove('left-half', 'right-half');
                     });
                 }
             }
@@ -460,7 +485,22 @@
                 loadChapter(season.chapters[0].chapter);
             }
 
-            // Navigation
+            // Navigation entre chapitres
+            document.getElementById('next-chapter').onclick = () => {
+                if (currentChapter < season.chapters.length - 1) {
+                    currentChapter++;
+                    loadChapter(season.chapters[currentChapter].chapter);
+                }
+            };
+
+            document.getElementById('prev-chapter').onclick = () => {
+                if (currentChapter > 0) {
+                    currentChapter--;
+                    loadChapter(season.chapters[currentChapter].chapter);
+                }
+            };
+
+            // Navigation entre pages
             document.getElementById('next').onclick = () => {
                 if (currentPage < pages.length - 1) {
                     currentPage++;
