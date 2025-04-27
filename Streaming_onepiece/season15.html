@@ -89,16 +89,12 @@
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            cursor: none; /* Par défaut, pas de curseur standard */
-        }
-        .manga-viewer img:hover {
-            cursor: none; /* Assure que le curseur reste personnalisé au survol */
         }
         .manga-viewer .left-half {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>'), auto;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="yellow" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>'), auto;
         }
         .manga-viewer .right-half {
-            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'), auto;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="yellow" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>'), auto;
         }
         .chapter-details {
             background: url('../images/categories-texture-parchemin.avif') no-repeat center center/cover;
@@ -466,7 +462,7 @@
 
                     // Réinitialiser le curseur quand la souris sort de l'image
                     img.addEventListener('mouseleave', () => {
-                        imgwark.classList.remove('left-half', 'right-half');
+                        img.classList.remove('left-half', 'right-half');
                     });
                 }
             }
