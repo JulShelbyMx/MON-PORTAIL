@@ -3,6 +3,5 @@
     "version": "1.0.0",
     "dependencies": {
       "node-fetch": "^2.6.1",
-      "sharp": "^0.33.3"
     }
   }

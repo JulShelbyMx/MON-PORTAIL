@@ -1,5 +1,5 @@
+// netlify/functions/proxy-image.js
 const fetch = require('node-fetch');
-const sharp = require('sharp');
 
 exports.handler = async (event) => {
     const { id } = event.queryStringParameters;
@@ -10,34 +10,37 @@ exports.handler = async (event) => {
         };
     }
 
-    const url = `https://drive.google.com/uc?export=download&id=${id}`;
+    const url = `https://drive.google.com/uc?export=download&id=${id}&confirm=1`;
     try {
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            headers: {
+                'Accept': 'image/*', // Demander l'image originale
+                'User-Agent': 'Mozilla/5.0', // Simuler un navigateur
+            },
+        });
         if (!response.ok) {
             throw new Error(`Erreur HTTP: ${response.status}`);
         }
 
         const buffer = await response.buffer();
-        // Redimensionner et compresser l'image avec sharp
-        const optimizedImage = await sharp(buffer)
-            .resize({ width: 600 }) // Réduire à 600px de large (au lieu de 800px)
-            .jpeg({ quality: 90 }) // Augmenter la qualité à 90% (au lieu de 80%)
-            .toBuffer();
+        const contentType = response.headers.get('content-type') || 'image/jpeg';
 
         return {
             statusCode: 200,
             headers: {
-                'Content-Type': 'image/jpeg',
-                'Cache-Control': 'public, max-age=31536000'
+                'Content-Type': contentType,
+                'Cache-Control': 'public, max-age=31536000',
+                'Access-Control-Allow-Origin': '*', // Pour CORS
+                'Accept-Ranges': 'bytes', // Supporte les requêtes partielles
             },
-            body: optimizedImage.toString('base64'),
-            isBase64Encoded: true
+            body: buffer.toString('base64'),
+            isBase64Encoded: true,
         };
     } catch (error) {
         console.error('Erreur proxy:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Erreur lors de la récupération de l’image' })
+            body: JSON.stringify({ error: 'Erreur lors de la récupération de l’image' }),
         };
     }
 };
