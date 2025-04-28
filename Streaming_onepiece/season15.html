@@ -271,14 +271,21 @@
             }
         }
 
-        // Fonction pour faire défiler jusqu'aux boutons "Previous Chapter" et "Next Chapter"
+        // Fonction pour faire défiler jusqu'au début de l'image
         function scrollToImage() {
-            const chapterNavButtons = document.querySelector('.chapter-navigation-buttons');
+            const mangaViewer = document.getElementById('manga-viewer');
             const header = document.querySelector('header');
             const streamingHero = document.querySelector('.streaming-hero');
 
-            if (!chapterNavButtons || !header || !streamingHero) {
-                console.error('Erreur : chapterNavButtons, header ou streamingHero non trouvé');
+            if (!mangaViewer || !header || !streamingHero) {
+                console.error('Erreur : mangaViewer, header ou streamingHero non trouvé');
+                return;
+            }
+
+            // Trouver l'élément image dans manga-viewer
+            const image = mangaViewer.querySelector('img');
+            if (!image) {
+                console.error('Erreur : image non trouvée dans manga-viewer');
                 return;
             }
 
@@ -286,12 +293,12 @@
             requestAnimationFrame(() => {
                 const headerHeight = header.offsetHeight;
                 const heroHeight = streamingHero.offsetHeight;
-                const navButtonsTop = chapterNavButtons.getBoundingClientRect().top + window.pageYOffset;
+                const imageTop = image.getBoundingClientRect().top + window.pageYOffset;
 
-                console.log('Défilement - Hauteur header:', headerHeight, 'Hauteur streaming-hero:', heroHeight, 'Position chapterNavButtonsTop:', navButtonsTop);
+                console.log('Défilement - Hauteur header:', headerHeight, 'Hauteur streaming-hero:', heroHeight, 'Position imageTop:', imageTop);
 
-                // Calculer la position pour que les boutons soient juste en dessous du header et streaming-hero
-                const scrollPosition = navButtonsTop - (headerHeight + heroHeight);
+                // Calculer la position pour que l'image soit juste en dessous du header et streaming-hero
+                const scrollPosition = imageTop - (headerHeight + heroHeight);
                 window.scrollTo({
                     top: scrollPosition,
                     behavior: 'smooth'
