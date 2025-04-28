@@ -98,8 +98,8 @@
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M10 6 L22 16 L10 26 L14 16 Z" fill="black" stroke="black" stroke-width="2"/></svg>'), auto;
         }
         .page-indicator {
-            display: inline-block;
-            text-align: left;
+            display: block;
+            text-align: center;
             padding: 5px 10px;
             font-family: 'Pirata One', sans-serif;
             font-size: 16px;
@@ -108,7 +108,8 @@
             border: 2px solid #ffb300;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            margin-bottom: 10px;
+            margin: 0 auto 10px auto;
+            width: fit-content;
         }
         .chapter-details {
             background: url('../images/categories-texture-parchemin.avif') no-repeat center center/cover;
@@ -264,22 +265,14 @@
             }
         }
 
-        // Fonction pour faire défiler jusqu'au début de l'image
+        // Fonction pour faire défiler jusqu'au page-indicator
         function scrollToImage() {
             const pageIndicator = document.getElementById('page-indicator');
-            const mangaViewer = document.getElementById('manga-viewer');
             const header = document.querySelector('header');
             const streamingHero = document.querySelector('.streaming-hero');
 
-            if (!pageIndicator || !mangaViewer || !header || !streamingHero) {
-                console.error('Erreur : pageIndicator, mangaViewer, header ou streamingHero non trouvé');
-                return;
-            }
-
-            // Trouver l'élément image dans manga-viewer
-            const image = mangaViewer.querySelector('img');
-            if (!image) {
-                console.error('Erreur : image non trouvée dans manga-viewer');
+            if (!pageIndicator || !header || !streamingHero) {
+                console.error('Erreur : pageIndicator, header ou streamingHero non trouvé');
                 return;
             }
 
@@ -287,14 +280,12 @@
             requestAnimationFrame(() => {
                 const headerHeight = header.offsetHeight;
                 const heroHeight = streamingHero.offsetHeight;
-                const pageIndicatorHeight = pageIndicator.offsetHeight;
-                const imageTop = image.getBoundingClientRect().top + window.pageYOffset;
+                const pageIndicatorTop = pageIndicator.getBoundingClientRect().top + window.pageYOffset;
 
-                console.log('Défilement - Hauteur header:', headerHeight, 'Hauteur streaming-hero:', heroHeight, 'Hauteur pageIndicator:', pageIndicatorHeight, 'Position imageTop:', imageTop);
+                console.log('Défilement - Hauteur header:', headerHeight, 'Hauteur streaming-hero:', heroHeight, 'Position pageIndicatorTop:', pageIndicatorTop);
 
-                // Calculer la position pour que l'image soit juste en dessous du header et streaming-hero,
-                // mais laisser de la place pour que page-indicator soit visible
-                const scrollPosition = imageTop - (headerHeight + heroHeight + pageIndicatorHeight + 10);
+                // Calculer la position pour que page-indicator soit juste en dessous du header et streaming-hero
+                const scrollPosition = pageIndicatorTop - (headerHeight + heroHeight) + 10; // +10 pour un petit décalage
                 window.scrollTo({
                     top: scrollPosition,
                     behavior: 'smooth'
