@@ -81,7 +81,7 @@
         }
         .manga-viewer {
             text-align: center;
-            position: relative;
+            position: relative; /* Nécessaire pour que position: absolute de page-indicator fonctionne */
             max-width: 600px; /* Aligné avec la largeur max de l'image */
             margin: 0 auto; /* Centré */
         }
@@ -99,9 +99,11 @@
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M10 6 L22 16 L10 26 L14 16 Z" fill="black" stroke="black" stroke-width="2"/></svg>'), auto;
         }
         .page-indicator {
+            position: absolute; /* Sortir du flux normal pour dissocier des autres éléments */
+            top: 0; /* Positionner en haut de manga-viewer */
+            left: 0; /* Aligner à gauche */
             display: inline-block;
             text-align: left;
-            margin-bottom: 10px;
             padding: 5px 10px;
             font-family: 'Pirata One', sans-serif;
             font-size: 16px;
@@ -110,6 +112,9 @@
             border: 2px solid #ffb300; /* Bordure jaune */
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Ombre légère */
+        }
+        .manga-viewer img {
+            margin-top: 40px; /* Ajouter une marge pour éviter que l'image ne chevauche page-indicator */
         }
         .chapter-details {
             background: url('../images/categories-texture-parchemin.avif') no-repeat center center/cover;
@@ -268,7 +273,6 @@
 
         // Fonction pour faire défiler jusqu'au début de l'indicateur de page, en tenant compte du header
         function scrollToImage() {
-            // Récupérer une référence fraîche à page-indicator après la mise à jour du DOM
             const pageIndicator = document.getElementById('page-indicator');
             const streamingHero = document.querySelector('.streaming-hero');
             if (pageIndicator && streamingHero) {
@@ -281,7 +285,7 @@
                         behavior: 'smooth'
                     });
                     console.log('Défilement effectué à:', pageIndicatorTop - heroHeight - 10);
-                }, 200); // Augmenter le délai à 200ms pour plus de stabilité
+                }, 300); // Augmenter le délai à 300ms pour plus de stabilité
             } else {
                 console.error('Erreur : pageIndicator ou streamingHero non trouvé');
             }
