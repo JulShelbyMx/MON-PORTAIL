@@ -112,6 +112,8 @@
             border: 2px solid #ffb300;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            /* Bordure temporaire pour débogage visuel */
+            border: 2px solid red;
         }
         .manga-viewer img {
             margin-top: 40px;
@@ -181,9 +183,10 @@
     </style>
 </head>
 <body>
-    <header>
+    <!-- Commenter le header pour tester son impact -->
+    <!-- <header>
         <div class="logo">One Piece Seasons</div>
-    </header>
+    </header> -->
 
     <section class="streaming-hero">
         <div class="streaming-hero-content">
@@ -275,21 +278,26 @@
         function scrollToImage() {
             const pageIndicator = document.getElementById('page-indicator');
             const streamingHero = document.querySelector('.streaming-hero');
-            if (pageIndicator && streamingHero) {
+            
+            if (!pageIndicator || !streamingHero) {
+                console.error('Erreur : pageIndicator ou streamingHero non trouvé');
+                return;
+            }
+
+            // Utiliser requestAnimationFrame pour s'assurer que le DOM est rendu
+            requestAnimationFrame(() => {
                 const heroHeight = streamingHero.offsetHeight;
                 const pageIndicatorTop = pageIndicator.getBoundingClientRect().top + window.pageYOffset;
-                console.log('Défilement - Hauteur hero:', heroHeight, 'Position pageIndicatorTop:', pageIndicatorTop);
-                setTimeout(() => {
-                    const scrollPosition = pageIndicatorTop - heroHeight - 10;
-                    window.scrollTo({
-                        top: scrollPosition,
-                        behavior: 'smooth'
-                    });
-                    console.log('Défilement effectué à:', scrollPosition);
-                }, 500); // Augmenter le délai à 500ms pour attendre le rendu complet
-            } else {
-                console.error('Erreur : pageIndicator ou streamingHero non trouvé');
-            }
+                console.log('Défilement - Hauteur streaming-hero:', heroHeight, 'Position pageIndicatorTop:', pageIndicatorTop);
+
+                // Calculer la position pour que page-indicator soit juste en dessous du streaming-hero
+                const scrollPosition = pageIndicatorTop - heroHeight;
+                window.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'smooth'
+                });
+                console.log('Défilement effectué à:', scrollPosition);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', () => {
