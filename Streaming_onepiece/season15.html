@@ -268,18 +268,22 @@
 
         // Fonction pour faire défiler jusqu'au début de l'indicateur de page, en tenant compte du header
         function scrollToImage() {
+            // Récupérer une référence fraîche à page-indicator après la mise à jour du DOM
             const pageIndicator = document.getElementById('page-indicator');
             const streamingHero = document.querySelector('.streaming-hero');
             if (pageIndicator && streamingHero) {
                 const heroHeight = streamingHero.offsetHeight; // Hauteur du header
                 const pageIndicatorTop = pageIndicator.getBoundingClientRect().top + window.pageYOffset; // Position absolue de l'indicateur
-                // Ajouter un léger délai pour s'assurer que le DOM est complètement rendu
+                console.log('Défilement - Hauteur hero:', heroHeight, 'Position pageIndicatorTop:', pageIndicatorTop);
                 setTimeout(() => {
                     window.scrollTo({
                         top: pageIndicatorTop - heroHeight - 10, // Décalage pour que l'indicateur soit juste sous le header, avec une petite marge de 10px
                         behavior: 'smooth'
                     });
-                }, 100); // Délai de 100ms pour attendre le rendu
+                    console.log('Défilement effectué à:', pageIndicatorTop - heroHeight - 10);
+                }, 200); // Augmenter le délai à 200ms pour plus de stabilité
+            } else {
+                console.error('Erreur : pageIndicator ou streamingHero non trouvé');
             }
         }
 
@@ -292,7 +296,6 @@
             const chapterDetails = document.getElementById('chapter-details');
             const loadingSpinner = document.getElementById('loading-spinner');
             const streamingHero = document.querySelector('.streaming-hero');
-            const pageIndicator = document.getElementById('page-indicator');
 
             // Vérification initiale
             if (!season.name || !season.chapters || season.chapters.length === 0) {
@@ -336,17 +339,14 @@
                 }
                 currentPage = 0;
 
-                // Mettre à jour l'indicateur de page
-                pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`;
-
                 // Afficher le spinner
                 loadingSpinner.classList.add('active');
-                mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + pageIndicator.textContent + '</div>';
+                mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>';
 
                 const img = new Image();
                 img.src = pages[currentPage];
                 img.onload = () => {
-                    mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + pageIndicator.textContent + '</div>' +
+                    mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>' +
                                             `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                     loadingSpinner.classList.remove('active');
                     attachImageClickListener(); // Ajouter le gestionnaire de clics après chargement
@@ -354,7 +354,7 @@
                     scrollToImage(); // Faire défiler jusqu'à l'indicateur
                 };
                 img.onerror = () => {
-                    mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + pageIndicator.textContent + '</div>' +
+                    mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>' +
                                             `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
                     console.error('Erreur chargement image:', pages[currentPage]);
                     loadingSpinner.classList.remove('active');
@@ -431,7 +431,7 @@
                             if (currentPage > 0) {
                                 currentPage--;
                                 loadingSpinner.classList.add('active');
-                                mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + pageIndicator.textContent + '</div>';
+                                mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>';
 
                                 const newImg = new Image();
                                 newImg.src = pages[currentPage];
@@ -439,7 +439,6 @@
                                     mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>' +
                                                             `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                                     loadingSpinner.classList.remove('active');
-                                    pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`; // Mettre à jour l'indicateur
                                     attachImageClickListener();
                                     attachCursorListener();
                                     scrollToImage(); // Faire défiler jusqu'à l'indicateur
@@ -449,7 +448,6 @@
                                                             `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
                                     console.error('Erreur chargement image:', pages[currentPage]);
                                     loadingSpinner.classList.remove('active');
-                                    pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`; // Mettre à jour l'indicateur
                                     scrollToImage(); // Faire défiler jusqu'à l'indicateur
                                 };
 
@@ -463,7 +461,7 @@
                             if (currentPage < pages.length - 1) {
                                 currentPage++;
                                 loadingSpinner.classList.add('active');
-                                mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + pageIndicator.textContent + '</div>';
+                                mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>';
 
                                 const newImg = new Image();
                                 newImg.src = pages[currentPage];
@@ -471,7 +469,6 @@
                                     mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>' +
                                                             `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                                     loadingSpinner.classList.remove('active');
-                                    pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`; // Mettre à jour l'indicateur
                                     attachImageClickListener();
                                     attachCursorListener();
                                     scrollToImage(); // Faire défiler jusqu'à l'indicateur
@@ -481,7 +478,6 @@
                                                             `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
                                     console.error('Erreur chargement image:', pages[currentPage]);
                                     loadingSpinner.classList.remove('active');
-                                    pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`; // Mettre à jour l'indicateur
                                     scrollToImage(); // Faire défiler jusqu'à l'indicateur
                                 };
 
@@ -555,7 +551,7 @@
                 if (currentPage < pages.length - 1) {
                     currentPage++;
                     loadingSpinner.classList.add('active');
-                    mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + pageIndicator.textContent + '</div>';
+                    mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>';
 
                     const img = new Image();
                     img.src = pages[currentPage];
@@ -563,7 +559,6 @@
                         mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>' +
                                                 `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                         loadingSpinner.classList.remove('active');
-                        pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`; // Mettre à jour l'indicateur
                         attachImageClickListener();
                         attachCursorListener();
                         scrollToImage(); // Faire défiler jusqu'à l'indicateur
@@ -573,7 +568,6 @@
                                                 `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
                         console.error('Erreur chargement image:', pages[currentPage]);
                         loadingSpinner.classList.remove('active');
-                        pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`; // Mettre à jour l'indicateur
                         scrollToImage(); // Faire défiler jusqu'à l'indicateur
                     };
 
@@ -588,7 +582,7 @@
                 if (currentPage > 0) {
                     currentPage--;
                     loadingSpinner.classList.add('active');
-                    mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + pageIndicator.textContent + '</div>';
+                    mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>';
 
                     const img = new Image();
                     img.src = pages[currentPage];
@@ -596,7 +590,6 @@
                         mangaViewer.innerHTML = '<div class="page-indicator" id="page-indicator">' + `Page ${currentPage + 1}/${pages.length}` + '</div>' +
                                                 `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                         loadingSpinner.classList.remove('active');
-                        pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`; // Mettre à jour l'indicateur
                         attachImageClickListener();
                         attachCursorListener();
                         scrollToImage(); // Faire défiler jusqu'à l'indicateur
@@ -606,7 +599,6 @@
                                                 `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
                         console.error('Erreur chargement image:', pages[currentPage]);
                         loadingSpinner.classList.remove('active');
-                        pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`; // Mettre à jour l'indicateur
                         scrollToImage(); // Faire défiler jusqu'à l'indicateur
                     };
 
