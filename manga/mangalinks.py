@@ -7,8 +7,8 @@ import json
 # Config
 parent_folder_name = "One Piece scans"  # Nom de ton dossier parent sur Drive
 output_file = r"manga\mangalinks.json"
-credentials_file = r"manga\credentials.json"
-token_file = r"manga\token.json"
+credentials_file = r"D:\HakuNeko Desktop\Manga\credentials.json"
+token_file = r"D:\HakuNeko Desktop\Manga\token.json"
 
 # Authentification Google Drive API
 SCOPES = ['https://www.googleapis.com/auth/drive.readonly']
