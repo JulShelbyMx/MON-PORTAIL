@@ -273,10 +273,13 @@
             if (pageIndicator && streamingHero) {
                 const heroHeight = streamingHero.offsetHeight; // Hauteur du header
                 const pageIndicatorTop = pageIndicator.getBoundingClientRect().top + window.pageYOffset; // Position absolue de l'indicateur
-                window.scrollTo({
-                    top: pageIndicatorTop - heroHeight, // Décalage pour que l'indicateur soit juste sous le header
-                    behavior: 'smooth'
-                });
+                // Ajouter un léger délai pour s'assurer que le DOM est complètement rendu
+                setTimeout(() => {
+                    window.scrollTo({
+                        top: pageIndicatorTop - heroHeight - 10, // Décalage pour que l'indicateur soit juste sous le header, avec une petite marge de 10px
+                        behavior: 'smooth'
+                    });
+                }, 100); // Délai de 100ms pour attendre le rendu
             }
         }
 
