@@ -112,8 +112,6 @@
             border: 2px solid #ffb300;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-            /* Bordure temporaire pour débogage visuel */
-            border: 2px solid red;
         }
         .manga-viewer img {
             margin-top: 40px;
@@ -183,10 +181,9 @@
     </style>
 </head>
 <body>
-    <!-- Commenter le header pour tester son impact -->
-    <!-- <header>
+    <header>
         <div class="logo">One Piece Seasons</div>
-    </header> -->
+    </header>
 
     <section class="streaming-hero">
         <div class="streaming-hero-content">
@@ -274,24 +271,27 @@
             }
         }
 
-        // Fonction pour faire défiler jusqu'au début de l'indicateur de page
+        // Fonction pour faire défiler jusqu'aux boutons "Previous Chapter" et "Next Chapter"
         function scrollToImage() {
-            const pageIndicator = document.getElementById('page-indicator');
+            const chapterNavButtons = document.querySelector('.chapter-navigation-buttons');
+            const header = document.querySelector('header');
             const streamingHero = document.querySelector('.streaming-hero');
-            
-            if (!pageIndicator || !streamingHero) {
-                console.error('Erreur : pageIndicator ou streamingHero non trouvé');
+
+            if (!chapterNavButtons || !header || !streamingHero) {
+                console.error('Erreur : chapterNavButtons, header ou streamingHero non trouvé');
                 return;
             }
 
             // Utiliser requestAnimationFrame pour s'assurer que le DOM est rendu
             requestAnimationFrame(() => {
+                const headerHeight = header.offsetHeight;
                 const heroHeight = streamingHero.offsetHeight;
-                const pageIndicatorTop = pageIndicator.getBoundingClientRect().top + window.pageYOffset;
-                console.log('Défilement - Hauteur streaming-hero:', heroHeight, 'Position pageIndicatorTop:', pageIndicatorTop);
+                const navButtonsTop = chapterNavButtons.getBoundingClientRect().top + window.pageYOffset;
 
-                // Calculer la position pour que page-indicator soit juste en dessous du streaming-hero
-                const scrollPosition = pageIndicatorTop - heroHeight;
+                console.log('Défilement - Hauteur header:', headerHeight, 'Hauteur streaming-hero:', heroHeight, 'Position chapterNavButtonsTop:', navButtonsTop);
+
+                // Calculer la position pour que les boutons soient juste en dessous du header et streaming-hero
+                const scrollPosition = navButtonsTop - (headerHeight + heroHeight);
                 window.scrollTo({
                     top: scrollPosition,
                     behavior: 'smooth'
