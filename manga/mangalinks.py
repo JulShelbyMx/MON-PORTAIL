@@ -193,6 +193,6 @@ js_code += "    }\n"
 js_code += "];"
 
 # Sauvegarder le code JavaScript dans un fichier
-with open(r"D:\manga\streaming_code.js", "w") as f:
+with open(r"C:\Users\Eleve\OneDrive - LYCEE FREDERIC OZANAM\Documents\MON PORTAIL\Streaming_onepiece\streaming.js", "w") as f:
     f.write(js_code)
 print(f"Code JavaScript généré et sauvegardé dans D:\manga\streaming_code.js")
