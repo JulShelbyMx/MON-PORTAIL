@@ -172,22 +172,3 @@ all_chapters.sort(key=lambda x: float(x['chapter']))
 with open(output_file, 'w') as f:
     json.dump(all_chapters, f, indent=2)
 print(f"Liens sauvegardés dans {output_file}")
-
-# Générer le code JavaScript pour streaming.js
-print("\nCode JavaScript pour streaming.js :")
-js_code = "const seasons = [\n"
-js_code += "    {\n"
-js_code += '        name: "Scans",\n'
-js_code += '        thumbnail: "../images/scans.jpg",\n'
-js_code += "        chapters: [\n"
-for chapter in all_chapters:
-    js_code += "            {\n"
-    js_code += f'                chapter: "{chapter["chapter"]}",\n'
-    js_code += "                imageUrls: [\n"
-    for url in chapter["imageUrls"]:
-        js_code += f'                    "{url}",\n'
-    js_code += "                ]\n"
-    js_code += "            },\n"
-js_code += "        ]\n"
-js_code += "    }\n"
-js_code += "];"
