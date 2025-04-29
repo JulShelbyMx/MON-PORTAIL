@@ -26,106 +26,100 @@
             padding: 0;
         }
 
-       /* Header et bouton Back */
-  /* Header et bouton Back */
-.ranking-hero {
-    background: url('../images/images-ranking/ranking-hero.jpg') no-repeat center top/cover;
-    height: 50vh;
-    min-height: 400px; /* Ensure enough height for layout */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* Primary method to push content to the bottom */
-    align-items: center; /* Center horizontally */
-    text-align: center;
-    position: relative;
-    z-index: 1000;
-}
+        /* Header et bouton Back */
+        .ranking-hero {
+            background: url('../images/images-ranking/ranking-hero.jpg') no-repeat center top/cover;
+            height: 50vh;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 1000;
+        }
 
-.ranking-hero-content {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.85);
-    padding: 2px;
-    border-radius: 20px;
-    border: 2px solid #ffb300;
-    position: relative; /* For the ::before pseudo-element */
-    width: fit-content; /* Prevent stretching */
-    z-index: 1001; /* Ensure the content is above other elements */
-    /* Fallback: Absolute positioning to force the text to the bottom */
-    position: absolute;
-    bottom: 20px; /* Place at the bottom with some spacing */
-    left: 50%;
-    transform: translateX(-50%); /* Center horizontally */
-    margin: 0; /* Remove margin since we’re using absolute positioning */
-}
+        .ranking-hero-content {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 2px;
+            border-radius: 20px;
+            border: 2px solid #ffb300;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: fit-content;
+            z-index: 1001;
+        }
 
-.return-button {
-    position: absolute;
-    top: 20px !important; /* Force le positionnement en haut */
-    left: 20px !important; /* Force le positionnement à gauche */
-    transform: none !important; /* Annule tout transform hérité ou appliqué */
-    padding: 12px 25px;
-    background-color: #ffb300;
-    color: #0a0a0a;
-    text-decoration: none;
-    border-radius: 10px;
-    font-family: 'Pirata One', sans-serif;
-    font-size: 20px;
-    border: 3px solid #0a0a0a;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    cursor: pointer;
-    z-index: 1003; /* Au-dessus de tout */
-}
+        .return-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 12px 25px;
+            background-color: #ffb300;
+            color: #0a0a0a;
+            text-decoration: none;
+            border-radius: 10px;
+            font-family: 'Pirata One', sans-serif;
+            font-size: 20px;
+            border: 3px solid #0a0a0a;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+            z-index: 1003;
+        }
 
-.return-button:hover {
-    background-color: #e0a800;
-    transform: scale(1.1) !important; /* Garde l'effet de scale au hover */
-}
+        .return-button:hover {
+            background-color: #e0a800;
+            transform: scale(1.1);
+        }
 
-.return-button:focus {
-    outline: none;
-    box-shadow: 0 0 5px 2px #ffb300; /* Visibilité du focus */
-}
+        .return-button:focus {
+            outline: none;
+            box-shadow: 0 0 5px 2px #ffb300;
+        }
 
-/* Add the yellow border above the text box */
-.ranking-hero::before {
-    content: '';
-    position: absolute;
-    top: calc(100% - 103px); /* Positionne la barre juste au-dessus de .ranking-hero-content */
-    left: 0;
-    right: 0;
-    margin-left: 5px;
-    margin-right: 5px;
-    width: auto;
-    height: 6px;
-    background: #ffb300;
-    box-shadow: 0 0 10px rgba(255, 179, 0, 0.8);
-    z-index: 1002;
-}
+        /* Bordures jaunes */
+        .ranking-hero::before {
+            content: '';
+            position: absolute;
+            top: calc(100% - 103px);
+            left: 0;
+            right: 0;
+            margin-left: 5px;
+            margin-right: 5px;
+            width: auto;
+            height: 6px;
+            background: #ffb300;
+            box-shadow: 0 0 10px rgba(255, 179, 0, 0.8);
+            z-index: 1002;
+        }
 
-.ranking-hero::after {
-    content: '';
-    position: absolute;
-    top: calc(100% - 10px); /* Positionne la barre juste en dessous de .ranking-hero-content */
-    left: 0;
-    right: 0;
-    margin-left: 5px;
-    margin-right: 5px;
-    width: auto;
-    height: 6px;
-    background: #ffb300;
-    box-shadow: 0 0 10px rgba(255, 179, 0, 0.8);
-    z-index: 1002;
-}
+        .ranking-hero::after {
+            content: '';
+            position: absolute;
+            top: calc(100% - 10px);
+            left: 0;
+            right: 0;
+            margin-left: 5px;
+            margin-right: 5px;
+            width: auto;
+            height: 6px;
+            background: #ffb300;
+            box-shadow: 0 0 10px rgba(255, 179, 0, 0.8);
+            z-index: 1002;
+        }
 
-
-.ranking-hero h2 {
-    font-family: 'Pirata One', sans-serif;
-    font-size: 30px;
-    color: #ffb300;
-    text-shadow: 3px 3px 8px #000;
-    margin: 0;
-    padding: 8px;
-}
+        .ranking-hero h2 {
+            font-family: 'Pirata One', sans-serif;
+            font-size: 30px;
+            color: #ffb300;
+            text-shadow: 3px 3px 8px #000;
+            margin: 0;
+            padding: 8px;
+        }
 
         /* Conteneur principal */
         .ranking-container {
@@ -308,10 +302,10 @@
             background-color: #666;
         }
         .status-fini, .status-fini-manga {
-            color: #00FFFF; /* Cyan clair pour le statut "Fini" */
+            color: #00FFFF;
         }
         .status-fini-dot, .status-fini-manga-dot {
-            background-color: #00FFFF; /* Dot en cyan clair */
+            background-color: #00FFFF;
         }
 
         /* Couleurs des tiers */
@@ -347,174 +341,173 @@
         }
 
         /* Media Query pour mobile (max-width: 768px) */
-       /* Media Query pour mobile (max-width: 768px) */
-       @media (max-width: 768px) {
-    .ranking-hero {
-        height: 15vh;
-        background-position: center 30%;
-        background-size: cover;
-    }
-    
-    .ranking-hero-content {
-        padding: 4px;
-        margin-bottom: 8px;
-    }
+        @media (max-width: 768px) {
+            .ranking-hero {
+                height: 15vh;
+                background-position: center 30%;
+                background-size: cover;
+            }
+            
+            .ranking-hero-content {
+                padding: 4px;
+                margin-bottom: 8px;
+            }
 
-    .ranking-hero h2 {
-        font-size: 18px;
-        padding: 6px;
-    }
+            .ranking-hero h2 {
+                font-size: 18px;
+                padding: 6px;
+            }
 
-    .return-button {
-        font-size: 16px;
-        padding: 8px 15px;
-        top: 15px;
-        left: 15px;
-    }
+            .return-button {
+                font-size: 16px;
+                padding: 8px 15px;
+                top: 15px;
+                left: 15px;
+            }
 
-    .ranking-hero::before {
-        margin-left: 10px;
-        margin-right: 10px;
-        height: 4px;
-        top: calc(100% - 95px);
-    }
+            .ranking-hero::before {
+                margin-left: 10px;
+                margin-right: 10px;
+                height: 4px;
+                top: calc(100% - 95px);
+            }
 
-    .ranking-hero::after {
-        margin-left: 10px;
-        margin-right: 10px;
-        height: 4px;
-        top: calc(100% - 5px);
-    }
+            .ranking-hero::after {
+                margin-left: 10px;
+                margin-right: 10px;
+                height: 4px;
+                top: calc(100% - 5px);
+            }
 
-    .ranking-container {
-        padding: 15px;
-        margin: 20px auto;
-        width: 90%;
-        max-width: 600px;
-    }
+            .ranking-container {
+                padding: 15px;
+                margin: 20px auto;
+                width: 90%;
+                max-width: 600px;
+            }
 
-    .tier h3 {
-        font-size: 26px;
-        padding: 10px;
-    }
+            .tier h3 {
+                font-size: 26px;
+                padding: 10px;
+            }
 
-    .tier li {
-        flex-direction: column;
-        align-items: flex-start;
-        font-size: 16px;
-        padding: 15px;
-    }
+            .tier li {
+                flex-direction: column;
+                align-items: flex-start;
+                font-size: 16px;
+                padding: 15px;
+            }
 
-    .tier li img {
-        width: 90px;
-        height: auto;
-        margin: 0 0 15px 0;
-        max-width: 100%;
-    }
+            .tier li img {
+                width: 90px;
+                height: auto;
+                margin: 0 0 15px 0;
+                max-width: 100%;
+            }
 
-    .tier li strong {
-        font-size: 18px;
-    }
+            .tier li strong {
+                font-size: 18px;
+            }
 
-    .tier li .status-anime, .tier li .status-manga {
-        font-size: 14px;
-        padding: 2px 6px;
-    }
+            .tier li .status-anime, .tier li .status-manga {
+                font-size: 14px;
+                padding: 2px 6px;
+            }
 
-    .tier li .status-anime::before, .tier li .status-manga::before {
-        font-size: 12px;
-    }
+            .tier li .status-anime::before, .tier li .status-manga::before {
+                font-size: 12px;
+            }
 
-    .tier li .author {
-        font-size: 12px;
-    }
+            .tier li .author {
+                font-size: 12px;
+            }
 
-    .tier ul ul {
-        margin-left: 15px;
-        font-size: 12px;
-    }
+            .tier ul ul {
+                margin-left: 15px;
+                font-size: 12px;
+            }
 
-    .tier ul ul ul {
-        margin-left: 10px;
-        font-size: 11px;
-    }
-}
+            .tier ul ul ul {
+                margin-left: 10px;
+                font-size: 11px;
+            }
+        }
 
-@media (max-width: 480px) {
-    .ranking-hero {
-        height: 15vh;
-        background-position: center 20%;
-        background-size: cover;
-    }
+        @media (max-width: 480px) {
+            .ranking-hero {
+                height: 15vh;
+                background-position: center 20%;
+                background-size: cover;
+            }
 
-    .ranking-hero-content {
-        padding: 2px;
-        margin-bottom: 5px;
-        border-radius: 15px;
-    }
+            .ranking-hero-content {
+                padding: 2px;
+                margin-bottom: 5px;
+                border-radius: 15px;
+            }
 
-    .ranking-hero h2 {
-        font-size: 16px;
-        padding: 4px;
-    }
+            .ranking-hero h2 {
+                font-size: 16px;
+                padding: 4px;
+            }
 
-    .return-button {
-        font-size: 14px;
-        padding: 6px 12px;
-        top: 10px;
-        left: 10px;
-        border-radius: 8px;
-    }
+            .return-button {
+                font-size: 14px;
+                padding: 6px 12px;
+                top: 10px;
+                left: 10px;
+                border-radius: 8px;
+            }
 
-    .ranking-hero::before {
-        margin-left: 5px;
-        margin-right: 5px;
-        height: 3px;
-        top: calc(100% - 92px);
-    }
+            .ranking-hero::before {
+                margin-left: 5px;
+                margin-right: 5px;
+                height: 3px;
+                top: calc(100% - 92px);
+            }
 
-    .ranking-hero::after {
-        margin-left: 5px;
-        margin-right: 5px;
-        height: 3px;
-        top: calc(100% - 3px);
-    }
+            .ranking-hero::after {
+                margin-left: 5px;
+                margin-right: 5px;
+                height: 3px;
+                top: calc(100% - 3px);
+            }
 
-    .tier h3 {
-        font-size: 22px;
-        padding: 8px;
-    }
+            .tier h3 {
+                font-size: 22px;
+                padding: 8px;
+            }
 
-    .tier li {
-        font-size: 14px;
-        padding: 12px;
-    }
+            .tier li {
+                font-size: 14px;
+                padding: 12px;
+            }
 
-    .tier li img {
-        width: 80px;
-    }
+            .tier li img {
+                width: 80px;
+            }
 
-    .tier li strong {
-        font-size: 16px;
-    }
+            .tier li strong {
+                font-size: 16px;
+            }
 
-    .tier li .status-anime, .tier li .status-manga {
-        font-size: 12px;
-    }
+            .tier li .status-anime, .tier li .status-manga {
+                font-size: 12px;
+            }
 
-    .tier li .author {
-        font-size: 11px;
-    }
+            .tier li .author {
+                font-size: 11px;
+            }
 
-    .tier ul ul {
-        margin-left: 10px;
-        font-size: 10px;
-    }
+            .tier ul ul {
+                margin-left: 10px;
+                font-size: 10px;
+            }
 
-    .tier ul ul ul {
-        font-size: 9px;
-    }
-}
+            .tier ul ul ul {
+                font-size: 9px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -545,7 +538,6 @@
                                     <strong>OAV Monsters</strong>
                                     <div class="author">Auteur : Eiichiro Oda</div>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
-                   
                                 </div>
                             </li>
                             <li>
@@ -553,53 +545,36 @@
                                     <strong>One Piece Log: Fish-man Island</strong>
                                     <div class="author">Par : Toei Animation</div>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
-
-                               </div>
+                                </div>
                             </li>
                             <li>
-                                <div
-
-                                    class="title-status">
+                                <div class="title-status">
                                     <strong>Wanted</strong>
                                     <div class="author">Auteur : Eiichiro Oda</div>
                                     <span class="status-a-voir status-manga"><span class="status-a-voir-dot status-dot"></span> À lire</span>
-
                                 </div>
                             </li>
                             <li>
-                                <div
-
-                                    class="title-status">
+                                <div class="title-status">
                                     <strong>One Piece Live Action</strong>
                                     <div class="author">Par : Eiichiro Oda / Netflix</div>
-                                   <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
-
+                                    <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                                 </div>
                             </li>
                             <li>
-                                <div
-
-                                    class="title-status">
+                                <div class="title-status">
                                     <strong>The One Piece</strong>
                                     <div class="author">Par : Wit Studio</div>
                                     <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir, annoncé mais pas de date?!</span>
-                      
-                           </div>
-                        </li>
-
-
-
-                        <li>
-        
-                            ...
-        
-                        </li>
+                                </div>
+                            </li>
+                            <li>
+                                ...
+                            </li>
                         </ul>
                     </div>
                 </li> 
-
                 <li>
- 
                     <img src="../images/images-ranking/dragon-ball.gif" alt="Dragon Ball">
                     <div class="content">
                         <div class="title-status">
@@ -644,15 +619,10 @@
                                     <div class="author">Par : Toei Animation</div>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                                 </div>
-                        </li>
-
-                        
-
-                        <li>
-        
-                            ...
-        
-                        </li>
+                            </li>
+                            <li>
+                                ...
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -686,18 +656,13 @@
                                     <div class="author">Auteurs : Masashi Kishimoto / Mikio Ikemoto</div>
                                     <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                                     <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour (tous les 20 du mois)</span>
-                                 </div>
+                                </div>
                             </li>
-    
-                            
-    
                             <li>
-            
                                 ...
-            
                             </li>
                         </ul>
-                    </li>
+                    </div>
                 </li>
                 <li>
                     <img src="../images/images-ranking/bleach.gif" alt="Bleach">
@@ -746,35 +711,20 @@
                                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> Pas de date?</span>
                                         </div>
                                     </li>
-            
-                                    
-            
                                     <li>
-                    
                                         ...
-                    
                                     </li>
                                 </ul>
                             </li>
-
-
-
                             <li>
-            
                                 ...
-            
                             </li>
                         </ul>
-                     </div>
-                        </li>
-
-                        
-
-                        <li>
-        
-                            ...
-        
-                        </li>
+                    </div>
+                </li>
+                <li>
+                    ...
+                </li>
             </ul>
         </div>
 
@@ -815,13 +765,8 @@
                         <div class="author">Auteur : Kentaro Miura🕊️ / Kouji Mori</div>
                     </div>
                 </li>
-
-                
-
                 <li>
-
                     ...
-
                 </li>
             </ul>
         </div>
@@ -831,7 +776,7 @@
             <h3>★ S</h3>
             <ul>
                 <li>
-                    <img src="../images/images-ranking/jojo.gif" alt="JoJo's Bizarre Adventure">
+                    <img src="../images/images-ranking/jojo.webp" alt="JoJo's Bizarre Adventure" class="interactive-img" data-alt-src="../images/images-ranking/jojo.gif" data-audio-id="dio-audio">
                     <div class="content">
                         <div class="title-status">
                             <strong>JOJO'S BIZARRE ADVENTURES</strong>
@@ -855,7 +800,7 @@
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/jojopart3.avif" alt="JoJo's Bizarre Adventure Part 3">
+                                <img src="../images/images-ranking/jojopart3.avif" alt="JoJo's Bizarre Adventure Part 3" class="interactive-img" data-alt-src="../images/images-ranking/jojopart3.gif" data-audio-id="jotaro-audio">
                                 <div class="title-status">
                                     <strong>Stardust Crusaders (Kujo Jotaro) - Part3</strong>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
@@ -881,7 +826,6 @@
                                     <strong>Stone Ocean (Kujo Jolyne) - Part6</strong>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                                 </div>
-
                             </li>
                             <li>
                                 <img src="../images/images-ranking/jojopart7.webp" alt="JoJo's Bizarre Adventure Part 7">
@@ -891,23 +835,14 @@
                                     <span class="status-en-cours status-manga"><span class="status-en-cours-manga-dot status-dot"></span>En cours</span>
                                 </div>
                             </li>
-                            
-    
                             <li>
-            
                                 ...
-            
                             </li>
                         </ul>
-                     </div>
+                    </div>
                 </li>
-
-                
-
                 <li>
-
                     ...
-
                 </li>
             </ul>
         </div>
@@ -992,13 +927,8 @@
                         <div class="author">Auteur : Gege Akutami</div>
                     </div>
                 </li>
-
-                
-
                 <li>
-
                     ...
-
                 </li>
             </ul>
         </div>
@@ -1116,13 +1046,8 @@
                         <div class="author">Auteur : Riichiro Inagaki / Boichi</div>
                     </div>
                 </li>
-
-                
-
                 <li>
-
                     ...
-
                 </li>
             </ul>
         </div>
@@ -1219,13 +1144,8 @@
                         <div class="author">Auteur : Miwa Ueda</div>
                     </div>
                 </li>
-
-                
-
                 <li>
-
                     ...
-
                 </li>
             </ul>
         </div>
@@ -1321,14 +1241,10 @@
                         <div class="author">Auteur : Rui Tsukiyo / Shiokonbu</div>
                     </div>
                 </li>
-
-                
-
                 <li>
-
                     ...
-
                 </li>
+           部分
             </ul>
         </div>
 
@@ -1455,25 +1371,20 @@
                         <div class="author">Auteur : Junko</div>
                     </div>
                 </li>
-                
                 <li>
-                <img src="../images/images-ranking/overflow.webp" alt="Overflow">
+                    <img src="../images/images-ranking/overflow.webp" alt="Overflow">
                     <div class="content">
                         <div class="title-status">
                             <strong>OVERFLOW</strong>
-                           <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Fini? Saison 2?</span>
-                           <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour, suite??</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Fini? Saison 2?</span>
+                            <span class="status-a-jour-manga status-manga"><spanifeng
+                            <span class="status-a-jour-manga-dot status-dot"></span> À jour, suite??
                         </div>
                         <div class="author">Auteur : Ishigura Rei</div>
                     </div>
                 </li>
-
-
-
                 <li>
-
                     ...
-
                 </li>
             </ul>
         </div>
@@ -1567,7 +1478,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>SUMMERTIME RENDERING</strong>
-                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Yasuki Tanaka</div>
                     </div>
@@ -1576,7 +1487,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>AO HARU RIDE</strong>
-                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Io Sakisaka</div>
                     </div>
@@ -1585,7 +1496,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>CLASSROOM OF THE ELITE</strong>
-                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Shōgo Kinugasa</div>
                     </div>
@@ -1594,7 +1505,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>FOOD WARS</strong>
-                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Yūto Tsukuda / Shun Saeki</div>
                     </div>
@@ -1603,7 +1514,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>MAHOU SHOUJO MADOKA MAGICA</strong>
-                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Gen Urobuchi</div>
                     </div>
@@ -1612,32 +1523,65 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>BLOOD-C</strong>
-                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Kotone Ranmaru</div>
-                   </div>
+                    </div>
                 </li>
                 <li>
-
                     <div class="content">
                         <div class="title-status">
                             <strong>Fruits Basket</strong>
-                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
                         </div>
                         <div class="author">Auteur : Natsuki Takaya</div>
                     </div>
                 </li>
-
-                
-
                 <li>
-
                     ...
-
                 </li>
             </ul>
         </div>
 
-    <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'92e3d4de3f8f9ae2',t:'MTc0NDMwNDc1Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
+        <!-- Éléments audio pour les sons -->
+        <audio id="dio-audio" src="../audio/dio.mp3"></audio>
+        <audio id="jotaro-audio" src="../audio/jotaro.mp3"></audio>
+
+        <!-- Script pour gérer les interactions -->
+        <script>
+            document.querySelectorAll('.interactive-img').forEach(img => {
+                const originalSrc = img.src;
+                const altSrc = img.getAttribute('data-alt-src');
+                const audioId = img.getAttribute('data-audio-id');
+                const audio = document.getElementById(audioId);
+
+                // Gestion du survol
+                img.addEventListener('mouseover', () => {
+                    img.src = altSrc;
+                    if (audio) {
+                        audio.currentTime = 0;
+                        audio.play().catch(err => console.log('Erreur de lecture audio:', err));
+                    }
+                });
+
+                img.addEventListener('mouseout', () => {
+                    img.src = originalSrc;
+                    if (audio) {
+                        audio.pause();
+                        audio.currentTime = 0;
+                    }
+                });
+
+                // Gestion du clic
+                img.addEventListener('click', () => {
+                    img.src = altSrc;
+                    if (audio) {
+                        audio.currentTime = 0;
+                        audio.play().catch(err => console.log('Erreur de lecture audio:', err));
+                    }
+                });
+            });
+        </script>
+    </div>
 </body>
 </html>
