@@ -25,24 +25,7 @@ exports.handler = async (event) => {
             const metadata = await sharp(buffer).metadata();
             const originalWidth = metadata.width;
             const originalHeight = metadata.height;
-            let resizedImage = buffer;
-            let finalWidth = originalWidth;
-            let finalHeight = originalHeight;
-            let resizeInfo = `Dimensions originales: ${originalWidth}x${originalHeight}`;
-
-            // Redimensionner uniquement si la largeur dépasse 600px
-            if (originalWidth > 600) {
-                resizedImage = await sharp(buffer)
-                    .resize({ width: 600, fit: 'inside', withoutEnlargement: true })
-                    .jpeg({ quality: 100, progressive: true, force: false })
-                    .toBuffer();
-                const newMetadata = await sharp(resizedImage).metadata();
-                finalWidth = newMetadata.width;
-                finalHeight = newMetadata.height;
-                resizeInfo += ` | Redimensionnée à: ${finalWidth}x${finalHeight}`;
-            } else {
-                resizeInfo += ` | Pas de redimensionnement (largeur <= 600px)`;
-            }
+            const resizeInfo = `Dimensions originales: ${originalWidth}x${originalHeight} | Pas de redimensionnement`;
 
             return {
                 statusCode: 200,
@@ -53,7 +36,7 @@ exports.handler = async (event) => {
                     'Accept-Ranges': 'bytes',
                     'X-Image-Info': resizeInfo, // Header personnalisé pour les logs
                 },
-                body: resizedImage.toString('base64'),
+                body: buffer.toString('base64'),
                 isBase64Encoded: true,
             };
         } catch (error) {
@@ -92,24 +75,7 @@ exports.handler = async (event) => {
         const metadata = await sharp(buffer).metadata();
         const originalWidth = metadata.width;
         const originalHeight = metadata.height;
-        let resizedImage = buffer;
-        let finalWidth = originalWidth;
-        let finalHeight = originalHeight;
-        let resizeInfo = `Dimensions originales: ${originalWidth}x${originalHeight}`;
-
-        // Redimensionner uniquement si la largeur dépasse 600px
-        if (originalWidth > 600) {
-            resizedImage = await sharp(buffer)
-                .resize({ width: 600, fit: 'inside', withoutEnlargement: true })
-                .jpeg({ quality: 100, progressive: true, force: false })
-                .toBuffer();
-            const newMetadata = await sharp(resizedImage).metadata();
-            finalWidth = newMetadata.width;
-            finalHeight = newMetadata.height;
-            resizeInfo += ` | Redimensionnée à: ${finalWidth}x${finalHeight}`;
-        } else {
-            resizeInfo += ` | Pas de redimensionnement (largeur <= 600px)`;
-        }
+        const resizeInfo = `Dimensions originales: ${originalWidth}x${originalHeight} | Pas de redimensionnement`;
 
         return {
             statusCode: 200,
@@ -120,7 +86,7 @@ exports.handler = async (event) => {
                 'Accept-Ranges': 'bytes',
                 'X-Image-Info': resizeInfo, // Header personnalisé pour les logs
             },
-            body: resizedImage.toString('base64'),
+            body: buffer.toString('base64'),
             isBase64Encoded: true,
         };
     } catch (error) {

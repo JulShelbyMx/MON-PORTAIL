@@ -304,6 +304,56 @@
             }
         }
 
+        // Fonction pour désactiver le lissage via canvas (méthode alternative)
+        async function renderImageWithoutSmoothing(imageUrl, mangaViewer) {
+            const dimensions = await logImageInfo(imageUrl);
+            const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
+
+            // Créer un canvas temporaire pour forcer le rendu sans lissage
+            const img = new Image();
+            img.src = imageUrl;
+            return new Promise((resolve) => {
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    const ctx = canvas.getContext('2d');
+
+                    // Désactiver le lissage dans le canvas
+                    ctx.imageSmoothingEnabled = false;
+                    ctx.webkitImageSmoothingEnabled = false;
+                    ctx.mozImageSmoothingEnabled = false;
+                    ctx.msImageSmoothingEnabled = false;
+
+                    // Dessiner l'image sur le canvas
+                    ctx.drawImage(img, 0, 0);
+
+                    // Créer une nouvelle image à partir du canvas
+                    const newImg = new Image();
+                    newImg.src = canvas.toDataURL('image/png');
+                    newImg.style.width = `${displayWidth}px`;
+                    newImg.style.height = 'auto';
+                    newImg.style.borderRadius = '10px';
+                    newImg.style.boxShadow = '0 4px 10px rgba(0, 0, 0, 0.5)';
+                    newImg.alt = 'Manga Page';
+                    newImg.onerror = () => {
+                        newImg.src = 'https://via.placeholder.com/600x900?text=Image+not+available';
+                        newImg.alt = 'Image not available';
+                        console.error(`Erreur chargement image: ${imageUrl}`);
+                    };
+
+                    mangaViewer.innerHTML = '';
+                    mangaViewer.appendChild(newImg);
+                    resolve(newImg);
+                };
+                img.onerror = () => {
+                    mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
+                    console.error('Erreur chargement image:', imageUrl);
+                    resolve(null);
+                };
+            });
+        }
+
         // Fonction pour faire défiler jusqu'au page-indicator
         function scrollToImage() {
             const pageIndicator = document.getElementById('page-indicator');
@@ -384,25 +434,16 @@
                 pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`;
                 mangaViewer.innerHTML = '';
 
-                const img = new Image();
-                img.src = pages[currentPage];
-                img.onload = async () => {
-                    // Récupérer les informations de redimensionnement et les dimensions
-                    const dimensions = await logImageInfo(pages[currentPage]);
-                    const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
-
-                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" style="width: ${displayWidth}px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                const img = await renderImageWithoutSmoothing(pages[currentPage], mangaViewer);
+                if (img) {
                     loadingSpinner.classList.remove('active');
                     attachImageClickListener();
                     attachCursorListener();
                     scrollToImage();
-                };
-                img.onerror = () => {
-                    mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
-                    console.error('Erreur chargement image:', pages[currentPage]);
+                } else {
                     loadingSpinner.classList.remove('active');
                     scrollToImage();
-                };
+                }
 
                 chapterDetails.innerHTML = `<h2>Chapter ${selectedChapter.chapter} - ${season.name}</h2>`;
                 preloadImages(pages, currentPage);
@@ -474,24 +515,16 @@
                                 pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`;
                                 mangaViewer.innerHTML = '';
 
-                                const newImg = new Image();
-                                newImg.src = pages[currentPage];
-                                newImg.onload = async () => {
-                                    const dimensions = await logImageInfo(pages[currentPage]);
-                                    const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
-
-                                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" style="width: ${displayWidth}px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                                const newImg = await renderImageWithoutSmoothing(pages[currentPage], mangaViewer);
+                                if (newImg) {
                                     loadingSpinner.classList.remove('active');
                                     attachImageClickListener();
                                     attachCursorListener();
                                     scrollToImage();
-                                };
-                                newImg.onerror = () => {
-                                    mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
-                                    console.error('Erreur chargement image:', pages[currentPage]);
+                                } else {
                                     loadingSpinner.classList.remove('active');
                                     scrollToImage();
-                                };
+                                }
 
                                 preloadImages(pages, currentPage);
                             } else if (currentChapter > 0) {
@@ -505,24 +538,16 @@
                                 pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`;
                                 mangaViewer.innerHTML = '';
 
-                                const newImg = new Image();
-                                newImg.src = pages[currentPage];
-                                newImg.onload = async () => {
-                                    const dimensions = await logImageInfo(pages[currentPage]);
-                                    const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
-
-                                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" style="width: ${displayWidth}px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                                const newImg = await renderImageWithoutSmoothing(pages[currentPage], mangaViewer);
+                                if (newImg) {
                                     loadingSpinner.classList.remove('active');
                                     attachImageClickListener();
                                     attachCursorListener();
                                     scrollToImage();
-                                };
-                                newImg.onerror = () => {
-                                    mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
-                                    console.error('Erreur chargement image:', pages[currentPage]);
+                                } else {
                                     loadingSpinner.classList.remove('active');
                                     scrollToImage();
-                                };
+                                }
 
                                 preloadImages(pages, currentPage);
                             } else if (currentChapter < season.chapters.length - 1) {
@@ -592,24 +617,16 @@
                     pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`;
                     mangaViewer.innerHTML = '';
 
-                    const img = new Image();
-                    img.src = pages[currentPage];
-                    img.onload = async () => {
-                        const dimensions = await logImageInfo(pages[currentPage]);
-                        const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
-
-                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" style="width: ${displayWidth}px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                    const img = await renderImageWithoutSmoothing(pages[currentPage], mangaViewer);
+                    if (img) {
                         loadingSpinner.classList.remove('active');
                         attachImageClickListener();
                         attachCursorListener();
                         scrollToImage();
-                    };
-                    img.onerror = () => {
-                        mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
-                        console.error('Erreur chargement image:', pages[currentPage]);
+                    } else {
                         loadingSpinner.classList.remove('active');
                         scrollToImage();
-                    };
+                    }
 
                     preloadImages(pages, currentPage);
                 } else if (currentChapter < season.chapters.length - 1) {
@@ -625,24 +642,16 @@
                     pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`;
                     mangaViewer.innerHTML = '';
 
-                    const img = new Image();
-                    img.src = pages[currentPage];
-                    img.onload = async () => {
-                        const dimensions = await logImageInfo(pages[currentPage]);
-                        const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
-
-                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" style="width: ${displayWidth}px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                    const img = await renderImageWithoutSmoothing(pages[currentPage], mangaViewer);
+                    if (img) {
                         loadingSpinner.classList.remove('active');
                         attachImageClickListener();
                         attachCursorListener();
                         scrollToImage();
-                    };
-                    img.onerror = () => {
-                        mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
-                        console.error('Erreur chargement image:', pages[currentPage]);
+                    } else {
                         loadingSpinner.classList.remove('active');
                         scrollToImage();
-                    };
+                    }
 
                     preloadImages(pages, currentPage);
                 } else if (currentChapter > 0) {
