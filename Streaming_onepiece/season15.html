@@ -90,6 +90,16 @@
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            image-rendering: -webkit-optimize-contrast; /* Chrome, Safari */
+            image-rendering: crisp-edges; /* Firefox */
+            image-rendering: pixelated; /* Fallback */
+        }
+        /* Media query pour mobile */
+        @media (max-width: 600px) {
+            .manga-viewer img {
+                width: 100%;
+                max-width: 100%;
+            }
         }
         .manga-viewer .left-half {
             cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path d="M22 6 L10 16 L22 26 L18 16 Z" fill="black" stroke="black" stroke-width="2"/></svg>'), auto;
@@ -276,7 +286,6 @@
                 return;
             }
 
-            // Utiliser requestAnimationFrame pour s'assurer que le DOM est rendu
             requestAnimationFrame(() => {
                 const headerHeight = header.offsetHeight;
                 const heroHeight = streamingHero.offsetHeight;
@@ -284,8 +293,7 @@
 
                 console.log('Défilement - Hauteur header:', headerHeight, 'Hauteur streaming-hero:', heroHeight, 'Position pageIndicatorTop:', pageIndicatorTop);
 
-                // Calculer la position pour que page-indicator soit juste en dessous du header et streaming-hero
-                const scrollPosition = pageIndicatorTop - (headerHeight + heroHeight) + 10; // +10 pour un petit décalage
+                const scrollPosition = pageIndicatorTop - (headerHeight + heroHeight) + 10;
                 window.scrollTo({
                     top: scrollPosition,
                     behavior: 'smooth'
@@ -305,17 +313,14 @@
             const loadingSpinner = document.getElementById('loading-spinner');
             const streamingHero = document.querySelector('.streaming-hero');
 
-            // Vérification initiale
             if (!season.name || !season.chapters || season.chapters.length === 0) {
                 console.error('Saison non valide:', season);
                 mangaViewer.innerHTML = '<p class="error-message">Error: Season not found</p>';
                 return;
             }
 
-            // Appliquer l'image de fond
             streamingHero.style.backgroundImage = `url("${season.thumbnail || '../images/default-season-placeholder.jpg'}")`;
 
-            // Remplir le sélecteur de chapitres
             season.chapters.forEach(chapter => {
                 const option = document.createElement('option');
                 option.value = chapter.chapter;
@@ -337,7 +342,6 @@
                 }
                 chapterSelect.value = selectedChapter.chapter;
 
-                // Convertir les URLs Google Drive pour affichage via proxy
                 pages = selectedChapter.imageUrls.map(convertGoogleDriveUrl);
                 if (!pages || pages.length === 0) {
                     mangaViewer.innerHTML = '<p class="error-message">Error: No images available for this chapter</p>';
@@ -347,7 +351,6 @@
                 }
                 currentPage = 0;
 
-                // Afficher le spinner
                 loadingSpinner.classList.add('active');
                 pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`;
                 mangaViewer.innerHTML = '';
@@ -355,7 +358,7 @@
                 const img = new Image();
                 img.src = pages[currentPage];
                 img.onload = () => {
-                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" srcset="${pages[currentPage]} 2x" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                     loadingSpinner.classList.remove('active');
                     attachImageClickListener();
                     attachCursorListener();
@@ -371,7 +374,6 @@
                 chapterDetails.innerHTML = `<h2>Chapter ${selectedChapter.chapter} - ${season.name}</h2>`;
                 preloadImages(pages, currentPage);
 
-                // Sauvegarde historique
                 const user = netlifyIdentity.currentUser();
                 if (user) {
                     getIP().then(ip => {
@@ -423,7 +425,6 @@
                 }
             }
 
-            // Fonction pour gérer les clics sur l'image
             function attachImageClickListener() {
                 const img = mangaViewer.querySelector('img');
                 if (img) {
@@ -434,7 +435,6 @@
                         const halfWidth = width / 2;
 
                         if (x < halfWidth) {
-                            // Côté gauche : page précédente
                             if (currentPage > 0) {
                                 currentPage--;
                                 loadingSpinner.classList.add('active');
@@ -444,7 +444,7 @@
                                 const newImg = new Image();
                                 newImg.src = pages[currentPage];
                                 newImg.onload = () => {
-                                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" srcset="${pages[currentPage]} 2x" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                                     loadingSpinner.classList.remove('active');
                                     attachImageClickListener();
                                     attachCursorListener();
@@ -463,7 +463,6 @@
                                 loadChapter(season.chapters[currentChapter].chapter);
                             }
                         } else {
-                            // Côté droit : page suivante
                             if (currentPage < pages.length - 1) {
                                 currentPage++;
                                 loadingSpinner.classList.add('active');
@@ -473,7 +472,7 @@
                                 const newImg = new Image();
                                 newImg.src = pages[currentPage];
                                 newImg.onload = () => {
-                                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" srcset="${pages[currentPage]} 2x" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                                     loadingSpinner.classList.remove('active');
                                     attachImageClickListener();
                                     attachCursorListener();
@@ -496,7 +495,6 @@
                 }
             }
 
-            // Fonction pour gérer le curseur selon la position de la souris
             function attachCursorListener() {
                 const img = mangaViewer.querySelector('img');
                 if (img) {
@@ -515,14 +513,12 @@
                         }
                     });
 
-                    // Réinitialiser le curseur quand la souris sort de l'image
                     img.addEventListener('mouseleave', () => {
                         img.classList.remove('left-half', 'right-half');
                     });
                 }
             }
 
-            // Charger depuis l’URL
             const hash = window.location.hash;
             if (hash) {
                 const chapterNumber = hash.replace('#chapter', '');
@@ -536,7 +532,6 @@
                 loadChapter(season.chapters[0].chapter);
             }
 
-            // Navigation entre chapitres
             document.getElementById('next-chapter').onclick = () => {
                 if (currentChapter < season.chapters.length - 1) {
                     currentChapter++;
@@ -551,7 +546,6 @@
                 }
             };
 
-            // Navigation entre pages
             document.getElementById('next').onclick = () => {
                 if (currentPage < pages.length - 1) {
                     currentPage++;
@@ -562,7 +556,7 @@
                     const img = new Image();
                     img.src = pages[currentPage];
                     img.onload = () => {
-                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" srcset="${pages[currentPage]} 2x" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                         loadingSpinner.classList.remove('active');
                         attachImageClickListener();
                         attachCursorListener();
@@ -592,7 +586,7 @@
                     const img = new Image();
                     img.src = pages[currentPage];
                     img.onload = () => {
-                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" srcset="${pages[currentPage]} 2x" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                         loadingSpinner.classList.remove('active');
                         attachImageClickListener();
                         attachCursorListener();
@@ -616,7 +610,6 @@
                 currentChapter = season.chapters.findIndex(ch => ch.chapter == e.target.value);
                 loadChapter(e.target.value);
 
-                // Sauvegarde historique lors du changement de chapitre
                 const user = netlifyIdentity.currentUser();
                 if (user) {
                     getIP().then(ip => {
