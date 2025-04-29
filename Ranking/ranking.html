@@ -575,7 +575,7 @@
                     </div>
                 </li> 
                 <li>
-                    <video class="interactive-video" poster="../images/images-ranking/dragon-ball.gif" src="../video/dragonball.mp4" alt="Dragon Ball"></video>
+                    <video class="interactive-video" src="../video/dragonball.mp4" alt="Dragon Ball" loop muted></video>
                     <div class="content">
                         <div class="title-status">
                             <strong>DRAGON BALL</strong>
@@ -1590,35 +1590,31 @@
 
             // Gestion des vidéos interactives (Dragon Ball)
             document.querySelectorAll('.interactive-video').forEach(video => {
-                const poster = video.getAttribute('poster'); // Récupère l'image GIF (poster)
+                // Lancer la vidéo automatiquement au chargement (muted par défaut)
+                try {
+                    video.play().catch(err => console.log('Erreur de lecture initiale vidéo:', err));
+                } catch (err) {
+                    console.log('Erreur lors de la lecture initiale vidéo:', err);
+                }
 
-                const playVideo = () => {
+                const toggleSound = (enableSound) => {
                     try {
-                        video.load(); // Réinitialise la vidéo pour éviter les bugs
-                        video.play().catch(err => console.log('Erreur de lecture vidéo:', err));
+                        video.muted = !enableSound; // Active ou désactive le son
                     } catch (err) {
-                        console.log('Erreur lors de la lecture vidéo:', err);
+                        console.log('Erreur lors de la gestion du son:', err);
                     }
                 };
 
                 video.addEventListener('mouseover', () => {
-                    video.removeAttribute('poster'); // Supprime le poster pour afficher la vidéo
-                    playVideo();
+                    toggleSound(true); // Activer le son au survol
                 });
 
                 video.addEventListener('mouseout', () => {
-                    try {
-                        video.pause();
-                        video.currentTime = 0;
-                        video.setAttribute('poster', poster); // Rétablit le GIF comme poster
-                    } catch (err) {
-                        console.log('Erreur lors de la pause vidéo:', err);
-                    }
+                    toggleSound(false); // Désactiver le son à la sortie
                 });
 
                 video.addEventListener('click', () => {
-                    video.removeAttribute('poster'); // Supprime le poster pour afficher la vidéo
-                    playVideo();
+                    toggleSound(true); // Activer le son au clic
                 });
             });
         </script>
