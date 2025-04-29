@@ -1590,7 +1590,7 @@
 
             // Gestion des vidéos interactives (Dragon Ball)
             document.querySelectorAll('.interactive-video').forEach(video => {
-                const poster = video.poster;
+                const poster = video.getAttribute('poster'); // Récupère l'image GIF (poster)
 
                 const playVideo = () => {
                     try {
@@ -1602,6 +1602,7 @@
                 };
 
                 video.addEventListener('mouseover', () => {
+                    video.removeAttribute('poster'); // Supprime le poster pour afficher la vidéo
                     playVideo();
                 });
 
@@ -1609,13 +1610,14 @@
                     try {
                         video.pause();
                         video.currentTime = 0;
-                        video.poster = poster;
+                        video.setAttribute('poster', poster); // Rétablit le GIF comme poster
                     } catch (err) {
                         console.log('Erreur lors de la pause vidéo:', err);
                     }
                 });
 
                 video.addEventListener('click', () => {
+                    video.removeAttribute('poster'); // Supprime le poster pour afficher la vidéo
                     playVideo();
                 });
             });
