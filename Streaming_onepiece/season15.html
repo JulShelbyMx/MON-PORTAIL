@@ -85,8 +85,8 @@
             margin: 0 auto;
         }
         .manga-viewer img {
-            width: 100%;
-            max-width: 600px;
+            max-width: 600px; /* Largeur maximale */
+            width: auto; /* Laisser JavaScript gérer la largeur réelle */
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -248,6 +248,10 @@
 
         // Fonction pour convertir les URLs Google Drive en URLs proxy
         function convertGoogleDriveUrl(originalUrl) {
+            if (originalUrl.includes('/proxy-image?url=')) {
+                return originalUrl;
+            }
+
             let fileId;
             const viewMatch = originalUrl.match(/\/file\/d\/([^\/]+)/);
             const downloadMatch = originalUrl.match(/id=([^&]+)/);
@@ -272,6 +276,31 @@
                 const img = new Image();
                 img.src = pages[nextPage];
                 console.log(`Préchargement de la page suivante: ${pages[nextPage]}`);
+            }
+        }
+
+        // Fonction pour récupérer les infos de redimensionnement et les dimensions côté client
+        async function logImageInfo(imageUrl) {
+            try {
+                const response = await fetch(imageUrl, { method: 'HEAD' });
+                const resizeInfo = response.headers.get('X-Image-Info') || 'Informations de redimensionnement non disponibles';
+                console.log(`Info proxy image: ${resizeInfo}`);
+
+                const img = new Image();
+                img.src = imageUrl;
+                return new Promise((resolve) => {
+                    img.onload = () => {
+                        console.log(`Dimensions affichées (client): ${img.naturalWidth}x${img.naturalHeight}`);
+                        resolve({ width: img.naturalWidth, height: img.naturalHeight });
+                    };
+                    img.onerror = () => {
+                        console.error('Erreur lors de la récupération des dimensions côté client:', imageUrl);
+                        resolve({ width: 0, height: 0 });
+                    };
+                });
+            } catch (error) {
+                console.error('Erreur lors de la récupération des infos:', error);
+                return { width: 0, height: 0 };
             }
         }
 
@@ -332,7 +361,7 @@
             let currentPage = 0;
             let pages = [];
 
-            function loadChapter(chapterNumber) {
+            async function loadChapter(chapterNumber) {
                 const selectedChapter = season.chapters.find(ch => ch.chapter == chapterNumber);
                 if (!selectedChapter || !selectedChapter.imageUrls) {
                     console.error('Chapitre non trouvé ou invalide:', chapterNumber);
@@ -357,8 +386,12 @@
 
                 const img = new Image();
                 img.src = pages[currentPage];
-                img.onload = () => {
-                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" srcset="${pages[currentPage]} 2x" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                img.onload = async () => {
+                    // Récupérer les informations de redimensionnement et les dimensions
+                    const dimensions = await logImageInfo(pages[currentPage]);
+                    const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
+
+                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" style="width: ${displayWidth}px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                     loadingSpinner.classList.remove('active');
                     attachImageClickListener();
                     attachCursorListener();
@@ -425,10 +458,10 @@
                 }
             }
 
-            function attachImageClickListener() {
+            async function attachImageClickListener() {
                 const img = mangaViewer.querySelector('img');
                 if (img) {
-                    img.addEventListener('click', (e) => {
+                    img.addEventListener('click', async (e) => {
                         const rect = img.getBoundingClientRect();
                         const x = e.clientX - rect.left;
                         const width = rect.width;
@@ -443,8 +476,11 @@
 
                                 const newImg = new Image();
                                 newImg.src = pages[currentPage];
-                                newImg.onload = () => {
-                                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" srcset="${pages[currentPage]} 2x" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                                newImg.onload = async () => {
+                                    const dimensions = await logImageInfo(pages[currentPage]);
+                                    const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
+
+                                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" style="width: ${displayWidth}px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                                     loadingSpinner.classList.remove('active');
                                     attachImageClickListener();
                                     attachCursorListener();
@@ -471,8 +507,11 @@
 
                                 const newImg = new Image();
                                 newImg.src = pages[currentPage];
-                                newImg.onload = () => {
-                                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" srcset="${pages[currentPage]} 2x" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                                newImg.onload = async () => {
+                                    const dimensions = await logImageInfo(pages[currentPage]);
+                                    const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
+
+                                    mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" style="width: ${displayWidth}px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                                     loadingSpinner.classList.remove('active');
                                     attachImageClickListener();
                                     attachCursorListener();
@@ -546,7 +585,7 @@
                 }
             };
 
-            document.getElementById('next').onclick = () => {
+            document.getElementById('next').onclick = async () => {
                 if (currentPage < pages.length - 1) {
                     currentPage++;
                     loadingSpinner.classList.add('active');
@@ -555,8 +594,11 @@
 
                     const img = new Image();
                     img.src = pages[currentPage];
-                    img.onload = () => {
-                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" srcset="${pages[currentPage]} 2x" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                    img.onload = async () => {
+                        const dimensions = await logImageInfo(pages[currentPage]);
+                        const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
+
+                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" style="width: ${displayWidth}px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                         loadingSpinner.classList.remove('active');
                         attachImageClickListener();
                         attachCursorListener();
@@ -576,7 +618,7 @@
                 }
             };
 
-            document.getElementById('prev').onclick = () => {
+            document.getElementById('prev').onclick = async () => {
                 if (currentPage > 0) {
                     currentPage--;
                     loadingSpinner.classList.add('active');
@@ -585,8 +627,11 @@
 
                     const img = new Image();
                     img.src = pages[currentPage];
-                    img.onload = () => {
-                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" srcset="${pages[currentPage]} 2x" loading="lazy" alt="Manga Page" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
+                    img.onload = async () => {
+                        const dimensions = await logImageInfo(pages[currentPage]);
+                        const displayWidth = dimensions.width > 600 ? 600 : dimensions.width;
+
+                        mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page" style="width: ${displayWidth}px;" onerror="this.onerror=null; this.src='https://via.placeholder.com/600x900?text=Image+not+available'; this.alt='Image not available'; console.error('Erreur chargement image: ${pages[currentPage]}');">`;
                         loadingSpinner.classList.remove('active');
                         attachImageClickListener();
                         attachCursorListener();
