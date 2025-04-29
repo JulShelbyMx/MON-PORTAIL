@@ -167,7 +167,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .tier li img {
+        .tier li img, .tier li video {
             width: 80px;
             height: 80px;
             object-fit: cover;
@@ -398,7 +398,7 @@
                 padding: 15px;
             }
 
-            .tier li img {
+            .tier li img, .tier li video {
                 width: 90px;
                 height: auto;
                 margin: 0 0 15px 0;
@@ -483,7 +483,7 @@
                 padding: 12px;
             }
 
-            .tier li img {
+            .tier li img, .tier li video {
                 width: 80px;
             }
 
@@ -575,7 +575,7 @@
                     </div>
                 </li> 
                 <li>
-                    <img src="../images/images-ranking/dragon-ball.gif" alt="Dragon Ball">
+                    <video class="interactive-video" poster="../images/images-ranking/dragon-ball.gif" src="../video/dragonball.mp4" muted alt="Dragon Ball"></video>
                     <div class="content">
                         <div class="title-status">
                             <strong>DRAGON BALL</strong>
@@ -1244,7 +1244,6 @@
                 <li>
                     ...
                 </li>
-           部分
             </ul>
         </div>
 
@@ -1377,8 +1376,7 @@
                         <div class="title-status">
                             <strong>OVERFLOW</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Fini? Saison 2?</span>
-                            <span class="status-a-jour-manga status-manga"><spanifeng
-                            <span class="status-a-jour-manga-dot status-dot"></span> À jour, suite??
+                            <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour, suite??</span>
                         </div>
                         <div class="author">Auteur : Ishigura Rei</div>
                     </div>
@@ -1549,13 +1547,13 @@
 
         <!-- Script pour gérer les interactions -->
         <script>
+            // Gestion des images interactives
             document.querySelectorAll('.interactive-img').forEach(img => {
                 const originalSrc = img.src;
                 const altSrc = img.getAttribute('data-alt-src');
                 const audioId = img.getAttribute('data-audio-id');
                 const audio = document.getElementById(audioId);
 
-                // Gestion du survol
                 img.addEventListener('mouseover', () => {
                     img.src = altSrc;
                     if (audio) {
@@ -1572,13 +1570,31 @@
                     }
                 });
 
-                // Gestion du clic
                 img.addEventListener('click', () => {
                     img.src = altSrc;
                     if (audio) {
                         audio.currentTime = 0;
                         audio.play().catch(err => console.log('Erreur de lecture audio:', err));
                     }
+                });
+            });
+
+            // Gestion des vidéos interactives
+            document.querySelectorAll('.interactive-video').forEach(video => {
+                const poster = video.poster;
+
+                video.addEventListener('mouseover', () => {
+                    video.play().catch(err => console.log('Erreur de lecture vidéo:', err));
+                });
+
+                video.addEventListener('mouseout', () => {
+                    video.pause();
+                    video.currentTime = 0;
+                    video.poster = poster;
+                });
+
+                video.addEventListener('click', () => {
+                    video.play().catch(err => console.log('Erreur de lecture vidéo:', err));
                 });
             });
         </script>
