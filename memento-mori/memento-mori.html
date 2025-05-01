@@ -70,7 +70,7 @@
     border: 2px solid #0a0a0a;
 }
 .grid div.selected {
-    border: 2px amiga solid #ff0000;
+    border: 2px solid #ff0000;
 }
 .message-box {
     margin: 20px auto;
@@ -170,28 +170,28 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 376px; /* Ajuster pour inclure grille + étiquettes */
+        max-width: 380px; /* Ajuster pour inclure grille + étiquettes */
         margin: 0 auto;
     }
     .grid {
-        grid-template-columns: repeat(52, 6px); /* Réduire la taille des cases */
+        grid-template-columns: repeat(52, 6px);
         grid-gap: 1px;
         padding: 8px;
-        width: 356px; /* Largeur corrigée : 52 * 6px + 51 * 1px + 16px + 52 * 2px (bordures) */
-        height: 716px; /* Hauteur corrigée : 100 * 6px + 99 * 1px + 16px + 100 * 2px (bordures) */
+        width: 356px; /* Largeur corrigée : 52 * 6px + 51 * 1px + 16px + 52 * 4px (bordures) */
+        height: 916px; /* Hauteur corrigée : 100 * 6px + 99 * 1px + 16px + 100 * 4px (bordures) */
         box-sizing: content-box;
     }
     .grid div {
         width: 6px;
         height: 6px;
-        border: 1px solid #0a0a0a; /* Ajuster la bordure pour mobile */
+        border: 2px solid #0a0a0a; /* Même bordure que sur PC */
         box-sizing: border-box;
     }
     .grid div.filled {
-        border: 1px solid #0a0a0a;
+        border: 2px solid #0a0a0a;
     }
     .grid div.selected {
-        border: 1px solid #ff0000;
+        border: 2px solid #ff0000;
     }
     .years-labels {
         right: -20px;
@@ -199,8 +199,8 @@ button:hover {
     }
     .years-labels span {
         font-size: 10px;
-        height: 7px; /* Ajuster pour s'aligner avec les cases */
-        line-height: 7px;
+        height: 8px; /* Ajuster pour s'aligner avec les cases */
+        line-height: 8px;
         margin-bottom: 0px;
     }
     .years-labels span:nth-child(10n) {
@@ -245,37 +245,37 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 356px; /* Ajuster pour inclure grille + étiquettes */
+        max-width: 360px; /* Ajuster pour inclure grille + étiquettes */
         margin: 0 auto;
     }
     .grid {
         grid-template-columns: repeat(52, 6px);
         grid-gap: 0.5px;
         padding: 8px;
-        width: 349.5px; /* Largeur corrigée : 52 * 6px + 51 * 0.5px + 16px + 52 * 2px (bordures) */
-        height: 665.5px; /* Hauteur corrigée : 100 * 6px + 99 * 0.5px + 16px + 100 * 2px (bordures) */
+        width: 349.5px; /* Largeur corrigée : 52 * 6px + 51 * 0.5px + 16px + 52 * 4px (bordures) */
+        height: 865.5px; /* Hauteur corrigée : 100 * 6px + 99 * 0.5px + 16px + 100 * 4px (bordures) */
         box-sizing: content-box;
     }
     .grid div {
         width: 6px;
         height: 6px;
-        border: 1px solid #0a0a0a;
+        border: 2px solid #0a0a0a;
         box-sizing: border-box;
     }
     .grid div.filled {
-        border: 1px solid #0a0a0a;
+        border: 2px solid #0a0a0a;
     }
     .grid div.selected {
-        border: 1px solid #ff0000;
+        border: 2px solid #ff0000;
     }
     .years-labels {
-        right: -10px; /* Rapprocher pour éviter le débordement */
+        right: -10px;
         top: 8px;
     }
     .years-labels span {
         font-size: 8px;
-        height: 6.5px; /* Ajuster pour s'aligner avec les cases */
-        line-height: 6.5px;
+        height: 7.5px; /* Ajuster pour s'aligner avec les cases */
+        line-height: 7.5px;
         margin-bottom: 0px;
     }
     .years-labels span:nth-child(10n) {
