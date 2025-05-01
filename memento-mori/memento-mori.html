@@ -47,6 +47,9 @@ body {
 .grid-container {
     display: inline-block;
     position: relative;
+    width: 100%;
+    max-width: 1004px; /* 964px (grille) + 40px (étiquettes) */
+    margin: 0 auto;
 }
 .grid {
     display: grid;
@@ -54,8 +57,11 @@ body {
     grid-gap: 2px;
     background-color: #ffb300;
     padding: 15px;
+    width: 964px; /* 52 * 12px + 51 * 2px + 30px (padding) + 52 * 4px (bordures) */
+    height: 1828px; /* 100 * 12px + 99 * 2px + 30px + 100 * 4px */
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    box-sizing: content-box;
 }
 .grid div {
     width: 12px;
@@ -64,6 +70,7 @@ body {
     border: 2px solid #0a0a0a;
     cursor: pointer;
     position: relative;
+    box-sizing: border-box;
 }
 .grid div.filled {
     background-color: #000;
@@ -154,77 +161,142 @@ button {
 button:hover {
     background: #e0a800;
 }
-
 @media (max-width: 768px) {
     .memento-hero {
         height: 20vh;
     }
     .return-button {
-        padding: 12px 20px;
-        font-size: 18px;
+        padding: 10px 20px;
+        font-size: 16px;
     }
     .memento-container {
-        padding: 15px;
+        padding: 10px;
         margin: 10px auto;
     }
+    .grid-container {
+        max-width: 480px; /* 458px (grille) + 20px (étiquettes) + marge */
+    }
     .grid {
-        grid-template-columns: repeat(26, 12px);
-        grid-gap: 2px;
+        grid-template-columns: repeat(52, 8px);
+        grid-gap: 1px;
         padding: 10px;
-        overflow-x: auto;
-        justify-content: center;
+        width: 458px; /* 52 * 8px + 51 * 1px + 20px (padding) + 52 * 2px (bordures) */
+        height: 1011px; /* 100 * 8px + 99 * 1px + 20px + 100 * 2px */
+    }
+    .grid div {
+        width: 8px;
+        height: 8px;
+        border: 1px solid #0a0a0a;
+    }
+    .grid div.filled {
+        border: 1px solid #0a0a0a;
+    }
+    .grid div.selected {
+        border: 1px solid #ff0000;
     }
     .years-labels {
-        right: -35px;
-        font-size: 12px;
+        right: -20px;
+        top: 10px;
+    }
+    .years-labels span {
+        font-size: 10px;
+        height: 9px;
+        line-height: 9px;
+        margin-bottom: 0px;
+    }
+    .years-labels span:nth-child(10n) {
+        margin-bottom: 8px;
+    }
+    .grid div:nth-child(520n) {
+        margin-bottom: 8px;
     }
     .message-box {
         font-size: 14px;
         padding: 8px;
+        margin: 10px auto;
     }
     .delete-menu {
         padding: 10px;
     }
     .delete-menu button {
-        font-size: 12px;
         padding: 6px 12px;
+        font-size: 12px;
     }
     .selected-cells {
-        font-size: 13px;
+        font-size: 12px;
     }
     .auth-container {
-        width: 90%;
+        max-width: 90%;
         padding: 15px;
     }
 }
-
 @media (max-width: 480px) {
+    .memento-hero {
+        height: 15vh;
+    }
     .return-button {
-        padding: 10px 16px;
-        font-size: 16px;
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    .memento-container {
+        padding: 5px;
+        margin: 5px auto;
+    }
+    .grid-container {
+        max-width: 335.5px; /* 325.5px (grille) + 10px (étiquettes) */
     }
     .grid {
-        grid-template-columns: repeat(13, 12px);
+        grid-template-columns: repeat(52, 6px);
+        grid-gap: 0.5px;
         padding: 8px;
+        width: 325.5px; /* 52 * 6px + 51 * 0.5px + 16px (padding) + 52 * 2px (bordures) */
+        height: 865.5px; /* 100 * 6px + 99 * 0.5px + 16px + 100 * 2px */
+    }
+    .grid div {
+        width: 6px;
+        height: 6px;
+        border: 1px solid #0a0a0a;
+    }
+    .grid div.filled {
+        border: 1px solid #0a0a0a;
+    }
+    .grid div.selected {
+        border: 1px solid #ff0000;
     }
     .years-labels {
-        display: none;
+        right: -10px;
+        top: 8px;
+    }
+    .years-labels span {
+        font-size: 8px;
+        height: 7.5px;
+        line-height: 7.5px;
+        margin-bottom: 0px;
+    }
+    .years-labels span:nth-child(10n) {
+        margin-bottom: 6px;
+    }
+    .grid div:nth-child(520n) {
+        margin-bottom: 6px;
+    }
+    .message-box {
+        font-size: 12px;
+        padding: 6px;
+        margin: 8px auto;
     }
     .delete-menu {
         padding: 8px;
     }
     .delete-menu button {
-        font-size: 11px;
         padding: 5px 10px;
+        font-size: 10px;
     }
     .selected-cells {
-        font-size: 12px;
+        font-size: 10px;
     }
     .auth-container {
+        max-width: 95%;
         padding: 10px;
-    }
-    .message-box {
-        font-size: 13px;
     }
 }
 
