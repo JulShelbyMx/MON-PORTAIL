@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="../images/logopage.png" />
     <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
+        /* Ton CSS reste inchangé */
         body {
             background-color: #111;
             color: white;
@@ -153,8 +154,6 @@
         button:hover {
             background: #e0a800;
         }
-
-        /* Media Queries pour mobile */
         @media (max-width: 768px) {
             .memento-hero {
                 height: 20vh;
@@ -218,7 +217,6 @@
                 padding: 15px;
             }
         }
-
         @media (max-width: 480px) {
             .memento-hero {
                 height: 15vh;
@@ -311,110 +309,115 @@
         </div>
     </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-    const grid = document.getElementById('memento-grid');
-    const yearsLabels = document.getElementById('years-labels');
-    const messageBox = document.getElementById('message-box');
-    const selectedCellsDisplay = document.getElementById('selected-cells');
-    const totalYears = 100;
-    const weeksPerYear = 52;
-    let selectMode = false;
-    let selectedCells = [];
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('memento-grid');
+            const yearsLabels = document.getElementById('years-labels');
+            const messageBox = document.getElementById('message-box');
+            const selectedCellsDisplay = document.getElementById('selected-cells');
+            const totalYears = 100;
+            const weeksPerYear = 52;
+            let selectMode = false;
+            let selectedCells = [];
 
-    // Générer les étiquettes des années (1 à 100)
-    for (let year = 1; year <= totalYears; year++) {
-        const label = document.createElement('span');
-        label.textContent = year;
-        yearsLabels.appendChild(label);
-    }
-
-    // Générer la grille (100 ans x 52 semaines)
-    for (let year = 0; year < totalYears; year++) {
-        for (let week = 0; week < weeksPerYear; week++) {
-            const cell = document.createElement('div');
-            cell.dataset.year = year + 1; // Lignes étiquetées 1 à 100
-            cell.dataset.week = week + 1;
-            grid.appendChild(cell);
-        }
-    }
-
-    // Calculer les dates pour chaque case
-    const startDate = new Date('2008-04-20'); // Dimanche 20 avril 2008 (année 1, semaine 1)
-    const datesMap = new Map();
-    let currentDate = new Date(startDate);
-    let yearIndex = 1; // Commence à 1
-    let weekIndex = 1;
-
-    // Calculer les dates jusqu'à la fin de la grille
-    while (yearIndex <= totalYears) {
-        const key = `${yearIndex}-${weekIndex}`;
-        datesMap.set(key, currentDate.toLocaleString('fr-FR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit'
-        }));
-        currentDate.setDate(currentDate.getDate() + 7);
-        weekIndex++;
-        if (weekIndex > weeksPerYear) {
-            weekIndex = 1;
-            yearIndex++;
-        }
-    }
-
-    // Charger l'historique des cases remplies
-    function loadGrid() {
-        const user = netlifyIdentity.currentUser();
-        if (!user) return;
-
-        const history = (user.user_metadata && user.user_metadata.memento) || {};
-        Object.entries(history).forEach(([key, data]) => {
-            const [year, week] = key.split('-').map(Number);
-            const cell = document.querySelector(`[data-year="${year}"][data-week="${week}"]`);
-            if (cell) {
-                cell.classList.add('filled');
-                cell.dataset.timestamp = data.timestamp;
+            // Générer les étiquettes des années (1 à 100)
+            for (let year = 1; year <= totalYears; year++) {
+                const label = document.createElement('span');
+                label.textContent = year;
+                yearsLabels.appendChild(label);
             }
-        });
 
-        // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 18 (case 1, ligne 18, 20 avril 2025)
-        yearIndex = 1;
-        weekIndex = 1;
-        const totalWeeksToFill = 884; // 17 années (jusqu'au 20 avril 2025, semaine 20/04/2025 au 26/04/2025)
-        let weeksFilled = 0;
+            // Générer la grille (100 ans x 52 semaines)
+            for (let year = 0; year < totalYears; year++) {
+                for (let week = 0; week < weeksPerYear; week++) {
+                    const cell = document.createElement('div');
+                    cell.dataset.year = year + 1; // Lignes étiquetées 1 à 100
+                    cell.dataset.week = week + 1;
+                    grid.appendChild(cell);
+                }
+            }
 
-        while (weeksFilled < totalWeeksToFill && yearIndex <= totalYears) {
-            const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
-            if (cell && !cell.classList.contains('filled')) {
+            // Calculer les dates pour chaque case
+            const startDate = new Date('2008-04-20'); // Dimanche 20 avril 2008 (année 1, semaine 1)
+            const datesMap = new Map();
+            let currentDate = new Date(startDate);
+            let yearIndex = 1; // Commence à 1
+            let weekIndex = 1;
+
+            // Calculer les dates jusqu'à la fin de la grille
+            while (yearIndex <= totalYears) {
                 const key = `${yearIndex}-${weekIndex}`;
-                cell.classList.add('filled');
-                cell.dataset.timestamp = datesMap.get(key);
+                datesMap.set(key, currentDate.toLocaleString('fr-FR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }));
+                console.log(`Case ${key}: ${datesMap.get(key)}`); // Log pour déboguer
+                currentDate.setDate(currentDate.getDate() + 7);
+                weekIndex++;
+                if (weekIndex > weeksPerYear) {
+                    weekIndex = 1;
+                    yearIndex++;
+                }
             }
-            weeksFilled++;
-            weekIndex++;
-            if (weekIndex > weeksPerYear) {
-                weekIndex = 1;
-                yearIndex++;
-            }
-        }
 
-        // S'assurer que les cases après année 18, semaine 1 ne sont pas remplies
-        while (yearIndex <= totalYears) {
-            const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
-            if (cell && cell.classList.contains('filled')) {
-                cell.classList.remove('filled');
-                cell.dataset.timestamp = '';
-            }
-            weekIndex++;
-            if (weekIndex > weeksPerYear) {
+            // Charger l'historique des cases remplies
+            function loadGrid() {
+                const user = netlifyIdentity.currentUser();
+                if (!user) {
+                    console.log('Utilisateur non connecté, grille non remplie');
+                    return;
+                }
+
+                const history = (user.user_metadata && user.user_metadata.memento) || {};
+                Object.entries(history).forEach(([key, data]) => {
+                    const [year, week] = key.split('-').map(Number);
+                    const cell = document.querySelector(`[data-year="${year}"][data-week="${week}"]`);
+                    if (cell) {
+                        cell.classList.add('filled');
+                        cell.dataset.timestamp = data.timestamp;
+                    }
+                });
+
+                // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 18 (case 1, ligne 18, 20 avril 2025)
+                yearIndex = 1;
                 weekIndex = 1;
-                yearIndex++;
+                const totalWeeksToFill = 884; // Jusqu'au 20 avril 2025 (semaine 20/04/2025 au 26/04/2025)
+                let weeksFilled = 0;
+
+                while (weeksFilled <= totalWeeksToFill && yearIndex <= totalYears) {
+                    const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
+                    if (cell && !cell.classList.contains('filled')) {
+                        const key = `${yearIndex}-${weekIndex}`;
+                        cell.classList.add('filled');
+                        cell.dataset.timestamp = datesMap.get(key);
+                        console.log(`Remplissage case ${key}: ${datesMap.get(key)}`); // Log pour déboguer
+                    }
+                    weeksFilled++;
+                    weekIndex++;
+                    if (weekIndex > weeksPerYear) {
+                        weekIndex = 1;
+                        yearIndex++;
+                    }
+                }
+
+                // S'assurer que les cases après année 18, semaine 1 ne sont pas remplies
+                while (yearIndex <= totalYears) {
+                    const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
+                    if (cell && cell.classList.contains('filled')) {
+                        cell.classList.remove('filled');
+                        cell.dataset.timestamp = '';
+                    }
+                    weekIndex++;
+                    if (weekIndex > weeksPerYear) {
+                        weekIndex = 1;
+                        yearIndex++;
+                    }
+                }
             }
-        }
-    }
-    
+
             // Mettre à jour l'historique
             async function updateGrid(year, week, action, timestamp = null) {
                 const user = netlifyIdentity.currentUser();
