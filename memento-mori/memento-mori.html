@@ -16,7 +16,7 @@
             padding: 0;
         }
         .memento-hero {
-            background: url('../images/memento-mori-backround.webp') no-repeat center center/cover;
+            background: url('../images/memento-mori-background.jpg') no-repeat center center/cover;
             height: 30vh;
             display: flex;
             justify-content: center;
@@ -73,7 +73,7 @@
             border: 2px solid #ff0000;
         }
         .message-box {
-            margin-bottom: 20px;
+            margin: 20px 0;
             padding: 10px;
             background-color: #0a0a0a;
             color: #ffb300;
@@ -200,7 +200,7 @@
             .message-box {
                 font-size: 14px;
                 padding: 8px;
-                margin-bottom: 10px;
+                margin: 10px 0;
             }
             .delete-menu {
                 padding: 10px;
@@ -260,7 +260,7 @@
             .message-box {
                 font-size: 12px;
                 padding: 6px;
-                margin-bottom: 8px;
+                margin: 8px 0;
             }
             .delete-menu {
                 padding: 8px;
@@ -286,7 +286,7 @@
 
     <section class="memento-hero">
         <div class="memento-hero-content">
-            <a href="../index.html" class="return-button">BACK</a>
+            <a href="index.html" class="return-button">BACK</a>
         </div>
     </section>
 
@@ -298,11 +298,11 @@
     </div>
 
     <div class="memento-container">
-        <div class="message-box" id="message-box">Cliquez sur une case pour voir son état.</div>
         <div class="grid-container">
             <div class="years-labels" id="years-labels"></div>
             <div class="grid" id="memento-grid"></div>
         </div>
+        <div class="message-box" id="message-box">Cliquez sur une case pour voir son état.</div>
         <div class="delete-menu">
             <div class="selected-cells" id="selected-cells">Cases sélectionnées : Aucune</div>
             <button onclick="toggleSelectMode()">Activer/Désactiver mode suppression</button>
