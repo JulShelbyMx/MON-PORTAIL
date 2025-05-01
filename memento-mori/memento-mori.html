@@ -379,10 +379,10 @@
             }
         });
 
-        // Pré-remplir toutes les cases jusqu'à la semaine 2 de l'année 18 (case 2, ligne 18, 27 avril 2025)
+        // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 18 (case 1, ligne 18, 20 avril 2025)
         yearIndex = 1;
         weekIndex = 1;
-        const totalWeeksToFill = 885; // 17 années + 1 semaine (jusqu'au 27 avril 2025)
+        const totalWeeksToFill = 884; // 17 années (jusqu'au 20 avril 2025, semaine 20/04/2025 au 26/04/2025)
         let weeksFilled = 0;
 
         while (weeksFilled < totalWeeksToFill && yearIndex <= totalYears) {
@@ -400,7 +400,7 @@
             }
         }
 
-        // S'assurer que les cases après année 18, semaine 2 ne sont pas remplies
+        // S'assurer que les cases après année 18, semaine 1 ne sont pas remplies
         while (yearIndex <= totalYears) {
             const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
             if (cell && cell.classList.contains('filled')) {
@@ -414,7 +414,7 @@
             }
         }
     }
-
+    
             // Mettre à jour l'historique
             async function updateGrid(year, week, action, timestamp = null) {
                 const user = netlifyIdentity.currentUser();
