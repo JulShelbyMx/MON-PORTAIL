@@ -170,18 +170,19 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 340px; /* Ajuster pour inclure grille + étiquettes */
+        max-width: 400px; /* Augmenter la largeur du conteneur */
         margin: 0 auto;
     }
     .grid {
-        grid-template-columns: repeat(52, 5px); /* Augmenter la taille des cases */
+        grid-template-columns: repeat(52, 6px); /* Augmenter la taille des cases */
         grid-gap: 1px;
-        padding: 5px;
-        width: 290px; /* Largeur exacte : 52 * 5px + 51 * 1px + 10px */
+        padding: 8px;
+        width: 346px; /* Largeur exacte : 52 * 6px + 51 * 1px + 16px */
+        height: 666px; /* Hauteur exacte : 100 * 6px + 99 * 1px + 16px */
     }
     .grid div {
-        width: 5px;
-        height: 5px;
+        width: 6px;
+        height: 6px;
         border: 1px solid #0a0a0a;
     }
     .grid div.filled {
@@ -191,20 +192,20 @@ button:hover {
         border: 1px solid #ff0000;
     }
     .years-labels {
-        right: -20px; /* Ajuster pour que ça rentre */
-        top: 5px;
+        right: -20px;
+        top: 8px;
     }
     .years-labels span {
         font-size: 10px;
-        height: 5px;
-        line-height: 5px;
+        height: 6px;
+        line-height: 6px;
         margin-bottom: 1px;
     }
     .years-labels span:nth-child(10n) {
-        margin-bottom: 5px;
+        margin-bottom: 6px;
     }
     .grid div:nth-child(520n) {
-        margin-bottom: 5px;
+        margin-bottom: 6px;
     }
     .message-box {
         font-size: 14px;
@@ -242,18 +243,19 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 300px; /* Ajuster pour inclure grille + étiquettes */
+        max-width: 380px; /* Augmenter la largeur du conteneur */
         margin: 0 auto;
     }
     .grid {
-        grid-template-columns: repeat(52, 5px); /* Garder une taille lisible */
+        grid-template-columns: repeat(52, 6px); /* Garder la taille des cases */
         grid-gap: 0.5px;
-        padding: 5px;
-        width: 287.5px; /* Largeur exacte : 52 * 5px + 51 * 0.5px + 10px */
+        padding: 8px;
+        width: 343.5px; /* Largeur exacte : 52 * 6px + 51 * 0.5px + 16px */
+        height: 663.5px; /* Hauteur exacte : 100 * 6px + 99 * 0.5px + 16px */
     }
     .grid div {
-        width: 5px;
-        height: 5px;
+        width: 6px;
+        height: 6px;
         border: 0.5px solid #0a0a0a;
     }
     .grid div.filled {
@@ -264,19 +266,19 @@ button:hover {
     }
     .years-labels {
         right: -15px;
-        top: 5px;
+        top: 8px;
     }
     .years-labels span {
         font-size: 8px;
-        height: 5px;
-        line-height: 5px;
+        height: 6px;
+        line-height: 6px;
         margin-bottom: 0.5px;
     }
     .years-labels span:nth-child(10n) {
-        margin-bottom: 5px;
+        margin-bottom: 6px;
     }
     .grid div:nth-child(520n) {
-        margin-bottom: 5px;
+        margin-bottom: 6px;
     }
     .message-box {
         font-size: 12px;
