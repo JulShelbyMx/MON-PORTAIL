@@ -170,15 +170,15 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 400px; /* Augmenter la largeur du conteneur */
+        max-width: 450px; /* Augmenter pour inclure la grille et les étiquettes */
         margin: 0 auto;
     }
     .grid {
-        grid-template-columns: repeat(52, 6px); /* Augmenter la taille des cases */
+        grid-template-columns: repeat(52, 6px);
         grid-gap: 1px;
         padding: 8px;
-        width: 346px; /* Largeur exacte : 52 * 6px + 51 * 1px + 16px */
-        height: 666px; /* Hauteur exacte : 100 * 6px + 99 * 1px + 16px */
+        width: 398px; /* Largeur corrigée : 52 * 6px + 51 * 1px + 16px + 52 * 1px (bordures) */
+        height: 766px; /* Hauteur corrigée : 100 * 6px + 99 * 1px + 16px + 100 * 1px (bordures) */
     }
     .grid div {
         width: 6px;
@@ -243,15 +243,15 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 380px; /* Augmenter la largeur du conteneur */
+        max-width: 430px; /* Augmenter pour inclure la grille et les étiquettes */
         margin: 0 auto;
     }
     .grid {
-        grid-template-columns: repeat(52, 6px); /* Garder la taille des cases */
+        grid-template-columns: repeat(52, 6px);
         grid-gap: 0.5px;
         padding: 8px;
-        width: 343.5px; /* Largeur exacte : 52 * 6px + 51 * 0.5px + 16px */
-        height: 663.5px; /* Hauteur exacte : 100 * 6px + 99 * 0.5px + 16px */
+        width: 405.5px; /* Largeur corrigée : 52 * 6px + 51 * 0.5px + 16px + 52 * 1px (bordures) */
+        height: 765.5px; /* Hauteur corrigée : 100 * 6px + 99 * 0.5px + 16px + 100 * 1px (bordures) */
     }
     .grid div {
         width: 6px;
