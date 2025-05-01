@@ -170,23 +170,25 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 450px; /* Augmenter pour inclure la grille et les étiquettes */
+        max-width: 400px; /* Réduire légèrement */
         margin: 0 auto;
     }
     .grid {
-        grid-template-columns: repeat(52, 6px);
+        grid-template-columns: repeat(52, 7px); /* Augmenter la taille des cases */
         grid-gap: 1px;
         padding: 8px;
-        width: 398px; /* Largeur corrigée : 52 * 6px + 51 * 1px + 16px + 52 * 1px (bordures) */
-        height: 766px; /* Hauteur corrigée : 100 * 6px + 99 * 1px + 16px + 100 * 1px (bordures) */
+        width: 375px; /* Largeur corrigée : 52 * 7px + 51 * 1px + 16px */
+        height: 866px; /* Hauteur corrigée : 100 * 7px + 99 * 1px + 16px */
+        box-sizing: content-box; /* S'assurer que padding et bordures ne sont pas inclus dans width/height */
     }
     .grid div {
-        width: 6px;
-        height: 6px;
-        border: 1px solid #0a0a0a;
+        width: 7px;
+        height: 7px;
+        border: 0px; /* Supprimer les bordures pour simplifier le calcul */
+        box-sizing: border-box;
     }
     .grid div.filled {
-        border: 1px solid #0a0a0a;
+        border: 0px;
     }
     .grid div.selected {
         border: 1px solid #ff0000;
@@ -197,15 +199,15 @@ button:hover {
     }
     .years-labels span {
         font-size: 10px;
-        height: 6px;
-        line-height: 6px;
+        height: 7px;
+        line-height: 7px;
         margin-bottom: 1px;
     }
     .years-labels span:nth-child(10n) {
-        margin-bottom: 6px;
+        margin-bottom: 7px;
     }
     .grid div:nth-child(520n) {
-        margin-bottom: 6px;
+        margin-bottom: 7px;
     }
     .message-box {
         font-size: 14px;
@@ -243,26 +245,28 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 430px; /* Augmenter pour inclure la grille et les étiquettes */
+        max-width: 390px; /* Réduire légèrement pour mieux s'adapter */
         margin: 0 auto;
     }
     .grid {
-        grid-template-columns: repeat(52, 6px);
+        grid-template-columns: repeat(52, 7px);
         grid-gap: 0.5px;
         padding: 8px;
-        width: 405.5px; /* Largeur corrigée : 52 * 6px + 51 * 0.5px + 16px + 52 * 1px (bordures) */
-        height: 765.5px; /* Hauteur corrigée : 100 * 6px + 99 * 0.5px + 16px + 100 * 1px (bordures) */
+        width: 374.5px; /* Largeur corrigée : 52 * 7px + 51 * 0.5px + 16px */
+        height: 815.5px; /* Hauteur corrigée : 100 * 7px + 99 * 0.5px + 16px */
+        box-sizing: content-box;
     }
     .grid div {
-        width: 6px;
-        height: 6px;
-        border: 0.5px solid #0a0a0a;
+        width: 7px;
+        height: 7px;
+        border: 0px;
+        box-sizing: border-box;
     }
     .grid div.filled {
-        border: 0.5px solid #0a0a0a;
+        border: 0px;
     }
     .grid div.selected {
-        border: 0.5px solid #ff0000;
+        border: 1px solid #ff0000;
     }
     .years-labels {
         right: -15px;
@@ -270,15 +274,15 @@ button:hover {
     }
     .years-labels span {
         font-size: 8px;
-        height: 6px;
-        line-height: 6px;
+        height: 7px;
+        line-height: 7px;
         margin-bottom: 0.5px;
     }
     .years-labels span:nth-child(10n) {
-        margin-bottom: 6px;
+        margin-bottom: 7px;
     }
     .grid div:nth-child(520n) {
-        margin-bottom: 6px;
+        margin-bottom: 7px;
     }
     .message-box {
         font-size: 12px;
