@@ -287,7 +287,7 @@
 
     <section class="memento-hero">
         <div class="memento-hero-content">
-            <a href="../index.html" class="return-button">BACK</a>
+            <a href="index.html" class="return-button">BACK</a>
         </div>
     </section>
 
@@ -379,19 +379,34 @@
                     }
                 });
 
-                // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 17
+                // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 17 (inclus)
                 yearIndex = 1;
                 weekIndex = 1;
-                let totalWeeksFilled = 0;
-                const weeksUntilYear17Week1 = 888; // 888 semaines jusqu'au 27 avril 2025
-                while (totalWeeksFilled < weeksUntilYear17Week1 && yearIndex <= totalYears) {
+                const totalWeeksToFill = 888; // 888 semaines jusqu'au 27 avril 2025 (année 17, semaine 1)
+                let weeksFilled = 0;
+
+                while (weeksFilled < totalWeeksToFill && yearIndex <= totalYears) {
                     const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
                     if (cell && !cell.classList.contains('filled')) {
                         const key = `${yearIndex}-${weekIndex}`;
                         cell.classList.add('filled');
                         cell.dataset.timestamp = datesMap.get(key);
                     }
-                    totalWeeksFilled++;
+                    weeksFilled++;
+                    weekIndex++;
+                    if (weekIndex > weeksPerYear) {
+                        weekIndex = 1;
+                        yearIndex++;
+                    }
+                }
+
+                // S'assurer que les cases après année 17, semaine 1 ne sont pas remplies
+                while (yearIndex <= totalYears) {
+                    const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
+                    if (cell && cell.classList.contains('filled')) {
+                        cell.classList.remove('filled');
+                        cell.dataset.timestamp = '';
+                    }
                     weekIndex++;
                     if (weekIndex > weeksPerYear) {
                         weekIndex = 1;
