@@ -336,34 +336,9 @@
                 }
             }
 
-            // Calculer les dates pour chaque case
-            const startDate = new Date('2008-04-20T00:00:00'); // Dimanche 20 avril 2008 (case 1-1), heure fixée à 00:00
+            // Définir les dates uniquement pour 18-2 et les nouvelles cases
             const datesMap = new Map();
-            let currentDate = new Date(startDate);
-            let yearIndex = 1;
-            let weekIndex = 1;
-
-            // Remplir datesMap en avançant de 7 jours (toujours des dimanches)
-            while (yearIndex <= totalYears) {
-                const key = `${yearIndex}-${weekIndex}`;
-                datesMap.set(key, currentDate.toLocaleString('fr-FR', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                }));
-                // Logs pour déboguer
-                if (key === '1-1' || key === '17-52' || key === '18-1' || key === '18-2' || key === '18-3') {
-                    console.log(`Case ${key}: ${datesMap.get(key)}`);
-                }
-                currentDate.setDate(currentDate.getDate() + 7); // Avancer de 7 jours (reste un dimanche)
-                weekIndex++;
-                if (weekIndex > weeksPerYear) {
-                    weekIndex = 1;
-                    yearIndex++;
-                }
-            }
+            datesMap.set('18-2', '27/04/2025, 00:00'); // Date fixée pour 18-2
 
             // Charger l'historique des cases remplies
             function loadGrid() {
@@ -379,14 +354,14 @@
                     const cell = document.querySelector(`[data-year="${year}"][data-week="${week}"]`);
                     if (cell) {
                         cell.classList.add('filled');
-                        cell.dataset.timestamp = data.timestamp;
+                        cell.dataset.timestamp = data.timestamp || ''; // Garder le timestamp si existant
                     }
                 });
 
                 // Pré-remplir toutes les cases jusqu'à la semaine 2 de l'année 18 (27 avril 2025)
-                yearIndex = 1;
-                weekIndex = 1;
-                const totalWeeksToFill = 888; // Jusqu'au 27 avril 2025 (888 semaines depuis 20/04/2008)
+                let yearIndex = 1;
+                let weekIndex = 1;
+                const totalWeeksToFill = 888; // Jusqu'à 18-2 (27 avril 2025)
                 let weeksFilled = 0;
 
                 while (weeksFilled < totalWeeksToFill && yearIndex <= totalYears) {
@@ -394,8 +369,13 @@
                     if (cell && !cell.classList.contains('filled')) {
                         const key = `${yearIndex}-${weekIndex}`;
                         cell.classList.add('filled');
-                        cell.dataset.timestamp = datesMap.get(key);
-                        console.log(`Remplissage case ${key}: ${datesMap.get(key)}`);
+                        // Ajouter un timestamp uniquement pour 18-2
+                        if (key === '18-2') {
+                            cell.dataset.timestamp = datesMap.get(key);
+                        } else {
+                            cell.dataset.timestamp = ''; // Pas de date pour les autres cases
+                        }
+                        console.log(`Remplissage case ${key}: ${cell.dataset.timestamp || 'Aucune date'}`);
                     }
                     weeksFilled++;
                     weekIndex++;
@@ -424,14 +404,17 @@
             // Mettre à jour l'historique
             async function updateGrid(year, week, action, timestamp = null) {
                 const user = netlifyIdentity.currentUser();
-                if (!user) return;
+                if (!user) {
+                    console.log('Utilisateur non connecté, impossible de mettre à jour la grille');
+                    messageBox.textContent = 'Veuillez vous connecter pour modifier la grille.';
+                    return;
+                }
 
-                const ip = await getIP();
                 const key = `${year}-${week}`;
-                const currentHistory = (user.user_metadata && user.user_metadata.memento) || {};
+                let currentHistory = (user.user_metadata && user.user_metadata.memento) || {};
 
                 if (action === 'fill') {
-                    const cellTimestamp = timestamp || currentHistory[key]?.timestamp || datesMap.get(key) || new Date().toLocaleString('fr-FR', {
+                    const cellTimestamp = timestamp || new Date().toLocaleString('fr-FR', {
                         day: '2-digit',
                         month: '2-digit',
                         year: 'numeric',
@@ -439,13 +422,22 @@
                         minute: '2-digit'
                     });
                     currentHistory[key] = { timestamp: cellTimestamp };
+                    console.log(`Ajout de la case ${key} avec timestamp: ${cellTimestamp}`);
                 } else if (action === 'delete') {
                     delete currentHistory[key];
+                    console.log(`Suppression de la case ${key}`);
                 }
 
-                await user.update({
-                    data: { memento: currentHistory }
-                });
+                try {
+                    await user.update({
+                        data: { memento: currentHistory }
+                    });
+                    console.log(`Mise à jour réussie pour ${action} de la case ${key}`);
+                } catch (error) {
+                    console.error(`Erreur lors de la mise à jour de la grille pour ${action}:`, error);
+                    messageBox.textContent = `Erreur lors de la ${action === 'fill' ? 'mise à jour' : 'suppression'}.`;
+                    return;
+                }
 
                 const cell = document.querySelector(`[data-year="${year}"][data-week="${week}"]`);
                 if (action === 'fill') {
@@ -456,7 +448,7 @@
                     cell.classList.remove('filled');
                     cell.classList.remove('selected');
                     cell.dataset.timestamp = '';
-                    messageBox.textContent = 'Case non remplie';
+                    messageBox.textContent = 'Case supprimée';
                     updateSelectedCellsDisplay();
                 }
             }
@@ -479,11 +471,19 @@
                     selectedCells = [];
                     document.querySelectorAll('.selected').forEach(cell => cell.classList.remove('selected'));
                     updateSelectedCellsDisplay();
+                    messageBox.textContent = 'Mode suppression désactivé';
+                } else {
+                    messageBox.textContent = 'Mode suppression activé';
                 }
             };
 
             // Supprimer les cases sélectionnées
             window.deleteSelectedCells = async function () {
+                if (selectedCells.length === 0) {
+                    messageBox.textContent = 'Aucune case sélectionnée à supprimer';
+                    return;
+                }
+
                 for (const { year, week } of selectedCells) {
                     await updateGrid(year, week, 'delete');
                 }
@@ -510,25 +510,31 @@
                 const year = parseInt(cell.dataset.year);
                 const week = parseInt(cell.dataset.week);
                 const key = `${year}-${week}`;
-                console.log(`Clic sur case ${key}: ${cell.dataset.timestamp}`);
 
                 if (selectMode) {
                     const cellIndex = selectedCells.findIndex(c => c.year === year && c.week === week);
                     if (cellIndex === -1) {
                         selectedCells.push({ year, week });
                         cell.classList.add('selected');
+                        console.log(`Case ${key} ajoutée à la sélection`);
                     } else {
                         selectedCells.splice(cellIndex, 1);
                         cell.classList.remove('selected');
+                        console.log(`Case ${key} retirée de la sélection`);
                     }
                     updateSelectedCellsDisplay();
                 } else {
                     const isFilled = cell.classList.contains('filled');
                     if (!isFilled) {
-                        const timestamp = datesMap.get(key);
-                        await updateGrid(year, week, 'fill', timestamp);
+                        // Ajouter une nouvelle case avec la date actuelle
+                        await updateGrid(year, week, 'fill');
                     } else {
-                        messageBox.textContent = `Case remplie le : ${cell.dataset.timestamp}`;
+                        const timestamp = cell.dataset.timestamp;
+                        if (timestamp) {
+                            messageBox.textContent = `Case remplie le : ${timestamp}`;
+                        } else {
+                            messageBox.textContent = 'Case remplie (pas de date)';
+                        }
                     }
                 }
             });
@@ -552,10 +558,8 @@
                     signupBtn.style.display = 'inline-block';
                     logoutBtn.style.display = 'none';
                     grid.querySelectorAll('.filled').forEach(cell => {
-                        if (!datesMap.has(`${cell.dataset.year}-${cell.dataset.week}`)) {
-                            cell.classList.remove('filled');
-                            cell.dataset.timestamp = '';
-                        }
+                        cell.classList.remove('filled');
+                        cell.dataset.timestamp = '';
                     });
                     messageBox.textContent = 'Cliquez sur une case pour voir son état.';
                 }
