@@ -322,8 +322,8 @@
     let selectMode = false;
     let selectedCells = [];
 
-    // Générer les étiquettes des années (0 à 99)
-    for (let year = 0; year < totalYears; year++) {
+    // Générer les étiquettes des années (1 à 100)
+    for (let year = 1; year <= totalYears; year++) {
         const label = document.createElement('span');
         label.textContent = year;
         yearsLabels.appendChild(label);
@@ -333,21 +333,21 @@
     for (let year = 0; year < totalYears; year++) {
         for (let week = 0; week < weeksPerYear; week++) {
             const cell = document.createElement('div');
-            cell.dataset.year = year; // Lignes étiquetées 0 à 99
+            cell.dataset.year = year + 1; // Lignes étiquetées 1 à 100
             cell.dataset.week = week + 1;
             grid.appendChild(cell);
         }
     }
 
     // Calculer les dates pour chaque case
-    const startDate = new Date('2008-04-20'); // Dimanche 20 avril 2008 (année 0, semaine 1)
+    const startDate = new Date('2008-04-20'); // Dimanche 20 avril 2008 (année 1, semaine 1)
     const datesMap = new Map();
     let currentDate = new Date(startDate);
-    let yearIndex = 0; // Commence à 0
+    let yearIndex = 1; // Commence à 1
     let weekIndex = 1;
 
     // Calculer les dates jusqu'à la fin de la grille
-    while (yearIndex < totalYears) {
+    while (yearIndex <= totalYears) {
         const key = `${yearIndex}-${weekIndex}`;
         datesMap.set(key, currentDate.toLocaleString('fr-FR', {
             day: '2-digit',
@@ -379,13 +379,13 @@
             }
         });
 
-        // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 17 (case 1, ligne 18, 20 avril 2025)
-        yearIndex = 0;
+        // Pré-remplir toutes les cases jusqu'à la semaine 2 de l'année 18 (case 2, ligne 18, 27 avril 2025)
+        yearIndex = 1;
         weekIndex = 1;
-        const totalWeeksToFill = 885; // 17 années (jusqu'au 20 avril 2025)
+        const totalWeeksToFill = 885; // 17 années + 1 semaine (jusqu'au 27 avril 2025)
         let weeksFilled = 0;
 
-        while (weeksFilled < totalWeeksToFill && yearIndex < totalYears) {
+        while (weeksFilled < totalWeeksToFill && yearIndex <= totalYears) {
             const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
             if (cell && !cell.classList.contains('filled')) {
                 const key = `${yearIndex}-${weekIndex}`;
@@ -400,8 +400,8 @@
             }
         }
 
-        // S'assurer que les cases après année 17, semaine 1 ne sont pas remplies
-        while (yearIndex < totalYears) {
+        // S'assurer que les cases après année 18, semaine 2 ne sont pas remplies
+        while (yearIndex <= totalYears) {
             const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
             if (cell && cell.classList.contains('filled')) {
                 cell.classList.remove('filled');
