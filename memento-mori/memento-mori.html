@@ -170,25 +170,25 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 360px; /* Ajuster pour la nouvelle taille */
+        max-width: 376px; /* Ajuster pour inclure grille + étiquettes */
         margin: 0 auto;
     }
     .grid {
-        grid-template-columns: repeat(52, 6px); /* Réduire la taille des cases */
+        grid-template-columns: repeat(52, 6px);
         grid-gap: 1px;
         padding: 8px;
-        width: 324px; /* Largeur corrigée : 52 * 6px + 51 * 1px + 16px */
-        height: 716px; /* Hauteur corrigée : 100 * 6px + 99 * 1px + 16px */
+        width: 356px; /* Largeur corrigée : 52 * 6px + 51 * 1px + 16px + 52 * 1px (bordures) */
+        height: 716px; /* Hauteur : 100 * 6px + 99 * 1px + 16px */
         box-sizing: content-box;
     }
     .grid div {
         width: 6px;
         height: 6px;
-        border: 0px;
+        border: 0.5px solid #0a0a0a; /* Remettre les bordures */
         box-sizing: border-box;
     }
     .grid div.filled {
-        border: 0px;
+        border: 0.5px solid #0a0a0a;
     }
     .grid div.selected {
         border: 1px solid #ff0000;
@@ -199,9 +199,9 @@ button:hover {
     }
     .years-labels span {
         font-size: 10px;
-        height: 6px;
-        line-height: 6px;
-        margin-bottom: 1px;
+        height: 7px; /* Ajuster pour mieux s'aligner avec les cases */
+        line-height: 7px;
+        margin-bottom: 0px; /* Ajuster l'espacement */
     }
     .years-labels span:nth-child(10n) {
         margin-bottom: 6px;
@@ -245,25 +245,25 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 340px; /* Ajuster pour la nouvelle taille */
+        max-width: 356px; /* Ajuster pour inclure grille + étiquettes */
         margin: 0 auto;
     }
     .grid {
         grid-template-columns: repeat(52, 6px);
         grid-gap: 0.5px;
         padding: 8px;
-        width: 323.5px; /* Largeur corrigée : 52 * 6px + 51 * 0.5px + 16px */
-        height: 665.5px; /* Hauteur corrigée : 100 * 6px + 99 * 0.5px + 16px */
+        width: 349.5px; /* Largeur corrigée : 52 * 6px + 51 * 0.5px + 16px + 52 * 1px (bordures) */
+        height: 665.5px; /* Hauteur : 100 * 6px + 99 * 0.5px + 16px */
         box-sizing: content-box;
     }
     .grid div {
         width: 6px;
         height: 6px;
-        border: 0px;
+        border: 0.5px solid #0a0a0a;
         box-sizing: border-box;
     }
     .grid div.filled {
-        border: 0px;
+        border: 0.5px solid #0a0a0a;
     }
     .grid div.selected {
         border: 1px solid #ff0000;
@@ -274,9 +274,9 @@ button:hover {
     }
     .years-labels span {
         font-size: 8px;
-        height: 6px;
-        line-height: 6px;
-        margin-bottom: 0.5px;
+        height: 6.5px; /* Ajuster pour mieux s'aligner avec les cases */
+        line-height: 6.5px;
+        margin-bottom: 0px;
     }
     .years-labels span:nth-child(10n) {
         margin-bottom: 6px;
