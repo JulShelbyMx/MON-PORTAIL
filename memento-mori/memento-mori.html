@@ -346,6 +346,7 @@
             let yearIndex = 1;
             let weekIndex = 1;
 
+            // Total de 888 semaines jusqu'à année 17, semaine 1 (27 avril 2025)
             while (yearIndex <= totalYears) {
                 const key = `${yearIndex}-${weekIndex}`;
                 datesMap.set(key, currentDate.toLocaleString('fr-FR', {
@@ -361,7 +362,6 @@
                     weekIndex = 1;
                     yearIndex++;
                 }
-                if (yearIndex === 17 && weekIndex === 2) break; // Arrêter après la semaine 1 de l'année 17
             }
 
             // Charger l'historique des cases remplies
@@ -382,19 +382,21 @@
                 // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 17
                 yearIndex = 1;
                 weekIndex = 1;
-                while (yearIndex <= totalYears) {
+                let totalWeeksFilled = 0;
+                const weeksUntilYear17Week1 = 888; // 888 semaines jusqu'au 27 avril 2025
+                while (totalWeeksFilled < weeksUntilYear17Week1 && yearIndex <= totalYears) {
                     const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
                     if (cell && !cell.classList.contains('filled')) {
                         const key = `${yearIndex}-${weekIndex}`;
                         cell.classList.add('filled');
                         cell.dataset.timestamp = datesMap.get(key);
                     }
+                    totalWeeksFilled++;
                     weekIndex++;
                     if (weekIndex > weeksPerYear) {
                         weekIndex = 1;
                         yearIndex++;
                     }
-                    if (yearIndex === 17 && weekIndex === 2) break;
                 }
             }
 
