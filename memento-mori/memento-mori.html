@@ -350,25 +350,28 @@
                 }
 
                 const history = (user.user_metadata && user.user_metadata.memento) || {};
+
+                // Étape 1 : Charger toutes les cases remplies depuis l'historique
                 Object.entries(history).forEach(([key, data]) => {
                     const [year, week] = key.split('-').map(Number);
                     const cell = document.querySelector(`[data-year="${year}"][data-week="${week}"]`);
                     if (cell) {
                         cell.classList.add('filled');
-                        cell.dataset.timestamp = data.timestamp || ''; // Garder le timestamp si existant
+                        cell.dataset.timestamp = data.timestamp || '';
+                        console.log(`Chargement case ${key} depuis l'historique: ${cell.dataset.timestamp || 'Aucune date'}`);
                     }
                 });
 
-                // Pré-remplir toutes les cases jusqu'à la semaine 2 de l'année 18 (27 avril 2025)
+                // Étape 2 : Pré-remplir jusqu'à la semaine 2 de l'année 18 (27 avril 2025) si pas déjà dans l'historique
                 let yearIndex = 1;
                 let weekIndex = 1;
-                const totalWeeksToFill = 886; // Jusqu'à 18-2 (27 avril 2025)
+                const totalWeeksToFill = 886;
                 let weeksFilled = 0;
 
                 while (weeksFilled < totalWeeksToFill && yearIndex <= totalYears) {
+                    const key = `${yearIndex}-${weekIndex}`;
                     const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
-                    if (cell && !cell.classList.contains('filled')) {
-                        const key = `${yearIndex}-${weekIndex}`;
+                    if (cell && !cell.classList.contains('filled')) { // Remplir uniquement si pas déjà dans l'historique
                         cell.classList.add('filled');
                         // Ajouter un timestamp uniquement pour 18-2
                         if (key === '18-2') {
@@ -376,7 +379,7 @@
                         } else {
                             cell.dataset.timestamp = ''; // Pas de date pour les autres cases
                         }
-                        console.log(`Remplissage case ${key}: ${cell.dataset.timestamp || 'Aucune date'}`);
+                        console.log(`Remplissage initial case ${key}: ${cell.dataset.timestamp || 'Aucune date'}`);
                     }
                     weeksFilled++;
                     weekIndex++;
@@ -386,20 +389,8 @@
                     }
                 }
 
-                // S'assurer que les cases après année 18, semaine 2 ne sont pas remplies
-                while (yearIndex <= totalYears) {
-                    const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
-                    if (cell && cell.classList.contains('filled')) {
-                        cell.classList.remove('filled');
-                        cell.dataset.timestamp = '';
-                        console.log(`Déremplissage case ${yearIndex}-${weekIndex}`);
-                    }
-                    weekIndex++;
-                    if (weekIndex > weeksPerYear) {
-                        weekIndex = 1;
-                        yearIndex++;
-                    }
-                }
+                // Étape 3 : Ne plus déremplir les cases après 18-2, car elles peuvent être remplies manuellement
+                // Les cases remplies manuellement sont déjà chargées depuis l'historique au début de la fonction
             }
 
             // Mettre à jour l'historique
