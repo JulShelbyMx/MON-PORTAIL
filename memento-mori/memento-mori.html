@@ -379,10 +379,10 @@
             }
         });
 
-        // Pré-remplir toutes les cases jusqu'à la semaine 2 de l'année 17 (case 2, ligne 18, incluant 27 avril 2025)
+        // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 17 (case 1, ligne 18, 20 avril 2025)
         yearIndex = 0;
         weekIndex = 1;
-        const totalWeeksToFill = 885; // 17 années + 1 semaine (jusqu'au 27 avril 2025)
+        const totalWeeksToFill = 884; // 17 années (jusqu'au 20 avril 2025)
         let weeksFilled = 0;
 
         while (weeksFilled < totalWeeksToFill && yearIndex < totalYears) {
@@ -400,7 +400,7 @@
             }
         }
 
-        // S'assurer que les cases après année 17, semaine 2 ne sont pas remplies
+        // S'assurer que les cases après année 17, semaine 1 ne sont pas remplies
         while (yearIndex < totalYears) {
             const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
             if (cell && cell.classList.contains('filled')) {
