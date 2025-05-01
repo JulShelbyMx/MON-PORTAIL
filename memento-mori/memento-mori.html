@@ -8,302 +8,304 @@
     <link rel="shortcut icon" href="../images/logopage.png" />
     <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
-      body {
+ body {
     background-color: #111;
     color: white;
     font-family: 'Arial', sans-serif;
     margin: 0;
     padding: 0;
-    }
+}
+.memento-hero {
+    background: url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.return-button {
+    padding: 15px 25px;
+    background-color: #ffb300;
+    color: #0a0a0a;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 20px;
+    font-family: 'Pirata One', sans-serif;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: 2px solid #0a0a0a;
+}
+.return-button:hover {
+    background-color: #e0a800;
+    transform: scale(1.05);
+}
+.memento-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+    text-align: center;
+}
+.grid-container {
+    display: inline-block;
+    position: relative;
+}
+.grid {
+    display: grid;
+    grid-template-columns: repeat(52, 12px);
+    grid-gap: 2px;
+    background-color: #ffb300;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+.grid div {
+    width: 12px;
+    height: 12px;
+    background-color: #ffb300;
+    border: 2px solid #0a0a0a;
+    cursor: pointer;
+    position: relative;
+}
+.grid div.filled {
+    background-color: #000;
+    border: 2px solid #0a0a0a;
+}
+.grid div.selected {
+    border: 2px solid #ff0000;
+}
+.message-box {
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #0a0a0a;
+    color: #ffb300;
+    border-radius: 8px;
+    font-family: 'Pirata One', sans-serif;
+    font-size: 16px;
+    min-height: 30px;
+    display: block;
+    width: fit-content;
+}
+.delete-menu {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.delete-menu button {
+    background: #ffb300;
+    border: none;
+    padding: 8px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: 'Pirata One', sans-serif;
+    font-size: 14px;
+}
+.delete-menu button:hover {
+    background: #e0a800;
+}
+.selected-cells {
+    color: #ffb300;
+    margin-bottom: 10px;
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+}
+.years-labels {
+    position: absolute;
+    right: -40px;
+    top: 15px;
+    height: calc(100% - 30px);
+    display: flex;
+    flex-direction: column;
+    color: #ffb300;
+    font-family: 'Pirata One', sans-serif;
+    text-align: right;
+}
+.years-labels span {
+    font-size: 14px;
+    height: 12px;
+    line-height: 12px;
+    margin-bottom: 2px;
+}
+.years-labels span:nth-child(10n) {
+    margin-bottom: 12px;
+}
+.grid div:nth-child(520n) {
+    margin-bottom: 10px;
+}
+.auth-container {
+    max-width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #1a1a1a;
+    border-radius: 8px;
+    color: #fff;
+    text-align: center;
+}
+button {
+    background: #ffb300;
+    border: none;
+    padding: 8px;
+    margin: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background: #e0a800;
+}
+@media (max-width: 768px) {
     .memento-hero {
-        background: url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
-        height: 30vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        height: 20vh;
     }
     .return-button {
-        padding: 15px 25px;
-        background-color: #ffb300;
-        color: #0a0a0a;
-        text-decoration: none;
-        border-radius: 10px;
-        font-size: 20px;
-        font-family: 'Pirata One', sans-serif;
-        font-weight: bold;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-        border: 2px solid #0a0a0a;
-    }
-    .return-button:hover {
-        background-color: #e0a800;
-        transform: scale(1.05);
+        padding: 10px 20px;
+        font-size: 16px;
     }
     .memento-container {
-        padding: 20px;
-        max-width: 1200px;
-        margin: 20px auto;
-        text-align: center;
+        padding: 5px;
+        margin: 5px auto;
+        max-width: 100%;
     }
     .grid-container {
-        display: inline-block;
-        position: relative;
+        display: block;
+        width: 100%;
+        max-width: 376px; /* Ajuster pour inclure grille + étiquettes */
+        margin: 0 auto;
     }
     .grid {
-        display: grid;
-        grid-template-columns: repeat(52, 12px);
-        grid-gap: 2px;
-        background-color: #ffb300;
-        padding: 15px;
-        border-radius: 12px;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        grid-template-columns: repeat(52, 6px); /* Réduire la taille des cases */
+        grid-gap: 1px;
+        padding: 8px;
+        width: 356px; /* Largeur corrigée : 52 * 6px + 51 * 1px + 16px + 52 * 1px (bordures) */
+        height: 716px; /* Hauteur corrigée : 100 * 6px + 99 * 1px + 16px + 100 * 1px (bordures) */
+        box-sizing: content-box;
     }
     .grid div {
-        width: 12px;
-        height: 12px;
-        background-color: #ffb300;
-        border: 2px solid #0a0a0a;
-        cursor: pointer;
-        position: relative;
+        width: 6px;
+        height: 6px;
+        border: 0.5px solid #0a0a0a;
+        box-sizing: border-box;
     }
     .grid div.filled {
-        background-color: #000;
-        border: 2px solid #0a0a0a;
+        border: 0.5px solid #0a0a0a;
     }
     .grid div.selected {
-        border: 2px solid #ff0000;
-    }
-    .message-box {
-        margin: 20px auto;
-        padding: 10px;
-        background-color: #0a0a0a;
-        color: #ffb300;
-        border-radius: 8px;
-        font-family: 'Pirata One', sans-serif;
-        font-size: 16px;
-        min-height: 30px;
-        display: block;
-        width: fit-content;
-    }
-    .delete-menu {
-        margin-top: 20px;
-        padding: 15px;
-        background-color: #1a1a1a;
-        border-radius: 8px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .delete-menu button {
-        background: #ffb300;
-        border: none;
-        padding: 8px 15px;
-        margin: 5px;
-        cursor: pointer;
-        border-radius: 5px;
-        font-family: 'Pirata One', sans-serif;
-        font-size: 14px;
-    }
-    .delete-menu button:hover {
-        background: #e0a800;
-    }
-    .selected-cells {
-        color: #ffb300;
-        margin-bottom: 10px;
-        font-family: 'Arial', sans-serif;
-        font-size: 14px;
+        border: 1px solid #ff0000;
     }
     .years-labels {
-        position: absolute;
-        right: -40px;
-        top: 15px;
-        height: calc(100% - 30px);
-        display: flex;
-        flex-direction: column;
-        color: #ffb300;
-        font-family: 'Pirata One', sans-serif;
-        text-align: right;
+        right: -20px;
+        top: 8px;
+        height: 700px; /* Hauteur ajustée pour correspondre à la grille */
     }
     .years-labels span {
-        font-size: 14px;
-        height: 12px;
-        line-height: 12px;
-        margin-bottom: 2px;
+        font-size: 10px;
+        height: 7px; /* Ajuster pour s'aligner avec les cases */
+        line-height: 7px;
+        margin-bottom: 0px;
     }
     .years-labels span:nth-child(10n) {
-        margin-bottom: 12px;
+        margin-bottom: 6px;
     }
     .grid div:nth-child(520n) {
-        margin-bottom: 10px;
+        margin-bottom: 6px;
+    }
+    .message-box {
+        font-size: 14px;
+        padding: 8px;
+        margin: 10px auto;
+    }
+    .delete-menu {
+        padding: 10px;
+    }
+    .delete-menu button {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+    .selected-cells {
+        font-size: 12px;
     }
     .auth-container {
-        max-width: 400px;
-        margin: 20px auto;
-        padding: 20px;
-        background: #1a1a1a;
-        border-radius: 8px;
-        color: #fff;
-        text-align: center;
+        max-width: 90%;
+        padding: 15px;
     }
-    button {
-        background: #ffb300;
-        border: none;
+}
+@media (max-width: 480px) {
+    .memento-hero {
+        height: 15vh;
+    }
+    .return-button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+    .memento-container {
+        padding: 5px;
+        margin: 5px auto;
+        max-width: 100%;
+    }
+    .grid-container {
+        display: block;
+        width: 100%;
+        max-width: 349.5px; /* Ajuster pour inclure grille + étiquettes */
+        margin: 0 auto;
+    }
+    .grid {
+        grid-template-columns: repeat(52, 6px);
+        grid-gap: 0.5px;
         padding: 8px;
-        margin: 5px;
-        cursor: pointer;
+        width: 349.5px; /* Largeur corrigée : 52 * 6px + 51 * 0.5px + 16px + 52 * 1px (bordures) */
+        height: 665.5px; /* Hauteur corrigée : 100 * 6px + 99 * 0.5px + 16px + 100 * 1px (bordures) */
+        box-sizing: content-box;
     }
-    button:hover {
-        background: #e0a800;
+    .grid div {
+        width: 6px;
+        height: 6px;
+        border: 0.5px solid #0a0a0a;
+        box-sizing: border-box;
     }
-    @media (max-width: 768px) {
-        .memento-hero {
-            height: 20vh;
-        }
-        .return-button {
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-        .memento-container {
-            padding: 5px;
-            margin: 5px auto;
-            max-width: 100%;
-        }
-        .grid-container {
-            display: block;
-            width: 100%;
-            max-width: 427px; /* Ajuster pour inclure grille + étiquettes */
-            margin: 0 auto;
-        }
-        .grid {
-            grid-template-columns: repeat(52, 7px); /* Augmenter la taille des cases */
-            grid-gap: 1px;
-            padding: 8px;
-            width: 407px; /* Largeur corrigée : 52 * 7px + 51 * 1px + 16px + 52 * 1px (bordures) */
-            height: 866px; /* Hauteur corrigée : 100 * 7px + 99 * 1px + 16px + 100 * 1px (bordures) */
-            box-sizing: content-box;
-        }
-        .grid div {
-            width: 7px;
-            height: 7px;
-            border: 0.5px solid #0a0a0a;
-            box-sizing: border-box;
-        }
-        .grid div.filled {
-            border: 0.5px solid #0a0a0a;
-        }
-        .grid div.selected {
-            border: 1px solid #ff0000;
-        }
-        .years-labels {
-            right: -20px;
-            top: 8px;
-        }
-        .years-labels span {
-            font-size: 10px;
-            height: 8px; /* Ajuster pour mieux s'aligner */
-            line-height: 8px;
-            margin-bottom: 0px;
-        }
-        .years-labels span:nth-child(10n) {
-            margin-bottom: 7px;
-        }
-        .grid div:nth-child(520n) {
-            margin-bottom: 7px;
-        }
-        .message-box {
-            font-size: 14px;
-            padding: 8px;
-            margin: 10px auto;
-        }
-        .delete-menu {
-            padding: 10px;
-        }
-        .delete-menu button {
-            padding: 6px 12px;
-            font-size: 12px;
-        }
-        .selected-cells {
-            font-size: 12px;
-        }
-        .auth-container {
-            max-width: 90%;
-            padding: 15px;
-        }
+    .grid div.filled {
+        border: 0.5px solid #0a0a0a;
     }
-    @media (max-width: 480px) {
-        .memento-hero {
-            height: 15vh;
-        }
-        .return-button {
-            padding: 8px 15px;
-            font-size: 14px;
-        }
-        .memento-container {
-            padding: 5px;
-            margin: 5px auto;
-            max-width: 100%;
-        }
-        .grid-container {
-            display: block;
-            width: 100%;
-            max-width: 400px; /* Ajuster pour inclure grille + étiquettes */
-            margin: 0 auto;
-        }
-        .grid {
-            grid-template-columns: repeat(52, 7px);
-            grid-gap: 0.5px;
-            padding: 8px;
-            width: 400px; /* Largeur corrigée : 52 * 7px + 51 * 0.5px + 16px + 52 * 1px (bordures) */
-            height: 815.5px; /* Hauteur corrigée : 100 * 7px + 99 * 0.5px + 16px + 100 * 1px (bordures) */
-            box-sizing: content-box;
-        }
-        .grid div {
-            width: 7px;
-            height: 7px;
-            border: 0.5px solid #0a0a0a;
-            box-sizing: border-box;
-        }
-        .grid div.filled {
-            border: 0.5px solid #0a0a0a;
-        }
-        .grid div.selected {
-            border: 1px solid #ff0000;
-        }
-        .years-labels {
-            right: -15px;
-            top: 8px;
-        }
-        .years-labels span {
-            font-size: 8px;
-            height: 7.5px; /* Ajuster pour mieux s'aligner */
-            line-height: 7.5px;
-            margin-bottom: 0px;
-        }
-        .years-labels span:nth-child(10n) {
-            margin-bottom: 7px;
-        }
-        .grid div:nth-child(520n) {
-            margin-bottom: 7px;
-        }
-        .message-box {
-            font-size: 12px;
-            padding: 6px;
-            margin: 8px auto;
-        }
-        .delete-menu {
-            padding: 8px;
-        }
-        .delete-menu button {
-            padding: 5px 10px;
-            font-size: 10px;
-        }
-        .selected-cells {
-            font-size: 10px;
-        }
-        .auth-container {
-            max-width: 95%;
-            padding: 10px;
-        }
+    .grid div.selected {
+        border: 1px solid #ff0000;
     }
+    .years-labels {
+        right: -15px;
+        top: 8px;
+        height: 649.5px; /* Hauteur ajustée pour correspondre à la grille */
+    }
+    .years-labels span {
+        font-size: 8px;
+        height: 6.5px; /* Ajuster pour s'aligner avec les cases */
+        line-height: 6.5px;
+        margin-bottom: 0px;
+    }
+    .years-labels span:nth-child(10n) {
+        margin-bottom: 6px;
+    }
+    .grid div:nth-child(520n) {
+        margin-bottom: 6px;
+    }
+    .message-box {
+        font-size: 12px;
+        padding: 6px;
+        margin: 8px auto;
+    }
+    .delete-menu {
+        padding: 8px;
+    }
+    .delete-menu button {
+        padding: 5px 10px;
+        font-size: 10px;
+    }
+    .selected-cells {
+        font-size: 10px;
+    }
+    .auth-container {
+        max-width: 95%;
+        padding: 10px;
+    }
+}
     </style>
 </head>
 <body>
