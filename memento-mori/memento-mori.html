@@ -319,14 +319,14 @@
             const weeksPerYear = 52;
             let selectMode = false;
             let selectedCells = [];
-
+        
             // Générer les étiquettes des années (1 à 100)
             for (let year = 1; year <= totalYears; year++) {
                 const label = document.createElement('span');
                 label.textContent = year;
                 yearsLabels.appendChild(label);
             }
-
+        
             // Générer la grille (100 ans x 52 semaines)
             for (let year = 0; year < totalYears; year++) {
                 for (let week = 0; week < weeksPerYear; week++) {
@@ -336,33 +336,36 @@
                     grid.appendChild(cell);
                 }
             }
-
-            // Calculer les dates pour chaque case
-            const startDate = new Date('2008-04-20'); // Dimanche 20 avril 2008 (année 1, semaine 1)
+        
+            // Calculer les dates pour chaque case (nouvelle méthode)
+            const referenceDate = new Date('2025-04-27'); // Référence : 27/04/2025 (case 1, ligne 18)
+            const startDate = new Date('2008-04-20'); // Début : 20/04/2008 (case 1, ligne 1)
             const datesMap = new Map();
-            let currentDate = new Date(startDate);
-            let yearIndex = 1; // Commence à 1
-            let weekIndex = 1;
-
-            // Calculer les dates jusqu'à la fin de la grille
-            while (yearIndex <= totalYears) {
-                const key = `${yearIndex}-${weekIndex}`;
-                datesMap.set(key, currentDate.toLocaleString('fr-FR', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                }));
-                console.log(`Case ${key}: ${datesMap.get(key)}`); // Log pour déboguer
-                currentDate.setDate(currentDate.getDate() + 7);
-                weekIndex++;
-                if (weekIndex > weeksPerYear) {
-                    weekIndex = 1;
-                    yearIndex++;
+            const totalWeeks = totalYears * weeksPerYear; // 5200 semaines (100 ans)
+            const weeksToReference = 884; // 884 semaines de 20/04/2008 à 27/04/2025
+        
+            // Remplir datesMap
+            for (let yearIndex = 1; yearIndex <= totalYears; yearIndex++) {
+                for (let weekIndex = 1; weekIndex <= weeksPerYear; weekIndex++) {
+                    const key = `${yearIndex}-${weekIndex}`;
+                    const weekNumber = (yearIndex - 1) * weeksPerYear + (weekIndex - 1); // Numéro de semaine (0 à 5199)
+                    const weeksDiff = weekNumber - weeksToReference; // Différence par rapport à case 1, ligne 18
+                    const currentDate = new Date(referenceDate);
+                    currentDate.setDate(currentDate.getDate() + weeksDiff * 7); // Reculer ou avancer
+                    datesMap.set(key, currentDate.toLocaleString('fr-FR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    }));
+                    // Logs pour déboguer
+                    if (key === '1-1' || key === '17-52' || key === '18-1' || key === '18-2') {
+                        console.log(`Case ${key}: ${datesMap.get(key)}`);
+                    }
                 }
             }
-
+        
             // Charger l'historique des cases remplies
             function loadGrid() {
                 const user = netlifyIdentity.currentUser();
@@ -370,7 +373,7 @@
                     console.log('Utilisateur non connecté, grille non remplie');
                     return;
                 }
-
+        
                 const history = (user.user_metadata && user.user_metadata.memento) || {};
                 Object.entries(history).forEach(([key, data]) => {
                     const [year, week] = key.split('-').map(Number);
@@ -380,14 +383,14 @@
                         cell.dataset.timestamp = data.timestamp;
                     }
                 });
-
-                // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 18 (case 1, ligne 18, 20 avril 2025)
-                yearIndex = 1;
-                weekIndex = 1;
-                const totalWeeksToFill = 884; // Jusqu'au 20 avril 2025 (semaine 20/04/2025 au 26/04/2025)
+        
+                // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 18 (case 1, ligne 18, 27 avril 2025)
+                let yearIndex = 1;
+                let weekIndex = 1;
+                const totalWeeksToFill = 884; // Jusqu'au 27 avril 2025 (884 semaines depuis 20/04/2008)
                 let weeksFilled = 0;
-
-                while (weeksFilled <= totalWeeksToFill && yearIndex <= totalYears) {
+        
+                while (weeksFilled < totalWeeksToFill && yearIndex <= totalYears) {
                     const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
                     if (cell && !cell.classList.contains('filled')) {
                         const key = `${yearIndex}-${weekIndex}`;
@@ -402,7 +405,7 @@
                         yearIndex++;
                     }
                 }
-
+        
                 // S'assurer que les cases après année 18, semaine 1 ne sont pas remplies
                 while (yearIndex <= totalYears) {
                     const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
@@ -417,16 +420,16 @@
                     }
                 }
             }
-
+        
             // Mettre à jour l'historique
             async function updateGrid(year, week, action, timestamp = null) {
                 const user = netlifyIdentity.currentUser();
                 if (!user) return;
-
+        
                 const ip = await getIP();
                 const key = `${year}-${week}`;
                 const currentHistory = (user.user_metadata && user.user_metadata.memento) || {};
-
+        
                 if (action === 'fill') {
                     const cellTimestamp = timestamp || currentHistory[key]?.timestamp || datesMap.get(key) || new Date().toLocaleString('fr-FR', {
                         day: '2-digit',
@@ -439,11 +442,11 @@
                 } else if (action === 'delete') {
                     delete currentHistory[key];
                 }
-
+        
                 await user.update({
                     data: { memento: currentHistory }
                 });
-
+        
                 const cell = document.querySelector(`[data-year="${year}"][data-week="${week}"]`);
                 if (action === 'fill') {
                     cell.classList.add('filled');
@@ -457,7 +460,7 @@
                     updateSelectedCellsDisplay();
                 }
             }
-
+        
             async function getIP() {
                 try {
                     const response = await fetch('https://api.ipify.org?format=json');
@@ -468,7 +471,7 @@
                     return 'Inconnue';
                 }
             }
-
+        
             // Activer/désactiver le mode suppression
             window.toggleSelectMode = function () {
                 selectMode = !selectMode;
@@ -478,7 +481,7 @@
                     updateSelectedCellsDisplay();
                 }
             };
-
+        
             // Supprimer les cases sélectionnées
             window.deleteSelectedCells = async function () {
                 for (const { year, week } of selectedCells) {
@@ -488,7 +491,7 @@
                 document.querySelectorAll('.selected').forEach(cell => cell.classList.remove('selected'));
                 updateSelectedCellsDisplay();
             };
-
+        
             // Mettre à jour l'affichage des cases sélectionnées
             function updateSelectedCellsDisplay() {
                 if (selectedCells.length === 0) {
@@ -498,17 +501,18 @@
                     selectedCellsDisplay.textContent = `Cases sélectionnées : ${cellsText}`;
                 }
             }
-
+        
             // Gérer les clics sur les cases
             grid.addEventListener('click', async (e) => {
                 const cell = e.target.closest('div');
                 if (!cell || !cell.dataset.year) return;
-
+        
                 const year = parseInt(cell.dataset.year);
                 const week = parseInt(cell.dataset.week);
-
+                const key = `${year}-${week}`;
+                console.log(`Clic sur case ${key}: ${cell.dataset.timestamp}`); // Log pour déboguer
+        
                 if (selectMode) {
-                    const cellKey = `${year}-${week}`;
                     const cellIndex = selectedCells.findIndex(c => c.year === year && c.week === week);
                     if (cellIndex === -1) {
                         selectedCells.push({ year, week });
@@ -521,7 +525,6 @@
                 } else {
                     const isFilled = cell.classList.contains('filled');
                     if (!isFilled) {
-                        const key = `${year}-${week}`;
                         const timestamp = datesMap.get(key);
                         await updateGrid(year, week, 'fill', timestamp);
                     } else {
@@ -529,13 +532,13 @@
                     }
                 }
             });
-
+        
             // Gestion de l'authentification
             const userStatus = document.getElementById('user-status');
             const loginBtn = document.getElementById('login-btn');
             const signupBtn = document.getElementById('signup-btn');
             const logoutBtn = document.getElementById('logout-btn');
-
+        
             function updateUI(user) {
                 if (user) {
                     userStatus.textContent = `Connecté: ${user.email}`;
@@ -557,12 +560,12 @@
                     messageBox.textContent = 'Cliquez sur une case pour voir son état.';
                 }
             }
-
+        
             netlifyIdentity.on('init', (user) => updateUI(user));
             netlifyIdentity.on('login', (user) => { updateUI(user); netlifyIdentity.close(); });
             netlifyIdentity.on('logout', () => updateUI(null));
             netlifyIdentity.on('signup', (user) => { updateUI(user); netlifyIdentity.close(); });
-
+        
             const checkUser = () => {
                 const user = netlifyIdentity.currentUser();
                 updateUI(user);
@@ -570,6 +573,6 @@
             checkUser();
             setInterval(checkUser, 5000);
         });
-    </script>
+        </script>
 </body>
 </html>
