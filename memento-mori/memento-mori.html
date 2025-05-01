@@ -73,7 +73,7 @@
             border: 2px solid #ff0000;
         }
         .message-box {
-            margin: 20px 0;
+            margin: 20px auto;
             padding: 10px;
             background-color: #0a0a0a;
             color: #ffb300;
@@ -81,7 +81,8 @@
             font-family: 'Pirata One', sans-serif;
             font-size: 16px;
             min-height: 30px;
-            display: inline-block;
+            display: block;
+            width: fit-content;
         }
         .delete-menu {
             margin-top: 20px;
@@ -200,7 +201,7 @@
             .message-box {
                 font-size: 14px;
                 padding: 8px;
-                margin: 10px 0;
+                margin: 10px auto;
             }
             .delete-menu {
                 padding: 10px;
@@ -260,7 +261,7 @@
             .message-box {
                 font-size: 12px;
                 padding: 6px;
-                margin: 8px 0;
+                margin: 8px auto;
             }
             .delete-menu {
                 padding: 8px;
@@ -286,7 +287,7 @@
 
     <section class="memento-hero">
         <div class="memento-hero-content">
-            <a href="index.html" class="return-button">BACK</a>
+            <a href="../index.html" class="return-button">BACK</a>
         </div>
     </section>
 
@@ -339,11 +340,13 @@
             }
 
             // Calculer les dates pour chaque case
-            const startDate = new Date('2023-08-27'); // Dimanche 27 août 2023 (semaine 19, année 15)
+            const referenceDate = new Date('2023-08-27'); // Dimanche 27 août 2023 (semaine 19, année 15)
+            const weeksSinceYear1Week1 = (15 - 1) * weeksPerYear + (19 - 1); // 746 semaines
+            const startDate = new Date(referenceDate.getTime() - weeksSinceYear1Week1 * 7 * 24 * 60 * 60 * 1000); // 19 janvier 2009
             const datesMap = new Map();
             let currentDate = new Date(startDate);
-            let yearIndex = 15;
-            let weekIndex = 19;
+            let yearIndex = 1;
+            let weekIndex = 1;
 
             while (yearIndex <= totalYears) {
                 const key = `${yearIndex}-${weekIndex}`;
@@ -378,31 +381,15 @@
                     }
                 });
 
-                // Pré-remplir les 16 ans complets + 1 semaine de l'année 17
-                for (let year = 1; year <= 16; year++) {
-                    for (let week = 1; week <= 52; week++) {
-                        const cell = document.querySelector(`[data-year="${year}"][data-week="${week}"]`);
-                        if (cell && !cell.classList.contains('filled')) {
-                            cell.classList.add('filled');
-                            cell.dataset.timestamp = 'Pré-rempli';
-                        }
-                    }
-                }
-                const firstWeekYear17 = document.querySelector('[data-year="17"][data-week="1"]');
-                if (firstWeekYear17 && !firstWeekYear17.classList.contains('filled')) {
-                    firstWeekYear17.classList.add('filled');
-                    firstWeekYear17.dataset.timestamp = 'Pré-rempli';
-                }
-
-                // Pré-remplir les cases à partir de la semaine 19 de l'année 15 jusqu'à la semaine 1 de l'année 17
-                yearIndex = 15;
-                weekIndex = 19;
+                // Pré-remplir toutes les cases jusqu'à la semaine 1 de l'année 17
+                yearIndex = 1;
+                weekIndex = 1;
                 while (yearIndex <= totalYears) {
                     const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
                     if (cell && !cell.classList.contains('filled')) {
                         const key = `${yearIndex}-${weekIndex}`;
                         cell.classList.add('filled');
-                        cell.dataset.timestamp = datesMap.get(key) || 'Pré-rempli';
+                        cell.dataset.timestamp = datesMap.get(key);
                     }
                     weekIndex++;
                     if (weekIndex > weeksPerYear) {
@@ -544,7 +531,7 @@
                     signupBtn.style.display = 'inline-block';
                     logoutBtn.style.display = 'none';
                     grid.querySelectorAll('.filled').forEach(cell => {
-                        if (cell.dataset.timestamp !== 'Pré-rempli' && !datesMap.has(`${cell.dataset.year}-${cell.dataset.week}`)) {
+                        if (!datesMap.has(`${cell.dataset.year}-${cell.dataset.week}`)) {
                             cell.classList.remove('filled');
                             cell.dataset.timestamp = '';
                         }
