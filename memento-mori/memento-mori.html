@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="../images/logopage.png" />
     <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
-        body {
+       body {
     background-color: #111;
     color: white;
     font-family: 'Arial', sans-serif;
@@ -114,14 +114,14 @@
 }
 .years-labels {
     position: absolute;
-    right: -40px; /* Déplacer les étiquettes à droite */
+    right: -40px;
     top: 15px;
     height: calc(100% - 30px);
     display: flex;
     flex-direction: column;
     color: #ffb300;
     font-family: 'Pirata One', sans-serif;
-    text-align: right; /* Aligner le texte à droite */
+    text-align: right;
 }
 .years-labels span {
     font-size: 14px;
@@ -163,44 +163,47 @@ button:hover {
         font-size: 16px;
     }
     .memento-container {
-        padding: 5px; /* Réduit pour maximiser l'espace */
+        padding: 5px;
         margin: 5px auto;
+        max-width: 100%; /* S'assurer que le conteneur ne dépasse pas l'écran */
     }
     .grid-container {
-        width: 100%; /* S'assurer que le conteneur prend toute la largeur disponible */
-        overflow-x: auto; /* Ajouter un scroll horizontal si nécessaire */
+        display: block; /* Changement pour mieux contrôler la largeur */
+        width: 100%;
+        max-width: 320px; /* Limiter la largeur totale */
+        margin: 0 auto;
     }
     .grid {
-        grid-template-columns: repeat(52, 5px); /* Réduire la taille des cases */
-        grid-gap: 1px; /* Réduire l'espace entre les cases */
-        padding: 8px; /* Réduire le padding */
+        grid-template-columns: repeat(52, 4px); /* Réduire encore plus */
+        grid-gap: 0.5px; /* Réduire l'espace entre les cases */
+        padding: 5px;
     }
     .grid div {
-        width: 5px;
-        height: 5px;
-        border: 1px solid #0a0a0a;
+        width: 4px;
+        height: 4px;
+        border: 0.5px solid #0a0a0a; /* Réduire la bordure */
     }
     .grid div.filled {
-        border: 1px solid #0a0a0a;
+        border: 0.5px solid #0a0a0a;
     }
     .grid div.selected {
-        border: 1px solid #ff0000;
+        border: 0.5px solid #ff0000;
     }
     .years-labels {
-        right: -20px; /* Rapprocher les étiquettes */
-        top: 8px;
+        right: -15px; /* Rapprocher les étiquettes */
+        top: 5px;
     }
     .years-labels span {
-        font-size: 10px; /* Réduire la taille des étiquettes */
-        height: 5px;
-        line-height: 5px;
-        margin-bottom: 1px;
+        font-size: 8px;
+        height: 4px;
+        line-height: 4px;
+        margin-bottom: 0.5px;
     }
     .years-labels span:nth-child(10n) {
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
     .grid div:nth-child(520n) {
-        margin-bottom: 5px;
+        margin-bottom: 4px;
     }
     .message-box {
         font-size: 14px;
@@ -233,42 +236,45 @@ button:hover {
     .memento-container {
         padding: 5px;
         margin: 5px auto;
+        max-width: 100%;
     }
     .grid-container {
+        display: block;
         width: 100%;
-        overflow-x: auto;
+        max-width: 260px; /* Réduire encore plus pour petits écrans */
+        margin: 0 auto;
     }
     .grid {
-        grid-template-columns: repeat(52, 4px); /* Encore plus petit pour petits écrans */
-        grid-gap: 1px;
-        padding: 5px;
+        grid-template-columns: repeat(52, 3px); /* Taille minimale pour les cases */
+        grid-gap: 0.3px;
+        padding: 3px;
     }
     .grid div {
-        width: 4px;
-        height: 4px;
-        border: 1px solid #0a0a0a;
+        width: 3px;
+        height: 3px;
+        border: 0.3px solid #0a0a0a;
     }
     .grid div.filled {
-        border: 1px solid #0a0a0a;
+        border: 0.3px solid #0a0a0a;
     }
     .grid div.selected {
-        border: 1px solid #ff0000;
+        border: 0.3px solid #ff0000;
     }
     .years-labels {
-        right: -15px; /* Rapprocher encore plus */
-        top: 5px;
+        right: -10px;
+        top: 3px;
     }
     .years-labels span {
-        font-size: 8px; /* Taille minimale pour rester lisible */
-        height: 4px;
-        line-height: 4px;
-        margin-bottom: 1px;
+        font-size: 6px;
+        height: 3px;
+        line-height: 3px;
+        margin-bottom: 0.3px;
     }
     .years-labels span:nth-child(10n) {
-        margin-bottom: 5px;
+        margin-bottom: 3px;
     }
     .grid div:nth-child(520n) {
-        margin-bottom: 4px;
+        margin-bottom: 3px;
     }
     .message-box {
         font-size: 12px;
