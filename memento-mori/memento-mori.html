@@ -70,7 +70,7 @@
     border: 2px solid #0a0a0a;
 }
 .grid div.selected {
-    border: 2px solid #ff0000;
+    border: 2px amiga solid #ff0000;
 }
 .message-box {
     margin: 20px auto;
@@ -177,18 +177,18 @@ button:hover {
         grid-template-columns: repeat(52, 6px); /* Réduire la taille des cases */
         grid-gap: 1px;
         padding: 8px;
-        width: 356px; /* Largeur corrigée : 52 * 6px + 51 * 1px + 16px + 52 * 1px (bordures) */
-        height: 716px; /* Hauteur corrigée : 100 * 6px + 99 * 1px + 16px + 100 * 1px (bordures) */
+        width: 356px; /* Largeur corrigée : 52 * 6px + 51 * 1px + 16px + 52 * 2px (bordures) */
+        height: 716px; /* Hauteur corrigée : 100 * 6px + 99 * 1px + 16px + 100 * 2px (bordures) */
         box-sizing: content-box;
     }
     .grid div {
         width: 6px;
         height: 6px;
-        border: 0.5px solid #0a0a0a;
+        border: 1px solid #0a0a0a; /* Ajuster la bordure pour mobile */
         box-sizing: border-box;
     }
     .grid div.filled {
-        border: 0.5px solid #0a0a0a;
+        border: 1px solid #0a0a0a;
     }
     .grid div.selected {
         border: 1px solid #ff0000;
@@ -196,7 +196,6 @@ button:hover {
     .years-labels {
         right: -20px;
         top: 8px;
-        height: 700px; /* Hauteur ajustée pour correspondre à la grille */
     }
     .years-labels span {
         font-size: 10px;
@@ -246,33 +245,32 @@ button:hover {
     .grid-container {
         display: block;
         width: 100%;
-        max-width: 349.5px; /* Ajuster pour inclure grille + étiquettes */
+        max-width: 356px; /* Ajuster pour inclure grille + étiquettes */
         margin: 0 auto;
     }
     .grid {
         grid-template-columns: repeat(52, 6px);
         grid-gap: 0.5px;
         padding: 8px;
-        width: 349.5px; /* Largeur corrigée : 52 * 6px + 51 * 0.5px + 16px + 52 * 1px (bordures) */
-        height: 665.5px; /* Hauteur corrigée : 100 * 6px + 99 * 0.5px + 16px + 100 * 1px (bordures) */
+        width: 349.5px; /* Largeur corrigée : 52 * 6px + 51 * 0.5px + 16px + 52 * 2px (bordures) */
+        height: 665.5px; /* Hauteur corrigée : 100 * 6px + 99 * 0.5px + 16px + 100 * 2px (bordures) */
         box-sizing: content-box;
     }
     .grid div {
         width: 6px;
         height: 6px;
-        border: 0.5px solid #0a0a0a;
+        border: 1px solid #0a0a0a;
         box-sizing: border-box;
     }
     .grid div.filled {
-        border: 0.5px solid #0a0a0a;
+        border: 1px solid #0a0a0a;
     }
     .grid div.selected {
         border: 1px solid #ff0000;
     }
     .years-labels {
-        right: -15px;
+        right: -10px; /* Rapprocher pour éviter le débordement */
         top: 8px;
-        height: 649.5px; /* Hauteur ajustée pour correspondre à la grille */
     }
     .years-labels span {
         font-size: 8px;
