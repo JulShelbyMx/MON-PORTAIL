@@ -69,8 +69,11 @@
             background-color: #000;
             border: 2px solid #0a0a0a;
         }
+        .grid div.selected {
+            border: 2px solid #ff0000;
+        }
         .message-box {
-            margin-top: 20px;
+            margin-bottom: 20px;
             padding: 10px;
             background-color: #0a0a0a;
             color: #ffb300;
@@ -79,6 +82,34 @@
             font-size: 16px;
             min-height: 30px;
             display: inline-block;
+        }
+        .delete-menu {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .delete-menu button {
+            background: #ffb300;
+            border: none;
+            padding: 8px 15px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: 'Pirata One', sans-serif;
+            font-size: 14px;
+        }
+        .delete-menu button:hover {
+            background: #e0a800;
+        }
+        .selected-cells {
+            color: #ffb300;
+            margin-bottom: 10px;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
         }
         .years-labels {
             position: absolute;
@@ -92,15 +123,15 @@
         }
         .years-labels span {
             font-size: 14px;
-            height: 12px; /* Correspond à la hauteur des cases */
+            height: 12px;
             line-height: 12px;
-            margin-bottom: 2px; /* Correspond à grid-gap */
+            margin-bottom: 2px;
         }
         .years-labels span:nth-child(10n) {
-            margin-bottom: 12px; /* Espace supplémentaire après chaque 10e année */
+            margin-bottom: 12px;
         }
         .grid div:nth-child(520n) {
-            margin-bottom: 10px; /* Espace supplémentaire après chaque 10e année (cases 520, 1040, ..., 4680) */
+            margin-bottom: 10px;
         }
         .auth-container {
             max-width: 400px;
@@ -120,6 +151,131 @@
         }
         button:hover {
             background: #e0a800;
+        }
+
+        /* Media Queries pour mobile */
+        @media (max-width: 768px) {
+            .memento-hero {
+                height: 20vh;
+            }
+            .return-button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+            .memento-container {
+                padding: 10px;
+                margin: 10px auto;
+            }
+            .grid {
+                grid-template-columns: repeat(52, 8px);
+                padding: 10px;
+            }
+            .grid div {
+                width: 8px;
+                height: 8px;
+                border: 1px solid #0a0a0a;
+            }
+            .grid div.filled {
+                border: 1px solid #0a0a0a;
+            }
+            .grid div.selected {
+                border: 1px solid #ff0000;
+            }
+            .years-labels {
+                left: -30px;
+                top: 10px;
+            }
+            .years-labels span {
+                font-size: 12px;
+                height: 8px;
+                line-height: 8px;
+                margin-bottom: 2px;
+            }
+            .years-labels span:nth-child(10n) {
+                margin-bottom: 10px;
+            }
+            .grid div:nth-child(520n) {
+                margin-bottom: 8px;
+            }
+            .message-box {
+                font-size: 14px;
+                padding: 8px;
+                margin-bottom: 10px;
+            }
+            .delete-menu {
+                padding: 10px;
+            }
+            .delete-menu button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            .selected-cells {
+                font-size: 12px;
+            }
+            .auth-container {
+                max-width: 90%;
+                padding: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .memento-hero {
+                height: 15vh;
+            }
+            .return-button {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            .grid {
+                grid-template-columns: repeat(52, 6px);
+                padding: 8px;
+            }
+            .grid div {
+                width: 6px;
+                height: 6px;
+                border: 1px solid #0a0a0a;
+            }
+            .grid div.filled {
+                border: 1px solid #0a0a0a;
+            }
+            .grid div.selected {
+                border: 1px solid #ff0000;
+            }
+            .years-labels {
+                left: -25px;
+                top: 8px;
+            }
+            .years-labels span {
+                font-size: 10px;
+                height: 6px;
+                line-height: 6px;
+                margin-bottom: 2px;
+            }
+            .years-labels span:nth-child(10n) {
+                margin-bottom: 8px;
+            }
+            .grid div:nth-child(520n) {
+                margin-bottom: 6px;
+            }
+            .message-box {
+                font-size: 12px;
+                padding: 6px;
+                margin-bottom: 8px;
+            }
+            .delete-menu {
+                padding: 8px;
+            }
+            .delete-menu button {
+                padding: 5px 10px;
+                font-size: 10px;
+            }
+            .selected-cells {
+                font-size: 10px;
+            }
+            .auth-container {
+                max-width: 95%;
+                padding: 10px;
+            }
         }
     </style>
 </head>
@@ -142,11 +298,16 @@
     </div>
 
     <div class="memento-container">
+        <div class="message-box" id="message-box">Cliquez sur une case pour voir son état.</div>
         <div class="grid-container">
             <div class="years-labels" id="years-labels"></div>
             <div class="grid" id="memento-grid"></div>
         </div>
-        <div class="message-box" id="message-box">Cliquez sur une case pour voir son état.</div>
+        <div class="delete-menu">
+            <div class="selected-cells" id="selected-cells">Cases sélectionnées : Aucune</div>
+            <button onclick="toggleSelectMode()">Activer/Désactiver mode suppression</button>
+            <button onclick="deleteSelectedCells()">Supprimer les cases sélectionnées</button>
+        </div>
     </div>
 
     <script>
@@ -154,8 +315,11 @@
             const grid = document.getElementById('memento-grid');
             const yearsLabels = document.getElementById('years-labels');
             const messageBox = document.getElementById('message-box');
+            const selectedCellsDisplay = document.getElementById('selected-cells');
             const totalYears = 100;
             const weeksPerYear = 52;
+            let selectMode = false;
+            let selectedCells = [];
 
             // Générer les étiquettes des années (1 à 100)
             for (let year = 1; year <= totalYears; year++) {
@@ -174,6 +338,31 @@
                 }
             }
 
+            // Calculer les dates pour chaque case
+            const startDate = new Date('2023-08-27'); // Dimanche 27 août 2023 (semaine 19, année 15)
+            const datesMap = new Map();
+            let currentDate = new Date(startDate);
+            let yearIndex = 15;
+            let weekIndex = 19;
+
+            while (yearIndex <= totalYears) {
+                const key = `${yearIndex}-${weekIndex}`;
+                datesMap.set(key, currentDate.toLocaleString('fr-FR', {
+                    day: '2-digit',
+                    month: '2-digit',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                }));
+                currentDate.setDate(currentDate.getDate() + 7);
+                weekIndex++;
+                if (weekIndex > weeksPerYear) {
+                    weekIndex = 1;
+                    yearIndex++;
+                }
+                if (yearIndex === 17 && weekIndex === 2) break; // Arrêter après la semaine 1 de l'année 17
+            }
+
             // Charger l'historique des cases remplies
             function loadGrid() {
                 const user = netlifyIdentity.currentUser();
@@ -185,7 +374,7 @@
                     const cell = document.querySelector(`[data-year="${year}"][data-week="${week}"]`);
                     if (cell) {
                         cell.classList.add('filled');
-                        cell.dataset.timestamp = data.timestamp; // Stocker le timestamp dans l'élément
+                        cell.dataset.timestamp = data.timestamp;
                     }
                 });
 
@@ -204,27 +393,44 @@
                     firstWeekYear17.classList.add('filled');
                     firstWeekYear17.dataset.timestamp = 'Pré-rempli';
                 }
+
+                // Pré-remplir les cases à partir de la semaine 19 de l'année 15 jusqu'à la semaine 1 de l'année 17
+                yearIndex = 15;
+                weekIndex = 19;
+                while (yearIndex <= totalYears) {
+                    const cell = document.querySelector(`[data-year="${yearIndex}"][data-week="${weekIndex}"]`);
+                    if (cell && !cell.classList.contains('filled')) {
+                        const key = `${yearIndex}-${weekIndex}`;
+                        cell.classList.add('filled');
+                        cell.dataset.timestamp = datesMap.get(key) || 'Pré-rempli';
+                    }
+                    weekIndex++;
+                    if (weekIndex > weeksPerYear) {
+                        weekIndex = 1;
+                        yearIndex++;
+                    }
+                    if (yearIndex === 17 && weekIndex === 2) break;
+                }
             }
 
             // Mettre à jour l'historique
-            async function updateGrid(year, week, action) {
+            async function updateGrid(year, week, action, timestamp = null) {
                 const user = netlifyIdentity.currentUser();
                 if (!user) return;
 
                 const ip = await getIP();
-                const timestamp = new Date().toLocaleString('fr-FR', {
-                    day: '2-digit',
-                    month: '2-digit',
-                    year: 'numeric',
-                    hour: '2-digit',
-                    minute: '2-digit'
-                });
-
                 const key = `${year}-${week}`;
                 const currentHistory = (user.user_metadata && user.user_metadata.memento) || {};
 
                 if (action === 'fill') {
-                    currentHistory[key] = { timestamp };
+                    const cellTimestamp = timestamp || currentHistory[key]?.timestamp || datesMap.get(key) || new Date().toLocaleString('fr-FR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    currentHistory[key] = { timestamp: cellTimestamp };
                 } else if (action === 'delete') {
                     delete currentHistory[key];
                 }
@@ -236,12 +442,14 @@
                 const cell = document.querySelector(`[data-year="${year}"][data-week="${week}"]`);
                 if (action === 'fill') {
                     cell.classList.add('filled');
-                    cell.dataset.timestamp = timestamp;
-                    messageBox.textContent = `Case remplie le : ${timestamp}`;
+                    cell.dataset.timestamp = currentHistory[key].timestamp;
+                    messageBox.textContent = `Case remplie le : ${cell.dataset.timestamp}`;
                 } else if (action === 'delete') {
                     cell.classList.remove('filled');
+                    cell.classList.remove('selected');
                     cell.dataset.timestamp = '';
                     messageBox.textContent = 'Case non remplie';
+                    updateSelectedCellsDisplay();
                 }
             }
 
@@ -256,6 +464,36 @@
                 }
             }
 
+            // Activer/désactiver le mode suppression
+            window.toggleSelectMode = function () {
+                selectMode = !selectMode;
+                if (!selectMode) {
+                    selectedCells = [];
+                    document.querySelectorAll('.selected').forEach(cell => cell.classList.remove('selected'));
+                    updateSelectedCellsDisplay();
+                }
+            };
+
+            // Supprimer les cases sélectionnées
+            window.deleteSelectedCells = async function () {
+                for (const { year, week } of selectedCells) {
+                    await updateGrid(year, week, 'delete');
+                }
+                selectedCells = [];
+                document.querySelectorAll('.selected').forEach(cell => cell.classList.remove('selected'));
+                updateSelectedCellsDisplay();
+            };
+
+            // Mettre à jour l'affichage des cases sélectionnées
+            function updateSelectedCellsDisplay() {
+                if (selectedCells.length === 0) {
+                    selectedCellsDisplay.textContent = 'Cases sélectionnées : Aucune';
+                } else {
+                    const cellsText = selectedCells.map(cell => `Année ${cell.year}, Semaine ${cell.week}`).join('; ');
+                    selectedCellsDisplay.textContent = `Cases sélectionnées : ${cellsText}`;
+                }
+            }
+
             // Gérer les clics sur les cases
             grid.addEventListener('click', async (e) => {
                 const cell = e.target.closest('div');
@@ -263,27 +501,27 @@
 
                 const year = parseInt(cell.dataset.year);
                 const week = parseInt(cell.dataset.week);
-                const isFilled = cell.classList.contains('filled');
 
-                if (!isFilled) {
-                    await updateGrid(year, week, 'fill');
+                if (selectMode) {
+                    const cellKey = `${year}-${week}`;
+                    const cellIndex = selectedCells.findIndex(c => c.year === year && c.week === week);
+                    if (cellIndex === -1) {
+                        selectedCells.push({ year, week });
+                        cell.classList.add('selected');
+                    } else {
+                        selectedCells.splice(cellIndex, 1);
+                        cell.classList.remove('selected');
+                    }
+                    updateSelectedCellsDisplay();
                 } else {
-                    await updateGrid(year, week, 'delete');
-                }
-            });
-
-            // Afficher le message au clic
-            grid.addEventListener('click', (e) => {
-                const cell = e.target.closest('div');
-                if (!cell || !cell.dataset.year) return;
-
-                const isFilled = cell.classList.contains('filled');
-                const timestamp = cell.dataset.timestamp || '';
-
-                if (isFilled && timestamp) {
-                    messageBox.textContent = `Case remplie le : ${timestamp}`;
-                } else {
-                    messageBox.textContent = 'Case non remplie';
+                    const isFilled = cell.classList.contains('filled');
+                    if (!isFilled) {
+                        const key = `${year}-${week}`;
+                        const timestamp = datesMap.get(key);
+                        await updateGrid(year, week, 'fill', timestamp);
+                    } else {
+                        messageBox.textContent = `Case remplie le : ${cell.dataset.timestamp}`;
+                    }
                 }
             });
 
@@ -306,7 +544,7 @@
                     signupBtn.style.display = 'inline-block';
                     logoutBtn.style.display = 'none';
                     grid.querySelectorAll('.filled').forEach(cell => {
-                        if (cell.dataset.timestamp !== 'Pré-rempli') {
+                        if (cell.dataset.timestamp !== 'Pré-rempli' && !datesMap.has(`${cell.dataset.year}-${cell.dataset.week}`)) {
                             cell.classList.remove('filled');
                             cell.dataset.timestamp = '';
                         }
