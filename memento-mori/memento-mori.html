@@ -114,13 +114,14 @@
         }
         .years-labels {
             position: absolute;
-            left: -40px;
+            right: -40px; /* Déplacer les étiquettes à droite */
             top: 15px;
             height: calc(100% - 30px);
             display: flex;
             flex-direction: column;
             color: #ffb300;
             font-family: 'Pirata One', sans-serif;
+            text-align: right; /* Aligner le texte à droite */
         }
         .years-labels span {
             font-size: 14px;
@@ -181,7 +182,7 @@
                 border: 1px solid #ff0000;
             }
             .years-labels {
-                left: -30px;
+                right: -30px; /* Ajuster pour mobile */
                 top: 10px;
             }
             .years-labels span {
@@ -240,7 +241,7 @@
                 border: 1px solid #ff0000;
             }
             .years-labels {
-                left: -25px;
+                right: -25px; /* Ajuster pour petits écrans */
                 top: 8px;
             }
             .years-labels span {
@@ -338,7 +339,7 @@
 
             // Définir les dates uniquement pour 18-2 et les nouvelles cases
             const datesMap = new Map();
-            datesMap.set('18-2', '27/04/2025, 00:00'); // Date fixée pour 18-2
+            datesMap.set('18-2', '27/04/2025, 17:30'); // Date fixée pour 18-2 avec heure à 17h30
 
             // Charger l'historique des cases remplies
             function loadGrid() {
@@ -361,7 +362,7 @@
                 // Pré-remplir toutes les cases jusqu'à la semaine 2 de l'année 18 (27 avril 2025)
                 let yearIndex = 1;
                 let weekIndex = 1;
-                const totalWeeksToFill = 886; // Jusqu'à 18-2 (27 avril 2025)
+                const totalWeeksToFill = 888; // Jusqu'à 18-2 (27 avril 2025)
                 let weeksFilled = 0;
 
                 while (weeksFilled < totalWeeksToFill && yearIndex <= totalYears) {
