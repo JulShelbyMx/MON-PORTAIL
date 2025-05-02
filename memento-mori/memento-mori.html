@@ -54,6 +54,8 @@
             grid-gap: 2px;
             background-color: #ffb300;
             padding: 15px;
+            width: 760px; /* 52 * 12px + 51 * 2px + 30px (padding) + 52 * 4px (bordures) */
+            height: 1828px; /* 100 * 12px + 99 * 2px + 30px + 100 * 4px */
             border-radius: 12px;
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
         }
@@ -64,6 +66,7 @@
             border: 2px solid #0a0a0a;
             cursor: pointer;
             position: relative;
+            box-sizing: border-box;
         }
         .grid div.filled {
             background-color: #000;
@@ -114,27 +117,27 @@
         }
         .years-labels {
             position: absolute;
-            right: -40px; /* Déplacer les étiquettes à droite */
+            left: -40px;
             top: 15px;
             height: calc(100% - 30px);
             display: flex;
             flex-direction: column;
             color: #ffb300;
             font-family: 'Pirata One', sans-serif;
-            text-align: right; /* Aligner le texte à droite */
+            text-align: left;
         }
         .years-labels span {
-            font-size: 14px;
-            height: 12px;
-            line-height: 12px;
-            margin-bottom: 2px;
-        }
-        .years-labels span:nth-child(10n) {
-            margin-bottom: 12px;
-        }
-        .grid div:nth-child(520n) {
-            margin-bottom: 10px;
-        }
+                font-size: 14px;
+                height: 18px;
+                line-height: 14px;
+                margin-bottom: 0px;
+            }
+            .years-labels span:nth-child(10n) {
+                margin-bottom: 12px;
+            }
+            .grid div:nth-child(520n) {
+                margin-bottom: 12px;
+            }
         .auth-container {
             max-width: 400px;
             margin: 20px auto;
@@ -174,8 +177,8 @@
         grid-template-columns: repeat(52, 8px);
         grid-gap: 1px;
         padding: 10px;
-        width: 475px;
-        height: 990px;
+        width: 964px; /* 52 * 12px + 51 * 2px + 30px (padding) + 52 * 4px (bordures) */
+        height: 1828px; /* 100 * 12px + 99 * 2px + 30px + 100 * 4px */
     }
     .grid div {
         width: 8px;
@@ -195,16 +198,16 @@
         text-align: left;
     }
     .years-labels span {
-        font-size: 10px;
-        height: 10px;
-        line-height: 10px;
+        font-size: 14px;
+        height: 18px;
+        line-height: 20px;
         margin-bottom: 0px;
     }
     .years-labels span:nth-child(10n) {
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
     .grid div:nth-child(520n) {
-        margin-bottom: 8px;
+        margin-bottom: 12px;
     }
     .message-box {
         font-size: 14px;
