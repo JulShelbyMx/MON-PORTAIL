@@ -47,19 +47,18 @@
 .grid-container {
     display: inline-block;
     position: relative;
+    max-width: 1004px; /* 964px (grille) + 40px (étiquettes) */
 }
 .grid {
     display: grid;
-    grid-template-columns: repeat(52, 12px);
-    grid-gap: 2px;
-    background-color: #ffb300;
-    padding: 15px;
-    padding: 15px;
-    width: 760px; /* 52 * 12px + 51 * 2px + 30px (padding) + 52 * 4px (bordures) */
-    height: 1828px; /* 100 * 12px + 99 * 2px + 30px + 100 * 4px */
-    border-radius: 12px;
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-    box-sizing: content-box;
+            grid-template-columns: repeat(52, 12px);
+            grid-gap: 2px;
+            background-color: #ffb300;
+            padding: 15px;
+            width: 760px; /* 52 * 12px + 51 * 2px + 30px (padding) + 52 * 4px (bordures) */
+            height: 1828px; /* 100 * 12px + 99 * 2px + 30px + 100 * 4px */
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
 }
 .grid div {
     width: 12px;
@@ -130,8 +129,8 @@
 }
 .years-labels span {
     font-size: 14px;
-    height: 16px; /* 12px (case) + 2px (gap) + 2px (bordures) */
-    line-height: 14px;
+    height: 18px; /* 12px (case) + 2px (gap) + 2px (bordures) */
+    line-height: 16px;
     margin-bottom: 0px;
 }
 .years-labels span:nth-child(10n) {
