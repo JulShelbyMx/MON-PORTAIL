@@ -47,9 +47,6 @@
 .grid-container {
     display: inline-block;
     position: relative;
-    width: 100%;
-    max-width: 1004px; /* 964px (grille) + 40px (étiquettes) */
-    margin: 0 auto;
 }
 .grid {
     display: grid;
@@ -57,7 +54,8 @@
     grid-gap: 2px;
     background-color: #ffb300;
     padding: 15px;
-    width: 964px; /* 52 * 12px + 51 * 2px + 30px (padding) + 52 * 4px (bordures) */
+    padding: 15px;
+    width: 760px; /* 52 * 12px + 51 * 2px + 30px (padding) + 52 * 4px (bordures) */
     height: 1828px; /* 100 * 12px + 99 * 2px + 30px + 100 * 4px */
     border-radius: 12px;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
