@@ -8,7 +8,7 @@
     <link rel="shortcut icon" href="../images/logopage.png" />
     <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
- body {
+        body {
             background-color: #111;
             color: white;
             font-family: 'Arial', sans-serif;
@@ -114,14 +114,14 @@
         }
         .years-labels {
             position: absolute;
-            left: -40px; /* Déplacer les étiquettes à droite */
+            right: -40px; /* Déplacer les étiquettes à droite */
             top: 15px;
             height: calc(100% - 30px);
             display: flex;
             flex-direction: column;
             color: #ffb300;
             font-family: 'Pirata One', sans-serif;
-            text-align: left; /* Aligner le texte à droite */
+            text-align: right; /* Aligner le texte à droite */
         }
         .years-labels span {
             font-size: 14px;
@@ -154,152 +154,128 @@
         button:hover {
             background: #e0a800;
         }
-
-@media (max-width: 768px) {
-    .memento-hero {
-        height: 20vh;
-    }
-    .return-button {
-        padding: 10px 20px;
-        font-size: 16px;
-    }
-    .memento-container {
-        padding: 10px;
-        margin: 10px auto;
-    }
-    .grid-container {
-        max-width: 480px; /* 458px (grille) + 20px (étiquettes) + marge */
-    }
-    .grid {
-        grid-template-columns: repeat(52, 8px);
-        grid-gap: 1px;
-        padding: 10px;
-        width: 475px;
-        height: 990px;
-    }
-    .grid div {
-        width: 8px;
-        height: 8px;
-        border: 1px solid #0a0a0a;
-    }
-    .grid div.filled {
-        border: 1px solid #0a0a0a;
-    }
-    .grid div.selected {
-        border: 1px solid #ff0000;
-    }
-    .years-labels {
-        left: -45px;
-        top: 10px;
-        color: #ffb300;
-        text-align: left;
-    }
-    .years-labels span {
-        font-size: 10px;
-        height: 10px;
-        line-height: 10px;
-        margin-bottom: 0px;
-    }
-    .years-labels span:nth-child(10n) {
-        margin-bottom: 8px;
-    }
-    .grid div:nth-child(520n) {
-        margin-bottom: 8px;
-    }
-    .message-box {
-        font-size: 14px;
-        padding: 8px;
-        margin: 10px auto;
-    }
-    .delete-menu {
-        padding: 10px;
-    }
-    .delete-menu button {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-    .selected-cells {
-        font-size: 12px;
-    }
-    .auth-container {
-        max-width: 90%;
-        padding: 15px;
-    }
-}
-@media (max-width: 480px) {
-    .memento-hero {
-        height: 15vh;
-    }
-    .return-button {
-        padding: 8px 15px;
-        font-size: 14px;
-    }
-    .memento-container {
-        padding: 5px;
-        margin: 5px auto;
-    }
-    .grid-container {
-        max-width: 335.5px; /* 325.5px (grille) + 10px (étiquettes) */
-    }
-    .grid {
-        grid-template-columns: repeat(52, 6px);
-        grid-gap: 0.7px;
-        padding: 9px;
-        padding-left: 4px;
-        width: 340px;
-        height: 855px; 
-    }
-    .grid div {
-        width: 6px;
-        height: 6px;
-        border: 1px solid #0a0a0a;
-    }
-    .grid div.filled {
-        border: 1px solid #0a0a0a;
-    }
-    .grid div.selected {
-        border: 1px solid #ff0000;;
-    }
-    .years-labels {
-        left: -10.5px;
-        top: 8px;
-        color: #ffb300;
-        text-align: left;
-    }
-    .years-labels span {
-        font-size: 6px;
-        height: 8.3px;
-        line-height: 8px;
-        margin-bottom: 0px;
-    }
-    .years-labels span:nth-child(10n) {
-        margin-bottom: 5.5px;
-    }
-    .grid div:nth-child(520n) {
-        margin-bottom: 5.5px;
-    }
-    .message-box {
-        font-size: 12px;
-        padding: 6px;
-        margin: 8px auto;
-    }
-    .delete-menu {
-        padding: 8px;
-    }
-    .delete-menu button {
-        padding: 5px 10px;
-        font-size: 10px;
-    }
-    .selected-cells {
-        font-size: 10px;
-    }
-    .auth-container {
-        max-width: 95%;
-        padding: 10px;
-    }
-}
-
-
+        @media (max-width: 768px) {
+            .memento-hero {
+                height: 20vh;
+            }
+            .return-button {
+                padding: 10px 20px;
+                font-size: 16px;
+            }
+            .memento-container {
+                padding: 10px;
+                margin: 10px auto;
+            }
+            .grid {
+                grid-template-columns: repeat(52, 8px);
+                padding: 10px;
+            }
+            .grid div {
+                width: 8px;
+                height: 8px;
+                border: 1px solid #0a0a0a;
+            }
+            .grid div.filled {
+                border: 1px solid #0a0a0a;
+            }
+            .grid div.selected {
+                border: 1px solid #ff0000;
+            }
+            .years-labels {
+                right: -30px; /* Ajuster pour mobile */
+                top: 10px;
+            }
+            .years-labels span {
+                font-size: 12px;
+                height: 8px;
+                line-height: 8px;
+                margin-bottom: 2px;
+            }
+            .years-labels span:nth-child(10n) {
+                margin-bottom: 10px;
+            }
+            .grid div:nth-child(520n) {
+                margin-bottom: 8px;
+            }
+            .message-box {
+                font-size: 14px;
+                padding: 8px;
+                margin: 10px auto;
+            }
+            .delete-menu {
+                padding: 10px;
+            }
+            .delete-menu button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+            .selected-cells {
+                font-size: 12px;
+            }
+            .auth-container {
+                max-width: 90%;
+                padding: 15px;
+            }
+        }
+        @media (max-width: 480px) {
+            .memento-hero {
+                height: 15vh;
+            }
+            .return-button {
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+            .grid {
+                grid-template-columns: repeat(52, 6px);
+                padding: 8px;
+            }
+            .grid div {
+                width: 6px;
+                height: 6px;
+                border: 1px solid #0a0a0a;
+            }
+            .grid div.filled {
+                border: 1px solid #0a0a0a;
+            }
+            .grid div.selected {
+                border: 1px solid #ff0000;
+            }
+            .years-labels {
+                right: -25px; /* Ajuster pour petits écrans */
+                top: 8px;
+            }
+            .years-labels span {
+                font-size: 10px;
+                height: 6px;
+                line-height: 6px;
+                margin-bottom: 2px;
+            }
+            .years-labels span:nth-child(10n) {
+                margin-bottom: 8px;
+            }
+            .grid div:nth-child(520n) {
+                margin-bottom: 6px;
+            }
+            .message-box {
+                font-size: 12px;
+                padding: 6px;
+                margin: 8px auto;
+            }
+            .delete-menu {
+                padding: 8px;
+            }
+            .delete-menu button {
+                padding: 5px 10px;
+                font-size: 10px;
+            }
+            .selected-cells {
+                font-size: 10px;
+            }
+            .auth-container {
+                max-width: 95%;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -309,7 +285,7 @@
 
     <section class="memento-hero">
         <div class="memento-hero-content">
-            <a href="../index.html" class="return-button">BACK</a>
+            <a href="index.html" class="return-button">BACK</a>
         </div>
     </section>
 
@@ -389,7 +365,7 @@
                 // Étape 2 : Pré-remplir jusqu'à la semaine 2 de l'année 18 (27 avril 2025) si pas déjà dans l'historique
                 let yearIndex = 1;
                 let weekIndex = 1;
-                const totalWeeksToFill = 886;
+                const totalWeeksToFill = 888; // Jusqu'à 18-2 (27 avril 2025)
                 let weeksFilled = 0;
 
                 while (weeksFilled < totalWeeksToFill && yearIndex <= totalYears) {
