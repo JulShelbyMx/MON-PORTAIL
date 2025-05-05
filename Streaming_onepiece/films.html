@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,9 +23,8 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
-            background-color: #111; /* Fond de secours */
+            background-color: #111;
         }
-
         .return-button {
             padding: 15px 25px;
             background-color: #ffb300;
@@ -115,15 +113,14 @@
     <script src="streaming.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const seasons = generateStreamingLinks();
-            const seasonIndex = 0; // Saison 0
-            const season = seasons[seasonIndex] || {};
+            const seasons = window.generateStreamingLinks();
+            const season = seasons.find(s => s.fileName === "films.html");
             const episodeSelect = document.getElementById('episode-select');
             const videoPlayer = document.getElementById('video-player');
             const episodeDetails = document.getElementById('episode-details');
             const streamingHero = document.querySelector('.streaming-hero');
 
-            if (!season.name || !season.episodes) {
+            if (!season || !season.name || !season.episodes) {
                 console.error('Saison non valide:', season);
                 episodeDetails.textContent = 'Erreur : saison non trouvée';
                 return;
@@ -163,7 +160,6 @@
                 loadEpisode(season.episodes[0].episode);
             }
 
-            // Fonction pour obtenir l’IP
             async function getIP() {
                 try {
                     const response = await fetch('https://api.ipify.org?format=json');
@@ -220,7 +216,7 @@
                                     timestamp,
                                     ip
                                 },
-                                ...currentHistoryLog.slice(0, 49) // Limite à 50 entrées
+                                ...currentHistoryLog.slice(0, 49)
                             ]
                         },
                     }).then(() => {
@@ -235,30 +231,27 @@
         });
     </script>
 
-<script>
-    // Bloquer les pop-ups
-    window.open = function() {
-        console.log("Tentative de pop-up bloquée");
-        return null; // Empêche l'ouverture de nouvelles fenêtres
-    };
+    <script>
+        window.open = function() {
+            console.log("Tentative de pop-up bloquée");
+            return null;
+        };
 
-    // Surcharger window.alert pour bloquer les alertes publicitaires
-    window.alert = function() {
-        console.log("Alerte bloquée");
-        return null;
-    };
+        window.alert = function() {
+            console.log("Alerte bloquée");
+            return null;
+        };
 
-    // Observer les iframes pour détecter des changements suspects
-    document.addEventListener('DOMContentLoaded', () => {
-        const iframes = document.getElementsByTagName('iframe');
-        for (let iframe of iframes) {
-            iframe.addEventListener('load', () => {
-                // On ne peut pas accéder au contenu directement, mais on peut limiter les interactions
-                iframe.style.pointerEvents = 'auto'; // Permet de cliquer dans l’iframe, mais pas hors
-            });
-        }
-    });
-</script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const iframes = document.getElementsByTagName('iframe');
+            for (let iframe of iframes) {
+                iframe.addEventListener('load', () => {
+                    iframe.style.pointerEvents = 'auto';
+                });
+            }
+        });
+    </script>
 
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93b05d282d97bfde',t:'MTc0NjQ0OTQyOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>

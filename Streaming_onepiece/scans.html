@@ -214,7 +214,6 @@
 
     <script src="streaming.js"></script>
     <script>
-        // Bloquer les pop-ups
         window.open = function() {
             console.log("Tentative de pop-up bloquée");
             return null;
@@ -224,7 +223,6 @@
             return null;
         };
 
-        // Fonction pour obtenir l’IP
         async function getIP() {
             try {
                 const response = await fetch('https://api.ipify.org?format=json');
@@ -236,7 +234,6 @@
             }
         }
 
-        // Fonction pour convertir les URLs Google Drive en URLs proxy
         function convertGoogleDriveUrl(originalUrl) {
             let fileId;
             const viewMatch = originalUrl.match(/\/file\/d\/([^\/]+)/);
@@ -255,7 +252,6 @@
             return originalUrl;
         }
 
-        // Fonction pour précharger les images suivantes
         function preloadImages(pages, currentPage) {
             const nextPage = currentPage + 1;
             if (nextPage < pages.length) {
@@ -265,7 +261,6 @@
             }
         }
 
-        // Fonction pour faire défiler jusqu'au page-indicator
         function scrollToImage() {
             const pageIndicator = document.getElementById('page-indicator');
             const header = document.querySelector('header');
@@ -276,7 +271,6 @@
                 return;
             }
 
-            // Utiliser requestAnimationFrame pour s'assurer que le DOM est rendu
             requestAnimationFrame(() => {
                 const headerHeight = header.offsetHeight;
                 const heroHeight = streamingHero.offsetHeight;
@@ -284,8 +278,7 @@
 
                 console.log('Défilement - Hauteur header:', headerHeight, 'Hauteur streaming-hero:', heroHeight, 'Position pageIndicatorTop:', pageIndicatorTop);
 
-                // Calculer la position pour que page-indicator soit juste en dessous du header et streaming-hero
-                const scrollPosition = pageIndicatorTop - (headerHeight + heroHeight) + 10; // +10 pour un petit décalage
+                const scrollPosition = pageIndicatorTop - (headerHeight + heroHeight) + 10;
                 window.scrollTo({
                     top: scrollPosition,
                     behavior: 'smooth'
@@ -296,8 +289,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const seasons = window.generateStreamingLinks();
-            const seasonIndex = seasons.findIndex(s => s.name === "Scans");
-            const season = seasons[seasonIndex] || {};
+            const season = seasons.find(s => s.fileName === "scans.html");
             const chapterSelect = document.getElementById('chapter-select');
             const mangaViewer = document.getElementById('manga-viewer');
             const pageIndicator = document.getElementById('page-indicator');
@@ -305,17 +297,14 @@
             const loadingSpinner = document.getElementById('loading-spinner');
             const streamingHero = document.querySelector('.streaming-hero');
 
-            // Vérification initiale
-            if (!season.name || !season.chapters || season.chapters.length === 0) {
+            if (!season || !season.name || !season.chapters || season.chapters.length === 0) {
                 console.error('Saison non valide:', season);
                 mangaViewer.innerHTML = '<p class="error-message">Error: Season not found</p>';
                 return;
             }
 
-            // Appliquer l'image de fond
             streamingHero.style.backgroundImage = `url("${season.thumbnail || '../images/default-season-placeholder.jpg'}")`;
 
-            // Remplir le sélecteur de chapitres
             season.chapters.forEach(chapter => {
                 const option = document.createElement('option');
                 option.value = chapter.chapter;
@@ -337,7 +326,6 @@
                 }
                 chapterSelect.value = selectedChapter.chapter;
 
-                // Convertir les URLs Google Drive pour affichage via proxy
                 pages = selectedChapter.imageUrls.map(convertGoogleDriveUrl);
                 if (!pages || pages.length === 0) {
                     mangaViewer.innerHTML = '<p class="error-message">Error: No images available for this chapter</p>';
@@ -347,7 +335,6 @@
                 }
                 currentPage = 0;
 
-                // Afficher le spinner
                 loadingSpinner.classList.add('active');
                 pageIndicator.textContent = `Page ${currentPage + 1}/${pages.length}`;
                 mangaViewer.innerHTML = '';
@@ -360,6 +347,7 @@
                     attachImageClickListener();
                     attachCursorListener();
                     scrollToImage();
+                    updateHistory(season.name, selectedChapter.chapter, currentPage);
                 };
                 img.onerror = () => {
                     mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
@@ -370,60 +358,8 @@
 
                 chapterDetails.innerHTML = `<h2>Chapter ${selectedChapter.chapter} - ${season.name}</h2>`;
                 preloadImages(pages, currentPage);
-
-                // Sauvegarde historique
-                const user = netlifyIdentity.currentUser();
-                if (user) {
-                    getIP().then(ip => {
-                        const timestamp = new Date().toLocaleString('en-GB', {
-                            day: '2-digit',
-                            month: '2-digit',
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                        });
-                        console.log('Tentative de sauvegarde historique:', {
-                            season: season.name,
-                            chapter: selectedChapter.chapter,
-                            page: currentPage,
-                            timestamp,
-                            ip
-                        });
-
-                        const currentHistory = (user.user_metadata && user.user_metadata.history) || {};
-                        const currentHistoryLog = (user.user_metadata && user.user_metadata.history_log) || [];
-                        user.update({
-                            data: {
-                                history: {
-                                    ...currentHistory,
-                                    [season.name]: {
-                                        chapter: selectedChapter.chapter,
-                                        page: currentPage
-                                    }
-                                },
-                                history_log: [
-                                    {
-                                        season: season.name,
-                                        chapter: selectedChapter.chapter,
-                                        page: currentPage,
-                                        timestamp,
-                                        ip
-                                    },
-                                    ...currentHistoryLog.slice(0, 49)
-                                ]
-                            }
-                        }).then(() => {
-                            console.log('Historique mis à jour');
-                        }).catch(err => {
-                            console.error('Erreur mise à jour historique:', err);
-                        });
-                    }).catch(err => {
-                        console.error('Erreur récupération IP:', err);
-                    });
-                }
             }
 
-            // Fonction pour gérer les clics sur l'image
             function attachImageClickListener() {
                 const img = mangaViewer.querySelector('img');
                 if (img) {
@@ -434,7 +370,6 @@
                         const halfWidth = width / 2;
 
                         if (x < halfWidth) {
-                            // Côté gauche : page précédente
                             if (currentPage > 0) {
                                 currentPage--;
                                 loadingSpinner.classList.add('active');
@@ -449,6 +384,7 @@
                                     attachImageClickListener();
                                     attachCursorListener();
                                     scrollToImage();
+                                    updateHistory(season.name, season.chapters[currentChapter].chapter, currentPage);
                                 };
                                 newImg.onerror = () => {
                                     mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
@@ -463,7 +399,6 @@
                                 loadChapter(season.chapters[currentChapter].chapter);
                             }
                         } else {
-                            // Côté droit : page suivante
                             if (currentPage < pages.length - 1) {
                                 currentPage++;
                                 loadingSpinner.classList.add('active');
@@ -478,6 +413,7 @@
                                     attachImageClickListener();
                                     attachCursorListener();
                                     scrollToImage();
+                                    updateHistory(season.name, season.chapters[currentChapter].chapter, currentPage);
                                 };
                                 newImg.onerror = () => {
                                     mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
@@ -496,7 +432,6 @@
                 }
             }
 
-            // Fonction pour gérer le curseur selon la position de la souris
             function attachCursorListener() {
                 const img = mangaViewer.querySelector('img');
                 if (img) {
@@ -515,14 +450,12 @@
                         }
                     });
 
-                    // Réinitialiser le curseur quand la souris sort de l'image
                     img.addEventListener('mouseleave', () => {
                         img.classList.remove('left-half', 'right-half');
                     });
                 }
             }
 
-            // Charger depuis l’URL
             const hash = window.location.hash;
             if (hash) {
                 const chapterNumber = hash.replace('#chapter', '');
@@ -536,7 +469,6 @@
                 loadChapter(season.chapters[0].chapter);
             }
 
-            // Navigation entre chapitres
             document.getElementById('next-chapter').onclick = () => {
                 if (currentChapter < season.chapters.length - 1) {
                     currentChapter++;
@@ -551,7 +483,6 @@
                 }
             };
 
-            // Navigation entre pages
             document.getElementById('next').onclick = () => {
                 if (currentPage < pages.length - 1) {
                     currentPage++;
@@ -567,6 +498,7 @@
                         attachImageClickListener();
                         attachCursorListener();
                         scrollToImage();
+                        updateHistory(season.name, season.chapters[currentChapter].chapter, currentPage);
                     };
                     img.onerror = () => {
                         mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
@@ -597,6 +529,7 @@
                         attachImageClickListener();
                         attachCursorListener();
                         scrollToImage();
+                        updateHistory(season.name, season.chapters[currentChapter].chapter, currentPage);
                     };
                     img.onerror = () => {
                         mangaViewer.innerHTML = `<img src="https://via.placeholder.com/600x900?text=Image+not+available" alt="Image not available">`;
@@ -615,60 +548,9 @@
             chapterSelect.addEventListener('change', (e) => {
                 currentChapter = season.chapters.findIndex(ch => ch.chapter == e.target.value);
                 loadChapter(e.target.value);
-
-                // Sauvegarde historique lors du changement de chapitre
-                const user = netlifyIdentity.currentUser();
-                if (user) {
-                    getIP().then(ip => {
-                        const timestamp = new Date().toLocaleString('en-GB', {
-                            day: '2-digit',
-                            month: '2-digit',
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                        });
-                        const selectedChapter = season.chapters.find(ch => ch.chapter == e.target.value);
-                        console.log('Tentative de sauvegarde historique:', {
-                            season: season.name,
-                            chapter: selectedChapter.chapter,
-                            page: currentPage,
-                            timestamp,
-                            ip
-                        });
-
-                        const currentHistory = (user.user_metadata && user.user_metadata.history) || {};
-                        const currentHistoryLog = (user.user_metadata && user.user_metadata.history_log) || [];
-                        user.update({
-                            data: {
-                                history: {
-                                    ...currentHistory,
-                                    [season.name]: {
-                                        chapter: selectedChapter.chapter,
-                                        page: currentPage
-                                    }
-                                },
-                                history_log: [
-                                    {
-                                        season: season.name,
-                                        chapter: selectedChapter.chapter,
-                                        page: currentPage,
-                                        timestamp,
-                                        ip
-                                    },
-                                    ...currentHistoryLog.slice(0, 49)
-                                ]
-                            }
-                        }).then(() => {
-                            console.log('Historique mis à jour');
-                        }).catch(err => {
-                            console.error('Erreur mise à jour historique:', err);
-                        });
-                    }).catch(err => {
-                        console.error('Erreur récupération IP:', err);
-                    });
-                }
             });
         });
     </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93b05d290f85afa4',t:'MTc0NjQ0OTQzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
