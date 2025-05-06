@@ -8,53 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger');
     const navButtons = document.querySelector('.nav-buttons');
 
-    // Nouveau : Sélection de la vidéo de transition
-    const teleportVideo = document.getElementById('teleport-video');
-
-    // Vérification des éléments
-    if (!teleportVideo) {
-        console.error('Élément vidéo de téléportation manquant dans le DOM.');
-        return;
-    }
-
-    // Gestion des clics sur les boutons de navigation
-    const navLinks = document.querySelectorAll('.nav-button');
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault(); // Empêche la redirection immédiate
-            const href = link.getAttribute('href'); // Récupère l'URL cible
-
-            // Afficher la vidéo en plein écran
-            teleportVideo.style.display = 'block';
-            teleportVideo.style.position = 'fixed';
-            teleportVideo.style.top = '0';
-            teleportVideo.style.left = '0';
-            teleportVideo.style.width = '100vw';
-            teleportVideo.style.height = '100vh';
-            teleportVideo.style.objectFit = 'cover';
-            teleportVideo.style.zIndex = '9999';
-            teleportVideo.style.backgroundColor = 'black';
-
-            // Jouer la vidéo
-            teleportVideo.play().catch(err => {
-                console.error('Erreur lors de la lecture de la vidéo:', err);
-                // En cas d'erreur, rediriger immédiatement
-                window.location.href = href;
-            });
-
-            // Rediriger après la fin de la vidéo
-            teleportVideo.addEventListener('ended', () => {
-                teleportVideo.style.display = 'none'; // Cacher la vidéo
-                window.location.href = href; // Rediriger vers la page
-            }, { once: true });
-
-            // Réinitialiser la vidéo après lecture
-            teleportVideo.addEventListener('pause', () => {
-                teleportVideo.currentTime = 0; // Remettre au début
-            }, { once: true });
-        });
-    });
-
     // Vérification que les éléments essentiels existent pour éviter les erreurs
     if (!searchBar || !searchButton || !suggestionsList) {
         console.error('Un ou plusieurs éléments de la barre de recherche sont manquants dans le DOM.');
