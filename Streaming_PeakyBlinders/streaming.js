@@ -1,81 +1,75 @@
-
-// Fonction pour générer les liens de streaming
 function generateStreamingLinks() {
     const seasons = [
         {
             name: "Season 1",
             thumbnail: "../images/placeholder-pbs1.jpg",
             episodes: [
-                { episode: 1, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=1&episode=1&color=e600e6" },
-                { episode: 2, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=1&episode=2&color=e600e6" },
-                { episode: 3, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=1&episode=3&color=e600e6" },
-                { episode: 4, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=1&episode=4&color=e600e6" },
-                { episode: 5, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=1&episode=5&color=e600e6" },
-                { episode: 6, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=1&episode=6&color=e600e6" }
+                { episode: 1, videoUrl: "https://vidsrc.su/embed/tv/60574/1/1" },
+                { episode: 2, videoUrl: "https://vidsrc.su/embed/tv/60574/1/2" },
+                { episode: 3, videoUrl: "https://vidsrc.su/embed/tv/60574/1/3" },
+                { episode: 4, videoUrl: "https://vidsrc.su/embed/tv/60574/1/4" },
+                { episode: 5, videoUrl: "https://vidsrc.su/embed/tv/60574/1/5" },
+                { episode: 6, videoUrl: "https://vidsrc.su/embed/tv/60574/1/6" }
             ]
         },
-
         {
             name: "Season 2",
             thumbnail: "../images/placeholder-pbs2.webp",
             episodes: [
-                { episode: 1, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=2&episode=1&color=e600e6" },
-                { episode: 2, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=2&episode=2&color=e600e6" },
-                { episode: 3, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=2&episode=3&color=e600e6" },
-                { episode: 4, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=2&episode=4&color=e600e6" },
-                { episode: 5, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=2&episode=5&color=e600e6" },
-                { episode: 6, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=2&episode=6&color=e600e6" }
+                { episode: 1, videoUrl: "https://vidsrc.su/embed/tv/60574/2/1" },
+                { episode: 2, videoUrl: "https://vidsrc.su/embed/tv/60574/2/2" },
+                { episode: 3, videoUrl: "https://vidsrc.su/embed/tv/60574/2/3" },
+                { episode: 4, videoUrl: "https://vidsrc.su/embed/tv/60574/2/4" },
+                { episode: 5, videoUrl: "https://vidsrc.su/embed/tv/60574/2/5" },
+                { episode: 6, videoUrl: "https://vidsrc.su/embed/tv/60574/2/6" }
             ]
         },
-
         {
             name: "Season 3",
             thumbnail: "../images/placeholder-pbs3.jpg",
             episodes: [
-                { episode: 1, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=3&episode=1&color=e600e6" },
-                { episode: 2, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=3&episode=2&color=e600e6" },
-                { episode: 3, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=3&episode=3&color=e600e6" },
-                { episode: 4, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=3&episode=4&color=e600e6" },
-                { episode: 5, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=3&episode=5&color=e600e6" },
-                { episode: 6, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=3&episode=6&color=e600e6" }
+                { episode: 1, videoUrl: "https://vidsrc.su/embed/tv/60574/3/1" },
+                { episode: 2, videoUrl: "https://vidsrc.su/embed/tv/60574/3/2" },
+                { episode: 3, videoUrl: "https://vidsrc.su/embed/tv/60574/3/3" },
+                { episode: 4, videoUrl: "https://vidsrc.su/embed/tv/60574/3/4" },
+                { episode: 5, videoUrl: "https://vidsrc.su/embed/tv/60574/3/5" },
+                { episode: 6, videoUrl: "https://vidsrc.su/embed/tv/60574/3/6" }
             ]
         },
         {
             name: "Season 4",
             thumbnail: "../images/placeholder-pbs4.webp",
             episodes: [
-                { episode: 1, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=4&episode=1&color=e600e6" },
-                { episode: 2, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=4&episode=2&color=e600e6" },
-                { episode: 3, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=4&episode=3&color=e600e6" },
-                { episode: 4, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=4&episode=4&color=e600e6" },
-                { episode: 5, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=4&episode=5&color=e600e6" },
-                { episode: 6, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=4&episode=6&color=e600e6" }
+                { episode: 1, videoUrl: "https://vidsrc.su/embed/tv/60574/4/1" },
+                { episode: 2, videoUrl: "https://vidsrc.su/embed/tv/60574/4/2" },
+                { episode: 3, videoUrl: "https://vidsrc.su/embed/tv/60574/4/3" },
+                { episode: 4, videoUrl: "https://vidsrc.su/embed/tv/60574/4/4" },
+                { episode: 5, videoUrl: "https://vidsrc.su/embed/tv/60574/4/5" },
+                { episode: 6, videoUrl: "https://vidsrc.su/embed/tv/60574/4/6" }
             ]
         },
-
         {
             name: "Season 5",
             thumbnail: "../images/placeholder-pbs5.webp",
             episodes: [
-                { episode: 1, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=5&episode=1&color=e600e6" },
-                { episode: 2, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=5&episode=2&color=e600e6" },
-                { episode: 3, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=5&episode=3&color=e600e6" },
-                { episode: 4, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=5&episode=4&color=e600e6" },
-                { episode: 5, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=5&episode=5&color=e600e6" },
-                { episode: 6, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=5&episode=6&color=e600e6" }
+                { episode: 1, videoUrl: "https://vidsrc.su/embed/tv/60574/5/1" },
+                { episode: 2, videoUrl: "https://vidsrc.su/embed/tv/60574/5/2" },
+                { episode: 3, videoUrl: "https://vidsrc.su/embed/tv/60574/5/3" },
+                { episode: 4, videoUrl: "https://vidsrc.su/embed/tv/60574/5/4" },
+                { episode: 5, videoUrl: "https://vidsrc.su/embed/tv/60574/5/5" },
+                { episode: 6, videoUrl: "https://vidsrc.su/embed/tv/60574/5/6" }
             ]
         },
-
         {
             name: "Season 6",
             thumbnail: "../images/placeholder-pbs6.jpg",
             episodes: [
-                { episode: 1, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=6&episode=1&color=e600e6" },
-                { episode: 2, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=6&episode=2&color=e600e6" },
-                { episode: 3, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=6&episode=3&color=e600e6" },
-                { episode: 4, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=6&episode=4&color=e600e6" },
-                { episode: 5, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=6&episode=5&color=e600e6" },
-                { episode: 6, videoUrl: "https://vidsrc.io/embed/tv?imdb=tt2442560&season=6&episode=6&color=e600e6" }
+                { episode: 1, videoUrl: "https://vidsrc.su/embed/tv/60574/6/1" },
+                { episode: 2, videoUrl: "https://vidsrc.su/embed/tv/60574/6/2" },
+                { episode: 3, videoUrl: "https://vidsrc.su/embed/tv/60574/6/3" },
+                { episode: 4, videoUrl: "https://vidsrc.su/embed/tv/60574/6/4" },
+                { episode: 5, videoUrl: "https://vidsrc.su/embed/tv/60574/6/5" },
+                { episode: 6, videoUrl: "https://vidsrc.su/embed/tv/60574/6/6" }
             ]
         },
 
