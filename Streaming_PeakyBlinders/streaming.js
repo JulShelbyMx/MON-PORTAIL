@@ -72,7 +72,6 @@ function generateStreamingLinks() {
                 { episode: 6, videoUrl: "https://vidsrc.su/embed/tv/60574/6/6" }
             ]
         },
-
         {
             name: "Films",
             thumbnail: "../images/placeholder-pbs7.jpg",
@@ -163,6 +162,46 @@ document.addEventListener('DOMContentLoaded', () => {
             box-shadow: 0 0 20px #ffb300;
             transform: scale(1.1);
             transition: all 0.3s ease;
+        }
+        .adblock-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .adblock-message {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+        .adblock-message h2 {
+            color: #e600e6;
+            margin-bottom: 15px;
+        }
+        .adblock-message p {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .adblock-message button {
+            background: #e600e6;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .adblock-message button:hover {
+            background: #cc00cc;
         }
     `;
     document.head.appendChild(style);
@@ -393,4 +432,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
     checkUser();
     setInterval(checkUser, 5000);
+
+    // AdBlock detection script
+    function detectAdBlock() {
+        const adTest = document.createElement('div');
+        adTest.className = 'ad-banner adsbox';
+        adTest.style.position = 'absolute';
+        adTest.style.top = '-9999px';
+        document.body.appendChild(adTest);
+
+        setTimeout(() => {
+            const adBlocked = !adTest.offsetParent || window.getComputedStyle(adTest).display === 'none';
+            document.body.removeChild(adTest);
+
+            if (adBlocked) {
+                showAdBlockMessage();
+            }
+        }, 1000);
+    }
+
+    function showAdBlockMessage() {
+        const overlay = document.createElement('div');
+        overlay.className = 'adblock-overlay';
+        overlay.innerHTML = `
+            <div class="adblock-message">
+                <h2>AdBlock Detected</h2>
+                <p>It looks like you're using an ad blocker (like AdBlock Plus or uBlock Origin). This can prevent videos and subtitles from loading correctly. Please disable your ad blocker for this site and <strong>vidsrc.su</strong> to enjoy uninterrupted streaming.</p>
+                <p><strong>How to disable:</strong><br>
+                1. Click the AdBlock icon in your browser toolbar.<br>
+                2. Select "Don't run on pages on this site" or add this site to your whitelist.<br>
+                3. Refresh the page.</p>
+                <button onclick="window.location.reload()">I've Disabled AdBlock</button>
+            </div>
+        `;
+        document.body.appendChild(overlay);
+    }
+
+    // Run AdBlock detection after page load
+    detectAdBlock();
 });
