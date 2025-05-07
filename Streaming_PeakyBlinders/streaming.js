@@ -278,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'history-card';
             card.innerHTML = `
-                <a href="season${seasonIndex + 1}.html#episode${episodeData.episode}">
+                <a href="season${seasonIndex}.html#episode${episodeData.episode}">
                     <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${seasonName}">
                     <div class="history-info">
                         <h3>Last Episode Watched</h3>
