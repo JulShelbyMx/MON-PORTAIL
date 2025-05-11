@@ -252,6 +252,30 @@
             color: #ddd;
         }
 
+        /* Classe where pour les plateformes */
+        .tier li .where {
+            font-size: 14px;
+            padding: 3px 8px;
+            border-radius: 5px;
+            background: rgba(255, 179, 0, 0.2);
+            color: #ddd;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Nouvelle classe release-date pour les dates de sortie */
+        .tier li .release-date {
+            font-size: 14px;
+            padding: 3px 8px;
+            border-radius: 5px;
+            background: rgba(0, 191, 255, 0.2);
+            color: #ddd;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
         /* Sous-listes */
         .tier ul ul {
             margin-left: 25px;
@@ -422,6 +446,11 @@
                 font-size: 12px;
             }
 
+            .tier li .where, .tier li .release-date {
+                font-size: 12px;
+                padding: 2px 6px;
+            }
+
             .tier ul ul {
                 margin-left: 15px;
                 font-size: 12px;
@@ -499,6 +528,10 @@
                 font-size: 11px;
             }
 
+            .tier li .where, .tier li .release-date {
+                font-size: 10px;
+            }
+
             .tier ul ul {
                 margin-left: 10px;
                 font-size: 10px;
@@ -565,7 +598,9 @@
                                 <div class="title-status">
                                     <strong>The One Piece</strong>
                                     <div class="author">Par : Wit Studio</div>
-                                    <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir, annoncé mais pas de date?!</span>
+                                    <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> A voir</span>
+                                    <span class="where">Netflix</span>
+                                    <span class="release-date">Pas de date</span>
                                 </div>
                             </li>
                             <li>
@@ -708,7 +743,9 @@
                                     <li>
                                         <div class="title-status">
                                             <strong>The Calamity (part4)</strong>
-                                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> Pas de date?</span>
+                                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span>A voir</span>
+                                            <span class="where">Disney+</span>
+                                            <span class="release-date">Pas de date</span>
                                         </div>
                                     </li>
                                     <li>
@@ -759,8 +796,10 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>BERSERK</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Remake non-officiel été 2025 par StudioECLYPSE</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Remake non-officiel</span>
                             <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour</span>
+                            <span class="where">YouTube : Studio Eclypse</span>
+                            <span class="release-date">Juillet 2025</span>
                         </div>
                         <div class="author">Auteur : Kentaro Miura🕊️ / Kouji Mori</div>
                     </div>
@@ -780,8 +819,8 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>JOJO'S BIZARRE ADVENTURES</strong>
-                            <span class="status-en-cours status-anime"><span class="status-en-cours-dot status-dot"></span> En cours</span>
-                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span>A jour</span>
+                            <span class="status-en-cours status-manga"><span class="status-en-cours-manga-dot status-dot"></span> En cours</span>
                         </div>
                         <div class="author">Auteur : Hirohiko Araki</div>
                         <ul>
@@ -789,7 +828,7 @@
                                 <img src="../images/images-ranking/jojopart1.webp" alt="JoJo's Bizarre Adventure Part 1">
                                 <div class="title-status">
                                     <strong>Phantom Blood (Jonathan Joestar) - Part1</strong>
-                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
+                                    <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span>Fini</span>
                                 </div>
                             </li>
                             <li>
@@ -831,8 +870,9 @@
                                 <img src="../images/images-ranking/jojopart7.webp" alt="JoJo's Bizarre Adventure Part 7">
                                 <div class="title-status">
                                     <strong>Steel Ball Run (Johnny Joestar) - Part7</strong>
-                                    <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span>Annoncé ! Pas de date??</span>
-                                    <span class="status-en-cours status-manga"><span class="status-en-cours-manga-dot status-dot"></span>En cours</span>
+                                    <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span>A voir</span>
+                                    <span class="where">Netflix</span>
+                                    <span class="release-date">Pas de date</span>
                                 </div>
                             </li>
                             <li>
@@ -890,6 +930,8 @@
                             <strong>MY HERO ACADEMIA</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">S8: Octobre 2025</span>
                         </div>
                         <div class="author">Auteur : Kōhei Horikoshi</div>
                     </div>
@@ -912,6 +954,8 @@
                             <strong>DEMON SLAYER</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
+                            <span class="where">Crunchyroll, cinéma</span>
+                            <span class="release-date">Infinity Castle Film 1: 17 septembre 2025</span>
                         </div>
                         <div class="author">Auteur : Koyoharu Gotōge</div>
                     </div>
@@ -923,6 +967,8 @@
                             <strong>JUJUTSU KAISEN</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">S3: Pas de date</span>
                         </div>
                         <div class="author">Auteur : Gege Akutami</div>
                     </div>
@@ -966,6 +1012,8 @@
                             <strong>FIRE FORCE</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">S3 partie 2: Janvier 2026</span>
                         </div>
                         <div class="author">Auteur : Atsushi Ōkubo</div>
                     </div>
@@ -1009,6 +1057,8 @@
                             <strong>SOLO LEVELING</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">S2: Janvier 2026</span>
                         </div>
                         <div class="author">Auteur : Chugong</div>
                     </div>
@@ -1042,6 +1092,8 @@
                             <strong>DR. STONE</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">S4 cours 2: Juillet 2025, S4 cours 3: Pas de date</span>
                         </div>
                         <div class="author">Auteur : Riichiro Inagaki / Boichi</div>
                     </div>
@@ -1063,10 +1115,11 @@
                             <strong>TOKYO REVENGERS</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-fini-manga status-manga"><span class="status-fini-manga-dot status-dot"></span> Fini</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">The Battle of Three Deities: Pas de date</span>
                         </div>
                         <div class="author">Auteur : Ken Wakui</div>
-                    </div>
-                </li>
+                    </li>
                 <li>
                     <img src="../images/images-ranking/eminence-in-shadow.webp" alt="The Eminence in Shadow">
                     <div class="content">
@@ -1083,8 +1136,10 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>RASCAL DOES NOT DREAM OF BUNNY GIRL SENPAI</strong>
-                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini?</span>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> A voir</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">Santa Claus Film: Juillet 2025</span>
                         </div>
                         <div class="author">Auteur : Hajime Kamoshida</div>
                     </div>
@@ -1172,6 +1227,8 @@
                             <strong>HELL'S PARADISE</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">S2: Pas de date</span>
                         </div>
                         <div class="author">Auteur : Yūji Kaku</div>
                     </div>
@@ -1181,8 +1238,10 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>ONE PUNCH MAN</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Suite un jour?)</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">S3: Juillet 2025</span>
                         </div>
                         <div class="author">Auteur : ONE / Yūsuke Murata</div>
                     </div>
@@ -1215,6 +1274,8 @@
                             <strong>DANDADAN</strong>
                             <span class="status-en-cours status-anime"><span class="status-en-cours-dot status-dot"></span> En cours</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="where">Crunchyroll, Netflix</span>
+                            <span class="release-date">S2: 3 juillet 2025</span>
                         </div>
                         <div class="author">Auteur : Yukinobu Tatsu</div>
                     </div>
@@ -1224,7 +1285,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>SERVAMP</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Saison 2? Pas d'annonce?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Pas d’annonce)</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Tanaka Strike</div>
@@ -1235,7 +1296,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>KAIFUKU JUTSUSHI NO YARINAOSHI</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Saison 2? Pas d'annonce?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Pas d’annonce)</span>
                             <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> Suite?</span>
                         </div>
                         <div class="author">Auteur : Rui Tsukiyo / Shiokonbu</div>
@@ -1266,7 +1327,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>NAGATORO</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Saison 3?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Pas d’annonce)</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Nanashi</div>
@@ -1277,7 +1338,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>FUUFU IJOU KOIBITO MIMAN</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Saison 1 finie, S2?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Pas d’annonce)</span>
                             <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> 30 (pas de VF)</span>
                         </div>
                         <div class="author">Auteur : Yuki Kanamaru</div>
@@ -1288,8 +1349,10 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>MY DRESS UP DARLING</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Saison 2?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">S2: 2 juillet 2025</span>
                         </div>
                         <div class="author">Auteur : Shinichi Fukuda</div>
                     </div>
@@ -1321,8 +1384,10 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>THE 100 GIRLFRIENDS</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span>Saison 2 à voir</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="where">Crunchyroll</span>
+                            <span class="release-date">S3: Janvier 2026</span>
                         </div>
                         <div class="author">Auteur : Rikito Nakamura / Yukiko Nozawa</div>
                     </div>
@@ -1364,7 +1429,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>KISS HIM NOT ME!</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Fini? Saison 2?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Pas d’annonce)</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                         </div>
                         <div class="author">Auteur : Junko</div>
@@ -1375,7 +1440,7 @@
                     <div class="content">
                         <div class="title-status">
                             <strong>OVERFLOW</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> Fini? Saison 2?</span>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Pas d’annonce)</span>
                             <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour, suite??</span>
                         </div>
                         <div class="author">Auteur : Ishigura Rei</div>
@@ -1396,6 +1461,7 @@
                         <div class="title-status">
                             <strong>SWORD ART ONLINE</strong>
                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="where">Crunchyroll, Netflix</span>
                         </div>
                         <div class="author">Auteur : Reki Kawahara</div>
                     </div>
@@ -1405,6 +1471,7 @@
                         <div class="title-status">
                             <strong>FULL METAL ALCHEMIST</strong>
                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="where">Netflix</span>
                         </div>
                         <div class="author">Auteur : Hiromu Arakawa</div>
                     </div>
@@ -1414,6 +1481,7 @@
                         <div class="title-status">
                             <strong>THE SEVEN DEADLY SINS</strong>
                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="where">Netflix</span>
                         </div>
                         <div class="author">Auteur : Nakaba Suzuki</div>
                     </div>
@@ -1423,6 +1491,7 @@
                         <div class="title-status">
                             <strong>FRIEREN</strong>
                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="where">Crunchyroll</span>
                         </div>
                         <div class="author">Auteur : Kanehito Yamada / Tsukasa Abe</div>
                     </div>
@@ -1432,196 +1501,8 @@
                         <div class="title-status">
                             <strong>SPY X FAMILY</strong>
                             <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                            <span class="where">Crunchyroll, Netflix</span>
                         </div>
                         <div class="author">Auteur : Tatsuya Endo</div>
                     </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>DARLING IN THE FRANXX</strong>
-                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
-                        </div>
-                        <div class="author">Auteur : Trigger / A-1 Pictures</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>AKAME GA KILL</strong>
-                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
-                        </div>
-                        <div class="author">Auteur : Takahiro / Tetsuya Tashiro</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>YOUR LIE IN APRIL (film)</strong>
-                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
-                        </div>
-                        <div class="author">Auteur : Naoshi Arakawa</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>VAGABOND</strong>
-                            <span class="status-a-voir status-manga"><span class="status-a-voir-dot status-dot"></span> À lire {MANGA!}</span>
-                        </div>
-                        <div class="author">Auteur : Takehiko Inoue</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>SUMMERTIME RENDERING</strong>
-                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
-                        </div>
-                        <div class="author">Auteur : Yasuki Tanaka</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>AO HARU RIDE</strong>
-                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
-                        </div>
-                        <div class="author">Auteur : Io Sakisaka</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>CLASSROOM OF THE ELITE</strong>
-                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
-                        </div>
-                        <div class="author">Auteur : Shōgo Kinugasa</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>FOOD WARS</strong>
-                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
-                        </div>
-                        <div class="author">Auteur : Yūto Tsukuda / Shun Saeki</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>MAHOU SHOUJO MADOKA MAGICA</strong>
-                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
-                        </div>
-                        <div class="author">Auteur : Gen Urobuchi</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>BLOOD-C</strong>
-                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
-                        </div>
-                        <div class="author">Auteur : Kotone Ranmaru</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>Fruits Basket</strong>
-                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
-                        </div>
-                        <div class="author">Auteur : Natsuki Takaya</div>
-                    </div>
-                </li>
-                <li>
-                    ...
-                </li>
-            </ul>
-        </div>
-
-        <!-- Éléments audio pour les sons -->
-        <audio id="dio-audio" src="../audio/dio.mp3" preload="auto"></audio>
-        <audio id="jotaro-audio" src="../audio/jotaro.mp3" preload="auto"></audio>
-
-        <!-- Script pour gérer les interactions -->
-        <script>
-            // Gestion des images interactives (JoJo)
-            document.querySelectorAll('.interactive-img').forEach(img => {
-                const originalSrc = img.src;
-                const altSrc = img.getAttribute('data-alt-src');
-                const audioId = img.getAttribute('data-audio-id');
-                const audio = document.getElementById(audioId);
-        
-                const playAudio = () => {
-                    if (audio) {
-                        try {
-                            audio.load(); // Réinitialise l'audio pour éviter les bugs
-                            audio.play().catch(err => console.log('Erreur de lecture audio:', err));
-                        } catch (err) {
-                            console.log('Erreur lors de la lecture audio:', err);
-                        }
-                    }
-                };
-        
-                img.addEventListener('mouseover', () => {
-                    img.src = altSrc;
-                    playAudio();
-                });
-        
-                img.addEventListener('mouseout', () => {
-                    img.src = originalSrc;
-                    if (audio) {
-                        try {
-                            audio.pause();
-                            audio.currentTime = 0;
-                        } catch (err) {
-                            console.log('Erreur lors de la pause audio:', err);
-                        }
-                    }
-                });
-        
-                img.addEventListener('click', () => {
-                    img.src = altSrc;
-                    playAudio();
-                });
-            });
-        
-            // Gestion des vidéos interactives (Dragon Ball)
-            document.querySelectorAll('.interactive-video').forEach(video => {
-                // Lancer la vidéo automatiquement au chargement (muted par défaut)
-                try {
-                    video.play().catch(err => console.log('Erreur de lecture initiale vidéo:', err));
-                } catch (err) {
-                    console.log('Erreur lors de la lecture initiale vidéo:', err);
-                }
-        
-                // Fonction pour basculer le son sans affecter la lecture
-                const toggleSound = (enableSound) => {
-                    try {
-                        video.muted = !enableSound; // Active ou désactive le son
-                    } catch (err) {
-                        console.log('Erreur lors de la gestion du son:', err);
-                    }
-                };
-        
-                // Survol : activer le son, continuer la lecture
-                video.addEventListener('mouseover', () => {
-                    toggleSound(true); // Activer le son
-                });
-        
-                // Sortie du survol : couper le son, continuer la lecture
-                video.addEventListener('mouseout', () => {
-                    toggleSound(false); // Désactiver le son
-                });
-        
-                // Clic : activer le son (si muted), continuer la lecture
-                video.addEventListener('click', () => {
-                    toggleSound(true); // Activer le son si muted
-                });
-            });
-        </script>
-    </div>
-</body>
-</html>
+                </li

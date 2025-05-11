@@ -20002,7 +20002,7 @@ seasons.forEach((season, index) => {
     const seasonCard = document.createElement('div');
     seasonCard.className = 'season-card';
     seasonCard.innerHTML = `
-        <a href="${season.fileName}">
+        <a href="${season.fileName + 1}">
             <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${season.name}">
             <h3>${season.name}</h3>
         </a>
