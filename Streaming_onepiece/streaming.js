@@ -19965,7 +19965,8 @@ window.generateStreamingLinks = function() {
         { episode: 1126, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5886456'},
         { episode: 1127, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5894331'},
         { episode: 1128, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5901445'},
-        { episode: 1129, videoUrl: ''},
+        { episode: "EGGHEAD SP6", videoUrl: ''},
+        { episode: "1129, pas encore sorti", videoUrl: ''},
 
     ]
 },
@@ -20002,7 +20003,7 @@ seasons.forEach((season, index) => {
     const seasonCard = document.createElement('div');
     seasonCard.className = 'season-card';
     seasonCard.innerHTML = `
-        <a href="${season.fileName + 1}">
+        <a href="${season.fileName}">
             <img src="${season.thumbnail || '../images/default-season-placeholder.jpg'}" alt="${season.name}">
             <h3>${season.name}</h3>
         </a>
