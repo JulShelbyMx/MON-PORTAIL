@@ -1505,4 +1505,215 @@
                         </div>
                         <div class="author">Auteur : Tatsuya Endo</div>
                     </div>
-                </li
+                </li> 
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>DARLING IN THE FRANXX</strong>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                        </div>
+                        <div class="author">Auteur : Trigger / A-1 Pictures</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>AKAME GA KILL</strong>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                        </div>
+                        <div class="author">Auteur : Takahiro / Tetsuya Tashiro</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>YOUR LIE IN APRIL (film)</strong>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                        </div>
+                        <div class="author">Auteur : Naoshi Arakawa</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>VAGABOND</strong>
+                            <span class="status-a-voir status-manga"><span class="status-a-voir-dot status-dot"></span> À lire {MANGA!}</span>
+                        </div>
+                        <div class="author">Auteur : Takehiko Inoue</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>SUMMERTIME RENDERING</strong>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                        </div>
+                        <div class="author">Auteur : Yasuki Tanaka</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>AO HARU RIDE</strong>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                        </div>
+                        <div class="author">Auteur : Io Sakisaka</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>CLASSROOM OF THE ELITE</strong>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                        </div>
+                        <div class="author">Auteur : Shōgo Kinugasa</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>FOOD WARS</strong>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                        </div>
+                        <div class="author">Auteur : Yūto Tsukuda / Shun Saeki</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>MAHOU SHOUJO MADOKA MAGICA</strong>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                        </div>
+                        <div class="author">Auteur : Gen Urobuchi</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>BLOOD-C</strong>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                        </div>
+                        <div class="author">Auteur : Kotone Ranmaru</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>Fruits Basket</strong>
+                            <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span> À voir</span>
+                        </div>
+                        <div class="author">Auteur : Natsuki Takaya</div>
+                    </div>
+                </li>
+                <li>
+                    ...
+                </li>
+            </ul>
+        </div>
+
+        <!-- Éléments audio pour les sons -->
+        <audio id="dio-audio" src="../audio/dio.mp3" preload="auto"></audio>
+        <audio id="jotaro-audio" src="../audio/jotaro.mp3" preload="auto"></audio>
+
+       <script>
+    // Gestion des images interactives (ex: JoJo avec changement d'image et son)
+    document.querySelectorAll('.interactive-img').forEach(img => {
+        const originalSrc = img.src;
+        const altSrc = img.getAttribute('data-alt-src');
+        const audioId = img.getAttribute('data-audio-id');
+        const audio = audioId ? document.getElementById(audioId) : null;
+
+        // Fonction pour jouer l'audio
+        const playAudio = () => {
+            if (audio) {
+                try {
+                    audio.load(); // Réinitialise l'audio
+                    audio.play().catch(err => console.error('Erreur lecture audio:', err));
+                } catch (err) {
+                    console.error('Erreur audio:', err);
+                }
+            }
+        };
+
+        // Survol : changer l'image et jouer l'audio
+        img.addEventListener('mouseover', () => {
+            if (altSrc) img.src = altSrc;
+            playAudio();
+        });
+
+        // Sortie survol : restaurer l'image et arrêter l'audio
+        img.addEventListener('mouseout', () => {
+            img.src = originalSrc;
+            if (audio) {
+                try {
+                    audio.pause();
+                    audio.currentTime = 0;
+                } catch (err) {
+                    console.error('Erreur pause audio:', err);
+                }
+            }
+        });
+
+        // Clic : changer l'image et jouer l'audio
+        img.addEventListener('click', () => {
+            if (altSrc) img.src = altSrc;
+            playAudio();
+        });
+    });
+
+    // Gestion des vidéos interactives (ex: Dragon Ball avec contrôle du son)
+    document.querySelectorAll('.interactive-video').forEach(video => {
+        // Configurer la vidéo pour l'autoplay (muted)
+        video.muted = true;
+        video.loop = true;
+
+        // Lancer la vidéo automatiquement au chargement
+        const startVideo = () => {
+            try {
+                if (video.paused) {
+                    video.play().catch(err => console.error('Erreur lecture vidéo:', err));
+                }
+            } catch (err) {
+                console.error('Erreur démarrage vidéo:', err);
+            }
+        };
+        startVideo();
+
+        // Fonction pour basculer le son sans affecter la lecture
+        const toggleSound = (enableSound) => {
+            try {
+                video.muted = !enableSound;
+                // Vérifier que la vidéo est en lecture, sinon la relancer
+                if (!video.paused) return;
+                video.play().catch(err => console.error('Erreur relance vidéo:', err));
+            } catch (err) {
+                console.error('Erreur gestion son vidéo:', err);
+            }
+        };
+
+        // Survol : activer le son et s'assurer que la vidéo joue
+        video.addEventListener('mouseover', () => {
+            toggleSound(true);
+        });
+
+        // Sortie survol : couper le son et s'assurer que la vidéo continue
+        video.addEventListener('mouseout', () => {
+            toggleSound(false);
+            startVideo(); // S'assurer que la vidéo ne s'est pas arrêtée
+        });
+
+        // Clic : activer le son si muted et s'assurer que la vidéo joue
+        video.addEventListener('click', () => {
+            if (video.muted) {
+                toggleSound(true);
+            }
+            startVideo();
+        });
+
+        // Désactiver les contrôles natifs via JavaScript
+        video.removeAttribute('controls');
+        video.addEventListener('contextmenu', (e) => e.preventDefault()); // Désactiver le menu contextuel
+    });
+</script>
+    </div>
+</body>
+</html>
