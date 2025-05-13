@@ -236,31 +236,30 @@ body {
 .sidebar {
     position: fixed;
     top: 0;
-    left: -300px;
     width: 300px;
     height: 100vh;
     background: #222;
     border-right: 2px solid #87CEEB;
-    transition: left 0.3s ease;
+    display: none;
     z-index: 1000;
     font-family: 'Arial', sans-serif;
 }
 
 .sidebar.active {
-    left: 0;
+    display: block;
 }
 
 .close-sidebar {
     position: absolute;
-    top: 8px; /* Reduced from 10px */
-    right: 8px; /* Reduced from 10px */
+    top: 8px;
+    right: 8px;
     background: #87CEEB;
     color: #0a0a0a;
     border: none;
     border-radius: 5px;
-    font-size: 16px; /* Reduced from 18px */
+    font-size: 16px;
     cursor: pointer;
-    padding: 4px 8px; /* Reduced from 5px 10px */
+    padding: 4px 8px;
     transition: background-color 0.3s ease;
 }
 
@@ -321,21 +320,21 @@ body {
     width: 100%;
     border-collapse: collapse;
     background: #333;
-    border-radius: 6px; /* Slightly smaller radius */
+    border-radius: 6px;
     overflow: hidden;
 }
 
 .holiday-table th, .holiday-table td {
-    padding: 8px; /* Reduced from 10px */
+    padding: 8px;
     border: 1px solid #87CEEB;
     text-align: left;
-    font-size: 14px; /* Reduced from 16px */
+    font-size: 14px;
 }
 
 .holiday-table th {
     background: #87CEEB;
     color: #0a0a0a;
-    font-size: 16px; /* Reduced from 18px */
+    font-size: 16px;
 }
 
 /* Media Queries for Tablets and Large Phones (768px and less) */
@@ -405,18 +404,23 @@ body {
 
     .hamburger-menu span {
         height: 4px;
-        border: 1px solid #87CEEB; /* Consistent contour */
+        border: 1px solid #87CEEB;
     }
 
     .sidebar {
         width: 80vw;
+        display: none;
+    }
+
+    .sidebar.active {
+        display: block;
     }
 
     .close-sidebar {
-        font-size: 14px; /* Reduced from implicit 16px */
-        padding: 3px 6px; /* Reduced from 4px 8px */
-        top: 6px; /* Reduced from 8px */
-        right: 6px; /* Reduced from 8px */
+        font-size: 14px;
+        padding: 3px 6px;
+        top: 6px;
+        right: 6px;
     }
 
     .tab-button {
@@ -425,12 +429,12 @@ body {
     }
 
     .holiday-table th, .holiday-table td {
-        font-size: 12px; /* Reduced from 16px */
-        padding: 6px; /* Reduced from 8px */
+        font-size: 12px;
+        padding: 6px;
     }
 
     .holiday-table th {
-        font-size: 14px; /* Reduced from 18px */
+        font-size: 14px;
     }
 
     .sidebar-content {
@@ -491,18 +495,23 @@ body {
 
     .hamburger-menu span {
         height: 3px;
-        border: 1px solid #87CEEB; /* Consistent contour */
+        border: 1px solid #87CEEB;
     }
 
     .sidebar {
         width: 90vw;
+        display: none;
+    }
+
+    .sidebar.active {
+        display: block;
     }
 
     .close-sidebar {
-        font-size: 12px; /* Reduced from implicit 14px */
-        padding: 2px 5px; /* Reduced from 3px 6px */
-        top: 5px; /* Reduced from 6px */
-        right: 5px; /* Reduced from 6px */
+        font-size: 12px;
+        padding: 2px 5px;
+        top: 5px;
+        right: 5px;
     }
 
     .tab-button {
@@ -511,12 +520,12 @@ body {
     }
 
     .holiday-table th, .holiday-table td {
-        font-size: 10px; /* Reduced from 14px */
-        padding: 5px; /* Reduced from 6px */
+        font-size: 10px;
+        padding: 5px;
     }
 
     .holiday-table th {
-        font-size: 12px; /* Reduced from 16px */
+        font-size: 12px;
     }
 
     .sidebar-content {
