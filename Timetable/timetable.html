@@ -3,42 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timetable - Moorside High School</title>
-    <link rel="stylesheet" href="../styles.css">
+    <title>Eliya's Timetable - Year 9 [2024-2025]</title>
     <link rel="stylesheet" href="timetable.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../images/logopage.png" />
 </head>
 <body>
-    <header>
-        <div class="logo">Eliya's Timetable - Year 9 [2024-2025]</div>
-    </header>
+    <div class="timetable-hero">
+        <a href="index.html" class="return-button">BACK</a>
+        <button class="hamburger-menu" id="hamburger-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
 
-    <section class="timetable-hero">
-        <div class="timetable-hero-content">
-            <a href="../index.html" class="return-button">BACK</a>
+    <div class="sidebar" id="sidebar">
+        <button class="close-sidebar" id="close-sidebar">✕</button>
+        <div class="sidebar-tabs">
+            <button class="tab-button active" data-tab="holidays">Holidays</button>
+            <button class="tab-button" data-tab="bank-holidays">Bank Holidays</button>
         </div>
-    </section>
+        <div class="sidebar-content">
+            <div class="tab-content active" id="holidays">
+                <h2>Holidays</h2>
+                <table class="holiday-table" id="holidays-table">
+                    <thead>
+                        <tr>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="tab-content" id="bank-holidays">
+                <h2>Bank Holidays</h2>
+                <table class="holiday-table" id="bank-holidays-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Reason</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 
     <div class="timetable-container">
-        <div id="holiday-message" class="holiday-message" style="display: none;"></div>
-        <div id="holiday-options" class="holiday-options" style="display: none;">
-            <button id="show-return-timetable" class="toggle-button" style="display: none;">Show the timetable for the first week back</button>
-            <button id="show-week-timetable" class="toggle-button" style="display: none;">Show the timetable for this week</button>
+        <div class="holiday-message" id="holiday-message" style="display: none;">
+            No classes today
+            <div class="holiday-options" id="holiday-options">
+                <button class="toggle-button" id="show-return-timetable">Show the timetable for the first week back</button>
+                <button class="toggle-button" id="show-week-timetable">Show the timetable for this week</button>
+            </div>
         </div>
 
         <div class="timetable-toggle">
             <button id="toggle-button" class="toggle-button">Switch to Week B</button>
         </div>
 
-        <!-- Conteneur où les plannings seront générés dynamiquement -->
         <div id="timetable-week-a"></div>
         <div id="timetable-week-b" style="display: none;"></div>
-        <div id="timetable-week-a-mobile"></div>
+        <div id="timetable-week-a-mobile" style="display: none;"></div>
         <div id="timetable-week-b-mobile" style="display: none;"></div>
-        <div id="no-class-message" class="no-class-message" style="display: none;">NO CLASS RN</div>
+
+        <div class="no-class-message" id="no-class-message">NO CLASS RN</div>
     </div>
 
     <script src="timetable.js"></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9343ad8ccf2d53b7',t:'MTc0NTMwOTc3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93465a1b2aafd9c1',t:'MTc0NTMzNzgxNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>

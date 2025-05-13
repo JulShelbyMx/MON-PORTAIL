@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Global holidays array with one-based months (January = 1, May = 5, etc.)
+    const holidays = [
+        { start: { year: 2025, month: 5, day: 23 }, end: { year: 2025, month: 6, day: 1 }, reason: 'Holidays' },
+        { start: { year: 2025, month: 7, day: 23 }, end: { year: 2025, month: 8, day: 31 }, reason: 'Summer Holidays' },
+        { start: { year: 2025, month: 10, day: 24 }, end: { year: 2025, month: 11, day: 2 }, reason: 'Holidays' },
+        { start: { year: 2025, month: 12, day: 18 }, end: { year: 2026, month: 1, day: 4 }, reason: 'Christmas Holidays' },
+        { start: { year: 2026, month: 2, day: 13 }, end: { year: 2026, month: 2, day: 22 }, reason: 'Holidays' },
+        { start: { year: 2026, month: 4, day: 2 }, end: { year: 2026, month: 4, day: 19 }, reason: 'Easter Holidays' },
+        { start: { year: 2026, month: 5, day: 22 }, end: { year: 2026, month: 5, day: 31 }, reason: 'Holidays' },
+        { start: { year: 2026, month: 7, day: 23 }, end: { year: 2026, month: 8, day: 31 }, reason: 'Summer Holidays' },
+
+        { start: { year:'', month: '', day: '' }, end: { year: '', month: '', day: '' }, reason: 'BANK HOLIDAY' },
+    ];
+
     const weekAContainer = document.getElementById('timetable-week-a');
     const weekBContainer = document.getElementById('timetable-week-b');
     const weekAMobileContainer = document.getElementById('timetable-week-a-mobile');
@@ -9,19 +23,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const showReturnTimetable = document.getElementById('show-return-timetable');
     const showWeekTimetable = document.getElementById('show-week-timetable');
     const noClassMessage = document.getElementById('no-class-message');
+    const hamburgerMenu = document.getElementById('hamburger-menu');
+    const sidebar = document.getElementById('sidebar');
+    const closeSidebar = document.getElementById('close-sidebar');
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
 
     let isUKTime = true;
     let isManualDayChange = false;
     let currentWeek;
     let weekA, weekB, weekAMobile, weekBMobile, toggleTimeA, toggleTimeB, toggleTimeAMobile, toggleTimeBMobile, timeZoneA, timeZoneB, timeZoneAMobile, timeZoneBMobile;
-    let isInitialLoad = true; // Indicateur pour le focus initial
+    let isInitialLoad = true;
 
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-    // Date manuelle prioritaire, sinon auto
     const manualDate = null;
     const today = manualDate ? new Date(manualDate) : new Date();
-    const bstToday = manualDate ? today : new Date(today.getTime() + 3600000); // BST seulement en auto
+    const bstToday = manualDate ? today : new Date(today.getTime() + 3600000);
     const dayOfWeek = bstToday.getUTCDay();
     let currentDayIndex = dayOfWeek - 1;
     if (currentDayIndex < 0 || currentDayIndex > 4) {
@@ -37,12 +55,58 @@ document.addEventListener('DOMContentLoaded', () => {
         holidayMessage.style.display = 'block';
     }
 
-    // Fonction pour générer les plannings dynamiquement
+    // Function to format dates for display
+    function formatDate(date) {
+        const options = { day: 'numeric', month: 'long', year: 'numeric' };
+        return date.toLocaleDateString('en-GB', options);
+    }
+
+    // Function to populate holiday and bank holiday tables
+    function populateHolidayTables() {
+        const holidaysTableBody = document.querySelector('#holidays-table tbody');
+        const bankHolidaysTableBody = document.querySelector('#bank-holidays-table tbody');
+
+        const multiDayHolidays = holidays.filter(h => {
+            const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
+            const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
+            return startDate.getTime() !== endDate.getTime() || h.reason.includes('Holidays');
+        });
+        const singleDayHolidays = holidays.filter(h => {
+            const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
+            const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
+            return startDate.getTime() === endDate.getTime() && !h.reason.includes('Holidays');
+        });
+
+        // Populate Holidays table (multi-day periods)
+        holidaysTableBody.innerHTML = multiDayHolidays.map(holiday => {
+            const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
+            const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
+            return `
+                <tr>
+                    <td>${formatDate(startDate)}</td>
+                    <td>${formatDate(endDate)}</td>
+                    <td>${holiday.reason}</td>
+                </tr>
+            `;
+        }).join('');
+
+        // Populate Bank Holidays table (single-day events)
+        bankHolidaysTableBody.innerHTML = singleDayHolidays.map(holiday => {
+            const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
+            return `
+                <tr>
+                    <td>${formatDate(startDate)}</td>
+                    <td>${holiday.reason}</td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // Function to generate timetables
     function generateTimetables() {
         const isMobile = window.innerWidth <= 768;
 
         if (!isMobile) {
-            // Générer le planning desktop
             weekAContainer.innerHTML = `
                 <h2>Week A</h2>
                 <table class="timetable-table">
@@ -196,7 +260,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 </table>
             `;
         } else {
-            // Générer le planning mobile
             weekAMobileContainer.innerHTML = `
                 <h2>Week A</h2>
                 <div class="mobile-timetable-scroll">
@@ -293,15 +356,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         <tbody>
                             <tr>
                                 <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                            <td>9PH/Tu</td>
-                            <td>9PH/Tu</td>
-                            <td>9PH/Tu</td>
-                            <td>9PH/Tu</td>
-                            <td>9PH/Tu</td>
-                        </tr>
-                        <tr>
-                            <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                            <td>9cd/PsE</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                                <td>9PH/Tu</td>
+                            </tr>
+                            <tr>
+                                <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                                <td>9cd/PsE</td>
                             <td>9cd/TcR</td>
                             <td>9cd/EnE</td>
                             <td>9cd/ScR</td>
@@ -353,7 +416,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
     }
 
-    // Initialiser les références après génération
+    // Initialize references after generation
     weekA = weekAContainer.querySelector('.timetable-table');
     weekB = weekBContainer.querySelector('.timetable-table');
     weekAMobile = weekAMobileContainer.querySelector('.mobile-timetable-table');
@@ -368,8 +431,30 @@ document.addEventListener('DOMContentLoaded', () => {
     timeZoneBMobile = document.getElementById('time-zone-b-mobile');
 }
 
-// Générer les plannings au chargement
+// Generate timetables and populate holiday tables at load
 generateTimetables();
+populateHolidayTables();
+
+// Hamburger menu and sidebar functionality
+hamburgerMenu.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+    hamburgerMenu.classList.toggle('active');
+});
+
+closeSidebar.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+    hamburgerMenu.classList.remove('active');
+});
+
+// Tab switching functionality
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(button.dataset.tab).classList.add('active');
+    });
+});
 
 function convertTime(timeStr) {
     if (timeStr.includes('(REG)')) {
@@ -447,32 +532,18 @@ function updateTimes() {
     }
 
     highlightCurrentLesson();
-    // Ne pas appeler scrollToCurrentDay ici pour éviter le recentrage
 }
 
 function isHolidayOrClosure(date) {
-    const holidays = [
-        { start: new Date(Date.UTC(2025, 3, 4)), end: new Date(Date.UTC(2025, 3, 4)), reason: 'STAFF ONLY (INSET)' },
-        { start: new Date(Date.UTC(2025, 3, 5)), end: new Date(Date.UTC(2025, 3, 20)), reason: 'Easter Holidays' },
-        { start: new Date(Date.UTC(2025, 3, 21)), end: new Date(Date.UTC(2025, 3, 21)), reason: 'BANK HOLIDAY' },
-        { start: new Date(Date.UTC(2025, 4, 5)), end: new Date(Date.UTC(2025, 4, 5)), reason: 'BANK HOLIDAY' },
-        { start: new Date(Date.UTC(2025, 4, 23)), end: new Date(Date.UTC(2025, 5, 1)), reason: 'Holidays' },
-        { start: new Date(Date.UTC(2025, 6, 23)), end: new Date(Date.UTC(2025, 7, 31)), reason: 'Summer Holidays' },
-        { start: new Date(Date.UTC(2025, 9, 24)), end: new Date(Date.UTC(2025, 10, 2)), reason: 'Holidays' },
-        { start: new Date(Date.UTC(2025, 11, 18)), end: new Date(Date.UTC(2026, 0, 4)), reason: 'Christmas Holidays' },
-        { start: new Date(Date.UTC(2026, 1, 13)), end: new Date(Date.UTC(2026, 1, 22)), reason: 'Holidays' },
-        { start: new Date(Date.UTC(2026, 3, 2)), end: new Date(Date.UTC(2026, 3, 19)), reason: 'Easter Holidays' },
-        { start: new Date(Date.UTC(2026, 4, 22)), end: new Date(Date.UTC(2026, 4, 31)), reason: 'Holidays' },
-        { start: new Date(Date.UTC(2026, 6, 23)), end: new Date(Date.UTC(2026, 7, 31)), reason: 'Summer Holidays' }
-    ];
-
-    const bstDate = manualDate ? date : new Date(date.getTime() + 3600000); // BST en auto uniquement
+    const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
     const dateOnly = new Date(Date.UTC(bstDate.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
 
     console.log('Holiday check:', bstDate.toISOString(), 'Date only:', dateOnly.toISOString());
 
     for (const holiday of holidays) {
-        if (dateOnly >= holiday.start && dateOnly <= holiday.end) {
+        const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
+        const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
+        if (dateOnly >= startDate && dateOnly <= endDate) {
             return holiday.reason;
         }
     }
@@ -488,7 +559,7 @@ function getWeekType(date) {
 }
 
 function getReturnDate(holidayEnd) {
-    let returnDate = new Date(holidayEnd);
+    let returnDate = new Date(Date.UTC(holidayEnd.year, holidayEnd.month - 1, holidayEnd.day));
     returnDate.setUTCDate(returnDate.getUTCDate() + 1);
     while (returnDate.getUTCDay() === 0 || returnDate.getUTCDay() === 6 || isHolidayOrClosure(returnDate)) {
         returnDate.setUTCDate(returnDate.getUTCDate() + 1);
@@ -497,7 +568,7 @@ function getReturnDate(holidayEnd) {
 }
 
 function scrollToCurrentDay() {
-    if (window.innerWidth > 768) return; // Ne s'applique que sur mobile
+    if (window.innerWidth > 768) return;
 
     const activeTable = weekAMobileContainer.style.display === 'block' ? weekAMobile : weekBMobile;
     const scrollContainer = activeTable.parentElement;
@@ -519,7 +590,6 @@ function highlightCurrentLesson() {
     const allCells = document.querySelectorAll('.timetable-table td, .mobile-timetable-table td');
     allCells.forEach(cell => cell.classList.remove('current-lesson'));
 
-    // Hide "No class rn" message by default
     noClassMessage.style.display = 'none';
 
     if (isManualDayChange || manualDate) {
@@ -542,11 +612,10 @@ function highlightCurrentLesson() {
     const timeCellsMobile = activeTableMobile ? activeTableMobile.querySelectorAll('tbody td[data-uk-time]') : [];
     let currentLessonFound = false;
 
-    // Check if it's a holiday or weekend
     const isWeekend = bstNow.getUTCDay() === 0 || bstNow.getUTCDay() === 6;
     const holidayReason = isHolidayOrClosure(now);
     if (isWeekend || holidayReason) {
-        return; // Don't show "No class rn" during holidays or weekends
+        return;
     }
 
     timeCells.forEach((cell, index) => {
@@ -624,7 +693,7 @@ function highlightCurrentLesson() {
 
     if (!currentLessonFound) {
         console.log('No current lesson at this time.');
-        noClassMessage.style.display = 'block'; // Show "No class rn" message
+        noClassMessage.style.display = 'block';
     }
 }
 
@@ -674,25 +743,15 @@ function checkDayChange() {
 }
 
 function handleHoliday(date, reason) {
-    const holidays = [
-        { start: new Date(Date.UTC(2025, 3, 4)), end: new Date(Date.UTC(2025, 3, 4)), reason: 'STAFF ONLY (INSET)' },
-        { start: new Date(Date.UTC(2025, 3, 5)), end: new Date(Date.UTC(2025, 3, 20)), reason: 'Easter Holidays' },
-        { start: new Date(Date.UTC(2025, 3, 21)), end: new Date(Date.UTC(2025, 3, 21)), reason: 'BANK HOLIDAY' },
-        { start: new Date(Date.UTC(2025, 4, 5)), end: new Date(Date.UTC(2025, 4, 5)), reason: 'BANK HOLIDAY' },
-        { start: new Date(Date.UTC(2025, 4, 23)), end: new Date(Date.UTC(2025, 5, 1)), reason: 'Holidays' },
-        { start: new Date(Date.UTC(2025, 6, 23)), end: new Date(Date.UTC(2025, 7, 31)), reason: 'Summer Holidays' },
-        { start: new Date(Date.UTC(2025, 9, 24)), end: new Date(Date.UTC(2025, 10, 2)), reason: 'Holidays' },
-        { start: new Date(Date.UTC(2025, 11, 18)), end: new Date(Date.UTC(2026, 0, 4)), reason: 'Christmas Holidays' },
-        { start: new Date(Date.UTC(2026, 1, 13)), end: new Date(Date.UTC(2026, 1, 22)), reason: 'Holidays' },
-        { start: new Date(Date.UTC(2026, 3, 2)), end: new Date(Date.UTC(2026, 3, 19)), reason: 'Easter Holidays' },
-        { start: new Date(Date.UTC(2026, 4, 22)), end: new Date(Date.UTC(2026, 4, 31)), reason: 'Holidays' },
-        { start: new Date(Date.UTC(2026, 6, 23)), end: new Date(Date.UTC(2026, 7, 31)), reason: 'Summer Holidays' }
-    ];
-
     const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
     const dateOnly = new Date(Date.UTC(bstDate.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
-    const currentHoliday = holidays.find(h => dateOnly >= h.start && dateOnly <= h.end);
-    const isSingleDay = currentHoliday.start.getTime() === currentHoliday.end.getTime();
+    const currentHoliday = holidays.find(h => {
+        const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
+        const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
+        return dateOnly >= startDate && dateOnly <= endDate;
+    });
+    const isSingleDay = new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)).getTime() ===
+                        new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)).getTime();
     const nextDay = new Date(dateOnly);
     nextDay.setUTCDate(nextDay.getUTCDate() + 1);
     const isFollowedByHoliday = isHolidayOrClosure(nextDay);
@@ -748,7 +807,7 @@ function handleHoliday(date, reason) {
             weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
             weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
             weekAMobileContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
-            weekBMobileContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+            weekBMobileContainer.style.display = 'block';
             toggleButton.style.display = 'block';
             if (window.innerWidth <= 768) {
                 holidayMessage.textContent = `Today is ${reason}. Showing timetable for next school day: ${daysOfWeek[currentDayIndex]} (Week ${currentWeek})`;
@@ -839,6 +898,7 @@ if (holidayReason) {
             weekAMobileContainer.style.display = 'none';
             weekBMobileContainer.style.display = 'block';
         }
+        populateHolidayTables(); // Re-populate holiday tables on resize
     });
 
     updateTimes();
