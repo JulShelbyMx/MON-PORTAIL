@@ -448,30 +448,48 @@ if (isMobile && scrollToIndex > 0) {
         const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
         if (cell) {
             const containerWidth = scrollContainerA.offsetWidth;
+            const tableWidth = scrollContainerA.querySelector('.mobile-timetable-table').offsetWidth;
             const cellWidth = cell.offsetWidth;
             let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+            console.log('Centering - Initial Offset:', offset); // Débogage
             if (currentDay === 'thursday') {
-                offset += 50; // Décalage fixe de 50 pixels vers la droite pour Thursday
+                // Décalage pour aligner Thursday comme dans Image 2
+                const thursdayIndex = 4; // Index de Thursday (1-based: 1=Time, 2=Monday, 3=Tuesday, 4=Wednesday, 5=Thursday)
+                const targetOffset = (thursdayIndex - 1) * cellWidth + (cellWidth / 2) - (containerWidth / 2) + 100; // +100px décalage
+                offset = Math.max(0, targetOffset);
+                console.log('Centering Thursday - Adjusted Offset:', offset); // Débogage
             }
-            scrollContainerA.scrollTo({
-                left: Math.max(0, offset), // Empêche un défilement négatif
-                behavior: 'smooth'
-            });
+            // Ajouter un léger délai pour s'assurer que le DOM est prêt
+            setTimeout(() => {
+                scrollContainerA.scrollTo({
+                    left: Math.max(0, offset), // Empêche un défilement négatif
+                    behavior: 'smooth'
+                });
+            }, 100);
         }
     }
     if (scrollContainerB) {
         const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
         if (cell) {
             const containerWidth = scrollContainerB.offsetWidth;
+            const tableWidth = scrollContainerB.querySelector('.mobile-timetable-table').offsetWidth;
             const cellWidth = cell.offsetWidth;
             let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+            console.log('Centering - Initial Offset:', offset); // Débogage
             if (currentDay === 'thursday') {
-                offset += 50; // Décalage fixe de 50 pixels vers la droite pour Thursday
+                // Décalage pour aligner Thursday comme dans Image 2
+                const thursdayIndex = 4; // Index de Thursday
+                const targetOffset = (thursdayIndex - 1) * cellWidth + (cellWidth / 2) - (containerWidth / 2) + 100; // +100px décalage
+                offset = Math.max(0, targetOffset);
+                console.log('Centering Thursday - Adjusted Offset:', offset); // Débogage
             }
-            scrollContainerB.scrollTo({
-                left: Math.max(0, offset), // Empêche un défilement négatif
-                behavior: 'smooth'
-            });
+            // Ajouter un léger délai pour s'assurer que le DOM est prêt
+            setTimeout(() => {
+                scrollContainerB.scrollTo({
+                    left: Math.max(0, offset), // Empêche un défilement négatif
+                    behavior: 'smooth'
+                });
+            }, 100);
         }
     }
 }}
