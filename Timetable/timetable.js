@@ -452,7 +452,7 @@ if (isMobile && scrollToIndex > 0) {
             let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
             console.log('Centering - Day:', currentDay, 'Offset before:', offset); // Débogage
             if (currentDay === 'thursday') {
-                offset += 150; // Décalage de 150 pixels vers la droite pour Thursday
+                offset -= 20; // Décalage de 150 pixels vers la droite pour Thursday
                 console.log('Centering Thursday - Offset after:', offset); // Débogage
             }
             setTimeout(() => {
@@ -471,7 +471,7 @@ if (isMobile && scrollToIndex > 0) {
             let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
             console.log('Centering - Day:', currentDay, 'Offset before:', offset); // Débogage
             if (currentDay === 'thursday') {
-                offset += 150; // Décalage de 150 pixels vers la droite pour Thursday
+                offset -= 20; // Décalage de 150 pixels vers la droite pour Thursday
                 console.log('Centering Thursday - Offset after:', offset); // Débogage
             }
             setTimeout(() => {
