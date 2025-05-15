@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const cellWidth = cell.offsetWidth;
                     let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
                     if (currentDay === 'thursday') {
-                        offset += cellWidth * 0.4; // Décalage de 20% vers la droite pour Thursday
+                        offset += cellWidth * 0.8; // Décalage de 20% vers la droite pour Thursday
                     }
                     scrollContainerB.scrollTo({
                         left: offset,
