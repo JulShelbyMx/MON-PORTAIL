@@ -440,10 +440,11 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-       // Centrer le jour actuel au chargement (uniquement sur mobile)
+      // Centrer le jour actuel au chargement (uniquement sur mobile)
 if (isMobile && scrollToIndex > 0) {
     const scrollContainerA = document.getElementById('mobile-scroll-a');
     const scrollContainerB = document.getElementById('mobile-scroll-b');
+    console.log('Current Day:', currentDay, 'Current Day Index:', currentDayIndex); // Débogage
     if (scrollContainerA) {
         const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
         if (cell) {
@@ -453,10 +454,8 @@ if (isMobile && scrollToIndex > 0) {
             let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
             console.log('Centering - Initial Offset:', offset); // Débogage
             if (currentDay === 'thursday') {
-                // Décalage pour aligner Thursday comme dans Image 2
-                const thursdayIndex = 4; // Index de Thursday (1-based: 1=Time, 2=Monday, 3=Tuesday, 4=Wednesday, 5=Thursday)
-                const targetOffset = (thursdayIndex - 1) * cellWidth + (cellWidth / 2) - (containerWidth / 2) + 100; // +100px décalage
-                offset = Math.max(0, targetOffset);
+                const thursdayIndex = 4; // Index de Thursday (1=Time, 2=Monday, 3=Tuesday, 4=Wednesday, 5=Thursday)
+                offset = (thursdayIndex - 1) * cellWidth + (cellWidth / 2) - (containerWidth / 2) + 100; // Centrage sur Thursday + 100px
                 console.log('Centering Thursday - Adjusted Offset:', offset); // Débogage
             }
             // Ajouter un léger délai pour s'assurer que le DOM est prêt
@@ -477,10 +476,8 @@ if (isMobile && scrollToIndex > 0) {
             let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
             console.log('Centering - Initial Offset:', offset); // Débogage
             if (currentDay === 'thursday') {
-                // Décalage pour aligner Thursday comme dans Image 2
                 const thursdayIndex = 4; // Index de Thursday
-                const targetOffset = (thursdayIndex - 1) * cellWidth + (cellWidth / 2) - (containerWidth / 2) + 100; // +100px décalage
-                offset = Math.max(0, targetOffset);
+                offset = (thursdayIndex - 1) * cellWidth + (cellWidth / 2) - (containerWidth / 2) + 100; // Centrage sur Thursday + 100px
                 console.log('Centering Thursday - Adjusted Offset:', offset); // Débogage
             }
             // Ajouter un léger délai pour s'assurer que le DOM est prêt
