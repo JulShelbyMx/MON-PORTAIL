@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </tr>
                     <tr>
                         <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                        <td>PsE<span class="classroom">A206</span></td>
+                        <td>PsE<span class="classroom">A210</span></td>
                         <td>TcR<span class="classroom">A005</span></td>
                         <td>EnE<span class="classroom">A201</span></td>
                         <td>ScR<span class="classroom">A109</span></td>
