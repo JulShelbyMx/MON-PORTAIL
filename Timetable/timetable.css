@@ -377,12 +377,12 @@ body {
     }
 
     .timetable-table th, .timetable-table td {
-        padding: 10px; /* Augmenté de 8px à 10px */
-        font-size: 14px; /* Augmenté de 12px à 14px */
+        padding: 11px; /* Augmenté de 10px à 11px */
+        font-size: 15px; /* Augmenté de 14px à 15px */
     }
 
     .timetable-table th {
-        font-size: 16px; /* Augmenté de 14px à 16px */
+        font-size: 17px; /* Augmenté de 16px à 17px */
     }
 
     .mobile-timetable-scroll {
@@ -391,12 +391,12 @@ body {
     }
 
     .mobile-timetable-table th, .mobile-timetable-table td {
-        padding: 10px; /* Augmenté de 6px à 10px */
-        font-size: 14px; /* Augmenté de 12px à 14px */
+        padding: 11px; /* Augmenté de 10px à 11px */
+        font-size: 15px; /* Augmenté de 14px à 15px */
     }
 
     .mobile-timetable-table th {
-        font-size: 16px; /* Augmenté de 14px à 16px */
+        font-size: 17px; /* Augmenté de 16px à 17px */
     }
 
     .mobile-timetable-table th:first-child,
@@ -459,7 +459,7 @@ body {
     }
 
     .classroom {
-        font-size: 12px; /* Augmenté de 10px à 12px */
+        font-size: 13px; /* Augmenté de 12px à 13px */
     }
 }
 
@@ -485,21 +485,21 @@ body {
     }
 
     .timetable-table th, .timetable-table td {
-        padding: 8px; /* Augmenté de 6px à 8px */
-        font-size: 12px; /* Augmenté de 10px à 12px */
+        padding: 9px; /* Augmenté de 8px à 9px */
+        font-size: 13px; /* Augmenté de 12px à 13px */
     }
 
     .timetable-table th {
-        font-size: 14px; /* Augmenté de 12px à 14px */
+        font-size: 15px; /* Augmenté de 14px à 15px */
     }
 
     .mobile-timetable-table th, .mobile-timetable-table td {
-        padding: 8px; /* Augmenté de 4px à 8px */
-        font-size: 12px; /* Augmenté de 10px à 12px */
+        padding: 9px; /* Augmenté de 8px à 9px */
+        font-size: 13px; /* Augmenté de 12px à 13px */
     }
 
     .mobile-timetable-table th {
-        font-size: 14px; /* Augmenté de 12px à 14px */
+        font-size: 15px; /* Augmenté de 14px à 15px */
     }
 
     .mobile-timetable-table th:first-child,
@@ -562,6 +562,6 @@ body {
     }
 
     .classroom {
-        font-size: 10px; /* Augmenté de 8px à 10px */
+        font-size: 11px; /* Augmenté de 10px à 11px */
     }
 }

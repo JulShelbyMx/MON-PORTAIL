@@ -105,6 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to generate timetables
    function generateTimetables() {
     const isMobile = window.innerWidth <= 768;
+    const currentDate = new Date();
+    const currentDay = currentDate.toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+    const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
 
     if (!isMobile) {
         weekAContainer.innerHTML = `
@@ -260,9 +263,15 @@ document.addEventListener('DOMContentLoaded', () => {
             </table>
         `;
     } else {
+        const currentDayIndex = days.indexOf(currentDay);
+        let scrollToIndex = currentDayIndex !== -1 ? currentDayIndex + 1 : 0; // +1 pour passer la colonne "Time"
+
+        // Ajouter une colonne invisible le vendredi
+        const extraColumn = currentDay === 'friday' ? `<th style="display: none;"></th><td style="display: none;"></td>` : '';
+
         weekAMobileContainer.innerHTML = `
-            <h2>Week A</h2>
-            <div class="mobile-timetable-scroll">
+            <h2 style="text-align: center;">Week A</h2>
+            <div class="mobile-timetable-scroll" id="mobile-scroll-a">
                 <table class="mobile-timetable-table">
                     <thead>
                         <tr>
@@ -274,6 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <th>Wednesday</th>
                             <th>Thursday</th>
                             <th>Friday</th>
+                            ${extraColumn}
                         </tr>
                     </thead>
                     <tbody>
@@ -284,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>Tu<span class="classroom">B206</span></td>
                             <td>Tu<span class="classroom">B206</span></td>
                             <td>Tu<span class="classroom">B206</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="08:40-09:40">08:40-09:40</td>
@@ -292,6 +303,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>ArE<span class="classroom">B206</span></td>
                             <td>HiE<span class="classroom">A212</span></td>
                             <td>ScR<span class="classroom">A105</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="09:40-10:40">09:40-10:40</td>
@@ -300,6 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>MaE<span class="classroom">B110</span></td>
                             <td>DmE<span class="classroom">C101</span></td>
                             <td>PsE<span class="classroom">B210</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="10:55-11:55">10:55-11:55</td>
@@ -308,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>GgE<span class="classroom">A109</span></td>
                             <td>ReE<span class="classroom">A110</span></td>
                             <td>HiE<span class="classroom">B203</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="11:55-12:55">11:55-12:55</td>
@@ -316,6 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>Mess<span class="classroom">A005</span></td>
                             <td>FrE<span class="classroom">A205</span></td>
                             <td>GgE<span class="classroom">A211</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="12:55-13:55">12:55-13:55</td>
@@ -324,6 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>Lunch + Rt<span class="classroom">B206</span></td>
                             <td>Lunch + Rt<span class="classroom">B206</span></td>
                             <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="13:55-14:55">13:55-14:55</td>
@@ -332,14 +348,15 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>EnE<span class="classroom">A206</span></td>
                             <td>EnE<span class="classroom">A206</span></td>
                             <td>MaE<span class="classroom">B110</span></td>
+                            ${extraColumn}
                         </tr>
                     </tbody>
                 </table>
             </div>
         `;
         weekBMobileContainer.innerHTML = `
-            <h2>Week B</h2>
-            <div class="mobile-timetable-scroll">
+            <h2 style="text-align: center;">Week B</h2>
+            <div class="mobile-timetable-scroll" id="mobile-scroll-b">
                 <table class="mobile-timetable-table">
                     <thead>
                         <tr>
@@ -351,6 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <th>Wednesday</th>
                             <th>Thursday</th>
                             <th>Friday</th>
+                            ${extraColumn}
                         </tr>
                     </thead>
                     <tbody>
@@ -361,6 +379,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>Tu<span class="classroom">B206</span></td>
                             <td>Tu<span class="classroom">B206</span></td>
                             <td>Tu<span class="classroom">B206</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="08:40-09:40">08:40-09:40</td>
@@ -369,6 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>EnE<span class="classroom">A201</span></td>
                             <td>ScR<span class="classroom">A109</span></td>
                             <td>ScR<span class="classroom">A109</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="09:40-10:40">09:40-10:40</td>
@@ -377,6 +397,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>Mess<span class="classroom">A013</span></td>
                             <td>EnE<span class="classroom">A202</span></td>
                             <td>HiE<span class="classroom">B203</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="10:55-11:55">10:55-11:55</td>
@@ -385,6 +406,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>ArE<span class="classroom">B205</span></td>
                             <td>DmE<span class="classroom">C101</span></td>
                             <td>MaE<span class="classroom">B110</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="11:55-12:55">11:55-12:55</td>
@@ -393,6 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>SpE<span class="classroom">A212</span></td>
                             <td>FrE<span class="classroom">A209</span></td>
                             <td>GgE<span class="classroom">B207</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="12:55-13:55">12:55-13:55</td>
@@ -401,6 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>Lunch + Rt<span class="classroom">B206</span></td>
                             <td>Lunch + Rt<span class="classroom">B206</span></td>
                             <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="13:55-14:55">13:55-14:55</td>
@@ -409,11 +433,34 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>ScR<span class="classroom">A109</span></td>
                             <td>MaE<span class="classroom">B110</span></td>
                             <td>ReE<span class="classroom">B203</span></td>
+                            ${extraColumn}
                         </tr>
                     </tbody>
                 </table>
             </div>
         `;
+
+        // Centrer le jour actuel au chargement (uniquement sur mobile)
+        const scrollContainerA = document.getElementById('mobile-scroll-a');
+        const scrollContainerB = document.getElementById('mobile-scroll-b');
+        if (scrollContainerA && scrollToIndex > 0) {
+            const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
+            if (cell) {
+                const containerWidth = scrollContainerA.offsetWidth;
+                const cellWidth = cell.offsetWidth;
+                const offset = cell.offsetLeft - (containerWidth / 2) + (cellWidth / 2);
+                scrollContainerA.scrollLeft = offset;
+            }
+        }
+        if (scrollContainerB && scrollToIndex > 0) {
+            const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
+            if (cell) {
+                const containerWidth = scrollContainerB.offsetWidth;
+                const cellWidth = cell.offsetWidth;
+                const offset = cell.offsetLeft - (containerWidth / 2) + (cellWidth / 2);
+                scrollContainerB.scrollLeft = offset;
+            }
+        }
     }
 
     // Initialize references after generation
@@ -430,6 +477,16 @@ document.addEventListener('DOMContentLoaded', () => {
     timeZoneAMobile = document.getElementById('time-zone-a-mobile');
     timeZoneBMobile = document.getElementById('time-zone-b-mobile');
 }
+
+// Appeler la fonction au chargement
+document.addEventListener('DOMContentLoaded', generateTimetables);
+
+// Mettre à jour le centrage si la taille de l'écran change
+window.addEventListener('resize', () => {
+    if (window.innerWidth <= 768) {
+        generateTimetables();
+    }
+});
 
 // Generate timetables and populate holiday tables at load
 generateTimetables();
