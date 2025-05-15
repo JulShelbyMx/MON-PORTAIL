@@ -388,7 +388,6 @@ body {
     .mobile-timetable-scroll {
         max-height: calc(100vh - 200px);
         overflow-y: auto;
-        white-space: nowrap; /* Assure que le tableau reste sur une ligne */
     }
 
     .mobile-timetable-table th, .mobile-timetable-table td {
