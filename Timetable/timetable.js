@@ -440,49 +440,37 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-      // Centrer le jour actuel au chargement (uniquement sur mobile)
-if (isMobile && scrollToIndex > 0) {
-    const scrollContainerA = document.getElementById('mobile-scroll-a');
-    const scrollContainerB = document.getElementById('mobile-scroll-b');
-    if (scrollContainerA) {
-        const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
-        if (cell) {
-            const containerWidth = scrollContainerA.offsetWidth;
-            const cellWidth = cell.offsetWidth;
-            let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
-            console.log('Centering - Day:', currentDay, 'Offset before:', offset); // Débogage
-            if (currentDay === 'thursday') {
-                offset -= 20; // Décalage de 150 pixels vers la droite pour Thursday
-                console.log('Centering Thursday - Offset after:', offset); // Débogage
+       // Centrer le jour actuel au chargement (uniquement sur mobile)
+        if (isMobile && scrollToIndex > 0) {
+            const scrollContainerA = document.getElementById('mobile-scroll-a');
+            const scrollContainerB = document.getElementById('mobile-scroll-b');
+            if (scrollContainerA) {
+                const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
+                if (cell) {
+                    const containerWidth = scrollContainerA.offsetWidth;
+                    const cellWidth = cell.offsetWidth;
+                    const offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+                    scrollContainerA.scrollTo({
+                        left: offset,
+                        behavior: 'smooth'
+                    });
+                }
             }
-            setTimeout(() => {
-                scrollContainerA.scrollTo({
-                    left: Math.max(0, offset),
-                    behavior: 'smooth'
-                });
-            }, 100);
+            if (scrollContainerB) {
+                const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
+                if (cell) {
+                    const containerWidth = scrollContainerB.offsetWidth;
+                    const cellWidth = cell.offsetWidth;
+                    const offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+                    scrollContainerB.scrollTo({
+                        left: offset,
+                        behavior: 'smooth'
+                    });
+                }
+            }
         }
     }
-    if (scrollContainerB) {
-        const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
-        if (cell) {
-            const containerWidth = scrollContainerB.offsetWidth;
-            const cellWidth = cell.offsetWidth;
-            let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
-            console.log('Centering - Day:', currentDay, 'Offset before:', offset); // Débogage
-            if (currentDay === 'thursday') {
-                offset -= 20; // Décalage de 150 pixels vers la droite pour Thursday
-                console.log('Centering Thursday - Offset after:', offset); // Débogage
-            }
-            setTimeout(() => {
-                scrollContainerB.scrollTo({
-                    left: Math.max(0, offset),
-                    behavior: 'smooth'
-                });
-            }, 100);
-        }
-    }
-}}
+
     // Initialize references after generation
     weekA = weekAContainer.querySelector('.timetable-table');
     weekB = weekBContainer.querySelector('.timetable-table');
