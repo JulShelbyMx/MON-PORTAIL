@@ -69,24 +69,24 @@ body {
 }
 
 .timetable-table th, .timetable-table td {
-    padding: 10px; /* Réduit de 15px à 10px */
+    padding: 10px;
     border: 1px solid #87CEEB;
     text-align: center;
     font-family: 'Arial', sans-serif;
-    font-size: 14px; /* Réduit à 14px */
+    font-size: 14px;
 }
 
 .timetable-table th {
     background-color: #87CEEB;
     color: #0a0a0a;
-    font-size: 16px; /* Réduit de 18px à 16px */
+    font-size: 16px;
 }
 
 .classroom {
-    font-size: 12px; /* Réduit de 14px à 12px */
+    font-size: 12px;
     color: #87CEEB;
     font-weight: bold;
-    margin-top: 3px; /* Réduit de 5px à 3px */
+    margin-top: 3px;
     display: block;
 }
 
@@ -166,18 +166,18 @@ body {
 }
 
 .mobile-timetable-table th, .mobile-timetable-table td {
-    padding: 8px; /* Réduit de 12px à 8px */
+    padding: 8px;
     border: 1px solid #87CEEB;
     text-align: center;
     font-family: 'Arial', sans-serif;
     white-space: nowrap;
-    font-size: 14px; /* Réduit de 16px à 14px */
+    font-size: 14px;
 }
 
 .mobile-timetable-table th {
     background-color: #87CEEB;
     color: #0a0a0a;
-    font-size: 16px; /* Réduit de 18px à 16px */
+    font-size: 16px;
     position: sticky;
     left: 0;
     z-index: 1;
@@ -377,12 +377,12 @@ body {
     }
 
     .timetable-table th, .timetable-table td {
-        padding: 8px; /* Réduit encore pour mobile */
-        font-size: 12px; /* Réduit à 12px */
+        padding: 10px; /* Augmenté de 8px à 10px */
+        font-size: 14px; /* Augmenté de 12px à 14px */
     }
 
     .timetable-table th {
-        font-size: 14px; /* Réduit à 14px */
+        font-size: 16px; /* Augmenté de 14px à 16px */
     }
 
     .mobile-timetable-scroll {
@@ -391,12 +391,12 @@ body {
     }
 
     .mobile-timetable-table th, .mobile-timetable-table td {
-        padding: 6px; /* Réduit de 8px à 6px */
-        font-size: 12px; /* Réduit à 12px */
+        padding: 10px; /* Augmenté de 6px à 10px */
+        font-size: 14px; /* Augmenté de 12px à 14px */
     }
 
     .mobile-timetable-table th {
-        font-size: 14px; /* Réduit à 14px */
+        font-size: 16px; /* Augmenté de 14px à 16px */
     }
 
     .mobile-timetable-table th:first-child,
@@ -459,7 +459,7 @@ body {
     }
 
     .classroom {
-        font-size: 10px; /* Réduit de 12px à 10px */
+        font-size: 12px; /* Augmenté de 10px à 12px */
     }
 }
 
@@ -485,21 +485,21 @@ body {
     }
 
     .timetable-table th, .timetable-table td {
-        padding: 6px; /* Réduit encore pour petits écrans */
-        font-size: 10px; /* Réduit à 10px */
+        padding: 8px; /* Augmenté de 6px à 8px */
+        font-size: 12px; /* Augmenté de 10px à 12px */
     }
 
     .timetable-table th {
-        font-size: 12px; /* Réduit à 12px */
+        font-size: 14px; /* Augmenté de 12px à 14px */
     }
 
     .mobile-timetable-table th, .mobile-timetable-table td {
-        padding: 4px; /* Réduit de 6px à 4px */
-        font-size: 10px; /* Réduit à 10px */
+        padding: 8px; /* Augmenté de 4px à 8px */
+        font-size: 12px; /* Augmenté de 10px à 12px */
     }
 
     .mobile-timetable-table th {
-        font-size: 12px; /* Réduit à 12px */
+        font-size: 14px; /* Augmenté de 12px à 14px */
     }
 
     .mobile-timetable-table th:first-child,
@@ -562,6 +562,6 @@ body {
     }
 
     .classroom {
-        font-size: 8px; /* Réduit de 10px à 8px */
+        font-size: 10px; /* Augmenté de 8px à 10px */
     }
 }

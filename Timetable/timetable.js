@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </tr>
                     <tr>
                         <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                        <td>PsE<span class="classroom">A206</span></td>
+                        <td>PsE<span class="classroom">A210</span></td>
                         <td>TcR<span class="classroom">A005</span></td>
                         <td>EnE<span class="classroom">A201</span></td>
                         <td>ScR<span class="classroom">A109</span></td>
@@ -265,76 +265,75 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="mobile-timetable-scroll">
                 <table class="mobile-timetable-table">
                     <thead>
-                    <tr>
-                        <th>
-                            Time <span id="time-zone-a">[UK]</span>
-                            <button id="toggle-time-a" class="time-toggle-button">Switch to FR</button>
-                        </th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                        <td>EnE<span class="classroom">A206</span></td>
-                        <td>CoE<span class="classroom">B101</span></td>
-                        <td>ArE<span class="classroom">B206</span></td>
-                        <td>HiE<span class="classroom">A212</span></td>
-                        <td>ScR<span class="classroom">A105</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                        <td>PeR<span class="classroom">A012</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>DmE<span class="classroom">C101</span></td>
-                        <td>PsE<span class="classroom">B210</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                        <td>SpE<span class="classroom">A210</span></td>
-                        <td>EnE<span class="classroom">A206</span></td>
-                        <td>GgE<span class="classroom">A109</span></td>
-                        <td>ReE<span class="classroom">A110</span></td>
-                        <td>HiE<span class="classroom">B203</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>MuE<span class="classroom">B201</span></td>
-                        <td>Mess<span class="classroom">A005</span></td>
-                        <td>FrE<span class="classroom">A205</span></td>
-                        <td>GgE<span class="classroom">A211</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="12:55-13:55">12:55-13:55</td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                        <td>ScR<span class="classroom">A105</span></td>
-                        <td>ScR<span class="classroom">A105</span></td>
-                        <td>EnE<span class="classroom">A206</span></td>
-                        <td>EnE<span class="classroom">A206</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                    </tr>
-                </tbody>
+                        <tr>
+                            <th>Time <span id="time-zone-a-mobile">[UK]</span>
+                                <button id="toggle-time-a-mobile" class="time-toggle-button">Switch to FR</button>
+                            </th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                            <td>Tu<span class="classroom">B206</span></td>
+                            <td>Tu<span class="classroom">B206</span></td>
+                            <td>Tu<span class="classroom">B206</span></td>
+                            <td>Tu<span class="classroom">B206</span></td>
+                            <td>Tu<span class="classroom">B206</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                            <td>EnE<span class="classroom">A206</span></td>
+                            <td>CoE<span class="classroom">B101</span></td>
+                            <td>ArE<span class="classroom">B206</span></td>
+                            <td>HiE<span class="classroom">A212</span></td>
+                            <td>ScR<span class="classroom">A105</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                            <td>PeR<span class="classroom">A012</span></td>
+                            <td>MaE<span class="classroom">B110</span></td>
+                            <td>MaE<span class="classroom">B110</span></td>
+                            <td>DmE<span class="classroom">C101</span></td>
+                            <td>PsE<span class="classroom">B210</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="10:55-11:55">10:55-11:55</td>
+                            <td>SpE<span class="classroom">A210</span></td>
+                            <td>EnE<span class="classroom">A206</span></td>
+                            <td>GgE<span class="classroom">A109</span></td>
+                            <td>ReE<span class="classroom">A110</span></td>
+                            <td>HiE<span class="classroom">B203</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                            <td>MaE<span class="classroom">B110</span></td>
+                            <td>MuE<span class="classroom">B201</span></td>
+                            <td>Mess<span class="classroom">A005</span></td>
+                            <td>FrE<span class="classroom">A205</span></td>
+                            <td>GgE<span class="classroom">A211</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                            <td>ScR<span class="classroom">A105</span></td>
+                            <td>ScR<span class="classroom">A105</span></td>
+                            <td>EnE<span class="classroom">A206</span></td>
+                            <td>EnE<span class="classroom">A206</span></td>
+                            <td>MaE<span class="classroom">B110</span></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         `;
@@ -343,76 +342,75 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="mobile-timetable-scroll">
                 <table class="mobile-timetable-table">
                     <thead>
-                    <tr>
-                        <th>
-                            Time <span id="time-zone-b">[UK]</span>
-                            <button id="toggle-time-b" class="time-toggle-button">Switch to FR</button>
-                        </th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                        <td>PsE<span class="classroom">A210</span></td>
-                        <td>TcR<span class="classroom">A005</span></td>
-                        <td>EnE<span class="classroom">A201</span></td>
-                        <td>ScR<span class="classroom">A109</span></td>
-                        <td>ScR<span class="classroom">A109</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>GgE<span class="classroom">B202</span></td>
-                        <td>Mess<span class="classroom">A013</span></td>
-                        <td>EnE<span class="classroom">A202</span></td>
-                        <td>HiE<span class="classroom">B203</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                        <td>CoE<span class="classroom">B101</span></td>
-                        <td>EnE<span class="classroom">A212</span></td>
-                        <td>ArE<span class="classroom">B205</span></td>
-                        <td>DmE<span class="classroom">C101</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                        <td>PeR<span class="classroom">A013</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>SpE<span class="classroom">A212</span></td>
-                        <td>FrE<span class="classroom">A209</span></td>
-                        <td>GgE<span class="classroom">B207</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="12:55-13:55">12:55-13:55</td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                    </tr>
-                    <tr>
-                        <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                        <td>EnE<span class="classroom">A201</span></td>
-                        <td>MuE<span class="classroom">B201</span></td>
-                        <td>ScR<span class="classroom">A109</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>ReE<span class="classroom">B203</span></td>
-                    </tr>
-                </tbody>
+                        <tr>
+                            <th>Time <span id="time-zone-b-mobile">[UK]</span>
+                                <button id="toggle-time-b-mobile" class="time-toggle-button">Switch to FR</button>
+                            </th>
+                            <th>Monday</th>
+                            <th>Tuesday</th>
+                            <th>Wednesday</th>
+                            <th>Thursday</th>
+                            <th>Friday</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                            <td>Tu<span class="classroom">B206</span></td>
+                            <td>Tu<span class="classroom">B206</span></td>
+                            <td>Tu<span class="classroom">B206</span></td>
+                            <td>Tu<span class="classroom">B206</span></td>
+                            <td>Tu<span class="classroom">B206</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                            <td>PsE<span class="classroom">A210</span></td>
+                            <td>TcR<span class="classroom">A005</span></td>
+                            <td>EnE<span class="classroom">A201</span></td>
+                            <td>ScR<span class="classroom">A109</span></td>
+                            <td>ScR<span class="classroom">A109</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                            <td>MaE<span class="classroom">B110</span></td>
+                            <td>GgE<span class="classroom">B202</span></td>
+                            <td>Mess<span class="classroom">A013</span></td>
+                            <td>EnE<span class="classroom">A202</span></td>
+                            <td>HiE<span class="classroom">B203</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="10:55-11:55">10:55-11:55</td>
+                            <td>CoE<span class="classroom">B101</span></td>
+                            <td>EnE<span class="classroom">A212</span></td>
+                            <td>ArE<span class="classroom">B205</span></td>
+                            <td>DmE<span class="classroom">C101</span></td>
+                            <td>MaE<span class="classroom">B110</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                            <td>PeR<span class="classroom">A013</span></td>
+                            <td>MaE<span class="classroom">B110</span></td>
+                            <td>SpE<span class="classroom">A212</span></td>
+                            <td>FrE<span class="classroom">A209</span></td>
+                            <td>GgE<span class="classroom">B207</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                        </tr>
+                        <tr>
+                            <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                            <td>EnE<span class="classroom">A201</span></td>
+                            <td>MuE<span class="classroom">B201</span></td>
+                            <td>ScR<span class="classroom">A109</span></td>
+                            <td>MaE<span class="classroom">B110</span></td>
+                            <td>ReE<span class="classroom">B203</span></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         `;
