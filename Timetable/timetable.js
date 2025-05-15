@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>SpanishE<span class="classroom">A210</span></td>
                         <td>EnglishE<span class="classroom">A206</span></td>
                         <td>GeographyE<span class="classroom">A109</span></td>
-                        <td>ReE<span class="classroom">A110</span></td>
+                        <td>ReligionE<span class="classroom">A110</span></td>
                         <td>HistoryE<span class="classroom">B203</span></td>
                     </tr>
                     <tr>
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <td>MusicE<span class="classroom">B201</span></td>
                         <td>ScienceR<span class="classroom">A109</span></td>
                         <td>MathsE<span class="classroom">B110</span></td>
-                        <td>ReE<span class="classroom">B203</span></td>
+                        <td>ReligionE<span class="classroom">B203</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>SpanishE<span class="classroom">A210</span></td>
                             <td>EnglishE<span class="classroom">A206</span></td>
                             <td>GeographyE<span class="classroom">A109</span></td>
-                            <td>ReE<span class="classroom">A110</span></td>
+                            <td>ReligionE<span class="classroom">A110</span></td>
                             <td>HistoryE<span class="classroom">B203</span></td>
                             ${extraColumn}
                         </tr>
@@ -432,7 +432,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td>MusicE<span class="classroom">B201</span></td>
                             <td>ScienceR<span class="classroom">A109</span></td>
                             <td>MathsE<span class="classroom">B110</span></td>
-                            <td>ReE<span class="classroom">B203</span></td>
+                            <td>ReligionE<span class="classroom">B203</span></td>
                             ${extraColumn}
                         </tr>
                     </tbody>
