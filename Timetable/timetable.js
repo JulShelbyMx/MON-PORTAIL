@@ -440,8 +440,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Centrer le jour actuel au chargement (uniquement sur mobile)
-        if (isMobile && scrollToIndex > 0) {
+       // Centrer le jour actuel au chargement (uniquement sur mobile)
+if (isMobile && scrollToIndex > 0) {
     const scrollContainerA = document.getElementById('mobile-scroll-a');
     const scrollContainerB = document.getElementById('mobile-scroll-b');
     if (scrollContainerA) {
@@ -451,10 +451,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const cellWidth = cell.offsetWidth;
             let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
             if (currentDay === 'thursday') {
-                offset += cellWidth * 0.9; // Décalage de 50% vers la droite pour Thursday
+                offset += 50; // Décalage fixe de 50 pixels vers la droite pour Thursday
             }
             scrollContainerA.scrollTo({
-                left: offset,
+                left: Math.max(0, offset), // Empêche un défilement négatif
                 behavior: 'smooth'
             });
         }
@@ -466,10 +466,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const cellWidth = cell.offsetWidth;
             let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
             if (currentDay === 'thursday') {
-                offset += cellWidth * 0.9; // Décalage de 50% vers la droite pour Thursday
+                offset += 50; // Décalage fixe de 50 pixels vers la droite pour Thursday
             }
             scrollContainerB.scrollTo({
-                left: offset,
+                left: Math.max(0, offset), // Empêche un défilement négatif
                 behavior: 'smooth'
             });
         }
