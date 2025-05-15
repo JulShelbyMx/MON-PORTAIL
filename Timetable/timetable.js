@@ -442,41 +442,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Centrer le jour actuel au chargement (uniquement sur mobile)
         if (isMobile && scrollToIndex > 0) {
-            const scrollContainerA = document.getElementById('mobile-scroll-a');
-            const scrollContainerB = document.getElementById('mobile-scroll-b');
-            if (scrollContainerA) {
-                const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
-                if (cell) {
-                    const containerWidth = scrollContainerA.offsetWidth;
-                    const cellWidth = cell.offsetWidth;
-                    let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
-                    if (currentDay === 'thursday') {
-                        offset += cellWidth * 0.2; // Décalage de 20% vers la droite pour Thursday
-                    }
-                    scrollContainerA.scrollTo({
-                        left: offset,
-                        behavior: 'smooth'
-                    });
-                }
+    const scrollContainerA = document.getElementById('mobile-scroll-a');
+    const scrollContainerB = document.getElementById('mobile-scroll-b');
+    if (scrollContainerA) {
+        const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
+        if (cell) {
+            const containerWidth = scrollContainerA.offsetWidth;
+            const cellWidth = cell.offsetWidth;
+            let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+            if (currentDay === 'thursday') {
+                offset += cellWidth * 0.5; // Décalage de 50% vers la droite pour Thursday
             }
-            if (scrollContainerB) {
-                const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
-                if (cell) {
-                    const containerWidth = scrollContainerB.offsetWidth;
-                    const cellWidth = cell.offsetWidth;
-                    let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
-                    if (currentDay === 'thursday') {
-                        offset += cellWidth * 0.8; // Décalage de 20% vers la droite pour Thursday
-                    }
-                    scrollContainerB.scrollTo({
-                        left: offset,
-                        behavior: 'smooth'
-                    });
-                }
-            }
+            scrollContainerA.scrollTo({
+                left: offset,
+                behavior: 'smooth'
+            });
         }
     }
-
+    if (scrollContainerB) {
+        const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
+        if (cell) {
+            const containerWidth = scrollContainerB.offsetWidth;
+            const cellWidth = cell.offsetWidth;
+            let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+            if (currentDay === 'thursday') {
+                offset += cellWidth * 0.5; // Décalage de 50% vers la droite pour Thursday
+            }
+            scrollContainerB.scrollTo({
+                left: offset,
+                behavior: 'smooth'
+            });
+        }
+    }
+}}
     // Initialize references after generation
     weekA = weekAContainer.querySelector('.timetable-table');
     weekB = weekBContainer.querySelector('.timetable-table');
