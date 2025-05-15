@@ -129,59 +129,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 <tbody>
                     <tr>
                         <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
+                        <td>Tutor<span class="classroom">B206</span></td>
+                        <td>Tutor<span class="classroom">B206</span></td>
+                        <td>Tutor<span class="classroom">B206</span></td>
+                        <td>Tutor<span class="classroom">B206</span></td>
+                        <td>Tutor<span class="classroom">B206</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                        <td>EnE<span class="classroom">A206</span></td>
-                        <td>CoE<span class="classroom">B101</span></td>
-                        <td>ArE<span class="classroom">B206</span></td>
-                        <td>HiE<span class="classroom">A212</span></td>
-                        <td>ScR<span class="classroom">A105</span></td>
+                        <td>EnglishE<span class="classroom">A206</span></td>
+                        <td>ComputingE<span class="classroom">B101</span></td>
+                        <td>ArtE<span class="classroom">B206</span></td>
+                        <td>HistoryE<span class="classroom">A212</span></td>
+                        <td>ScienceR<span class="classroom">A105</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="09:40-10:40">09:40-10:40</td>
                         <td>PeR<span class="classroom">A012</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>DmE<span class="classroom">C101</span></td>
-                        <td>PsE<span class="classroom">B210</span></td>
+                        <td>MathsE<span class="classroom">B110</span></td>
+                        <td>MathsE<span class="classroom">B110</span></td>
+                        <td>DramaE<span class="classroom">C101</span></td>
+                        <td>PSHE<span class="classroom">B210</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                        <td>SpE<span class="classroom">A210</span></td>
-                        <td>EnE<span class="classroom">A206</span></td>
-                        <td>GgE<span class="classroom">A109</span></td>
+                        <td>SpanishE<span class="classroom">A210</span></td>
+                        <td>EnglishE<span class="classroom">A206</span></td>
+                        <td>GeographyE<span class="classroom">A109</span></td>
                         <td>ReE<span class="classroom">A110</span></td>
-                        <td>HiE<span class="classroom">B203</span></td>
+                        <td>HistoryE<span class="classroom">B203</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>MuE<span class="classroom">B201</span></td>
+                        <td>MathsE<span class="classroom">B110</span></td>
+                        <td>MusicE<span class="classroom">B201</span></td>
                         <td>Mess<span class="classroom">A005</span></td>
-                        <td>FrE<span class="classroom">A205</span></td>
-                        <td>GgE<span class="classroom">A211</span></td>
+                        <td>FrenchE<span class="classroom">A205</span></td>
+                        <td>GeographyE<span class="classroom">A211</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="12:55-13:55">12:55-13:55</td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
+                        <td>Lunch + R time<span class="classroom">B206</span></td>
+                        <td>Lunch + R time<span class="classroom">B206</span></td>
+                        <td>Lunch + R time<span class="classroom">B206</span></td>
+                        <td>Lunch + R time<span class="classroom">B206</span></td>
+                        <td>Lunch + R time<span class="classroom">B206</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                        <td>ScR<span class="classroom">A105</span></td>
-                        <td>ScR<span class="classroom">A105</span></td>
-                        <td>EnE<span class="classroom">A206</span></td>
-                        <td>EnE<span class="classroom">A206</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
+                        <td>ScienceR<span class="classroom">A105</span></td>
+                        <td>ScienceR<span class="classroom">A105</span></td>
+                        <td>EnglishE<span class="classroom">A206</span></td>
+                        <td>EnglishE<span class="classroom">A206</span></td>
+                        <td>MathsE<span class="classroom">B110</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -205,58 +205,58 @@ document.addEventListener('DOMContentLoaded', () => {
                 <tbody>
                     <tr>
                         <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
-                        <td>Tu<span class="classroom">B206</span></td>
+                        <td>Tutor<span class="classroom">B206</span></td>
+                        <td>Tutor<span class="classroom">B206</span></td>
+                        <td>Tutor<span class="classroom">B206</span></td>
+                        <td>Tutor<span class="classroom">B206</span></td>
+                        <td>Tutor<span class="classroom">B206</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                        <td>PsE<span class="classroom">A210</span></td>
-                        <td>TcR<span class="classroom">A005</span></td>
-                        <td>EnE<span class="classroom">A201</span></td>
-                        <td>ScR<span class="classroom">A109</span></td>
-                        <td>ScR<span class="classroom">A109</span></td>
+                        <td>PSHE<span class="classroom">A210</span></td>
+                        <td>ComputingE<span class="classroom">A005</span></td>
+                        <td>EnglishE<span class="classroom">A201</span></td>
+                        <td>ScienceR<span class="classroom">A109</span></td>
+                        <td>ScienceR<span class="classroom">A109</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>GgE<span class="classroom">B202</span></td>
+                        <td>MathsE<span class="classroom">B110</span></td>
+                        <td>GeographyE<span class="classroom">B202</span></td>
                         <td>Mess<span class="classroom">A013</span></td>
-                        <td>EnE<span class="classroom">A202</span></td>
-                        <td>HiE<span class="classroom">B203</span></td>
+                        <td>EnglishE<span class="classroom">A202</span></td>
+                        <td>HistoryE<span class="classroom">B203</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                        <td>CoE<span class="classroom">B101</span></td>
-                        <td>EnE<span class="classroom">A212</span></td>
-                        <td>ArE<span class="classroom">B205</span></td>
-                        <td>DmE<span class="classroom">C101</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
+                        <td>ComputingE<span class="classroom">B101</span></td>
+                        <td>EnglishE<span class="classroom">A212</span></td>
+                        <td>ArtE<span class="classroom">B205</span></td>
+                        <td>DramaE<span class="classroom">C101</span></td>
+                        <td>MathsE<span class="classroom">B110</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="11:55-12:55">11:55-12:55</td>
                         <td>PeR<span class="classroom">A013</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
-                        <td>SpE<span class="classroom">A212</span></td>
-                        <td>FrE<span class="classroom">A209</span></td>
-                        <td>GgE<span class="classroom">B207</span></td>
+                        <td>MathsE<span class="classroom">B110</span></td>
+                        <td>SpanishE<span class="classroom">A212</span></td>
+                        <td>FrenchE<span class="classroom">A209</span></td>
+                        <td>GeographyE<span class="classroom">B207</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="12:55-13:55">12:55-13:55</td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
-                        <td>Lunch + Rt<span class="classroom">B206</span></td>
+                        <td>Lunch + R time<span class="classroom">B206</span></td>
+                        <td>Lunch + R time<span class="classroom">B206</span></td>
+                        <td>Lunch + R time<span class="classroom">B206</span></td>
+                        <td>Lunch + R time<span class="classroom">B206</span></td>
+                        <td>Lunch + R time<span class="classroom">B206</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                        <td>EnE<span class="classroom">A201</span></td>
-                        <td>MuE<span class="classroom">B201</span></td>
-                        <td>ScR<span class="classroom">A109</span></td>
-                        <td>MaE<span class="classroom">B110</span></td>
+                        <td>EnglishE<span class="classroom">A201</span></td>
+                        <td>MusicE<span class="classroom">B201</span></td>
+                        <td>ScienceR<span class="classroom">A109</span></td>
+                        <td>MathsE<span class="classroom">B110</span></td>
                         <td>ReE<span class="classroom">B203</span></td>
                     </tr>
                 </tbody>
@@ -289,65 +289,65 @@ document.addEventListener('DOMContentLoaded', () => {
                     <tbody>
                         <tr>
                             <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                            <td>Tu<span class="classroom">B206</span></td>
-                            <td>Tu<span class="classroom">B206</span></td>
-                            <td>Tu<span class="classroom">B206</span></td>
-                            <td>Tu<span class="classroom">B206</span></td>
-                            <td>Tu<span class="classroom">B206</span></td>
+                            <td>Tutor<span class="classroom">B206</span></td>
+                            <td>Tutor<span class="classroom">B206</span></td>
+                            <td>Tutor<span class="classroom">B206</span></td>
+                            <td>Tutor<span class="classroom">B206</span></td>
+                            <td>Tutor<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                            <td>EnE<span class="classroom">A206</span></td>
-                            <td>CoE<span class="classroom">B101</span></td>
-                            <td>ArE<span class="classroom">B206</span></td>
-                            <td>HiE<span class="classroom">A212</span></td>
-                            <td>ScR<span class="classroom">A105</span></td>
+                            <td>EnglishE<span class="classroom">A206</span></td>
+                            <td>ComputingE<span class="classroom">B101</span></td>
+                            <td>ArtE<span class="classroom">B206</span></td>
+                            <td>HistoryE<span class="classroom">A212</span></td>
+                            <td>ScienceR<span class="classroom">A105</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="09:40-10:40">09:40-10:40</td>
                             <td>PeR<span class="classroom">A012</span></td>
-                            <td>MaE<span class="classroom">B110</span></td>
-                            <td>MaE<span class="classroom">B110</span></td>
-                            <td>DmE<span class="classroom">C101</span></td>
-                            <td>PsE<span class="classroom">B210</span></td>
+                            <td>MathsE<span class="classroom">B110</span></td>
+                            <td>MathsE<span class="classroom">B110</span></td>
+                            <td>DramaE<span class="classroom">C101</span></td>
+                            <td>PSHE<span class="classroom">B210</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                            <td>SpE<span class="classroom">A210</span></td>
-                            <td>EnE<span class="classroom">A206</span></td>
-                            <td>GgE<span class="classroom">A109</span></td>
+                            <td>SpanishE<span class="classroom">A210</span></td>
+                            <td>EnglishE<span class="classroom">A206</span></td>
+                            <td>GeographyE<span class="classroom">A109</span></td>
                             <td>ReE<span class="classroom">A110</span></td>
-                            <td>HiE<span class="classroom">B203</span></td>
+                            <td>HistoryE<span class="classroom">B203</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                            <td>MaE<span class="classroom">B110</span></td>
-                            <td>MuE<span class="classroom">B201</span></td>
+                            <td>MathsE<span class="classroom">B110</span></td>
+                            <td>MusicE<span class="classroom">B201</span></td>
                             <td>Mess<span class="classroom">A005</span></td>
-                            <td>FrE<span class="classroom">A205</span></td>
-                            <td>GgE<span class="classroom">A211</span></td>
+                            <td>FrenchE<span class="classroom">A205</span></td>
+                            <td>GeographyE<span class="classroom">A211</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="12:55-13:55">12:55-13:55</td>
-                            <td>Lunch + Rt<span class="classroom">B206</span></td>
-                            <td>Lunch + Rt<span class="classroom">B206</span></td>
-                            <td>Lunch + Rt<span class="classroom">B206</span></td>
-                            <td>Lunch + Rt<span class="classroom">B206</span></td>
-                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            <td>Lunch + R time<span class="classroom">B206</span></td>
+                            <td>Lunch + R time<span class="classroom">B206</span></td>
+                            <td>Lunch + R time<span class="classroom">B206</span></td>
+                            <td>Lunch + R time<span class="classroom">B206</span></td>
+                            <td>Lunch + R time<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                            <td>ScR<span class="classroom">A105</span></td>
-                            <td>ScR<span class="classroom">A105</span></td>
-                            <td>EnE<span class="classroom">A206</span></td>
-                            <td>EnE<span class="classroom">A206</span></td>
-                            <td>MaE<span class="classroom">B110</span></td>
+                            <td>ScienceR<span class="classroom">A105</span></td>
+                            <td>ScienceR<span class="classroom">A105</span></td>
+                            <td>EnglishE<span class="classroom">A206</span></td>
+                            <td>EnglishE<span class="classroom">A206</span></td>
+                            <td>MathsE<span class="classroom">B110</span></td>
                             ${extraColumn}
                         </tr>
                     </tbody>
@@ -374,64 +374,64 @@ document.addEventListener('DOMContentLoaded', () => {
                     <tbody>
                         <tr>
                             <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                            <td>Tu<span class="classroom">B206</span></td>
-                            <td>Tu<span class="classroom">B206</span></td>
-                            <td>Tu<span class="classroom">B206</span></td>
-                            <td>Tu<span class="classroom">B206</span></td>
-                            <td>Tu<span class="classroom">B206</span></td>
+                            <td>Tutor<span class="classroom">B206</span></td>
+                            <td>Tutor<span class="classroom">B206</span></td>
+                            <td>Tutor<span class="classroom">B206</span></td>
+                            <td>Tutor<span class="classroom">B206</span></td>
+                            <td>Tutor<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                            <td>PsE<span class="classroom">A210</span></td>
-                            <td>TcR<span class="classroom">A005</span></td>
-                            <td>EnE<span class="classroom">A201</span></td>
-                            <td>ScR<span class="classroom">A109</span></td>
-                            <td>ScR<span class="classroom">A109</span></td>
+                            <td>PSHE<span class="classroom">A210</span></td>
+                            <td>ComputingE<span class="classroom">A005</span></td>
+                            <td>EnglishE<span class="classroom">A201</span></td>
+                            <td>ScienceR<span class="classroom">A109</span></td>
+                            <td>ScienceR<span class="classroom">A109</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                            <td>MaE<span class="classroom">B110</span></td>
-                            <td>GgE<span class="classroom">B202</span></td>
+                            <td>MathsE<span class="classroom">B110</span></td>
+                            <td>GeographyE<span class="classroom">B202</span></td>
                             <td>Mess<span class="classroom">A013</span></td>
-                            <td>EnE<span class="classroom">A202</span></td>
-                            <td>HiE<span class="classroom">B203</span></td>
+                            <td>EnglishE<span class="classroom">A202</span></td>
+                            <td>HistoryE<span class="classroom">B203</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                            <td>CoE<span class="classroom">B101</span></td>
-                            <td>EnE<span class="classroom">A212</span></td>
-                            <td>ArE<span class="classroom">B205</span></td>
-                            <td>DmE<span class="classroom">C101</span></td>
-                            <td>MaE<span class="classroom">B110</span></td>
+                            <td>ComputingE<span class="classroom">B101</span></td>
+                            <td>EnglishE<span class="classroom">A212</span></td>
+                            <td>ArtE<span class="classroom">B205</span></td>
+                            <td>DramaE<span class="classroom">C101</span></td>
+                            <td>MathsE<span class="classroom">B110</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="11:55-12:55">11:55-12:55</td>
                             <td>PeR<span class="classroom">A013</span></td>
-                            <td>MaE<span class="classroom">B110</span></td>
-                            <td>SpE<span class="classroom">A212</span></td>
-                            <td>FrE<span class="classroom">A209</span></td>
-                            <td>GgE<span class="classroom">B207</span></td>
+                            <td>MathsE<span class="classroom">B110</span></td>
+                            <td>SpanishE<span class="classroom">A212</span></td>
+                            <td>FrenchE<span class="classroom">A209</span></td>
+                            <td>GeographyE<span class="classroom">B207</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="12:55-13:55">12:55-13:55</td>
-                            <td>Lunch + Rt<span class="classroom">B206</span></td>
-                            <td>Lunch + Rt<span class="classroom">B206</span></td>
-                            <td>Lunch + Rt<span class="classroom">B206</span></td>
-                            <td>Lunch + Rt<span class="classroom">B206</span></td>
-                            <td>Lunch + Rt<span class="classroom">B206</span></td>
+                            <td>Lunch + R time<span class="classroom">B206</span></td>
+                            <td>Lunch + R time<span class="classroom">B206</span></td>
+                            <td>Lunch + R time<span class="classroom">B206</span></td>
+                            <td>Lunch + R time<span class="classroom">B206</span></td>
+                            <td>Lunch + R time<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                            <td>EnE<span class="classroom">A201</span></td>
-                            <td>MuE<span class="classroom">B201</span></td>
-                            <td>ScR<span class="classroom">A109</span></td>
-                            <td>MaE<span class="classroom">B110</span></td>
+                            <td>EnglishE<span class="classroom">A201</span></td>
+                            <td>MusicE<span class="classroom">B201</span></td>
+                            <td>ScienceR<span class="classroom">A109</span></td>
+                            <td>MathsE<span class="classroom">B110</span></td>
                             <td>ReE<span class="classroom">B203</span></td>
                             ${extraColumn}
                         </tr>
@@ -441,24 +441,32 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
 
         // Centrer le jour actuel au chargement (uniquement sur mobile)
-        const scrollContainerA = document.getElementById('mobile-scroll-a');
-        const scrollContainerB = document.getElementById('mobile-scroll-b');
-        if (scrollContainerA && scrollToIndex > 0) {
-            const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
-            if (cell) {
-                const containerWidth = scrollContainerA.offsetWidth;
-                const cellWidth = cell.offsetWidth;
-                const offset = cell.offsetLeft - (containerWidth / 2) + (cellWidth / 2);
-                scrollContainerA.scrollLeft = offset;
+        if (isMobile && scrollToIndex > 0) {
+            const scrollContainerA = document.getElementById('mobile-scroll-a');
+            const scrollContainerB = document.getElementById('mobile-scroll-b');
+            if (scrollContainerA) {
+                const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
+                if (cell) {
+                    const containerWidth = scrollContainerA.offsetWidth;
+                    const cellWidth = cell.offsetWidth;
+                    const offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+                    scrollContainerA.scrollTo({
+                        left: offset,
+                        behavior: 'smooth'
+                    });
+                }
             }
-        }
-        if (scrollContainerB && scrollToIndex > 0) {
-            const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
-            if (cell) {
-                const containerWidth = scrollContainerB.offsetWidth;
-                const cellWidth = cell.offsetWidth;
-                const offset = cell.offsetLeft - (containerWidth / 2) + (cellWidth / 2);
-                scrollContainerB.scrollLeft = offset;
+            if (scrollContainerB) {
+                const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
+                if (cell) {
+                    const containerWidth = scrollContainerB.offsetWidth;
+                    const cellWidth = cell.offsetWidth;
+                    const offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+                    scrollContainerB.scrollTo({
+                        left: offset,
+                        behavior: 'smooth'
+                    });
+                }
             }
         }
     }
