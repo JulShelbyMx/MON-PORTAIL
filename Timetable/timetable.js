@@ -449,7 +449,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (cell) {
                     const containerWidth = scrollContainerA.offsetWidth;
                     const cellWidth = cell.offsetWidth;
-                    const offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+                    let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+                    if (currentDay === 'thursday') {
+                        offset += cellWidth * 0.2; // Décalage de 20% vers la droite pour Thursday
+                    }
                     scrollContainerA.scrollTo({
                         left: offset,
                         behavior: 'smooth'
@@ -461,7 +464,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (cell) {
                     const containerWidth = scrollContainerB.offsetWidth;
                     const cellWidth = cell.offsetWidth;
-                    const offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+                    let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+                    if (currentDay === 'thursday') {
+                        offset += cellWidth * 0.2; // Décalage de 20% vers la droite pour Thursday
+                    }
                     scrollContainerB.scrollTo({
                         left: offset,
                         behavior: 'smooth'
