@@ -444,24 +444,20 @@ document.addEventListener('DOMContentLoaded', () => {
 if (isMobile && scrollToIndex > 0) {
     const scrollContainerA = document.getElementById('mobile-scroll-a');
     const scrollContainerB = document.getElementById('mobile-scroll-b');
-    console.log('Current Day:', currentDay, 'Current Day Index:', currentDayIndex); // Débogage
     if (scrollContainerA) {
         const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
         if (cell) {
             const containerWidth = scrollContainerA.offsetWidth;
-            const tableWidth = scrollContainerA.querySelector('.mobile-timetable-table').offsetWidth;
             const cellWidth = cell.offsetWidth;
             let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
-            console.log('Centering - Initial Offset:', offset); // Débogage
+            console.log('Centering - Day:', currentDay, 'Offset before:', offset); // Débogage
             if (currentDay === 'thursday') {
-                const thursdayIndex = 4; // Index de Thursday (1=Time, 2=Monday, 3=Tuesday, 4=Wednesday, 5=Thursday)
-                offset = (thursdayIndex - 1) * cellWidth + (cellWidth / 2) - (containerWidth / 2) + 100; // Centrage sur Thursday + 100px
-                console.log('Centering Thursday - Adjusted Offset:', offset); // Débogage
+                offset += 150; // Décalage de 150 pixels vers la droite pour Thursday
+                console.log('Centering Thursday - Offset after:', offset); // Débogage
             }
-            // Ajouter un léger délai pour s'assurer que le DOM est prêt
             setTimeout(() => {
                 scrollContainerA.scrollTo({
-                    left: Math.max(0, offset), // Empêche un défilement négatif
+                    left: Math.max(0, offset),
                     behavior: 'smooth'
                 });
             }, 100);
@@ -471,19 +467,16 @@ if (isMobile && scrollToIndex > 0) {
         const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
         if (cell) {
             const containerWidth = scrollContainerB.offsetWidth;
-            const tableWidth = scrollContainerB.querySelector('.mobile-timetable-table').offsetWidth;
             const cellWidth = cell.offsetWidth;
             let offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
-            console.log('Centering - Initial Offset:', offset); // Débogage
+            console.log('Centering - Day:', currentDay, 'Offset before:', offset); // Débogage
             if (currentDay === 'thursday') {
-                const thursdayIndex = 4; // Index de Thursday
-                offset = (thursdayIndex - 1) * cellWidth + (cellWidth / 2) - (containerWidth / 2) + 100; // Centrage sur Thursday + 100px
-                console.log('Centering Thursday - Adjusted Offset:', offset); // Débogage
+                offset += 150; // Décalage de 150 pixels vers la droite pour Thursday
+                console.log('Centering Thursday - Offset after:', offset); // Débogage
             }
-            // Ajouter un léger délai pour s'assurer que le DOM est prêt
             setTimeout(() => {
                 scrollContainerB.scrollTo({
-                    left: Math.max(0, offset), // Empêche un défilement négatif
+                    left: Math.max(0, offset),
                     behavior: 'smooth'
                 });
             }, 100);
