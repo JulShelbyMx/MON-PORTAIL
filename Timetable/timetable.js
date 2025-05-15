@@ -129,43 +129,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 <tbody>
                     <tr>
                         <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                        <td>Tutor<span class="classroom">B206</span></td>
-                        <td>Tutor<span class="classroom">B206</span></td>
-                        <td>Tutor<span class="classroom">B206</span></td>
-                        <td>Tutor<span class="classroom">B206</span></td>
-                        <td>Tutor<span class="classroom">B206</span></td>
+                        <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                        <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                        <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                        <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                        <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                        <td>EnglishE<span class="classroom">A206</span></td>
-                        <td>ComputingE<span class="classroom">B101</span></td>
-                        <td>ArtE<span class="classroom">B206</span></td>
-                        <td>HistoryE<span class="classroom">A212</span></td>
-                        <td>ScienceR<span class="classroom">A105</span></td>
+                        <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                        <td data-abbrev="CoE" data-full="ComputingE">CoE<span class="classroom">B101</span></td>
+                        <td data-abbrev="ArE" data-full="ArtE">ArE<span class="classroom">B206</span></td>
+                        <td data-abbrev="HiE" data-full="HistoryE">HiE<span class="classroom">A212</span></td>
+                        <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                        <td>PeR<span class="classroom">A012</span></td>
-                        <td>MathsE<span class="classroom">B110</span></td>
-                        <td>MathsE<span class="classroom">B110</span></td>
-                        <td>DramaE<span class="classroom">C101</span></td>
-                        <td>PSHE<span class="classroom">B210</span></td>
+                        <td data-abbrev="PeR" data-full="PeR">PeR<span class="classroom">A012</span></td>
+                        <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                        <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                        <td data-abbrev="DmE" data-full="DramaE">DmE<span class="classroom">C101</span></td>
+                        <td data-abbrev="PsE" data-full="PSHE">PsE<span class="classroom">B210</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                        <td>SpanishE<span class="classroom">A210</span></td>
-                        <td>EnglishE<span class="classroom">A206</span></td>
-                        <td>GeographyE<span class="classroom">A109</span></td>
-                        <td>ReligionE<span class="classroom">A110</span></td>
-                        <td>HistoryE<span class="classroom">B203</span></td>
+                        <td data-abbrev="SpE" data-full="SpanishE">SpE<span class="classroom">A210</span></td>
+                        <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                        <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">A109</span></td>
+                        <td data-abbrev="ReE" data-full="ReligionE">ReE<span class="classroom">A110</span></td>
+                        <td data-abbrev="HiE" data-full="HistoryE">HiE<span class="classroom">B203</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                        <td>MathsE<span class="classroom">B110</span></td>
-                        <td>MusicE<span class="classroom">B201</span></td>
-                        <td>Mess<span class="classroom">A005</span></td>
-                        <td>FrenchE<span class="classroom">A205</span></td>
-                        <td>GeographyE<span class="classroom">A211</span></td>
+                        <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                        <td data-abbrev="MuE" data-full="MusicE">MuE<span class="classroom">B201</span></td>
+                        <td data-abbrev="Mess" data-full="Mess">Mess<span class="classroom">A005</span></td>
+                        <td data-abbrev="FrE" data-full="FrenchE">FrE<span class="classroom">A205</span></td>
+                        <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">A211</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="12:55-13:55">12:55-13:55</td>
@@ -177,11 +177,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     </tr>
                     <tr>
                         <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                        <td>ScienceR<span class="classroom">A105</span></td>
-                        <td>ScienceR<span class="classroom">A105</span></td>
-                        <td>EnglishE<span class="classroom">A206</span></td>
-                        <td>EnglishE<span class="classroom">A206</span></td>
-                        <td>MathsE<span class="classroom">B110</span></td>
+                        <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
+                        <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
+                        <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                        <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                        <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -205,43 +205,43 @@ document.addEventListener('DOMContentLoaded', () => {
                 <tbody>
                     <tr>
                         <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                        <td>Tutor<span class="classroom">B206</span></td>
-                        <td>Tutor<span class="classroom">B206</span></td>
-                        <td>Tutor<span class="classroom">B206</span></td>
-                        <td>Tutor<span class="classroom">B206</span></td>
-                        <td>Tutor<span class="classroom">B206</span></td>
+                        <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                        <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                        <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                        <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                        <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                        <td>PSHE<span class="classroom">A210</span></td>
-                        <td>ComputingE<span class="classroom">A005</span></td>
-                        <td>EnglishE<span class="classroom">A201</span></td>
-                        <td>ScienceR<span class="classroom">A109</span></td>
-                        <td>ScienceR<span class="classroom">A109</span></td>
+                        <td data-abbrev="PsE" data-full="PSHE">PsE<span class="classroom">A210</span></td>
+                        <td data-abbrev="CoE" data-full="ComputingE">CoE<span class="classroom">A005</span></td>
+                        <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A201</span></td>
+                        <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A109</span></td>
+                        <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A109</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                        <td>MathsE<span class="classroom">B110</span></td>
-                        <td>GeographyE<span class="classroom">B202</span></td>
-                        <td>Mess<span class="classroom">A013</span></td>
-                        <td>EnglishE<span class="classroom">A202</span></td>
-                        <td>HistoryE<span class="classroom">B203</span></td>
+                        <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                        <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">B202</span></td>
+                        <td data-abbrev="Mess" data-full="Mess">Mess<span class="classroom">A013</span></td>
+                        <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A202</span></td>
+                        <td data-abbrev="HiE" data-full="HistoryE">HiE<span class="classroom">B203</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                        <td>ComputingE<span class="classroom">B101</span></td>
-                        <td>EnglishE<span class="classroom">A212</span></td>
-                        <td>ArtE<span class="classroom">B205</span></td>
-                        <td>DramaE<span class="classroom">C101</span></td>
-                        <td>MathsE<span class="classroom">B110</span></td>
+                        <td data-abbrev="CoE" data-full="ComputingE">CoE<span class="classroom">B101</span></td>
+                        <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A212</span></td>
+                        <td data-abbrev="ArE" data-full="ArtE">ArE<span class="classroom">B205</span></td>
+                        <td data-abbrev="DmE" data-full="DramaE">DmE<span class="classroom">C101</span></td>
+                        <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                        <td>PeR<span class="classroom">A013</span></td>
-                        <td>MathsE<span class="classroom">B110</span></td>
-                        <td>SpanishE<span class="classroom">A212</span></td>
-                        <td>FrenchE<span class="classroom">A209</span></td>
-                        <td>GeographyE<span class="classroom">B207</span></td>
+                        <td data-abbrev="PeR" data-full="PeR">PeR<span class="classroom">A013</span></td>
+                        <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                        <td data-abbrev="SpE" data-full="SpanishE">SpE<span class="classroom">A212</span></td>
+                        <td data-abbrev="FrE" data-full="FrenchE">FrE<span class="classroom">A209</span></td>
+                        <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">B207</span></td>
                     </tr>
                     <tr>
                         <td data-uk-time="12:55-13:55">12:55-13:55</td>
@@ -253,11 +253,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     </tr>
                     <tr>
                         <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                        <td>EnglishE<span class="classroom">A201</span></td>
-                        <td>MusicE<span class="classroom">B201</span></td>
-                        <td>ScienceR<span class="classroom">A109</span></td>
-                        <td>MathsE<span class="classroom">B110</span></td>
-                        <td>ReligionE<span class="classroom">B203</span></td>
+                        <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A201</span></td>
+                        <td data-abbrev="MuE" data-full="MusicE">MuE<span class="classroom">B201</span></td>
+                        <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A109</span></td>
+                        <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                        <td data-abbrev="ReE" data-full="ReligionE">ReE<span class="classroom">B203</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -289,47 +289,47 @@ document.addEventListener('DOMContentLoaded', () => {
                     <tbody>
                         <tr>
                             <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                            <td>Tutor<span class="classroom">B206</span></td>
-                            <td>Tutor<span class="classroom">B206</span></td>
-                            <td>Tutor<span class="classroom">B206</span></td>
-                            <td>Tutor<span class="classroom">B206</span></td>
-                            <td>Tutor<span class="classroom">B206</span></td>
+                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                            <td>EnglishE<span class="classroom">A206</span></td>
-                            <td>ComputingE<span class="classroom">B101</span></td>
-                            <td>ArtE<span class="classroom">B206</span></td>
-                            <td>HistoryE<span class="classroom">A212</span></td>
-                            <td>ScienceR<span class="classroom">A105</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                            <td data-abbrev="CoE" data-full="ComputingE">CoE<span class="classroom">B101</span></td>
+                            <td data-abbrev="ArE" data-full="ArtE">ArE<span class="classroom">B206</span></td>
+                            <td data-abbrev="HiE" data-full="HistoryE">HiE<span class="classroom">A212</span></td>
+                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                            <td>PeR<span class="classroom">A012</span></td>
-                            <td>MathsE<span class="classroom">B110</span></td>
-                            <td>MathsE<span class="classroom">B110</span></td>
-                            <td>DramaE<span class="classroom">C101</span></td>
-                            <td>PSHE<span class="classroom">B210</span></td>
+                            <td data-abbrev="PeR" data-full="PeR">PeR<span class="classroom">A012</span></td>
+                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="DmE" data-full="DramaE">DmE<span class="classroom">C101</span></td>
+                            <td data-abbrev="PsE" data-full="PSHE">PsE<span class="classroom">B210</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                            <td>SpanishE<span class="classroom">A210</span></td>
-                            <td>EnglishE<span class="classroom">A206</span></td>
-                            <td>GeographyE<span class="classroom">A109</span></td>
-                            <td>ReligionE<span class="classroom">A110</span></td>
-                            <td>HistoryE<span class="classroom">B203</span></td>
+                            <td data-abbrev="SpE" data-full="SpanishE">SpE<span class="classroom">A210</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                            <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">A109</span></td>
+                            <td data-abbrev="ReE" data-full="ReligionE">ReE<span class="classroom">A110</span></td>
+                            <td data-abbrev="HiE" data-full="HistoryE">HiE<span class="classroom">B203</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                            <td>MathsE<span class="classroom">B110</span></td>
-                            <td>MusicE<span class="classroom">B201</span></td>
-                            <td>Mess<span class="classroom">A005</span></td>
-                            <td>FrenchE<span class="classroom">A205</span></td>
-                            <td>GeographyE<span class="classroom">A211</span></td>
+                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="MuE" data-full="MusicE">MuE<span class="classroom">B201</span></td>
+                            <td data-abbrev="Mess" data-full="Mess">Mess<span class="classroom">A005</span></td>
+                            <td data-abbrev="FrE" data-full="FrenchE">FrE<span class="classroom">A205</span></td>
+                            <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">A211</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
@@ -343,11 +343,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         </tr>
                         <tr>
                             <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                            <td>ScienceR<span class="classroom">A105</span></td>
-                            <td>ScienceR<span class="classroom">A105</span></td>
-                            <td>EnglishE<span class="classroom">A206</span></td>
-                            <td>EnglishE<span class="classroom">A206</span></td>
-                            <td>MathsE<span class="classroom">B110</span></td>
+                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
+                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
                             ${extraColumn}
                         </tr>
                     </tbody>
@@ -374,47 +374,47 @@ document.addEventListener('DOMContentLoaded', () => {
                     <tbody>
                         <tr>
                             <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                            <td>Tutor<span class="classroom">B206</span></td>
-                            <td>Tutor<span class="classroom">B206</span></td>
-                            <td>Tutor<span class="classroom">B206</span></td>
-                            <td>Tutor<span class="classroom">B206</span></td>
-                            <td>Tutor<span class="classroom">B206</span></td>
+                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                            <td>PSHE<span class="classroom">A210</span></td>
-                            <td>ComputingE<span class="classroom">A005</span></td>
-                            <td>EnglishE<span class="classroom">A201</span></td>
-                            <td>ScienceR<span class="classroom">A109</span></td>
-                            <td>ScienceR<span class="classroom">A109</span></td>
+                            <td data-abbrev="PsE" data-full="PSHE">PsE<span class="classroom">A210</span></td>
+                            <td data-abbrev="CoE" data-full="ComputingE">CoE<span class="classroom">A005</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A201</span></td>
+                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A109</span></td>
+                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A109</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                            <td>MathsE<span class="classroom">B110</span></td>
-                            <td>GeographyE<span class="classroom">B202</span></td>
-                            <td>Mess<span class="classroom">A013</span></td>
-                            <td>EnglishE<span class="classroom">A202</span></td>
-                            <td>HistoryE<span class="classroom">B203</span></td>
+                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">B202</span></td>
+                            <td data-abbrev="Mess" data-full="Mess">Mess<span class="classroom">A013</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A202</span></td>
+                            <td data-abbrev="HiE" data-full="HistoryE">HiE<span class="classroom">B203</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                            <td>ComputingE<span class="classroom">B101</span></td>
-                            <td>EnglishE<span class="classroom">A212</span></td>
-                            <td>ArtE<span class="classroom">B205</span></td>
-                            <td>DramaE<span class="classroom">C101</span></td>
-                            <td>MathsE<span class="classroom">B110</span></td>
+                            <td data-abbrev="CoE" data-full="ComputingE">CoE<span class="classroom">B101</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A212</span></td>
+                            <td data-abbrev="ArE" data-full="ArtE">ArE<span class="classroom">B205</span></td>
+                            <td data-abbrev="DmE" data-full="DramaE">DmE<span class="classroom">C101</span></td>
+                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                            <td>PeR<span class="classroom">A013</span></td>
-                            <td>MathsE<span class="classroom">B110</span></td>
-                            <td>SpanishE<span class="classroom">A212</span></td>
-                            <td>FrenchE<span class="classroom">A209</span></td>
-                            <td>GeographyE<span class="classroom">B207</span></td>
+                            <td data-abbrev="PeR" data-full="PeR">PeR<span class="classroom">A013</span></td>
+                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="SpE" data-full="SpanishE">SpE<span class="classroom">A212</span></td>
+                            <td data-abbrev="FrE" data-full="FrenchE">FrE<span class="classroom">A209</span></td>
+                            <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">B207</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
@@ -428,11 +428,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         </tr>
                         <tr>
                             <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                            <td>EnglishE<span class="classroom">A201</span></td>
-                            <td>MusicE<span class="classroom">B201</span></td>
-                            <td>ScienceR<span class="classroom">A109</span></td>
-                            <td>MathsE<span class="classroom">B110</span></td>
-                            <td>ReligionE<span class="classroom">B203</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A201</span></td>
+                            <td data-abbrev="MuE" data-full="MusicE">MuE<span class="classroom">B201</span></td>
+                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A109</span></td>
+                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="ReE" data-full="ReligionE">ReE<span class="classroom">B203</span></td>
                             ${extraColumn}
                         </tr>
                     </tbody>
@@ -484,6 +484,22 @@ document.addEventListener('DOMContentLoaded', () => {
     timeZoneB = document.getElementById('time-zone-b');
     timeZoneAMobile = document.getElementById('time-zone-a-mobile');
     timeZoneBMobile = document.getElementById('time-zone-b-mobile');
+
+    // Ajouter des gestionnaires d'événements pour basculer entre abréviation et nom complet
+    const cells = document.querySelectorAll('td[data-abbrev]');
+    cells.forEach(cell => {
+        cell.addEventListener('click', () => {
+            const abbrev = cell.getAttribute('data-abbrev');
+            const full = cell.getAttribute('data-full');
+            const currentText = cell.childNodes[0].textContent;
+            const classroom = cell.querySelector('.classroom').outerHTML;
+            if (currentText === abbrev) {
+                cell.innerHTML = `${full}${classroom}`;
+            } else {
+                cell.innerHTML = `${abbrev}${classroom}`;
+            }
+        });
+    });
 }
 
 // Appeler la fonction au chargement
