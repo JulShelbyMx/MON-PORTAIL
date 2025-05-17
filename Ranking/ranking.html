@@ -332,37 +332,41 @@
             background-color: #00FFFF;
         }
 
-        /* Couleurs des tiers */
+        /* Couleurs des tiers avec arc-en-ciel */
         .ssss-tier {
-            background: linear-gradient(135deg, rgba(255, 179, 0, 0.95), rgba(255, 68, 68, 0.95));
+            background: linear-gradient(135deg, #FF0000, #FF69B4); /* Rouge vers rose */
         }
         .sss-tier {
-            background: rgba(255, 179, 0, 0.9);
+            background: #FF4500; /* Orange vif */
         }
         .ss-tier {
-            background: rgba(255, 102, 102, 0.9);
+            background: #FFD700; /* Jaune doré */
         }
         .s-tier {
-            background: rgba(255, 153, 153, 0.9);
+            background: #32CD32; /* Vert lime */
         }
         .a-tier {
-            background: rgba(135, 206, 235, 0.9);
+            background: #00B7EB; /* Cyan */
         }
         .b-tier {
-            background: rgba(173, 216, 230, 0.9);
+            background: #1E90FF; /* Bleu */
         }
         .c-tier {
-            background: rgba(102, 102, 102, 0.9);
+            background: #9932CC; /* Violet */
         }
         .d-tier {
-            background: rgba(68, 68, 68, 0.9);
+            background: #FF1493; /* Rose magenta */
         }
         .e-tier {
-            background: rgba(51, 51, 51, 0.9);
+            background: #00CED1; /* Turquoise pour nouvelle catégorie E */
+        }
+        .f-tier {
+            background: #228B22; /* Vert forêt */
         }
         .todo-tier {
-            background: rgba(26, 26, 26, 0.9);
+            background: #FF6347; /* Corail */
         }
+
 
         /* Media Query pour mobile (max-width: 768px) */
         @media (max-width: 768px) {
@@ -1246,7 +1250,7 @@
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
                             <span class="where">Crunchyroll</span>
-                            <span class="release-date">S2: Pas de date</span>
+                            <span class="release-date">S2: Janvier 2026</span>
                         </div>
                         <div class="author">Auteur : Yūji Kaku</div>
                     </div>
@@ -1262,16 +1266,6 @@
                             <span class="release-date">S3: Juillet 2025</span>
                         </div>
                         <div class="author">Auteur : ONE / Yūsuke Murata</div>
-                    </div>
-                </li>
-                <li>
-                    <img src="../images/images-ranking/ninja-kamui.webp" alt="Ninja Kamui">
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>NINJA KAMUI</strong>
-                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini?</span>
-                        </div>
-                        <div class="author">Auteur : Sunghoo Park</div>
                     </div>
                 </li>
                 <li>
@@ -1299,17 +1293,6 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/servamp.webp" alt="Servamp">
-                    <div class="content">
-                        <div class="title-status">
-                            <strong>SERVAMP</strong>
-                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Pas d’annonce)</span>
-                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
-                        </div>
-                        <div class="author">Auteur : Tanaka Strike</div>
-                    </div>
-                </li>
-                <li>
                     <img src="../images/images-ranking/kaifuku.jpg" alt="Kaifuku Jutsushi no Yarinaoshi">
                     <div class="content">
                         <div class="title-status">
@@ -1325,6 +1308,41 @@
                 </li>
             </ul>
         </div>
+
+
+         <!-- F Tier -->
+        <div class="tier f-tier">
+            <h3>F</h3>
+            <ul>
+
+                <li>
+                    <img src="../images/images-ranking/ninja-kamui.webp" alt="Ninja Kamui">
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>NINJA KAMUI</strong>
+                            <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini?</span>
+                        </div>
+                        <div class="author">Auteur : Sunghoo Park</div>
+                    </div>
+                </li>
+                <li>
+                    <img src="../images/images-ranking/servamp.webp" alt="Servamp">
+                    <div class="content">
+                        <div class="title-status">
+                            <strong>SERVAMP</strong>
+                            <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Pas d’annonce)</span>
+                            <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                        </div>
+                        <div class="author">Auteur : Tanaka Strike</div>
+                    </div>
+                </li>
+
+                <li>
+                    ...
+                </li>
+            </ul>
+        </div>
+
 
         <!-- E Tier -->
         <div class="tier e-tier">
@@ -1417,6 +1435,8 @@
                             <strong>DEMON SLAVE</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour</span>
                             <span class="status-q-manga status-manga"><span class="status-q-manga-dot status-dot"></span> ?</span>
+                            <span class="where">Site streaming</span>
+                            <span class="release-date">S3: En 2026</span>
                         </div>
                         <div class="author">Auteur : Takahiro / Yohei Takemura</div>
                     </div>
@@ -1459,7 +1479,6 @@
                         <div class="title-status">
                             <strong>JITSU WA IMA HAITTEMASU... OFURO DE ONII-CHAN NO KATAI ARE GA... / OVERFLOW</strong>
                             <span class="status-a-jour status-anime"><span class="status-a-jour-dot status-dot"></span> À jour (Pas d’annonce)</span>
-                            <span class="status-a-jour-manga status-manga"><span class="status-a-jour-manga-dot status-dot"></span> À jour, suite??</span>
                             <span class="status-en-cours status-manga"><span class="status-en-cours-manga-dot status-dot"></span> En cours</span>
                         </div>
                         <div class="author">Auteur : Ishigura Rei</div>
