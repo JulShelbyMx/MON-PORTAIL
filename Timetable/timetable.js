@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).join('');
 
         bankHolidaysTableBody.innerHTML = singleDayHolidays.map(holiday => {
-            const startDate = new Date(Date.UTC(holiday.start.year, h.start.month - 1, h.start.day));
+            const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, h.start.day));
             return `
                 <tr>
                     <td>${formatDate(startDate)}</td>
@@ -279,6 +279,44 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
+        // Initialize references after generation
+        weekA = weekAContainer.querySelector('.timetable-table');
+        weekB = weekBContainer.querySelector('.timetable-table');
+        toggleTimeA = document.getElementById('toggle-time-a');
+        toggleTimeB = document.getElementById('toggle-time-b');
+        timeZoneA = document.getElementById('time-zone-a');
+        timeZoneB = document.getElementById('time-zone-b');
+
+        // Add event listeners for toggling between abbreviation and full name
+        const cells = document.querySelectorAll('td[data-abbrev]');
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                const abbrev = cell.getAttribute('data-abbrev');
+                const full = cell.getAttribute('data-full');
+                const currentText = cell.childNodes[0].textContent;
+                const classroom = cell.querySelector('.classroom').outerHTML;
+                if (currentText === abbrev) {
+                    cell.innerHTML = `${full}${classroom}`;
+                } else {
+                    cell.innerHTML = `${abbrev}${classroom}`;
+                }
+            });
+        });
+
+        // Add event listeners for time toggle buttons
+        if (toggleTimeA) {
+            toggleTimeA.addEventListener('click', () => {
+                isUKTime = !isUKTime;
+                updateTimes();
+            });
+        }
+        if (toggleTimeB) {
+            toggleTimeB.addEventListener('click', () => {
+                isUKTime = !isUKTime;
+                updateTimes();
+            });
+        }
+
         // Center the current day on mobile
         if (window.innerWidth <= 768 && scrollToIndex > 0) {
             const scrollContainerA = weekAContainer.querySelector('.timetable-scroll');
@@ -308,30 +346,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-
-        // Initialize references after generation
-        weekA = weekAContainer.querySelector('.timetable-table');
-        weekB = weekBContainer.querySelector('.timetable-table');
-        toggleTimeA = document.getElementById('toggle-time-a');
-        toggleTimeB = document.getElementById('toggle-time-b');
-        timeZoneA = document.getElementById('time-zone-a');
-        timeZoneB = document.getElementById('time-zone-b');
-
-        // Add event listeners for toggling between abbreviation and full name
-        const cells = document.querySelectorAll('td[data-abbrev]');
-        cells.forEach(cell => {
-            cell.addEventListener('click', () => {
-                const abbrev = cell.getAttribute('data-abbrev');
-                const full = cell.getAttribute('data-full');
-                const currentText = cell.childNodes[0].textContent;
-                const classroom = cell.querySelector('.classroom').outerHTML;
-                if (currentText === abbrev) {
-                    cell.innerHTML = `${full}${classroom}`;
-                } else {
-                    cell.innerHTML = `${abbrev}${classroom}`;
-                }
-            });
-        });
     }
 
     // Generate timetables and populate holiday tables at load
@@ -400,8 +414,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const ukTime = cell.getAttribute('data-uk-time');
                 cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
             });
-            timeZoneA.textContent = isUKTime ? '[UK]' : '[FR]';
-            toggleTimeA.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
+            if (timeZoneA) timeZoneA.textContent = isUKTime ? '[UK]' : '[FR]';
+            if (toggleTimeA) toggleTimeA.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
         }
 
         if (weekB) {
@@ -410,8 +424,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const ukTime = cell.getAttribute('data-uk-time');
                 cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
             });
-            timeZoneB.textContent = isUKTime ? '[UK]' : '[FR]';
-            toggleTimeB.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
+            if (timeZoneB) timeZoneB.textContent = isUKTime ? '[UK]' : '[FR]';
+            if (toggleTimeB) toggleTimeB.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
         }
 
         highlightCurrentLesson();
@@ -454,6 +468,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (window.innerWidth > 768) return;
 
         const activeTable = weekAContainer.style.display === 'block' ? weekA : weekB;
+        if (!activeTable) return;
+
         const scrollContainer = activeTable.parentElement;
         const dayColumn = scrollContainer.querySelectorAll('th')[currentDayIndex + 1];
 
@@ -489,8 +505,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentDay = daysOfWeek[currentDayIndex];
 
         const activeTable = weekAContainer.style.display === 'block' ? weekA : weekB;
+        if (!activeTable) return;
 
-        const timeCells = activeTable ? activeTable.querySelectorAll('tbody td[data-uk-time]') : [];
+        const timeCells = activeTable.querySelectorAll('tbody td[data-uk-time]');
         let currentLessonFound = false;
 
         const isWeekend = bstNow.getUTCDay() === 0 || bstNow.getUTCDay() === 6;
@@ -614,7 +631,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (window.innerWidth <= 768) {
                     scrollToCurrentDay();
                 }
-                holidayMessage.textContent = `Showing the timetable for the first week back, starting ${returnDate.toUTCString()} (Week ${currentWeek})`;
+                holidayMessage.textContent = `Showing the timetable for the first week back, starting ${formatDate(returnDate)} (Week ${currentWeek})`;
                 holidayOptions.style.display = 'none';
             };
         } else {
@@ -623,9 +640,6 @@ document.addEventListener('DOMContentLoaded', () => {
             holidayOptions.style.display = 'flex';
             showReturnTimetable.style.display = 'none';
             showWeekTimetable.style.display = 'block';
-            weekAContainer.style.display = 'none';
-            weekBContainer.style.display = 'none';
-            toggleButton.style.display = 'none';
 
             showWeekTimetable.textContent = 'Show Timetable for Next School Day';
             showWeekTimetable.onclick = () => {
@@ -646,20 +660,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 holidayOptions.style.display = 'none';
             };
         }
-    }
-
-    if (toggleTimeA) {
-        toggleTimeA.addEventListener('click', () => {
-            isUKTime = !isUKTime;
-            updateTimes();
-        });
-    }
-
-    if (toggleTimeB) {
-        toggleTimeB.addEventListener('click', () => {
-            isUKTime = !isUKTime;
-            updateTimes();
-        });
     }
 
     const holidayReason = isHolidayOrClosure(today);
@@ -691,6 +691,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 toggleButton.textContent = 'Switch to Week B';
                 currentWeek = 'A';
             }
+            if (window.innerWidth <= 768) {
+                scrollToCurrentDay();
+            }
         });
 
         window.addEventListener('resize', () => {
@@ -703,6 +706,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 weekBContainer.style.display = 'block';
             }
             populateHolidayTables();
+            if (window.innerWidth <= 768) {
+                scrollToCurrentDay();
+            }
         });
 
         updateTimes();
