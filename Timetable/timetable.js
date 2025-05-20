@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { start: { year: 2026, month: 2, day: 13 }, end: { year: 2026, month: 2, day: 22 }, reason: 'Holidays' },
         { start: { year: 2026, month: 4, day: 2 }, end: { year: 2026, month: 4, day: 19 }, reason: 'Easter Holidays' },
         { start: { year: 2026, month: 5, day: 22 }, end: { year: 2026, month: 5, day: 31 }, reason: 'Holidays' },
-        { start: { year: 2026, month: 7, day: 23 }, end: { year: 2026, month: 8, day: 31 }, reason: 'Summer Holidays' },
-        // Entrée invalide supprimée ou filtrée plus tard
+        { start: { year: 2026, month: 7, day: 23 }, end: { year: 2026, month: 8, day: 31 }, reason: 'Summer Holidays' }
     ];
 
     const weekAContainer = document.getElementById('timetable-week-a');
@@ -34,13 +33,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
 
-    const manualDate = null; // Pour tester, tu peux définir par exemple "2025-05-23"
+    const manualDate = null;
     const today = manualDate ? new Date(manualDate) : new Date();
-    const bstToday = manualDate ? today : new Date(today.getTime() + 3600000); // BST = UTC+1
+    const bstToday = manualDate ? today : new Date(today.getTime() + 3600000);
     const dayOfWeek = bstToday.getUTCDay();
     let currentDayIndex = dayOfWeek - 1;
     if (currentDayIndex < 0 || currentDayIndex > 4) {
-        currentDayIndex = 0; // Par défaut sur lundi si weekend
+        currentDayIndex = 0;
     }
     let lastKnownDay = bstToday.getUTCDate();
 
@@ -63,20 +62,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const holidaysTableBody = document.querySelector('#holidays-table tbody');
         const bankHolidaysTableBody = document.querySelector('#bank-holidays-table tbody');
 
-        // Filtrer les entrées invalides (année, mois ou jour vide)
-        const validHolidays = holidays.filter(h => h.start.year && h.start.month && h.start.day && h.end.year && h.end.month && h.end.day);
-
         // Séparer les jours fériés multi-jours et single-day
-        const multiDayHolidays = validHolidays.filter(h => {
+        const multiDayHolidays = holidays.filter(h => {
             const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
             const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
-            return startDate.getTime() !== endデート.getTime() || h.reason.includes('Holidays');
+            return startDate.getTime() !== endDate.getTime() || h.reason.includes('Holidays');
         });
-        const singleDayHolidays = validHolidays.filter(h => {
+        const singleDayHolidays = holidays.filter(h => {
             const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
             const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
             return startDate.getTime() === endDate.getTime() && !h.reason.includes('Holidays');
         });
+
+        console.log('Multi-day holidays:', multiDayHolidays);
+        console.log('Single-day holidays:', singleDayHolidays);
 
         try {
             holidaysTableBody.innerHTML = multiDayHolidays.map(holiday => {
@@ -454,7 +453,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Holiday check:', bstDate.toISOString(), 'Date only:', dateOnly.toISOString());
 
         for (const holiday of holidays) {
-            // Ignorer les entrées invalides
             if (!holiday.start.year || !holiday.start.month || !holiday.start.day) continue;
             const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
             const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
@@ -466,7 +464,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getWeekType(date) {
-        const termStart = new Date(Date.UTC(2025, 2, 31)); // 31 mars 2025
+        const termStart = new Date(Date.UTC(2025, 2, 31));
         const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
         const diffTime = Math.abs(bstDate - termStart);
         const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
@@ -517,7 +515,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const now = new Date();
-        const bstNow = new Date(now.getTime() + 3600000); // BST
+        const bstNow = new Date(now.getTime() + 3600000);
         const ukHours = bstNow.getUTCHours();
         const currentMinutes = bstNow.getUTCMinutes();
 
