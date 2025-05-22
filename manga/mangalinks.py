@@ -16,7 +16,7 @@ credentials_file = r"D:\HakuNeko Desktop\Manga\credentials.json"
 token_file = r"D:\HakuNeko Desktop\Manga\token.json"
 
 # Authentification Google Drive API
-SCOPES = ['https://www.googleapis.com/auth/drive']  # Scope complet pour voir tous les dossiers
+SCOPES = ['https://www.googleapis.com/auth/drive']
 creds = None
 
 # Étape 1 : Vérifier si token.json existe et est valide
@@ -174,11 +174,20 @@ for zip_file in zip_files:
     try:
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(chapter_folder_path)
+        print(f"Extraction de {zip_file} réussie.")
     except Exception as e:
         print(f"Erreur lors de l'extraction de {zip_file} : {str(e)}")
         continue
 
-    # Étape 2 : Créer le dossier Chapter_XXXX sur Google Drive
+    # Étape 2 : Supprimer le fichier ZIP après extraction
+    try:
+        os.remove(zip_path)
+        print(f"Fichier ZIP {zip_file} supprimé avec succès.")
+    except Exception as e:
+        print(f"Erreur lors de la suppression de {zip_file} : {str(e)}")
+        continue
+
+    # Étape 3 : Créer le dossier Chapter_XXXX sur Google Drive
     print(f"Création du dossier {chapter_folder_name} sur Google Drive...")
     folder_metadata = {
         'name': chapter_folder_name,
@@ -193,7 +202,7 @@ for zip_file in zip_files:
         print(f"Erreur lors de la création du dossier {chapter_folder_name} : {e}")
         continue
 
-    # Étape 3 : Uploader les images .jpg
+    # Étape 4 : Uploader les images .jpg
     image_urls = []
     for file_name in os.listdir(chapter_folder_path):
         if file_name.lower().endswith(('.jpg', '.jpeg', '.png', '.webp')):
@@ -218,14 +227,14 @@ for zip_file in zip_files:
                 print(f"Erreur lors de l'upload de {file_name} : {e}")
                 continue
 
-    # Étape 4 : Ajouter le chapitre à la liste des nouveaux chapitres
+    # Étape 5 : Ajouter le chapitre à la liste des nouveaux chapitres
     if image_urls:
         new_chapters.append({
-            "chapter": str(int(chapter_num)),  # Stocke "1148" au lieu de "1148.0"
+            "chapter": int(chapter_num),
             "imageUrls": image_urls
         })
 
-# Étape 5 : Mettre à jour mangalinks.json si des nouveaux chapitres ont été traités
+# Étape 6 : Mettre à jour mangalinks.json si des nouveaux chapitres ont été traités
 if new_chapters:
     all_chapters = existing_chapters + new_chapters
     all_chapters.sort(key=lambda x: float(x['chapter']))
