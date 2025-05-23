@@ -18656,7 +18656,29 @@ window.generateStreamingLinks = function() {
                   "https://drive.google.com/file/d/1H2Ch2X3-g9ZG2gSQ2aWCa1xpIo62_sK_/view"
                 ]
               },
-              
+              {
+                "chapter": 1149.0,
+                "imageUrls": [
+                  "https://drive.google.com/file/d/1P6lgDQXLN0iGj1lPYJBpKhs51R_YaUcU/view",
+                  "https://drive.google.com/file/d/1JN_-bBOElZuwlGsnkckQqqZclRaxciaa/view",
+                  "https://drive.google.com/file/d/103XQvW8fJ2bs9loWZH5X8jeoGZQYXOzU/view",
+                  "https://drive.google.com/file/d/1N4zOPwpEuek6Bg8nAMF8Be9csNKfgKcG/view",
+                  "https://drive.google.com/file/d/1JL9CUL7vZHpbc_8qFu72iZwQ0Mu0DTsg/view",
+                  "https://drive.google.com/file/d/10q0-tNEkf7eMSWWS9Ds1H5yG4WvCi4Rf/view",
+                  "https://drive.google.com/file/d/1A82zuJ1LPulrgy26EPVwy29vh6mktPr9/view",
+                  "https://drive.google.com/file/d/1S17vt9dMAeG6Qz9IsFBlyun4zaabhkXT/view",
+                  "https://drive.google.com/file/d/1ZotM-nXzs4DRbYEmeMsjGx29lHBoY7wl/view",
+                  "https://drive.google.com/file/d/1o0aMcmGR5YpoBwGPnQGyndBBMM2sMAEl/view",
+                  "https://drive.google.com/file/d/1Fq-F2sq5dG8XfusISEbNd-6_xPJlYJ64/view",
+                  "https://drive.google.com/file/d/1QSU0wj7VShU4hkWayOzaMkf76D7hkcDn/view",
+                  "https://drive.google.com/file/d/1hPuwi_RVlEGhdB5LPx_JJL1byHWJYKIr/view",
+                  "https://drive.google.com/file/d/1ZJAzl5pbqD41XvxFvDL-EhD2vCyqQAhV/view",
+                  "https://drive.google.com/file/d/1PRnU3ua7sEZY-4O2fRLlwG3qxLttx5RP/view",
+                  "https://drive.google.com/file/d/1KgscXmt1vwZmShVz8ZiZnIwNnBZsvuvZ/view",
+                  "https://drive.google.com/file/d/1B1r6-RwuiwHJrx76ByP4mW7o-1MQbS6C/view",
+                  "https://drive.google.com/file/d/1HSE6-KesTOl4ve4vgADm0UZDWgp1BFe0/view"
+                ]
+              },
               {
                 "chapter": "1150 - Pas sorti !",
                 "imageUrls": [
