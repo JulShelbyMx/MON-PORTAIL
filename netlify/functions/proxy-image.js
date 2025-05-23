@@ -10,8 +10,8 @@ exports.handler = async (event) => {
         };
     }
 
-    const tryFetchImage = async (url, attempt) => {
-        console.log(`Tentative ${attempt} de fetch pour fileId: ${id}, URL: ${url}`);
+    const tryFetchImage = async (url, attempt, size) => {
+        console.log(`Tentative ${attempt} de fetch pour fileId: ${id}, URL: ${url} (sz=${size})`);
         try {
             const response = await fetch(url, {
                 headers: {
@@ -52,20 +52,26 @@ exports.handler = async (event) => {
                 contentType
             };
         } catch (error) {
-            console.error(`Erreur fetch pour fileId ${id}:`, error.message);
+            console.error(`Erreur fetch pour fileId ${id} (sz=${size}):`, error.message);
             throw error;
         }
     };
 
     try {
-        // Essayer d'abord avec sz=w1500 pour meilleure qualité
         let result;
         try {
-            result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1500`, 1);
+            // Essayer d'abord avec sz=w1500 pour meilleure qualité
+            result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1500`, 1, 'w1500');
         } catch (error) {
             console.warn(`Échec avec sz=w1500 pour fileId ${id}: ${error.message}`);
-            // Fallback sur sz=w1000 si la taille dépasse ou autre erreur
-            result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1000`, 2);
+            try {
+                // Fallback sur sz=w1000
+                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1000`, 2, 'w1000');
+            } catch (error) {
+                console.warn(`Échec avec sz=w1000 pour fileId ${id}: ${error.message}`);
+                // Dernier fallback sur sz=w800 pour garantir l'affichage
+                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w800`, 3, 'w800');
+            }
         }
 
         return {
@@ -77,7 +83,8 @@ exports.handler = async (event) => {
                 'Expires': '0',
                 'Access-Control-Allow-Origin': '*',
                 'Accept-Ranges': 'bytes',
-                'X-File-Id': id
+                'X-File-Id': id,
+                'X-Image-Size': result.size || 'unknown' // Ajouter pour débogage
             },
             body: result.buffer.toString('base64'),
             isBase64Encoded: true
