@@ -18679,12 +18679,7 @@ window.generateStreamingLinks = function() {
                   "https://drive.google.com/file/d/1HSE6-KesTOl4ve4vgADm0UZDWgp1BFe0/view"
                 ]
               },
-              {
-                "chapter": "1150 - Pas sorti !",
-                "imageUrls": [
-                  "",
-                ]
-              },
+            
 
             ]
           },
