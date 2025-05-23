@@ -19993,7 +19993,7 @@ window.generateStreamingLinks = function() {
 
     ]
 
-// Vérification des fileName et des URLs
+ // Vérification des fileName et des URLs
     seasons.forEach((season, index) => {
         if (!season.fileName) {
             console.error(`Erreur : fileName manquant pour la saison à l'index ${index}`, season);

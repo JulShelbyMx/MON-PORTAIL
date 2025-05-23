@@ -213,7 +213,7 @@
     <div id="history-log-sidebar"></div>
 
     <script src="streaming.js"></script>
-        <script>
+    <script>
         window.open = function() {
             console.log("Tentative de pop-up bloquée");
             return null;
@@ -247,7 +247,7 @@
 
             if (fileId) {
                 console.log(`Conversion URL: ${originalUrl} -> /.netlify/functions/proxy-image?id=${fileId}`);
-                return `/.netlify/functions/proxy-image?id=${fileId}`;
+                return `/.netlify/functions/proxy-image?id=${fileId}&t=${Date.now()}`; // Bypass cache temporaire
             }
             console.warn('URL Google Drive non valide:', originalUrl);
             return originalUrl;
@@ -586,6 +586,5 @@
             initializeSidebar();
         });
     </script>
-    <script>( surement à supprimer>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93b05d290f85afa4',t:'MTc0NjQ0OTQzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>

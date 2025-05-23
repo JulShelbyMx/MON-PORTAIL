@@ -1,4 +1,3 @@
-// netlify/functions/proxy-image.js
 const fetch = require('node-fetch');
 
 exports.handler = async (event) => {
@@ -10,7 +9,7 @@ exports.handler = async (event) => {
         };
     }
 
-    const url = `https://drive.google.com/uc?export=download&id=${id}&confirm=1`;
+    const url = `https://drive.google.com/uc?export=view&id=${id}`;
     try {
         const response = await fetch(url, {
             headers: {
