@@ -10,7 +10,8 @@ exports.handler = async (event) => {
         };
     }
 
-    const url = `https://drive.google.com/uc?export=download&id=${id}`;
+    // Essayer thumbnail pour contourner la limite de taille
+    const url = `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
     console.log(`Tentative de fetch pour fileId: ${id}, URL: ${url}`);
 
     try {
@@ -18,8 +19,11 @@ exports.handler = async (event) => {
             headers: {
                 'Accept': 'image/*',
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
             },
-            redirect: 'follow' // Suivre les redirections
+            redirect: 'follow'
         });
 
         console.log(`Réponse HTTP: ${response.status}, Headers:`, Object.fromEntries(response.headers));
@@ -40,22 +44,35 @@ exports.handler = async (event) => {
         const buffer = await response.buffer();
         console.log(`Taille du buffer: ${buffer.length} octets`);
 
+        if (buffer.length > 6_291_556) {
+            console.error(`Erreur: Taille du buffer (${buffer.length}) dépasse la limite Netlify (6 Mo)`);
+            throw new Error('Image trop grande pour la limite Netlify');
+        }
+
         return {
             statusCode: 200,
             headers: {
                 'Content-Type': contentType,
-                'Cache-Control': 'public, max-age=31536000',
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0',
                 'Access-Control-Allow-Origin': '*',
                 'Accept-Ranges': 'bytes',
+                'X-File-Id': id // Ajouter fileId pour débogage
             },
             body: buffer.toString('base64'),
-            isBase64Encoded: true,
+            isBase64Encoded: true
         };
     } catch (error) {
         console.error(`Erreur proxy pour fileId ${id}:`, error.message);
         return {
             statusCode: 502,
-            body: JSON.stringify({ error: 'Erreur lors de la récupération de l’image', details: error.message }),
+            headers: {
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
+            },
+            body: JSON.stringify({ error: 'Erreur lors de la récupération de l’image', details: error.message })
         };
     }
 };

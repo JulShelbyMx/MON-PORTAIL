@@ -213,7 +213,7 @@
     <div id="history-log-sidebar"></div>
 
     <script src="streaming.js"></script>
-    <script>
+   <script>
         window.open = function() {
             console.log("Tentative de pop-up bloquée");
             return null;
@@ -246,8 +246,9 @@
             }
 
             if (fileId) {
-                console.log(`Conversion URL: ${originalUrl} -> /.netlify/functions/proxy-image?id=${fileId}`);
-                return `/.netlify/functions/proxy-image?id=${fileId}&t=${Date.now()}`; // Bypass cache temporaire
+                const convertedUrl = `/.netlify/functions/proxy-image?id=${fileId}&t=${Date.now()}`;
+                console.log(`Conversion URL: ${originalUrl} -> ${convertedUrl}`);
+                return convertedUrl;
             }
             console.warn('URL Google Drive non valide:', originalUrl);
             return originalUrl;
@@ -256,9 +257,11 @@
         function preloadImages(pages, currentPage) {
             const nextPage = currentPage + 1;
             if (nextPage < pages.length) {
-                const img = new Image();
-                img.src = pages[nextPage];
-                console.log(`Préchargement de la page suivante: ${pages[nextPage]}`);
+                setTimeout(() => {
+                    const img = new Image();
+                    img.src = pages[nextPage];
+                    console.log(`Préchargement de la page suivante: ${pages[nextPage]}`);
+                }, 1000); // Délai pour éviter concurrence
             }
         }
 
@@ -356,7 +359,22 @@
                 const img = new Image();
                 img.src = pages[currentPage];
                 console.log(`Affichage du chapitre ${chapterNumber}, page ${currentPage + 1}/${pages.length}: ${pages[currentPage]}`);
-                img.onload = () => {
+                img.onload = async () => {
+                    // Vérifier X-File-Id
+                    const fileId = pages[currentPage].match(/id=([^&]+)/)?.[1];
+                    try {
+                        const response = await fetch(pages[currentPage], { method: 'HEAD' });
+                        const servedFileId = response.headers.get('X-File-Id');
+                        if (servedFileId !== fileId) {
+                            console.error(`Image incorrecte! Demandé fileId: ${fileId}, Reçu: ${servedFileId}`);
+                            mangaViewer.innerHTML = `<p class="error-message">Erreur: Image incorrecte chargée (fileId ${servedFileId} au lieu de ${fileId})</p>`;
+                            loadingSpinner.classList.remove('active');
+                            return;
+                        }
+                    } catch (err) {
+                        console.warn('Impossible de vérifier X-File-Id:', err);
+                    }
+
                     mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page ${currentPage + 1}">`;
                     loadingSpinner.classList.remove('active');
                     attachImageClickListener();
@@ -366,7 +384,7 @@
                 };
                 img.onerror = () => {
                     console.error('Erreur chargement image:', pages[currentPage]);
-                    mangaViewer.innerHTML = `<p class="error-message">Erreur lors du chargement de l'image. Veuillez réessayer.</p>`;
+                    mangaViewer.innerHTML = `<p class="error-message">Erreur lors du chargement de l'image (page ${currentPage + 1}). Veuillez réessayer.</p>`;
                     loadingSpinner.classList.remove('active');
                     scrollToImage();
                 };
@@ -394,7 +412,21 @@
                                 const newImg = new Image();
                                 newImg.src = pages[currentPage];
                                 console.log(`Affichage du chapitre ${season.chapters[currentChapter].chapter}, page ${currentPage + 1}/${pages.length}: ${pages[currentPage]}`);
-                                newImg.onload = () => {
+                                newImg.onload = async () => {
+                                    const fileId = pages[currentPage].match(/id=([^&]+)/)?.[1];
+                                    try {
+                                        const response = await fetch(pages[currentPage], { method: 'HEAD' });
+                                        const servedFileId = response.headers.get('X-File-Id');
+                                        if (servedFileId !== fileId) {
+                                            console.error(`Image incorrecte! Demandé fileId: ${fileId}, Reçu: ${servedFileId}`);
+                                            mangaViewer.innerHTML = `<p class="error-message">Erreur: Image incorrecte chargée (fileId ${servedFileId} au lieu de ${fileId})</p>`;
+                                            loadingSpinner.classList.remove('active');
+                                            return;
+                                        }
+                                    } catch (err) {
+                                        console.warn('Impossible de vérifier X-File-Id:', err);
+                                    }
+
                                     mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page ${currentPage + 1}">`;
                                     loadingSpinner.classList.remove('active');
                                     attachImageClickListener();
@@ -404,7 +436,7 @@
                                 };
                                 newImg.onerror = () => {
                                     console.error('Erreur chargement image:', pages[currentPage]);
-                                    mangaViewer.innerHTML = `<p class="error-message">Erreur lors du chargement de l'image. Veuillez réessayer.</p>`;
+                                    mangaViewer.innerHTML = `<p class="error-message">Erreur lors du chargement de l'image (page ${currentPage + 1}). Veuillez réessayer.</p>`;
                                     loadingSpinner.classList.remove('active');
                                     scrollToImage();
                                 };
@@ -424,7 +456,21 @@
                                 const newImg = new Image();
                                 newImg.src = pages[currentPage];
                                 console.log(`Affichage du chapitre ${season.chapters[currentChapter].chapter}, page ${currentPage + 1}/${pages.length}: ${pages[currentPage]}`);
-                                newImg.onload = () => {
+                                newImg.onload = async () => {
+                                    const fileId = pages[currentPage].match(/id=([^&]+)/)?.[1];
+                                    try {
+                                        const response = await fetch(pages[currentPage], { method: 'HEAD' });
+                                        const servedFileId = response.headers.get('X-File-Id');
+                                        if (servedFileId !== fileId) {
+                                            console.error(`Image incorrecte! Demandé fileId: ${fileId}, Reçu: ${servedFileId}`);
+                                            mangaViewer.innerHTML = `<p class="error-message">Erreur: Image incorrecte chargée (fileId ${servedFileId} au lieu de ${fileId})</p>`;
+                                            loadingSpinner.classList.remove('active');
+                                            return;
+                                        }
+                                    } catch (err) {
+                                        console.warn('Impossible de vérifier X-File-Id:', err);
+                                    }
+
                                     mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page ${currentPage + 1}">`;
                                     loadingSpinner.classList.remove('active');
                                     attachImageClickListener();
@@ -434,7 +480,7 @@
                                 };
                                 newImg.onerror = () => {
                                     console.error('Erreur chargement image:', pages[currentPage]);
-                                    mangaViewer.innerHTML = `<p class="error-message">Erreur lors du chargement de l'image. Veuillez réessayer.</p>`;
+                                    mangaViewer.innerHTML = `<p class="error-message">Erreur lors du chargement de l'image (page ${currentPage + 1}). Veuillez réessayer.</p>`;
                                     loadingSpinner.classList.remove('active');
                                     scrollToImage();
                                 };
@@ -524,7 +570,21 @@
                     const img = new Image();
                     img.src = pages[currentPage];
                     console.log(`Affichage du chapitre ${season.chapters[currentChapter].chapter}, page ${currentPage + 1}/${pages.length}: ${pages[currentPage]}`);
-                    img.onload = () => {
+                    img.onload = async () => {
+                        const fileId = pages[currentPage].match(/id=([^&]+)/)?.[1];
+                        try {
+                            const response = await fetch(pages[currentPage], { method: 'HEAD' });
+                            const servedFileId = response.headers.get('X-File-Id');
+                            if (servedFileId !== fileId) {
+                                console.error(`Image incorrecte! Demandé fileId: ${fileId}, Reçu: ${servedFileId}`);
+                                mangaViewer.innerHTML = `<p class="error-message">Erreur: Image incorrecte chargée (fileId ${servedFileId} au lieu de ${fileId})</p>`;
+                                loadingSpinner.classList.remove('active');
+                                return;
+                            }
+                        } catch (err) {
+                            console.warn('Impossible de vérifier X-File-Id:', err);
+                        }
+
                         mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page ${currentPage + 1}">`;
                         loadingSpinner.classList.remove('active');
                         attachImageClickListener();
@@ -534,7 +594,7 @@
                     };
                     img.onerror = () => {
                         console.error('Erreur chargement image:', pages[currentPage]);
-                        mangaViewer.innerHTML = `<p class="error-message">Erreur lors du chargement de l'image. Veuillez réessayer.</p>`;
+                        mangaViewer.innerHTML = `<p class="error-message">Erreur lors du chargement de l'image (page ${currentPage + 1}). Veuillez réessayer.</p>`;
                         loadingSpinner.classList.remove('active');
                         scrollToImage();
                     };
@@ -556,7 +616,21 @@
                     const img = new Image();
                     img.src = pages[currentPage];
                     console.log(`Affichage du chapitre ${season.chapters[currentChapter].chapter}, page ${currentPage + 1}/${pages.length}: ${pages[currentPage]}`);
-                    img.onload = () => {
+                    img.onload = async () => {
+                        const fileId = pages[currentPage].match(/id=([^&]+)/)?.[1];
+                        try {
+                            const response = await fetch(pages[currentPage], { method: 'HEAD' });
+                            const servedFileId = response.headers.get('X-File-Id');
+                            if (servedFileId !== fileId) {
+                                console.error(`Image incorrecte! Demandé fileId: ${fileId}, Reçu: ${servedFileId}`);
+                                mangaViewer.innerHTML = `<p class="error-message">Erreur: Image incorrecte chargée (fileId ${servedFileId} au lieu de ${fileId})</p>`;
+                                loadingSpinner.classList.remove('active');
+                                return;
+                            }
+                        } catch (err) {
+                            console.warn('Impossible de vérifier X-File-Id:', err);
+                        }
+
                         mangaViewer.innerHTML = `<img src="${pages[currentPage]}" loading="lazy" alt="Manga Page ${currentPage + 1}">`;
                         loadingSpinner.classList.remove('active');
                         attachImageClickListener();
@@ -566,7 +640,7 @@
                     };
                     img.onerror = () => {
                         console.error('Erreur chargement image:', pages[currentPage]);
-                        mangaViewer.innerHTML = `<p class="error-message">Erreur lors du chargement de l'image. Veuillez réessayer.</p>`;
+                        mangaViewer.innerHTML = `<p class="error-message">Erreur lors du chargement de l'image (page ${currentPage + 1}). Veuillez réessayer.</p>`;
                         loadingSpinner.classList.remove('active');
                         scrollToImage();
                     };
