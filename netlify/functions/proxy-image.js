@@ -49,7 +49,8 @@ exports.handler = async (event) => {
 
             return {
                 buffer,
-                contentType
+                contentType,
+                size
             };
         } catch (error) {
             console.error(`Erreur fetch pour fileId ${id} (sz=${size}):`, error.message);
@@ -59,18 +60,29 @@ exports.handler = async (event) => {
 
     try {
         let result;
-        try {
-            // Essayer d'abord avec sz=w1500 pour meilleure qualité
-            result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1500`, 1, 'w1500');
-        } catch (error) {
-            console.warn(`Échec avec sz=w1500 pour fileId ${id}: ${error.message}`);
+        // Forcer sz=w1000 pour la page 1 du chapitre 1149
+        if (id === '1P6lgDQXLN0iGj1lPYJBpKhs51R_YaUcU') {
             try {
-                // Fallback sur sz=w1000
-                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1000`, 2, 'w1000');
+                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1000`, 1, 'w1000');
             } catch (error) {
                 console.warn(`Échec avec sz=w1000 pour fileId ${id}: ${error.message}`);
-                // Dernier fallback sur sz=w800 pour garantir l'affichage
-                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w800`, 3, 'w800');
+                // Fallback sur sz=w800
+                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w800`, 2, 'w800');
+            }
+        } else {
+            // Pour les autres images, essayer sz=w1500
+            try {
+                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1500`, 1, 'w1500');
+            } catch (error) {
+                console.warn(`Échec avec sz=w1500 pour fileId ${id}: ${error.message}`);
+                try {
+                    // Fallback sur sz=w1000
+                    result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1000`, 2, 'w1000');
+                } catch (error) {
+                    console.warn(`Échec avec sz=w1000 pour fileId ${id}: ${error.message}`);
+                    // Fallback sur sz=w800
+                    result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w800`, 3, 'w800');
+                }
             }
         }
 
@@ -84,7 +96,7 @@ exports.handler = async (event) => {
                 'Access-Control-Allow-Origin': '*',
                 'Accept-Ranges': 'bytes',
                 'X-File-Id': id,
-                'X-Image-Size': result.size || 'unknown' // Ajouter pour débogage
+                'X-Image-Size': result.size || 'unknown'
             },
             body: result.buffer.toString('base64'),
             isBase64Encoded: true
