@@ -288,6 +288,12 @@ body {
     font-size: 14px;
 }
 
+#timetable-message {
+    font-size: 1.2em;
+    color: #333;
+    white-space: pre-line;
+}
+
 .holiday-table th {
     background: #87CEEB;
     color: #0a0a0a;
