@@ -285,8 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </table>
             </div>
         `;
-
-        // Initialize references after generation
+// Initialize references after generation
         weekA = weekAContainer.querySelector('.timetable-table');
         weekB = weekBContainer.querySelector('.timetable-table');
         toggleTimeA = document.getElementById('toggle-time-a');
@@ -595,6 +594,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 holidayMessage.textContent = "It's the weekend!";
                 holidayMessage.style.display = 'block';
                 holidayOptions.style.display = 'none';
+                currentWeek = getWeekType(now);
+                weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+                weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+                toggleButton.style.display = 'block';
+                if (window.innerWidth <= 768) {
+                    scrollToCurrentDay();
+                }
             } else {
                 const holidayReason = isHolidayOrClosure(now);
                 if (holidayReason) {
@@ -602,6 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     holidayMessage.style.display = 'none';
                     holidayOptions.style.display = 'none';
+                    currentWeek = getWeekType(now);
                     weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
                     weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
                     toggleButton.style.display = 'block';
@@ -626,62 +633,36 @@ document.addEventListener('DOMContentLoaded', () => {
             const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
             return dateOnly >= startDate && dateOnly <= endDate;
         });
+
+        // Déterminer si c'est un jour férié unique ou une période de vacances
         const isSingleDay = currentHoliday && new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)).getTime() ===
                             new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)).getTime();
-        const nextDay = new Date(dateOnly);
-        nextDay.setUTCDate(nextDay.getUTCDate() + 1);
-        const isFollowedByHoliday = isHolidayOrClosure(nextDay);
 
-        if (!isSingleDay || (isSingleDay && isFollowedByHoliday)) {
-            holidayMessage.textContent = `No classes today: ${reason}`;
+        if (isSingleDay) {
+            // Jour férié unique : afficher l'emploi du temps de la semaine actuelle
+            holidayMessage.textContent = `No classes today: Bank Holiday`;
             holidayMessage.style.display = 'block';
-            holidayOptions.style.display = 'flex';
-            showReturnTimetable.style.display = 'block';
-            showWeekTimetable.style.display = 'none';
-            weekAContainer.style.display = 'none';
-            weekBContainer.style.display = 'none';
-            toggleButton.style.display = 'none';
-
-            showReturnTimetable.onclick = () => {
-                const returnDate = getReturnDate(currentHoliday.end);
-                currentWeek = getWeekType(returnDate);
-                currentDayIndex = returnDate.getUTCDay() - 1;
-                weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
-                weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
-                toggleButton.style.display = 'block';
-                if (window.innerWidth <= 768) {
-                    scrollToCurrentDay();
-                }
-                holidayMessage.textContent = `Showing the timetable for the first week back, starting ${formatDate(returnDate)} (Week ${currentWeek})`;
-                holidayOptions.style.display = 'none';
-                console.log('Show return timetable clicked, week:', currentWeek);
-            };
+            holidayOptions.style.display = 'none';
+            currentWeek = getWeekType(date);
+            weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+            weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+            toggleButton.style.display = 'block';
+            if (window.innerWidth <= 768) {
+                scrollToCurrentDay();
+            }
         } else {
-            holidayMessage.textContent = `No classes today: ${reason}`;
+            // Vacances : afficher l'emploi du temps de la semaine de la rentrée
+            const returnDate = getReturnDate(currentHoliday.end);
+            currentWeek = getWeekType(returnDate);
+            holidayMessage.textContent = `No classes today: Holidays (${formatDate(new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)))} - ${formatDate(new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)))})\nShowing timetable for the first week back, starting ${formatDate(returnDate)} (Week ${currentWeek})`;
             holidayMessage.style.display = 'block';
-            holidayOptions.style.display = 'flex';
-            showReturnTimetable.style.display = 'none';
-            showWeekTimetable.style.display = 'block';
-
-            showWeekTimetable.textContent = 'Show Timetable for Next School Day';
-            showWeekTimetable.onclick = () => {
-                let nextDate = new Date(dateOnly);
-                nextDate.setUTCDate(nextDate.getUTCDate() + 1);
-                while (nextDate.getUTCDay() === 0 || nextDate.getUTCDay() === 6 || isHolidayOrClosure(nextDate)) {
-                    nextDate.setUTCDate(nextDate.getUTCDate() + 1);
-                }
-                currentWeek = getWeekType(nextDate);
-                currentDayIndex = nextDate.getUTCDay() - 1;
-                weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
-                weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
-                toggleButton.style.display = 'block';
-                if (window.innerWidth <= 768) {
-                    holidayMessage.textContent = `Today is ${reason}. Showing timetable for next school day: ${daysOfWeek[currentDayIndex]} (Week ${currentWeek})`;
-                    scrollToCurrentDay();
-                }
-                holidayOptions.style.display = 'none';
-                console.log('Show week timetable clicked, week:', currentWeek);
-            };
+            holidayOptions.style.display = 'none';
+            weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+            weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+            toggleButton.style.display = 'block';
+            if (window.innerWidth <= 768) {
+                scrollToCurrentDay();
+            }
         }
     }
 
@@ -691,16 +672,11 @@ document.addEventListener('DOMContentLoaded', () => {
         handleHoliday(today, holidayReason);
     } else {
         currentWeek = getWeekType(today);
-
-        if (currentWeek === 'A') {
-            weekAContainer.style.display = 'block';
-            weekBContainer.style.display = 'none';
-            toggleButton.textContent = 'Switch to Week B';
-        } else {
-            weekAContainer.style.display = 'none';
-            weekBContainer.style.display = 'block';
-            toggleButton.textContent = 'Switch to Week A';
-        }
+        holidayMessage.style.display = 'none';
+        holidayOptions.style.display = 'none';
+        weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+        weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+        toggleButton.style.display = 'block';
 
         toggleButton.addEventListener('click', () => {
             if (currentWeek === 'A') {
