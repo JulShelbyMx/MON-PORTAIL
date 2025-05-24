@@ -60,6 +60,11 @@ body {
     background-color: #ADD8E6;
 }
 
+#toggle-button {
+    display: block;
+    margin: 0 auto 20px auto;
+}
+
 .timetable-scroll {
     width: 100%;
     overflow-x: auto;
@@ -104,6 +109,17 @@ body {
     font-size: 18px;
     font-family: 'Arial', sans-serif;
     margin-bottom: 20px;
+}
+
+#timetable-message {
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    border: 2px solid #87CEEB;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+    color: #87CEEB;
 }
 
 .no-class-message {
@@ -289,9 +305,13 @@ body {
 }
 
 #timetable-message {
-    font-size: 1.2em;
-    color: #333;
-    white-space: pre-line;
+    background: #222;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #87CEEB;
+    font-size: 18px;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
 }
 
 .holiday-table th {
