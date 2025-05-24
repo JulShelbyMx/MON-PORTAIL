@@ -780,5 +780,5 @@ document.addEventListener('DOMContentLoaded', () => {
         isInitialLoad = false;
     }
     if (!manualDate) setInterval(checkDayChange, 1000);
-}
+    }
 });
