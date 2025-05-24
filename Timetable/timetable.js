@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
  
- // Initialize references after generation
+  // Initialize references after generation
     weekA = weekAContainer.querySelector('.timetable-table');
     weekB = weekBContainer.querySelector('.timetable-table');
     toggleTimeA = document.getElementById('toggle-time-a');
@@ -543,7 +543,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentHoliday = holidays.find(h => {
                 const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
                 const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
-                const dateOnly = new Date(Date.UTC(bstNow.getUTCFullYear(), bstNow.getUTCMonth(), bstNow.getUTCDate()));
+                const dateOnly = new Date(Date.UTC(bstNow.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
                 return dateOnly >= startDate && dateOnly <= endDate;
             });
 
@@ -604,6 +604,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (!currentLessonFound) {
+            console.log('No current lesson at this time.');
             noClassMessage.textContent = 'No class right now';
             noClassMessage.style.display = 'block';
         }
@@ -617,6 +618,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const bstNow = new Date(now.getTime() + 3600000);
         const currentDay = bstNow.getUTCDate();
 
+        console.log('Check day:', now.toISOString(), 'BST:', bstNow.toISOString(), 'Day:', currentDay);
+
         if (currentDay !== lastKnownDay) {
             const dayOfWeek = bstNow.getUTCDay();
             currentDayIndex = dayOfWeek === 0 || dayOfWeek === 6 ? 0 : dayOfWeek - 1;
@@ -624,7 +627,6 @@ document.addEventListener('DOMContentLoaded', () => {
             isManualDayChange = false;
 
             const holidayReason = isHolidayOrClosure(now);
-            console.log('checkDayChange:', { holidayReason, currentDay, lastKnownDay, currentWeek });
             if (holidayReason) {
                 handleHoliday(now, holidayReason);
                 return;
@@ -636,7 +638,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 noClassMessage.textContent = "It's the weekend!";
                 noClassMessage.style.display = 'block';
                 holidayOptions.style.display = 'none';
-                currentWeek = getWeekType(now); // Show current week's timetable for regular weekends
+                currentWeek = getWeekType(now);
                 weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
                 weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
                 toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
@@ -679,7 +681,7 @@ document.addEventListener('DOMContentLoaded', () => {
             noClassMessage.textContent = `No classes today: Bank Holiday`;
             noClassMessage.style.display = 'block';
             holidayOptions.style.display = 'none';
-            currentWeek = getWeekType(date); // Show current week's timetable for single-day holidays
+            currentWeek = getWeekType(date);
         } else {
             const returnDate = getReturnDate(currentHoliday.end);
             currentWeek = getWeekType(returnDate);
