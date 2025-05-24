@@ -285,7 +285,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 </table>
             </div>
         `;
- // Initialize references after generation
+ 
+         // Initialize references after generation
     weekA = weekAContainer.querySelector('.timetable-table');
     weekB = weekBContainer.querySelector('.timetable-table');
     toggleTimeA = document.getElementById('toggle-time-a');
@@ -614,31 +615,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 handleHoliday(now, holidayReason);
             } else {
                 const isNowWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+                timetableMessage.style.display = 'none';
                 if (isNowWeekend) {
-                    timetableMessage.style.display = 'none';
                     noClassMessage.textContent = "It's the weekend!";
                     noClassMessage.style.display = 'block';
-                    holidayOptions.style.display = 'none';
-                    currentWeek = getWeekType(now);
-                    weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
-                    weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
-                    toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
-                    toggleButton.style.display = 'block';
-                    if (window.innerWidth <= 768) {
-                        scrollToCurrentDay();
-                    }
                 } else {
-                    timetableMessage.style.display = 'none';
                     noClassMessage.style.display = 'none';
-                    holidayOptions.style.display = 'none';
-                    currentWeek = getWeekType(now);
-                    weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
-                    weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
-                    toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
-                    toggleButton.style.display = 'block';
-                    if (window.innerWidth <= 768) {
-                        scrollToCurrentDay();
-                    }
+                }
+                holidayOptions.style.display = 'none';
+                currentWeek = getWeekType(now);
+                weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+                weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+                toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
+                toggleButton.style.display = 'block';
+                if (window.innerWidth <= 768) {
+                    scrollToCurrentDay();
                 }
             }
 
@@ -690,6 +681,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 scrollToCurrentDay();
             }
         }
+        lastKnownDay = dateOnly.getUTCDate(); // Ensure lastKnownDay is updated to prevent re-evaluation
+        console.log('handleHoliday:', { reason, isSingleDay, currentWeek, timetableDisplay: weekAContainer.style.display || weekBContainer.style.display });
     }
 
     const holidayReason = isHolidayOrClosure(today);
@@ -698,67 +691,65 @@ document.addEventListener('DOMContentLoaded', () => {
         handleHoliday(today, holidayReason);
     } else {
         const isTodayWeekend = today.getUTCDay() === 0 || today.getUTCDay() === 6;
+        timetableMessage.style.display = 'none';
         if (isTodayWeekend) {
-            timetableMessage.style.display = 'none';
             noClassMessage.textContent = "It's the weekend!";
             noClassMessage.style.display = 'block';
-            holidayOptions.style.display = 'none';
-            currentWeek = getWeekType(today);
-            weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
-            weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
-            toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
-            toggleButton.style.display = 'block';
         } else {
-            currentWeek = getWeekType(today);
-            timetableMessage.style.display = 'none';
             noClassMessage.style.display = 'none';
-            holidayOptions.style.display = 'none';
-            weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
-            weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
-            toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
-            toggleButton.style.display = 'block';
         }
-
-        toggleButton.addEventListener('click', () => {
-            if (currentWeek === 'A') {
-                weekAContainer.style.display = 'none';
-                weekBContainer.style.display = 'block';
-                toggleButton.textContent = 'Switch to Week A';
-                currentWeek = 'B';
-            } else {
-                weekAContainer.style.display = 'block';
-                weekBContainer.style.display = 'none';
-                toggleButton.textContent = 'Switch to Week B';
-                currentWeek = 'A';
-            }
-            if (window.innerWidth <= 768) {
-                scrollToCurrentDay();
-            }
-            console.log('Toggle button clicked, current week:', currentWeek);
-        });
-
-        window.addEventListener('resize', () => {
-            generateTimetables();
-            if (currentWeek === 'A') {
-                weekAContainer.style.display = 'block';
-                weekBContainer.style.display = 'none';
-            } else {
-                weekAContainer.style.display = 'none';
-                weekBContainer.style.display = 'block';
-            }
-            populateHolidayTables();
-            if (window.innerWidth <= 768) {
-                scrollToCurrentDay();
-            }
-            console.log('Window resized, width:', window.innerWidth);
-        });
-
-        updateTimes();
-        highlightCurrentLesson();
-        if (isInitialLoad && window.innerWidth <= 768) {
+        holidayOptions.style.display = 'none';
+        currentWeek = getWeekType(today);
+        weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+        weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+        toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
+        toggleButton.style.display = 'block';
+        if (window.innerWidth <= 768) {
             scrollToCurrentDay();
-            isInitialLoad = false;
         }
-        if (!manualDate) setInterval(checkDayChange, 1000);
+        lastKnownDay = today.getUTCDate(); // Initialize lastKnownDay
     }
- }});
+
+    // Add toggle button event listener
+    toggleButton.addEventListener('click', () => {
+        if (currentWeek === 'A') {
+            weekAContainer.style.display = 'none';
+            weekBContainer.style.display = 'block';
+            toggleButton.textContent = 'Switch to Week A';
+            currentWeek = 'B';
+        } else {
+            weekAContainer.style.display = 'block';
+            weekBContainer.style.display = 'none';
+            toggleButton.textContent = 'Switch to Week B';
+            currentWeek = 'A';
+        }
+        if (window.innerWidth <= 768) {
+            scrollToCurrentDay();
+        }
+        console.log('Toggle button clicked, current week:', currentWeek);
+    });
+
+    window.addEventListener('resize', () => {
+        generateTimetables();
+        if (currentWeek === 'A') {
+            weekAContainer.style.display = 'block';
+            weekBContainer.style.display = 'none';
+        } else {
+            weekAContainer.style.display = 'none';
+            weekBContainer.style.display = 'block';
+        }
+        populateHolidayTables();
+        if (window.innerWidth <= 768) {
+            scrollToCurrentDay();
+        }
+        console.log('Window resized, width:', window.innerWidth);
+    });
+
+    updateTimes();
+    highlightCurrentLesson();
+    if (isInitialLoad && window.innerWidth <= 768) {
+        scrollToCurrentDay();
+        isInitialLoad = false;
+    }
+    if (!manualDate) setInterval(checkDayChange, 1000);
+}});
