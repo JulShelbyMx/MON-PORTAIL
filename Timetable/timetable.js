@@ -285,73 +285,76 @@ document.addEventListener('DOMContentLoaded', () => {
                 </table>
             </div>
         `;
- // Initialize references after generation
-    weekA = weekAContainer.querySelector('.timetable-table');
-    weekB = weekBContainer.querySelector('.timetable-table');
-    toggleTimeA = document.getElementById('toggle-time-a');
-    toggleTimeB = document.getElementById('toggle-time-b');
-    timeZoneA = document.getElementById('time-zone-a');
-    timeZoneB = document.getElementById('time-zone-b');
-    const timetableMessage = document.getElementById('timetable-message'); // New reference for message above timetable
+  // Initialize references after generation
+        weekA = weekAContainer.querySelector('.timetable-table');
+        weekB = weekBContainer.querySelector('.timetable-table');
+        toggleTimeA = document.getElementById('toggle-time-a');
+        toggleTimeB = document.getElementById('toggle-time-b');
+        timeZoneA = document.getElementById('time-zone-a');
+        timeZoneB = document.getElementById('time-zone-b');
+        const timetableMessage = document.getElementById('timetable-message'); // New reference for message above timetable
 
-    // Add event listeners for toggling between abbreviation and full name
-    const cells = document.querySelectorAll('td[data-abbrev]');
-    cells.forEach(cell => {
-        cell.addEventListener('click', () => {
-            const abbrev = cell.getAttribute('data-abbrev');
-            const full = cell.getAttribute('data-full');
-            const currentText = cell.childNodes[0].textContent;
-            const classroom = cell.querySelector('.classroom').outerHTML;
-            if (currentText === abbrev) {
-                cell.innerHTML = `${full}${classroom}`;
-            } else {
-                cell.innerHTML = `${abbrev}${classroom}`;
+        // Add event listeners for toggling between abbreviation and full name
+        const cells = document.querySelectorAll('td[data-abbrev]');
+        cells.forEach(cell => {
+            cell.addEventListener('click', () => {
+                const abbrev = cell.getAttribute('data-abbrev');
+                const full = cell.getAttribute('data-full');
+                const currentText = cell.childNodes[0].textContent;
+                const classroom = cell.querySelector('.classroom').outerHTML;
+                if (currentText === abbrev) {
+                    cell.innerHTML = `${full}${classroom}`;
+                } else {
+                    cell.innerHTML = `${abbrev}${classroom}`;
+                }
+            });
+        });
+
+        // Add event listeners for time toggle buttons
+        if (toggleTimeA) {
+            toggleTimeA.addEventListener('click', () => {
+                isUKTime = !isUKTime;
+                updateTimes();
+            });
+        }
+        if (toggleTimeB) {
+            toggleTimeB.addEventListener('click', () => {
+                isUKTime = !isUKTime;
+                updateTimes();
+            });
+        }
+
+        // Center the current day on mobile
+        if (window.innerWidth <= 768 && scrollToIndex > 0) {
+            const scrollContainerA = weekAContainer.querySelector('.timetable-scroll');
+            const scrollContainerB = weekBContainer.querySelector('.timetable-scroll');
+            if (scrollContainerA) {
+                const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
+                if (cell) {
+                    const containerWidth = scrollContainerA.offsetWidth;
+                    const cellWidth = cell.offsetWidth;
+                    const offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+                    scrollContainerA.scrollTo({
+                        left: offset,
+                        behavior: 'smooth'
+                    });
+                }
             }
-        });
-    });
-
-    // Add event listeners for time toggle buttons
-    if (toggleTimeA) {
-        toggleTimeA.addEventListener('click', () => {
-            isUKTime = !isUKTime;
-            updateTimes();
-        });
-    }
-    if (toggleTimeB) {
-        toggleTimeB.addEventListener('click', () => {
-            isUKTime = !isUKTime;
-            updateTimes();
-        });
-    }
-
-    // Center the current day on mobile
-    if (window.innerWidth <= 768 && scrollToIndex > 0) {
-        const scrollContainerA = weekAContainer.querySelector('.timetable-scroll');
-        const scrollContainerB = weekBContainer.querySelector('.timetable-scroll');
-        if (scrollContainerA) {
-            const cell = scrollContainerA.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
-            if (cell) {
-                const containerWidth = scrollContainerA.offsetWidth;
-                const cellWidth = cell.offsetWidth;
-                const offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
-                scrollContainerA.scrollTo({
-                    left: offset,
-                    behavior: 'smooth'
-                });
+            if (scrollContainerB) {
+                const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
+                if (cell) {
+                    const containerWidth = scrollContainerB.offsetWidth;
+                    const cellWidth = cell.offsetWidth;
+                    const offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
+                    scrollContainerB.scrollTo({
+                        left: offset,
+                        behavior: 'smooth'
+                    });
+                }
             }
         }
-        if (scrollContainerB) {
-            const cell = scrollContainerB.querySelector(`thead th:nth-child(${scrollToIndex + 1})`);
-            if (cell) {
-                const containerWidth = scrollContainerB.offsetWidth;
-                const cellWidth = cell.offsetWidth;
-                const offset = cell.offsetLeft + (cellWidth / 2) - (containerWidth / 2);
-                scrollContainerB.scrollTo({
-                    left: offset,
-                    behavior: 'smooth'
-                });
-            }
-        }
+
+        console.log('generateTimetables completed');
     }
 
     // Generate timetables and populate holiday tables at load
@@ -385,10 +388,6 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('Tab switched to:', button.dataset.tab);
         });
     });
-
-    function formatDate(date) {
-        return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-    }
 
     function convertTime(timeStr) {
         if (timeStr.includes('(REG)')) {
@@ -458,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const holiday of holidays) {
             if (!holiday.start.year || !holiday.start.month || !holiday.start.day) continue;
             const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
-            const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
+            const endDate = new Date(Date.UTC(holiday.end.year, h.end.month - 1, h.end.day));
             if (dateOnly >= startDate && dateOnly <= endDate) {
                 return holiday.reason;
             }
@@ -625,6 +624,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
+            const timetableMessage = document.getElementById('timetable-message');
             timetableMessage.style.display = 'none';
             const isNowWeekend = dayOfWeek === 0 || dayOfWeek === 6;
             if (isNowWeekend) {
@@ -672,6 +672,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const endDate = currentHoliday ? new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)) : null;
         const isLastWeekend = !isSingleDay && endDate && (dateOnly.getTime() === endDate.getTime() || dateOnly.getTime() === endDate.getTime() - 86400000) && (bstDate.getUTCDay() === 0 || bstDate.getUTCDay() === 6);
 
+        const timetableMessage = document.getElementById('timetable-message');
         if (isSingleDay) {
             timetableMessage.style.display = 'none';
             noClassMessage.textContent = `No classes today: Bank Holiday`;
@@ -701,23 +702,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('handleHoliday:', { reason, isSingleDay, isLastWeekend, currentWeek, weekADisplay: weekAContainer.style.display, weekBDisplay: weekBContainer.style.display });
     }
 
-    function generateTimetables() {
-        console.log('generateTimetables called');
-        if (!weekAContainer.innerHTML.includes('timetable-table')) {
-            weekAContainer.innerHTML = '<table class="timetable-table"><thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead><tbody><tr><td data-uk-time="09:00-10:00">09:00-10:00</td><td data-abbrev="Math" data-full="Mathematics">Math<span class="classroom">Room 101</span></td><td></td><td></td><td></td><td></td></tr></tbody></table>';
-        }
-        if (!weekBContainer.innerHTML.includes('timetable-table')) {
-            weekBContainer.innerHTML = '<table class="timetable-table"><thead><tr><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th><th>Thursday</th><th>Friday</th></tr></thead><tbody><tr><td data-uk-time="09:00-10:00">09:00-10:00</td><td data-abbrev="Sci" data-full="Science">Sci<span class="classroom">Room 102</span></td><td></td><td></td><td></td><td></td></tr></tbody></table>';
-        }
-        weekA = weekAContainer.querySelector('.timetable-table');
-        weekB = weekBContainer.querySelector('.timetable-table');
-        console.log('generateTimetables: weekAContainer:', weekAContainer.innerHTML, 'weekBContainer:', weekBContainer.innerHTML);
-    }
-
-    function populateHolidayTables() {
-        console.log('populateHolidayTables called');
-    }
-
     // Initialize timetable
     const holidayReason = isHolidayOrClosure(today);
     console.log('Initialization:', { holidayReason, currentWeek, lastKnownDay });
@@ -725,6 +709,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (holidayReason) {
         handleHoliday(today, holidayReason);
     } else {
+        const timetableMessage = document.getElementById('timetable-message');
         currentWeek = getWeekType(today);
         timetableMessage.style.display = 'none';
         noClassMessage.style.display = 'none';
@@ -774,11 +759,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateTimes();
-        highlightCurrentLesson();
-        if (isInitialLoad && window.innerWidth <= 768) {
-            scrollToCurrentDay();
-            isInitialLoad = false;
-        }
-        if (!manualDate) setInterval(checkDayChange, 1000);
+    highlightCurrentLesson();
+    if (isInitialLoad && window.innerWidth <= 768) {
+        scrollToCurrentDay();
+        isInitialLoad = false;
     }
+    if (!manualDate) setInterval(checkDayChange, 1000);
+
+    console.log('Script fully loaded');
 });
