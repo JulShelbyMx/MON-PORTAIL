@@ -285,15 +285,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </table>
             </div>
         `;
- 
-  // Initialize references after generation
+ // Initialize references after generation
     weekA = weekAContainer.querySelector('.timetable-table');
     weekB = weekBContainer.querySelector('.timetable-table');
     toggleTimeA = document.getElementById('toggle-time-a');
     toggleTimeB = document.getElementById('toggle-time-b');
     timeZoneA = document.getElementById('time-zone-a');
     timeZoneB = document.getElementById('time-zone-b');
-    const timetableMessage = document.getElementById('timetable-message');
+    const timetableMessage = document.getElementById('timetable-message'); // New reference for message above timetable
 
     // Add event listeners for toggling between abbreviation and full name
     const cells = document.querySelectorAll('td[data-abbrev]');
@@ -354,296 +353,268 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+}
 
-    // Generate timetables and populate holiday tables at load
-    try {
-        generateTimetables();
-        console.log('generateTimetables called at init');
-        populateHolidayTables();
-    } catch (error) {
-        console.error('Erreur lors de l\'initialisation:', error);
+// Generate timetables and populate holiday tables at load
+try {
+    generateTimetables();
+    populateHolidayTables();
+} catch (error) {
+    console.error('Erreur lors de l\'initialisation:', error);
+}
+
+// Hamburger menu and sidebar functionality
+hamburgerMenu.addEventListener('click', () => {
+    sidebar.classList.toggle('active');
+    hamburgerMenu.classList.toggle('active');
+    console.log('Hamburger menu clicked, sidebar active:', sidebar.classList.contains('active'));
+});
+
+closeSidebar.addEventListener('click', () => {
+    sidebar.classList.remove('active');
+    hamburgerMenu.classList.remove('active');
+    console.log('Close sidebar clicked');
+});
+
+// Tab switching functionality
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        tabContents.forEach(content => content.classList.remove('active'));
+        button.classList.add('active');
+        document.getElementById(button.dataset.tab).classList.add('active');
+        console.log('Tab switched to:', button.dataset.tab);
+    });
+});
+
+function convertTime(timeStr) {
+    if (timeStr.includes('(REG)')) {
+        const times = timeStr.match(/\d{2}:\d{2}-\d{2}:\d{2}/)[0].split('-');
+        const start = times[0].split(':');
+        const end = times[1].split(':');
+        let startHour = parseInt(start[0], 10);
+        let endHour = parseInt(end[0], 10);
+        const startMinutes = start[1];
+        const endMinutes = end[1];
+
+        if (!isUKTime) {
+            startHour = (startHour + 1) % 24;
+            endHour = (endHour + 1) % 24;
+        }
+
+        return `(REG) ${startHour.toString().padStart(2, '0')}:${startMinutes}-${endHour.toString().padStart(2, '0')}:${endMinutes}`;
+    } else {
+        const times = timeStr.split('-');
+        const start = times[0].split(':');
+        const end = times[1].split(':');
+        let startHour = parseInt(start[0], 10);
+        let endHour = parseInt(end[0], 10);
+        const startMinutes = start[1];
+        const endMinutes = end[1];
+
+        if (!isUKTime) {
+            startHour = (startHour + 1) % 24;
+            endHour = (endHour + 1) % 24;
+        }
+
+        return `${startHour.toString().padStart(2, '0')}:${startMinutes}-${endHour.toString().padStart(2, '0')}:${endMinutes}`;
     }
+}
 
-    // Hamburger menu and sidebar functionality
-    hamburgerMenu.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-        hamburgerMenu.classList.toggle('active');
-        console.log('Hamburger menu clicked, sidebar active:', sidebar.classList.contains('active'));
-    });
-
-    closeSidebar.addEventListener('click', () => {
-        sidebar.classList.remove('active');
-        hamburgerMenu.classList.remove('active');
-        console.log('Close sidebar clicked');
-    });
-
-    // Tab switching functionality
-    tabButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            tabButtons.forEach(btn => btn.classList.remove('active'));
-            tabContents.forEach(content => content.classList.remove('active'));
-            button.classList.add('active');
-            document.getElementById(button.dataset.tab).classList.add('active');
-            console.log('Tab switched to:', button.dataset.tab);
+function updateTimes() {
+    if (weekA) {
+        const timeCellsA = weekA.querySelectorAll('tbody td[data-uk-time]');
+        timeCellsA.forEach(cell => {
+            const ukTime = cell.getAttribute('data-uk-time');
+            cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
         });
+        if (timeZoneA) timeZoneA.textContent = isUKTime ? '[UK]' : '[FR]';
+        if (toggleTimeA) toggleTimeA.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
+    }
+
+    if (weekB) {
+        const timeCellsB = weekB.querySelectorAll('tbody td[data-uk-time]');
+        timeCellsB.forEach(cell => {
+            const ukTime = cell.getAttribute('data-uk-time');
+            cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
+        });
+        if (timeZoneB) timeZoneB.textContent = isUKTime ? '[UK]' : '[FR]';
+        if (toggleTimeB) toggleTimeB.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
+    }
+
+    highlightCurrentLesson();
+    console.log('Times updated, isUKTime:', isUKTime);
+}
+
+function isHolidayOrClosure(date) {
+    const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
+    const dateOnly = new Date(Date.UTC(bstDate.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
+
+    console.log('Holiday check:', bstDate.toISOString(), 'Date only:', dateOnly.toISOString());
+
+    for (const holiday of holidays) {
+        if (!holiday.start.year || !holiday.start.month || !holiday.start.day) continue;
+        const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
+        const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
+        if (dateOnly >= startDate && dateOnly <= endDate) {
+            return holiday.reason;
+        }
+    }
+    return null;
+}
+
+function getWeekType(date) {
+    const termStart = new Date(Date.UTC(2025, 2, 31));
+    const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
+    const diffTime = Math.abs(bstDate - termStart);
+    const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
+    const weekType = diffWeeks % 2 === 0 ? 'A' : 'B';
+    console.log('Week type calculated:', weekType, 'Date:', bstDate.toISOString());
+    return weekType;
+}
+
+function getReturnDate(holidayEnd) {
+    let returnDate = new Date(Date.UTC(holidayEnd.year, holidayEnd.month - 1, holidayEnd.day));
+    returnDate.setUTCDate(returnDate.getUTCDate() + 1);
+    while (returnDate.getUTCDay() === 0 || returnDate.getUTCDay() === 6 || isHolidayOrClosure(returnDate)) {
+        returnDate.setUTCDate(returnDate.getUTCDate() + 1);
+    }
+    return returnDate;
+}
+
+function scrollToCurrentDay() {
+    if (window.innerWidth > 768) return;
+
+    const activeTable = weekAContainer.style.display === 'block' ? weekA : weekB;
+    if (!activeTable) return;
+
+    const scrollContainer = activeTable.parentElement;
+    const dayColumn = scrollContainer.querySelectorAll('th')[currentDayIndex + 1];
+
+    if (dayColumn) {
+        const columnLeft = dayColumn.offsetLeft;
+        const containerWidth = scrollContainer.clientWidth;
+        const columnWidth = dayColumn.offsetWidth;
+        const scrollPosition = columnLeft - (containerWidth / 2) + (columnWidth / 2);
+        scrollContainer.scrollTo({
+            left: scrollPosition,
+            behavior: 'smooth'
+        });
+        console.log('Scrolled to current day:', daysOfWeek[currentDayIndex]);
+    }
+}
+
+function highlightCurrentLesson() {
+    const allCells = document.querySelectorAll('.timetable-table td');
+    allCells.forEach(cell => cell.classList.remove('current-lesson'));
+
+    noClassMessage.style.display = 'none';
+
+    if (isManualDayChange || manualDate) {
+        return;
+    }
+
+    const now = new Date();
+    const bstNow = new Date(now.getTime() + 3600000);
+    const ukHours = bstNow.getUTCHours();
+    const currentMinutes = bstNow.getUTCMinutes();
+
+    const currentTimeInMinutes = ukHours * 60 + currentMinutes;
+
+    const currentDay = daysOfWeek[currentDayIndex];
+
+    const activeTable = weekAContainer.style.display === 'block' ? weekA : weekB;
+    if (!activeTable) return;
+
+    const timeCells = activeTable.querySelectorAll('tbody td[data-uk-time]');
+    let currentLessonFound = false;
+
+    const isWeekend = bstNow.getUTCDay() === 0 || bstNow.getUTCDay() === 6;
+    const holidayReason = isHolidayOrClosure(now);
+    if (isWeekend || holidayReason) {
+        noClassMessage.textContent = isWeekend ? "It's the weekend!" : holidayReason === 'Holidays' ? 
+            `No classes today: Holidays (${formatDate(new Date(Date.UTC(2025, 4, 24)))} - ${formatDate(new Date(Date.UTC(2025, 5, 1)))})` : 
+            `No classes today: Bank Holiday`;
+        noClassMessage.style.display = 'block';
+        return;
+    }
+
+    timeCells.forEach((cell, index) => {
+        const ukTime = cell.getAttribute('data-uk-time');
+
+        let startHour, startMinutes, endHour, endMinutes;
+        if (ukTime.includes('(REG)')) {
+            const times = ukTime.match(/\d{2}:\d{2}-\d{2}:\d{2}/)[0].split('-');
+            startHour = parseInt(times[0].split(':')[0], 10);
+            startMinutes = parseInt(times[0].split(':')[1], 10);
+            endHour = parseInt(times[1].split(':')[0], 10);
+            endMinutes = parseInt(times[1].split(':')[1], 10);
+        } else {
+            const times = ukTime.split('-');
+            startHour = parseInt(times[0].split(':')[0], 10);
+            startMinutes = parseInt(times[0].split(':')[1], 10);
+            endHour = parseInt(times[1].split(':')[0], 10);
+            endMinutes = parseInt(times[1].split(':')[1], 10);
+        }
+
+        const startTimeInMinutes = startHour * 60 + startMinutes;
+        const endTimeInMinutes = endHour * 60 + endMinutes;
+
+        if (currentTimeInMinutes >= startTimeInMinutes && currentTimeInMinutes <= endTimeInMinutes) {
+            const row = cell.parentElement;
+            const cells = row.querySelectorAll('td');
+            const lessonCell = cells[currentDayIndex + 1];
+            if (lessonCell) {
+                lessonCell.classList.add('current-lesson');
+                currentLessonFound = true;
+            }
+        }
     });
 
-    function convertTime(timeStr) {
-        if (timeStr.includes('(REG)')) {
-            const times = timeStr.match(/\d{2}:\d{2}-\d{2}:\d{2}/)[0].split('-');
-            const start = times[0].split(':');
-            const end = times[1].split(':');
-            let startHour = parseInt(start[0], 10);
-            let endHour = parseInt(end[0], 10);
-            const startMinutes = start[1];
-            const endMinutes = end[1];
-
-            if (!isUKTime) {
-                startHour = (startHour + 1) % 24;
-                endHour = (endHour + 1) % 24;
-            }
-
-            return `(REG) ${startHour.toString().padStart(2, '0')}:${startMinutes}-${endHour.toString().padStart(2, '0')}:${endMinutes}`;
-        } else {
-            const times = timeStr.split('-');
-            const start = times[0].split(':');
-            const end = times[1].split(':');
-            let startHour = parseInt(start[0], 10);
-            let endHour = parseInt(end[0], 10);
-            const startMinutes = start[1];
-            const endMinutes = end[1];
-
-            if (!isUKTime) {
-                startHour = (startHour + 1) % 24;
-                endHour = (endHour + 1) % 24;
-            }
-
-            return `${startHour.toString().padStart(2, '0')}:${startMinutes}-${endHour.toString().padStart(2, '0')}:${endMinutes}`;
-        }
+    if (!currentLessonFound) {
+        console.log('No current lesson at this time.');
+        noClassMessage.textContent = 'No class right now';
+        noClassMessage.style.display = 'block';
     }
+    console.log('Highlight current lesson checked, found:', currentLessonFound);
+}
 
-    function updateTimes() {
-        if (weekA) {
-            const timeCellsA = weekA.querySelectorAll('tbody td[data-uk-time]');
-            timeCellsA.forEach(cell => {
-                const ukTime = cell.getAttribute('data-uk-time');
-                cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
-            });
-            if (timeZoneA) timeZoneA.textContent = isUKTime ? '[UK]' : '[FR]';
-            if (toggleTimeA) toggleTimeA.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
-        }
+function checkDayChange() {
+    if (manualDate) return;
 
-        if (weekB) {
-            const timeCellsB = weekB.querySelectorAll('tbody td[data-uk-time]');
-            timeCellsB.forEach(cell => {
-                const ukTime = cell.getAttribute('data-uk-time');
-                cell.textContent = isUKTime ? ukTime : convertTime(ukTime);
-            });
-            if (timeZoneB) timeZoneB.textContent = isUKTime ? '[UK]' : '[FR]';
-            if (toggleTimeB) toggleTimeB.textContent = isUKTime ? 'Switch to FR' : 'Switch to UK';
-        }
+    const now = new Date();
+    const bstNow = new Date(now.getTime() + 3600000);
+    const currentDay = bstNow.getUTCDate();
 
-        highlightCurrentLesson();
-        console.log('Times updated, isUKTime:', isUKTime);
-    }
+    console.log('Check day:', now.toISOString(), 'BST:', bstNow.toISOString(), 'Day:', currentDay);
 
-    function isHolidayOrClosure(date) {
-        const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
-        const dateOnly = new Date(Date.UTC(bstDate.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
+    if (currentDay !== lastKnownDay) {
+        const dayOfWeek = bstNow.getUTCDay();
+        currentDayIndex = dayOfWeek === 0 || dayOfWeek === 6 ? 0 : dayOfWeek - 1;
+        currentDayIndex = Math.min(Math.max(currentDayIndex, 0), 4);
 
-        console.log('Holiday check:', bstDate.toISOString(), 'Date only:', dateOnly.toISOString());
+        isManualDayChange = false;
 
-        for (const holiday of holidays) {
-            if (!holiday.start.year || !holiday.start.month || !holiday.start.day) continue;
-            const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
-            const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
-            if (dateOnly >= startDate && dateOnly <= endDate) {
-                return holiday.reason;
-            }
-        }
-        return null;
-    }
-
-    function getWeekType(date) {
-        const termStart = new Date(Date.UTC(2025, 2, 31));
-        const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
-        const diffTime = Math.abs(bstDate - termStart);
-        const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
-        const weekType = diffWeeks % 2 === 0 ? 'A' : 'B';
-        console.log('Week type calculated:', weekType, 'Date:', bstDate.toISOString());
-        return weekType;
-    }
-
-    function getReturnDate(holidayEnd) {
-        let returnDate = new Date(Date.UTC(holidayEnd.year, holidayEnd.month - 1, holidayEnd.day));
-        returnDate.setUTCDate(returnDate.getUTCDate() + 1);
-        while (returnDate.getUTCDay() === 0 || returnDate.getUTCDay() === 6 || isHolidayOrClosure(returnDate)) {
-            returnDate.setUTCDate(returnDate.getUTCDate() + 1);
-        }
-        return returnDate;
-    }
-
-    function isLastWeekendOfHoliday(date, holiday) {
-        const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
-        const dateOnly = new Date(Date.UTC(bstDate.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
-        const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
-        const returnDate = getReturnDate(holiday.end);
-        const isWeekend = bstDate.getUTCDay() === 0 || bstDate.getUTCDay() === 6;
-        const isLastDay = dateOnly.getTime() === endDate.getTime();
-        const isDayBeforeLast = dateOnly.getTime() === endDate.getTime() - 86400000;
-        return isWeekend && (isLastDay || isDayBeforeLast) && returnDate.getUTCDay() !== 0 && returnDate.getUTCDay() !== 6;
-    }
-
-    function scrollToCurrentDay() {
-        if (window.innerWidth > 768) return;
-
-        const activeTable = weekAContainer.style.display === 'block' ? weekA : weekB;
-        if (!activeTable) return;
-
-        const scrollContainer = activeTable.parentElement;
-        const dayColumn = scrollContainer.querySelectorAll('th')[currentDayIndex + 1];
-
-        if (dayColumn) {
-            const columnLeft = dayColumn.offsetLeft;
-            const containerWidth = scrollContainer.clientWidth;
-            const columnWidth = dayColumn.offsetWidth;
-            const scrollPosition = columnLeft - (containerWidth / 2) + (columnWidth / 2);
-            scrollContainer.scrollTo({
-                left: scrollPosition,
-                behavior: 'smooth'
-            });
-            console.log('Scrolled to current day:', daysOfWeek[currentDayIndex]);
-        }
-    }
-
-    function highlightCurrentLesson() {
-        const allCells = document.querySelectorAll('.timetable-table td');
-        allCells.forEach(cell => cell.classList.remove('current-lesson'));
-
-        noClassMessage.style.display = 'none';
-
-        if (isManualDayChange || manualDate) {
-            return;
-        }
-
-        const now = new Date();
-        const bstNow = new Date(now.getTime() + 3600000);
-        const ukHours = bstNow.getUTCHours();
-        const currentMinutes = bstNow.getUTCMinutes();
-        const currentTimeInMinutes = ukHours * 60 + currentMinutes;
-
-        const activeTable = weekAContainer.style.display === 'block' ? weekA : weekB;
-        if (!activeTable) return;
-
-        const timeCells = activeTable.querySelectorAll('tbody td[data-uk-time]');
-        let currentLessonFound = false;
-
-        const holidayReason = isHolidayOrClosure(now);
-        if (holidayReason) {
-            const currentHoliday = holidays.find(h => {
-                const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
-                const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
-                const dateOnly = new Date(Date.UTC(bstNow.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
-                return dateOnly >= startDate && dateOnly <= endDate;
-            });
-
-            const isSingleDay = currentHoliday && new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)).getTime() ===
-                                new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)).getTime();
-
-            if (isSingleDay) {
-                noClassMessage.textContent = `No classes today: Bank Holiday`;
-                noClassMessage.style.display = 'block';
-            } else if (isLastWeekendOfHoliday(now, currentHoliday)) {
-                noClassMessage.textContent = "It's the weekend!";
-                noClassMessage.style.display = 'block';
-            } else {
-                noClassMessage.textContent = `No classes today: Holidays (${formatDate(new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)))} - ${formatDate(new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)))})`;
-                noClassMessage.style.display = 'block';
-            }
-            console.log('highlightCurrentLesson holiday:', { holidayReason, isSingleDay });
-            return;
-        }
-
-        const isWeekend = bstNow.getUTCDay() === 0 || bstNow.getUTCDay() === 6;
-        if (isWeekend) {
+        const isNowWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+        if (isNowWeekend) {
+            timetableMessage.style.display = 'none';
             noClassMessage.textContent = "It's the weekend!";
             noClassMessage.style.display = 'block';
-            console.log('highlightCurrentLesson weekend');
-            return;
-        }
-
-        timeCells.forEach((cell, index) => {
-            const ukTime = cell.getAttribute('data-uk-time');
-            let startHour, startMinutes, endHour, endMinutes;
-            if (ukTime.includes('(REG)')) {
-                const times = ukTime.match(/\d{2}:\d{2}-\d{2}:\d{2}/)[0].split('-');
-                startHour = parseInt(times[0].split(':')[0], 10);
-                startMinutes = parseInt(times[0].split(':')[1], 10);
-                endHour = parseInt(times[1].split(':')[0], 10);
-                endMinutes = parseInt(times[1].split(':')[1], 10);
-            } else {
-                const times = ukTime.split('-');
-                startHour = parseInt(times[0].split(':')[0], 10);
-                startMinutes = parseInt(times[0].split(':')[1], 10);
-                endHour = parseInt(times[1].split(':')[0], 10);
-                endMinutes = parseInt(times[1].split(':')[1], 10);
+            holidayOptions.style.display = 'none';
+            currentWeek = getWeekType(now);
+            weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+            weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+            toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
+            toggleButton.style.display = 'block';
+            if (window.innerWidth <= 768) {
+                scrollToCurrentDay();
             }
-
-            const startTimeInMinutes = startHour * 60 + startMinutes;
-            const endTimeInMinutes = endHour * 60 + endMinutes;
-
-            if (currentTimeInMinutes >= startTimeInMinutes && currentTimeInMinutes <= endTimeInMinutes) {
-                const row = cell.parentElement;
-                const cells = row.querySelectorAll('td');
-                const lessonCell = cells[currentDayIndex + 1];
-                if (lessonCell) {
-                    lessonCell.classList.add('current-lesson');
-                    currentLessonFound = true;
-                }
-            }
-        });
-
-        if (!currentLessonFound) {
-            console.log('No current lesson at this time.');
-            noClassMessage.textContent = 'No class right now';
-            noClassMessage.style.display = 'block';
-        }
-        console.log('Highlight current lesson checked, found:', currentLessonFound);
-    }
-
-    function checkDayChange() {
-        if (manualDate) return;
-
-        const now = new Date();
-        const bstNow = new Date(now.getTime() + 3600000);
-        const currentDay = bstNow.getUTCDate();
-
-        console.log('Check day:', now.toISOString(), 'BST:', bstNow.toISOString(), 'Day:', currentDay);
-
-        if (currentDay !== lastKnownDay) {
-            const dayOfWeek = bstNow.getUTCDay();
-            currentDayIndex = dayOfWeek === 0 || dayOfWeek === 6 ? 0 : dayOfWeek - 1;
-            currentDayIndex = Math.min(Math.max(currentDayIndex, 0), 4);
-            isManualDayChange = false;
-
+        } else {
             const holidayReason = isHolidayOrClosure(now);
             if (holidayReason) {
                 handleHoliday(now, holidayReason);
-                return;
-            }
-
-            timetableMessage.style.display = 'none';
-            const isNowWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-            if (isNowWeekend) {
-                noClassMessage.textContent = "It's the weekend!";
-                noClassMessage.style.display = 'block';
-                holidayOptions.style.display = 'none';
-                currentWeek = getWeekType(now);
-                weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
-                weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
-                toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
-                toggleButton.style.display = 'block';
             } else {
+                timetableMessage.style.display = 'none';
                 noClassMessage.style.display = 'none';
                 holidayOptions.style.display = 'none';
                 currentWeek = getWeekType(now);
@@ -651,93 +622,79 @@ document.addEventListener('DOMContentLoaded', () => {
                 weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
                 toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
                 toggleButton.style.display = 'block';
+                if (window.innerWidth <= 768) {
+                    scrollToCurrentDay();
+                }
             }
-
-            generateTimetables();
-            if (window.innerWidth <= 768) {
-                scrollToCurrentDay();
-            }
-            lastKnownDay = currentDay;
         }
 
-        highlightCurrentLesson();
+        lastKnownDay = currentDay;
     }
 
-    function handleHoliday(date, reason) {
-        const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
-        const dateOnly = new Date(Date.UTC(bstDate.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
-        const currentHoliday = holidays.find(h => {
-            if (!h.start.year || !h.start.month || !h.start.day) return false;
-            const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
-            const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
-            return dateOnly >= startDate && dateOnly <= endDate;
-        });
+    highlightCurrentLesson();
+}
 
-        const isSingleDay = currentHoliday && new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)).getTime() ===
-                            new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)).getTime();
+function handleHoliday(date, reason) {
+    const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
+    const dateOnly = new Date(Date.UTC(bstDate.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
+    const currentHoliday = holidays.find(h => {
+        if (!h.start.year || !h.start.month || !h.start.day) return false;
+        const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
+        const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
+        return dateOnly >= startDate && dateOnly <= endDate;
+    });
 
-        if (isSingleDay) {
-            timetableMessage.style.display = 'none';
-            noClassMessage.textContent = `No classes today: Bank Holiday`;
-            noClassMessage.style.display = 'block';
-            holidayOptions.style.display = 'none';
-            currentWeek = getWeekType(date);
-        } else {
-            const returnDate = getReturnDate(currentHoliday.end);
-            currentWeek = getWeekType(returnDate);
-            timetableMessage.textContent = `Showing timetable for the first week back, starting ${formatDate(returnDate)} (Week ${currentWeek})`;
-            timetableMessage.style.display = 'block';
-            if (isLastWeekendOfHoliday(date, currentHoliday)) {
-                noClassMessage.textContent = "It's the weekend!";
-            } else {
-                noClassMessage.textContent = `No classes today: Holidays (${formatDate(new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)))} - ${formatDate(new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)))})`;
-            }
-            noClassMessage.style.display = 'block';
-            holidayOptions.style.display = 'none';
-        }
+    // Déterminer si c'est un jour férié unique ou une période de vacances
+    const isSingleDay = currentHoliday && new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)).getTime() ===
+                        new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)).getTime();
 
+    if (isSingleDay) {
+        // Jour férié unique : afficher l'emploi du temps de la semaine actuelle
+        timetableMessage.style.display = 'none';
+        noClassMessage.textContent = `No classes today: Bank Holiday`;
+        noClassMessage.style.display = 'block';
+        holidayOptions.style.display = 'none';
+        currentWeek = getWeekType(date);
         weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
         weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
         toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
         toggleButton.style.display = 'block';
-        generateTimetables();
         if (window.innerWidth <= 768) {
             scrollToCurrentDay();
         }
-        lastKnownDay = dateOnly.getUTCDate();
-        console.log('handleHoliday:', { reason, isSingleDay, isLastWeekend: isLastWeekendOfHoliday(date, currentHoliday), currentWeek, weekADisplay: weekAContainer.style.display, weekBDisplay: weekBContainer.style.display });
-    }
-
-    // Initialize timetable
-    const today = new Date();
-    const holidayReason = isHolidayOrClosure(today);
-    console.log('Initialization:', { holidayReason, currentWeek, lastKnownDay });
-
-    if (holidayReason) {
-        handleHoliday(today, holidayReason);
     } else {
-        currentWeek = getWeekType(today);
-        timetableMessage.style.display = 'none';
-        noClassMessage.style.display = 'none';
+        // Vacances : afficher l'emploi du temps de la semaine de la rentrée
+        const returnDate = getReturnDate(currentHoliday.end);
+        currentWeek = getWeekType(returnDate);
+        timetableMessage.textContent = `Showing timetable for the first week back, starting ${formatDate(returnDate)} (Week ${currentWeek})`;
+        timetableMessage.style.display = 'block';
+        noClassMessage.textContent = `No classes today: Holidays (${formatDate(new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)))} - ${formatDate(new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)))})`;
+        noClassMessage.style.display = 'block';
         holidayOptions.style.display = 'none';
         weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
         weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
         toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
         toggleButton.style.display = 'block';
-
-        const isWeekend = today.getUTCDay() === 0 || today.getUTCDay() === 6;
-        if (isWeekend) {
-            noClassMessage.textContent = "It's the weekend!";
-            noClassMessage.style.display = 'block';
-        }
-
-        generateTimetables();
         if (window.innerWidth <= 768) {
             scrollToCurrentDay();
         }
     }
+}
 
-    // Toggle button event listener
+const holidayReason = isHolidayOrClosure(today);
+
+if (holidayReason) {
+    handleHoliday(today, holidayReason);
+} else {
+    currentWeek = getWeekType(today);
+    timetableMessage.style.display = 'none';
+    noClassMessage.style.display = 'none';
+    holidayOptions.style.display = 'none';
+    weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+    weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+    toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
+    toggleButton.style.display = 'block';
+
     toggleButton.addEventListener('click', () => {
         if (currentWeek === 'A') {
             weekAContainer.style.display = 'none';
@@ -756,7 +713,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Toggle button clicked, current week:', currentWeek);
     });
 
-    // Resize event listener
     window.addEventListener('resize', () => {
         generateTimetables();
         if (currentWeek === 'A') {
@@ -781,4 +737,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (!manualDate) setInterval(checkDayChange, 1000);
 }
-}); // Closing the document.addEventListener('DOMContentLoaded', () => {
+});
