@@ -774,11 +774,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     updateTimes();
-    highlightCurrentLesson();
-    if (isInitialLoad && window.innerWidth <= 768) {
-        scrollToCurrentDay();
-        isInitialLoad = false;
-    }
-    if (!manualDate) setInterval(checkDayChange, 1000);
+        highlightCurrentLesson();
+        if (isInitialLoad && window.innerWidth <= 768) {
+            scrollToCurrentDay();
+            isInitialLoad = false;
+        }
+        if (!manualDate) setInterval(checkDayChange, 1000);
     }
 });
