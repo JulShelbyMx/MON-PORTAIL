@@ -285,14 +285,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 </table>
             </div>
         `;
-  // Initialize references after generation
+ // Initialize references after generation
         weekA = weekAContainer.querySelector('.timetable-table');
         weekB = weekBContainer.querySelector('.timetable-table');
         toggleTimeA = document.getElementById('toggle-time-a');
         toggleTimeB = document.getElementById('toggle-time-b');
         timeZoneA = document.getElementById('time-zone-a');
         timeZoneB = document.getElementById('time-zone-b');
-        const timetableMessage = document.getElementById('timetable-message'); // New reference for message above timetable
+        const timetableMessage = document.getElementById('timetable-message');
 
         // Add event listeners for toggling between abbreviation and full name
         const cells = document.querySelectorAll('td[data-abbrev]');
@@ -457,7 +457,7 @@ document.addEventListener('DOMContentLoaded', () => {
         for (const holiday of holidays) {
             if (!holiday.start.year || !holiday.start.month || !holiday.start.day) continue;
             const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
-            const endDate = new Date(Date.UTC(holiday.end.year, h.end.month - 1, h.end.day));
+            const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
             if (dateOnly >= startDate && dateOnly <= endDate) {
                 return holiday.reason;
             }
@@ -521,10 +521,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const activeTable = weekAContainer.style.display === 'block' ? weekA : weekB;
         if (!activeTable) return;
 
-        const timeCells = activeTable.querySelectorAll('tbody td[data-uk-time]');
-        let currentLessonFound = false;
-
         const holidayReason = isHolidayOrClosure(now);
+        console.log('highlightCurrentLesson:', { holidayReason, isWeekend: bstNow.getUTCDay() === 0 || bstNow.getUTCDay() === 6 });
+
         if (holidayReason) {
             const currentHoliday = holidays.find(h => {
                 const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
@@ -536,21 +535,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const isSingleDay = currentHoliday && new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)).getTime() ===
                                 new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)).getTime();
 
-            const endDate = currentHoliday ? new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)) : null;
-            const dateOnly = new Date(Date.UTC(bstNow.getUTCFullYear(), bstNow.getUTCMonth(), bstNow.getUTCDate()));
-            const isLastWeekend = !isSingleDay && endDate && (dateOnly.getTime() === endDate.getTime() || dateOnly.getTime() === endDate.getTime() - 86400000) && (bstNow.getUTCDay() === 0 || bstNow.getUTCDay() === 6);
-
-            if (isLastWeekend) {
-                noClassMessage.textContent = "It's the weekend!";
-                noClassMessage.style.display = 'block';
-            } else if (isSingleDay) {
+            if (isSingleDay) {
                 noClassMessage.textContent = `No classes today: Bank Holiday`;
                 noClassMessage.style.display = 'block';
             } else {
                 noClassMessage.textContent = `No classes today: Holidays (${formatDate(new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)))} - ${formatDate(new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)))})`;
                 noClassMessage.style.display = 'block';
             }
-            console.log('highlightCurrentLesson holiday:', { holidayReason, isLastWeekend, isSingleDay });
+            console.log('highlightCurrentLesson holiday:', { holidayReason, isSingleDay });
             return;
         }
 
@@ -561,6 +553,9 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('highlightCurrentLesson weekend');
             return;
         }
+
+        const timeCells = activeTable.querySelectorAll('tbody td[data-uk-time]');
+        let currentLessonFound = false;
 
         timeCells.forEach((cell, index) => {
             const ukTime = cell.getAttribute('data-uk-time');
@@ -608,7 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const bstNow = new Date(now.getTime() + 3600000);
         const currentDay = bstNow.getUTCDate();
 
-        console.log('Check day:', now.toISOString(), 'BST:', bstNow.toISOString(), 'Day:', currentDay);
+        console.log('Check day:', now.toISOString(), 'BST:', bstNow.toISOString(), 'Day:', currentDay, 'Last known day:', lastKnownDay);
 
         if (currentDay !== lastKnownDay) {
             const dayOfWeek = bstNow.getUTCDay();
@@ -619,32 +614,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const holidayReason = isHolidayOrClosure(now);
             console.log('checkDayChange:', { holidayReason, currentDay, lastKnownDay, currentWeek });
+
             if (holidayReason) {
                 handleHoliday(now, holidayReason);
+                lastKnownDay = currentDay;
                 return;
             }
 
             const timetableMessage = document.getElementById('timetable-message');
             timetableMessage.style.display = 'none';
+            noClassMessage.style.display = 'none';
+            holidayOptions.style.display = 'none';
+
             const isNowWeekend = dayOfWeek === 0 || dayOfWeek === 6;
             if (isNowWeekend) {
                 noClassMessage.textContent = "It's the weekend!";
                 noClassMessage.style.display = 'block';
-                holidayOptions.style.display = 'none';
                 currentWeek = getWeekType(now);
-                weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
-                weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
-                toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
-                toggleButton.style.display = 'block';
             } else {
-                noClassMessage.style.display = 'none';
-                holidayOptions.style.display = 'none';
                 currentWeek = getWeekType(now);
-                weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
-                weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
-                toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
-                toggleButton.style.display = 'block';
             }
+
+            weekAContainer.style.display = currentWeek === 'A' ? 'block' : 'none';
+            weekBContainer.style.display = currentWeek === 'B' ? 'block' : 'none';
+            toggleButton.textContent = currentWeek === 'A' ? 'Switch to Week B' : 'Switch to Week A';
+            toggleButton.style.display = 'block';
 
             generateTimetables();
             if (window.innerWidth <= 768) {
@@ -669,10 +663,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const isSingleDay = currentHoliday && new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)).getTime() ===
                             new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)).getTime();
 
-        const endDate = currentHoliday ? new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)) : null;
-        const isLastWeekend = !isSingleDay && endDate && (dateOnly.getTime() === endDate.getTime() || dateOnly.getTime() === endDate.getTime() - 86400000) && (bstDate.getUTCDay() === 0 || bstDate.getUTCDay() === 6);
-
         const timetableMessage = document.getElementById('timetable-message');
+
         if (isSingleDay) {
             timetableMessage.style.display = 'none';
             noClassMessage.textContent = `No classes today: Bank Holiday`;
@@ -684,8 +676,7 @@ document.addEventListener('DOMContentLoaded', () => {
             currentWeek = getWeekType(returnDate);
             timetableMessage.textContent = `Showing timetable for the first week back, starting ${formatDate(returnDate)} (Week ${currentWeek})`;
             timetableMessage.style.display = 'block';
-            noClassMessage.textContent = isLastWeekend ? "It's the weekend!" : 
-                `No classes today: Holidays (${formatDate(new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)))} - ${formatDate(new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)))})`;
+            noClassMessage.textContent = `No classes today: Holidays (${formatDate(new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)))} - ${formatDate(new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)))})`;
             noClassMessage.style.display = 'block';
             holidayOptions.style.display = 'none';
         }
@@ -699,7 +690,7 @@ document.addEventListener('DOMContentLoaded', () => {
             scrollToCurrentDay();
         }
         lastKnownDay = dateOnly.getUTCDate();
-        console.log('handleHoliday:', { reason, isSingleDay, isLastWeekend, currentWeek, weekADisplay: weekAContainer.style.display, weekBDisplay: weekBContainer.style.display });
+        console.log('handleHoliday:', { reason, isSingleDay, currentWeek, returnDate: formatDate(new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day + 1))), weekADisplay: weekAContainer.style.display, weekBDisplay: weekBContainer.style.display });
     }
 
     // Initialize timetable
