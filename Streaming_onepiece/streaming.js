@@ -19984,7 +19984,7 @@ window.generateStreamingLinks = function() {
         { episode: 1128, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5901445'},
         { episode: "EGGHEAD SP6", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5909346'},
         { episode: 1129, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5915215'},
-        { episode: 1130, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5921659'},
+        { episode: 1130, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5921735'},
         { episode: "1131, pas encore sorti", videoUrl: ''},
 
 
