@@ -20005,7 +20005,7 @@ window.generateStreamingLinks = function() {
         { episode: "EGGHEAD SP6", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5909346'},
         { episode: 1129, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5915215'},
         { episode: 1130, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5921735'},
-        { episode: 1131, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5927082'},
+        { episode: 1131, videoUrl: 'https://mega.nz/embed/F14izLiK#fnNkSpz1z4C8OJcnQSCEeVVDpdrxl5Xo2bQQdT3h2jg'},
 
 
 
