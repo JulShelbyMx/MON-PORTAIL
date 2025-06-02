@@ -495,8 +495,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Jours scolaires = total - vacances
     const schoolDays = totalDays - vacationDays;
     const diffWeeks = Math.floor(schoolDays / 7);
-    // 31 mars = Week A
-    const weekType = diffWeeks % 2 === 0 ? 'A' : 'B'; // Pair = A, Impair = B
+    // 31 mars = Week B pour aligner 2 juin = Week A
+    const weekType = diffWeeks % 2 === 0 ? 'B' : 'A'; // Pair = B, Impair = A
     console.log('Week type calculated:', weekType, 'Date:', bstDate.toISOString(), 'School days:', schoolDays, 'Weeks:', diffWeeks);
     return weekType;
 }
