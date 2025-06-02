@@ -465,15 +465,41 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
-    function getWeekType(date) {
-        const termStart = new Date(Date.UTC(2025, 2, 31));
-        const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
-        const diffTime = Math.abs(bstDate - termStart);
-        const diffWeeks = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 7));
-        const weekType = diffWeeks % 2 === 0 ? 'A' : 'B';
-        console.log('Week type calculated:', weekType, 'Date:', bstDate.toISOString());
-        return weekType;
+   function getWeekType(date) {
+    const termStart = new Date(Date.UTC(2025, 2, 31)); // 31 mars 2025
+    const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
+    const dateOnly = new Date(Date.UTC(bstDate.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
+
+    // Calculer le nombre total de jours
+    const diffTime = Math.abs(dateOnly - termStart);
+    let totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+    // Soustraire les jours de vacances (périodes où start ≠ end)
+    let vacationDays = 0;
+    for (const holiday of holidays) {
+        if (!holiday.start.year || !holiday.start.month || !holiday.start.day) continue;
+        const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
+        const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
+        // Vérifier si c'est une période de vacances (pas un jour férié)
+        if (startDate.getTime() !== endDate.getTime()) {
+            // Compter les jours de vacances avant ou jusqu'à dateOnly
+            const vacationStart = startDate < termStart ? termStart : startDate;
+            const vacationEnd = endDate > dateOnly ? dateOnly : endDate;
+            if (vacationEnd >= vacationStart) {
+                const days = Math.floor((vacationEnd - vacationStart) / (1000 * 60 * 60 * 24)) + 1;
+                vacationDays += days;
+            }
+        }
     }
+
+    // Jours scolaires = total - vacances
+    const schoolDays = totalDays - vacationDays;
+    const diffWeeks = Math.floor(schoolDays / 7);
+    // 31 mars = Week A
+    const weekType = diffWeeks % 2 === 0 ? 'A' : 'B'; // Pair = A, Impair = B
+    console.log('Week type calculated:', weekType, 'Date:', bstDate.toISOString(), 'School days:', schoolDays, 'Weeks:', diffWeeks);
+    return weekType;
+}
 
     function getReturnDate(holidayEnd) {
         let returnDate = new Date(Date.UTC(holidayEnd.year, holidayEnd.month - 1, holidayEnd.day));
