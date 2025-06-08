@@ -85,6 +85,16 @@
             font-size: 24px;
             text-shadow: 2px 2px 4px black;
         }
+
+        /* Ajustements pour mobile */
+@media (max-width: 600px) {
+    .video-player-container {
+        padding-bottom: 56.25%; /* Maintient le ratio 16:9 */
+    }
+    .video-player-container iframe {
+        border-radius: 5px; /* Réduit légèrement le border-radius pour mobile */
+    }
+}
     </style>
 </head>
 <body>
