@@ -88,11 +88,16 @@
 
         /* Ajustements pour mobile */
 @media (max-width: 600px) {
+    .video-player {
+        margin: 0; /* Supprime toute marge */
+        padding: 0;
+        width: 100vw; /* Force la pleine largeur du viewport */
+    }
     .video-player-container {
         padding-bottom: 56.25%; /* Maintient le ratio 16:9 */
     }
     .video-player-container iframe {
-        border-radius: 5px; /* Réduit légèrement le border-radius pour mobile */
+        border-radius: 5px; /* Réduit le border-radius pour un look épuré */
     }
 }
     </style>
