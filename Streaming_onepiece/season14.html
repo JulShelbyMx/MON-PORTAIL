@@ -89,20 +89,32 @@
         /* Ajustements pour mobile */
 @media (max-width: 600px) {
     .video-player {
-        width: 90%; /* Réduit à 90% de la largeur de l’écran */
-        max-width: 90%;
-        margin: 0 auto; /* Centre le lecteur */
-        padding: 0;
+        width: 100vw; /* Pleine largeur de l’écran */
+        max-width: 100vw; /* Supprime toute limite */
+        margin: 0; /* Supprime les écarts */
+        padding: 0; /* Supprime les paddings */
+        position: relative;
+        left: 0; /* Force l’alignement à gauche */
     }
     .video-player-container {
         width: 100%;
-        padding-bottom: 45%; /* Hauteur encore plus réduite */
+        padding-bottom: 45%; /* Hauteur réduite pour un léger dézoom */
         margin: 0;
         padding: 0;
     }
     .video-player-container iframe {
         border-radius: 5px;
     }
+}
+
+/* Supprime les paddings/margins des conteneurs parents */
+body, main, section, #episode-list {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Évite tout débordement */
 }
     </style>
 </head>
