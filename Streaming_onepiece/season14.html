@@ -89,15 +89,20 @@
         /* Ajustements pour mobile */
 @media (max-width: 600px) {
     .video-player {
-        margin: 0; /* Supprime toute marge */
+        width: 100%;
+        max-width: 100%; /* Évite de dépasser le conteneur parent */
+        margin: 0;
         padding: 0;
-        width: 100vw; /* Force la pleine largeur du viewport */
+        position: relative;
+        left: 0; /* Force l’alignement à gauche */
     }
     .video-player-container {
-        padding-bottom: 56.25%; /* Maintient le ratio 16:9 */
+        padding-bottom: 50%; /* Réduit légèrement la hauteur (ratio ~1.78:1) */
+        width: 100%;
+        max-width: 100%;
     }
     .video-player-container iframe {
-        border-radius: 5px; /* Réduit le border-radius pour un look épuré */
+        border-radius: 5px;
     }
 }
     </style>
