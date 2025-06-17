@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport</title>
+    <link rel="shortcut icon" href="../images/logopage.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <style>
+        /* Réinitialisation des styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #141414;
+            color: white;
+        }
+
+        /* Section hero */
+        .hero {
+            background: url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
+            height: 30vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .hero-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .back-button {
+            padding: 10px 20px;
+            background-color: #000000;
+            color: #ffb300;
+            text-decoration: none;
+            border: 2px solid #ffb300;
+            border-radius: 20px;
+            font-size: 18px;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: #ffb300;
+            color: #000000;
+        }
+
+        .hero-hamburger {
+            background: none;
+            border: none;
+            color: #000000;
+            font-size: 28px;
+            cursor: pointer;
+            z-index: 2002;
+            transition: opacity 0.3s ease;
+        }
+
+        .hero-hamburger.active {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .history-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2001;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .history-menu.active {
+            display: block;
+        }
+
+        .history-menu-content {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border: 2px solid #ffb300;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .history-menu button.close-menu {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #ffb300;
+            color: #000000;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .history-menu button.close-menu:hover {
+            background-color: #e0a800;
+        }
+
+        .history-menu h3 {
+            font-family: 'Pirata One', sans-serif;
+            font-size: 24px;
+            color: #ffb300;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .history-menu ul {
+            list-style: none;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .history-menu li {
+            padding: 10px;
+            font-size: 16px;
+            border-bottom: 1px solid #333;
+        }
+
+        .history-menu li:last-child {
+            border-bottom: none;
+        }
+
+        /* Widget Netlify */
+        #netlify-identity-widget {
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Chronomètre */
+        .timer {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .timer-display {
+            font-size: 36px;
+            font-family: 'Arial', sans-serif;
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+
+        .timer-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .timer-controls button {
+            padding: 10px;
+            background-color: #ffb300;
+            color: #000000;
+            border: none;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .timer-controls button:hover {
+            background-color: #e0a800;
+        }
+
+        .timer-controls button.hidden {
+            display: none;
+        }
+
+        /* Programme */
+        .sport-container {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .sport-container h2 {
+            font-family: 'Pirata One', sans-serif;
+            font-size: 28px;
+            color: #ffb300;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px black;
+        }
+
+        .section {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 2px solid #ffb300;
+        }
+
+        .section h3 {
+            font-family: 'Pirata One', sans-serif;
+            font-size: 24px;
+            color: #ffb300;
+            margin-bottom: 10px;
+        }
+
+        .section ul {
+            list-style: none;
+        }
+
+        .section li {
+            font-size: 16px;
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .section li::before {
+            content: '🏋️';
+            position: absolute;
+            left: 0;
+            font-size: 16px;
+        }
+
+        /* Bouton "Retour en haut" */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffb300;
+            color: #000000;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: none;
+            z-index: 2000;
+        }
+
+        #back-to-top:hover {
+            background-color: #e0a800;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-hamburger {
+                font-size: 24px;
+            }
+
+            .history-menu-content {
+                max-width: 90%;
+            }
+
+            .sport-container h2 {
+                font-size: 24px;
+            }
+
+            .section h3 {
+                font-size: 20px;
+            }
+
+            .section li {
+                font-size: 14px;
+            }
+
+            .timer-display {
+                font-size: 28px;
+            }
+
+            .timer-controls button {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+
+            .history-menu h3 {
+                font-size: 20px;
+            }
+
+            .history-menu li {
+                font-size: 14px;
+            }
+
+            .history-menu ul {
+                max-height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sport-container {
+                padding: 10px;
+            }
+
+            .sport-container h2 {
+                font-size: 20px;
+            }
+
+            .section h3 {
+                font-size: 18px;
+            }
+
+            .section li {
+                font-size: 12px;
+            }
+
+            .timer-display {
+                font-size: 24px;
+            }
+
+            .timer-controls button {
+                width: 32px;
+                height: 32px;
+                font-size: 14px;
+            }
+
+            .hero {
+                height: 25vh;
+            }
+
+            .back-button {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+
+            .hero-hamburger {
+                font-size: 20px;
+            }
+
+            .history-menu-content {
+                padding: 15px;
+            }
+
+            .history-menu button.close-menu {
+                font-size: 14px;
+                padding: 8px;
+            }
+
+            .history-menu h3 {
+                font-size: 18px;
+            }
+
+            .history-menu li {
+                font-size: 12px;
+                padding: 8px;
+            }
+
+            .history-menu ul {
+                max-height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-controls">
+            <a href="../index.html" class="back-button">BACK</a>
+            <button class="hero-hamburger">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <div class="history-menu">
+            <div class="history-menu-content">
+                <button class="close-menu">Close</button>
+                <h3>LOGS</h3>
+                <ul id="history-list"></ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="netlify-identity-widget">
+        <div data-netlify-identity-menu></div>
+    </section>
+
+    <section class="timer">
+        <div class="timer-display" id="timer-display">00:00:00</div>
+        <div class="timer-controls">
+            <button id="stop-timer" class="hidden"><i class="fas fa-stop"></i></button>
+            <button id="start-pause-timer"><i class="fas fa-play"></i></button>
+        </div>
+    </section>
+
+    <main class="sport-container">
+        <h2>Programme de Musculation Quotidien</h2>
+        <div class="section">
+            <h3>Échauffement rapide (5 minutes)</h3>
+            <ul>
+                <li>Rotations des bras (avant/arrière) – 20 fois</li>
+                <li>Flexion/extension des coudes – poings serrés</li>
+                <li>Étirements légers des poignets et des épaules</li>
+            </ul>
+        </div>
+        <div class="section">
+            <h3>Circuit d’exercices (≈25 minutes)</h3>
+            <ul>
+                <li>Curl biceps (avec haltères 3 kg) – 3 × 15 répétitions</li>
+                <li>Hammer curls (3 kg) – 3 × 15 répétitions</li>
+                <li>Extensions triceps au-dessus de la tête (3 kg) – 3 × 15 répétitions</li>
+                <li>Overhead press (3 kg) – 1 × 15 répétitions</li>
+                <li>Sit-up (abdos) – 2 × 15 répétitions</li>
+                <li>Farmer's hold (3 kg par main) – 1 × 60 secondes</li>
+                <li>Pompes triceps normales – 1 × 3 répétitions</li>
+                <li>Gainage planche – 1 × 45 secondes</li>
+                <li>Ponts de hanches – 2 × 15 répétitions</li>
+                <li>Pianotage explosif (pour les doigts) – 1 à 2 minutes<br><small>Assieds-toi, mains à plat. Tape avec chaque doigt comme sur un clavier en accélérant progressivement. Reste précis et rapide.</small></li>
+            </ul>
+        </div>
+    </main>
+
+    <button id="back-to-top" title="Retour en haut"><i class="fas fa-arrow-up"></i></button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const heroHamburger = document.querySelector('.hero-hamburger');
+            const historyMenu = document.querySelector('.history-menu');
+            const closeMenu = document.querySelector('.close-menu');
+            const backToTopButton = document.getElementById('back-to-top');
+            const startPauseButton = document.getElementById('start-pause-timer');
+            const stopButton = document.getElementById('stop-timer');
+            const timerDisplay = document.getElementById('timer-display');
+            const historyList = document.getElementById('history-list');
+
+            let timer;
+            let timeElapsed = 0;
+            let isRunning = false;
+
+            // Gestion du menu hamburger
+            if (heroHamburger && historyMenu && closeMenu) {
+                heroHamburger.addEventListener('click', () => {
+                    historyMenu.classList.toggle('active');
+                    heroHamburger.classList.toggle('active');
+                });
+
+                closeMenu.addEventListener('click', () => {
+                    historyMenu.classList.remove('active');
+                    heroHamburger.classList.remove('active');
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (!heroHamburger.contains(e.target) && !historyMenu.contains(e.target)) {
+                        historyMenu.classList.remove('active');
+                        heroHamburger.classList.remove('active');
+                    }
+                });
+            }
+
+            // Gestion du bouton "Retour en haut"
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 200) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Gestion du chronomètre
+            function updateTimer() {
+                timeElapsed++;
+                const hours = Math.floor(timeElapsed / 3600);
+                const minutes = Math.floor((timeElapsed % 3600) / 60);
+                const seconds = timeElapsed % 60;
+                timerDisplay.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            startPauseButton.addEventListener('click', () => {
+                if (!isRunning) {
+                    timer = setInterval(updateTimer, 1000);
+                    startPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
+                    stopButton.classList.remove('hidden');
+                    isRunning = true;
+                } else {
+                    clearInterval(timer);
+                    startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+                    isRunning = false;
+                }
+            });
+
+            stopButton.addEventListener('click', () => {
+                clearInterval(timer);
+                isRunning = false;
+                startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+                stopButton.classList.add('hidden');
+
+                // Sauvegarder l'entrée dans l'historique si connecté
+                if (netlifyIdentity.currentUser()) {
+                    const now = new Date();
+                    const dateTime = now.toLocaleString('fr-FR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    const finalTime = timerDisplay.textContent;
+                    const entry = { dateTime, finalTime };
+
+                    // Sauvegarder dans localStorage (simule Netlify CMS)
+                    let history = JSON.parse(localStorage.getItem('workoutHistory') || '[]');
+                    history.push(entry);
+                    localStorage.setItem('workoutHistory', JSON.stringify(history));
+                    updateHistoryList();
+                }
+
+                // Réinitialiser le chronomètre
+                timeElapsed = 0;
+                timerDisplay.textContent = '00:00:00';
+            });
+
+            // Mettre à jour l'historique
+            function updateHistoryList() {
+                const history = JSON.parse(localStorage.getItem('workoutHistory') || '[]');
+                historyList.innerHTML = '';
+                history.forEach(entry => {
+                    const li = document.createElement('li');
+                    li.textContent = `${entry.dateTime} - Temps: ${entry.finalTime}`;
+                    historyList.appendChild(li);
+                });
+            }
+
+            // Netlify Identity
+            netlifyIdentity.on('init', user => {
+                if (user) {
+                    updateHistoryList();
+                }
+            });
+
+            netlifyIdentity.on('login', () => {
+                updateHistoryList();
+            });
+
+            netlifyIdentity.on('logout', () => {
+                historyList.innerHTML = '<li>Veuillez vous connecter pour voir l\'historique.</li>';
+            });
+        });
+    </script>
+</body>
+</html>

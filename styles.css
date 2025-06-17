@@ -218,6 +218,38 @@ header {
     transform: scale(1.05);
 }
 
+
+
+
+/* Scroll horizontal pour nav-buttons, même style que carousel-container */
+.nav-buttons {
+    overflow-x: auto;
+    white-space: nowrap;
+    display: flex;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch; /* Scroll fluide sur iOS */
+    padding: 0 10px;
+    /* Aligne avec le style des carousels */
+    scrollbar-width: none; /* Masque scrollbar sur Firefox */
+    -ms-overflow-style: none; /* Masque scrollbar sur Edge */
+}
+
+/* Masquer la scrollbar sur Webkit (Chrome, Safari) */
+.nav-buttons::-webkit-scrollbar {
+    display: none;
+}
+
+/* Garantir que les boutons ne rétrécissent pas */
+.nav-button {
+    flex: 0 0 auto; /* Taille fixe, pas de compression */
+    min-width: fit-content; /* Respecte le contenu */
+}
+
+
+
+
+
+
 /* Section héro avec fond de mer */
 .hero {
     background: url('images/onepiece-hero-background.jpg') no-repeat center center/cover;

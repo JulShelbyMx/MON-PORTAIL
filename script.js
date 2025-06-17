@@ -44,6 +44,46 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+
+
+
+    /* Gestion du scroll horizontal pour les boutons de navigation */
+const navButtonsContainer = document.querySelector('.nav-buttons');
+if (navButtonsContainer) {
+    let isDragging = false;
+    let startDragX, scrollLeft;
+
+    navButtonsContainer.addEventListener('mousedown', (e) => {
+        if (window.matchMedia('(max-width: 1024px)').matches) return; // Ignore sur mobile
+        isDragging = true;
+        startDragX = e.pageX - navButtonsContainer.offsetLeft;
+        scrollLeft = navButtonsContainer.scrollLeft;
+        navButtonsContainer.style.cursor = 'grabbing';
+    });
+
+    navButtonsContainer.addEventListener('mouseleave', () => {
+        isDragging = false;
+        navButtonsContainer.style.cursor = 'grab';
+    });
+
+    navButtonsContainer.addEventListener('mouseup', () => {
+        isDragging = false;
+        navButtonsContainer.style.cursor = 'grab';
+    });
+
+    navButtonsContainer.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - navButtonsContainer.offsetLeft;
+        const walk = (x - startDragX) * 2; // Vitesse du scroll
+        navButtonsContainer.scrollLeft = scrollLeft - walk;
+    });
+}
+
+
+
+
+
     // Fonction pour récupérer les cartes dynamiquement
     const getSiteCards = (carousel) => carousel.querySelectorAll('.site-card');
 
