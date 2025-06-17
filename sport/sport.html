@@ -24,12 +24,12 @@
         /* Section hero */
         .hero {
             background: url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
-            height: 20vh; /* Hauteur réduite */
+            height: 30vh; /* Restauré à la taille initiale */
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            /* Supprimé z-index: 1000 pour retirer la priorité */
+            /* z-index supprimé pour retirer la priorité */
         }
 
         .hero-controls {
@@ -63,6 +63,11 @@
             cursor: pointer;
             z-index: 2002;
             transition: opacity 0.3s ease;
+        }
+
+        .hero-hamburger.modal-open {
+            opacity: 0;
+            pointer-events: none;
         }
 
         .hero-hamburger.active {
@@ -164,12 +169,12 @@
         .auth-container {
             max-width: 400px;
             margin: 20px auto;
-            margin-top: 25vh; /* Marge pour éviter le chevauchement */
             padding: 20px;
             background: #1a1a1a;
             border-radius: 8px;
             color: #fff;
             text-align: center;
+            /* Supprimé margin-top pour retirer l'espace */
         }
 
         .auth-container button {
@@ -347,7 +352,6 @@
             .auth-container {
                 max-width: 90%;
                 padding: 15px;
-                margin-top: 20vh; /* Ajusté pour mobile */
             }
 
             .auth-container button {
@@ -384,7 +388,7 @@
             }
 
             .hero {
-                height: 15vh; /* Hauteur réduite pour mobile */
+                height: 25vh; /* Restauré à la taille initiale pour mobile */
             }
 
             .back-button {
@@ -420,7 +424,6 @@
 
             .auth-container {
                 padding: 10px;
-                margin-top: 18vh; /* Ajusté pour petits écrans */
             }
 
             .auth-container button {
@@ -719,6 +722,14 @@
                 netlifyIdentity.on('signup', (user) => {
                     updateUI(user);
                     netlifyIdentity.close();
+                });
+
+                netlifyIdentity.on('open', () => {
+                    heroHamburger.classList.add('modal-open');
+                });
+
+                netlifyIdentity.on('close', () => {
+                    heroHamburger.classList.remove('modal-open');
                 });
 
                 const checkUser = () => {
