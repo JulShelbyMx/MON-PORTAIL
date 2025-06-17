@@ -29,7 +29,7 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            z-index: 1000;
+            z-index: 100; /* Réduit pour éviter de chevaucher le widget Netlify */
         }
 
         .hero-controls {
@@ -132,10 +132,32 @@
             padding: 10px;
             font-size: 16px;
             border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .history-menu li:last-child {
             border-bottom: none;
+        }
+
+        /* Style pour le bouton de suppression */
+        .delete-btn {
+            background-color: #ff4444;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .delete-btn:hover {
+            background-color: #cc0000;
         }
 
         /* Authentification */
@@ -147,6 +169,8 @@
             border-radius: 8px;
             color: #fff;
             text-align: center;
+            position: relative;
+            z-index: 200; /* Au-dessus du header */
         }
 
         .auth-container button {
@@ -594,6 +618,27 @@
                 timerDisplay.textContent = '00:00:00';
             });
 
+            // Supprimer une entrée de l'historique
+            async function deleteHistoryEntry(index) {
+                const user = netlifyIdentity.currentUser();
+                if (!user) return;
+
+                const currentHistoryLog = (user.user_metadata && user.user_metadata.history_log) || [];
+                const updatedHistoryLog = currentHistoryLog.filter((_, i) => i !== index);
+
+                try {
+                    await user.update({
+                        data: {
+                            history_log: updatedHistoryLog
+                        }
+                    });
+                    console.log('Entrée supprimée');
+                    updateHistoryList();
+                } catch (err) {
+                    console.error('Erreur suppression entrée:', err);
+                }
+            }
+
             // Mettre à jour l'historique
             function updateHistoryList() {
                 const user = netlifyIdentity.currentUser();
@@ -607,10 +652,17 @@
                     historyList.innerHTML = '<li>Aucun historique disponible.</li>';
                     return;
                 }
-                historyLog.forEach(entry => {
+                historyLog.forEach((entry, index) => {
                     if (entry.type === 'workout') {
                         const li = document.createElement('li');
-                        li.textContent = `${entry.timestamp} - Temps: ${entry.time}`;
+                        const textSpan = document.createElement('span');
+                        textSpan.textContent = `${entry.timestamp} - Temps: ${entry.time}`;
+                        const deleteBtn = document.createElement('button');
+                        deleteBtn.className = 'delete-btn';
+                        deleteBtn.innerHTML = '<i class="fas fa-times"></i>';
+                        deleteBtn.addEventListener('click', () => deleteHistoryEntry(index));
+                        li.appendChild(textSpan);
+                        li.appendChild(deleteBtn);
                         historyList.appendChild(li);
                     }
                 });
@@ -660,6 +712,14 @@
                 netlifyIdentity.on('signup', (user) => {
                     updateUI(user);
                     netlifyIdentity.close();
+                });
+
+                // Forcer le z-index du widget Netlify
+                netlifyIdentity.on('open', () => {
+                    const widget = document.querySelector('.netlify-identity-modal');
+                    if (widget) {
+                        widget.style.zIndex = '999999';
+                    }
                 });
 
                 const checkUser = () => {
