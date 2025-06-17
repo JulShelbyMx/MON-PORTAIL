@@ -277,98 +277,6 @@
             background-color: #e0a800;
         }
 
-        /* Hamburger menu */
-        .hamburger-menu {
-            cursor: pointer;
-            width: 30px;
-            height: 24px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            margin: 10px auto;
-            z-index: 1000;
-        }
-
-        .hamburger-menu span {
-            display: block;
-            width: 100%;
-            height: 4px;
-            background: #ffb300;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger-menu.active span:nth-child(1) {
-            transform: rotate(45deg) translate(7px, 7px);
-        }
-
-        .hamburger-menu.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger-menu.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        /* Sidebar */
-        .history-log-sidebar {
-            position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100%;
-            background: #1a1a1a;
-            padding: 80px 20px 20px;
-            transition: left 0.3s ease;
-            z-index: 999;
-            overflow-y: auto;
-        }
-
-        .history-log-sidebar.open {
-            left: 0;
-        }
-
-        .sidebar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .history-log-sidebar h2 {
-            color: #ffb300;
-            font-family: 'Pirata One', sans-serif;
-            margin: 0;
-            font-size: 20px;
-        }
-
-        .history-log-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .history-log-list li {
-            background: #222;
-            padding: 10px;
-            margin: 5px 0;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-
-        .close-sidebar-btn {
-            background: #ff4444;
-            color: white;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .close-sidebar-btn:hover {
-            background: #cc0000;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .hero-hamburger {
@@ -498,13 +406,6 @@
     </style>
 </head>
 <body>
-    <div class="history-log-sidebar" id="history-log-sidebar">
-        <div class="sidebar-header">
-            <h2>Historique complet</h2>
-            <button class="close-sidebar-btn">Fermer</button>
-        </div>
-        <p>Aucun historique complet.</p>
-    </div>
     <section class="hero">
         <div class="hero-controls">
             <a href="../index.html" class="back-button">BACK</a>
@@ -526,16 +427,6 @@
         <button id="login-btn">Log In</button>
         <button id="signup-btn">Sign Up</button>
         <button id="logout-btn" style="display:none;">Log Out</button>
-    </div>
-
-    <div id="history">
-        <h2>Historique des Workouts</h2>
-        <p id="history-content">Aucun historique.</p>
-        <div class="hamburger-menu" id="hamburger-menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
     </div>
 
     <section class="timer">
@@ -596,9 +487,6 @@
             const stopButton = document.getElementById('stop-timer');
             const timerDisplay = document.getElementById('timer-display');
             const historyList = document.getElementById('history-list');
-            const historyContent = document.getElementById('history-content');
-            const hamburgerMenu = document.getElementById('hamburger-menu');
-            const historyLogSidebar = document.getElementById('history-log-sidebar');
 
             let timer;
             let timeElapsed = 0;
@@ -695,7 +583,6 @@
                         }
                     }).then(() => {
                         console.log('Historique mis à jour');
-                        loadHistoryLog(user);
                         updateHistoryList();
                     }).catch(err => {
                         console.error('Erreur mise à jour historique:', err);
@@ -712,15 +599,12 @@
                 const user = netlifyIdentity.currentUser();
                 if (!user) {
                     historyList.innerHTML = '<li>Veuillez vous connecter pour voir l\'historique.</li>';
-                    historyContent.textContent = 'Non connecté';
                     return;
                 }
                 const historyLog = (user.user_metadata && user.user_metadata.history_log) || [];
                 historyList.innerHTML = '';
-                historyContent.innerHTML = '';
                 if (historyLog.length === 0) {
                     historyList.innerHTML = '<li>Aucun historique disponible.</li>';
-                    historyContent.textContent = 'Aucun historique.';
                     return;
                 }
                 historyLog.forEach(entry => {
@@ -728,16 +612,6 @@
                         const li = document.createElement('li');
                         li.textContent = `${entry.timestamp} - Temps: ${entry.time}`;
                         historyList.appendChild(li);
-
-                        const card = document.createElement('div');
-                        card.className = 'history-card';
-                        card.innerHTML = `
-                            <div class="history-info">
-                                <h3>Workout</h3>
-                                <p>Temps: ${entry.time} - ${entry.timestamp}</p>
-                            </div>
-                        `;
-                        historyContent.appendChild(card);
                     }
                 });
             }
@@ -748,9 +622,8 @@
                 const loginBtn = document.getElementById('login-btn');
                 const signupBtn = document.getElementById('signup-btn');
                 const logoutBtn = document.getElementById('logout-btn');
-                const historyContent = document.getElementById('history-content');
 
-                if (!userStatus || !loginBtn || !signupBtn || !logoutBtn || !historyContent) {
+                if (!userStatus || !loginBtn || !signupBtn || !logoutBtn) {
                     console.error('Éléments du widget d’authentification manquants');
                     return;
                 }
@@ -761,65 +634,15 @@
                         loginBtn.style.display = 'none';
                         signupBtn.style.display = 'none';
                         logoutBtn.style.display = 'inline-block';
-                        loadHistoryLog(user);
                         updateHistoryList();
                     } else {
                         userStatus.textContent = 'Non connecté';
                         loginBtn.style.display = 'inline-block';
                         signupBtn.style.display = 'inline-block';
                         logoutBtn.style.display = 'none';
-                        historyContent.textContent = 'Aucun historique.';
-                        historyLogSidebar.innerHTML = '<p>Non connecté</p>';
+                        historyList.innerHTML = '<li>Veuillez vous connecter pour voir l\'historique.</li>';
                     }
                 }
-
-                function loadHistoryLog(user) {
-                    if (!user) {
-                        historyLogSidebar.innerHTML = '<p>Non connecté</p>';
-                        return;
-                    }
-                    const historyLog = (user.user_metadata && user.user_metadata.history_log) || [];
-                    if (!historyLogSidebar.querySelector('.history-log-list')) {
-                        historyLogSidebar.innerHTML = `
-                            <div class="sidebar-header">
-                                <h2>Historique complet</h2>
-                                <button class="close-sidebar-btn">Fermer</button>
-                            </div>
-                            <ul class="history-log-list"></ul>
-                        `;
-                    }
-
-                    const historyLogList = historyLogSidebar.querySelector('.history-log-list');
-                    if (historyLog.length === 0) {
-                        historyLogList.innerHTML = '<li>Aucun historique complet.</li>';
-                        return;
-                    }
-
-                    historyLogList.innerHTML = '';
-                    historyLog.forEach(log => {
-                        const li = document.createElement('li');
-                        if (log.type === 'workout') {
-                            li.textContent = `Workout, Temps: ${log.time}, ${log.timestamp}, IP: ${log.ip}`;
-                        } else if (log.episode) {
-                            li.textContent = `${log.season}, Episode ${log.episode}, ${log.timestamp}, IP: ${log.ip}`;
-                        } else if (log.chapter) {
-                            li.textContent = `${log.season}, Chapter ${log.chapter}, Page ${log.page}, ${log.timestamp}, IP: ${log.ip}`;
-                        }
-                        historyLogList.appendChild(li);
-                    });
-                }
-
-                historyLogSidebar.addEventListener('click', (e) => {
-                    if (e.target.classList.contains('close-sidebar-btn')) {
-                        hamburgerMenu.classList.remove('active');
-                        historyLogSidebar.classList.remove('open');
-                    }
-                });
-
-                hamburgerMenu.addEventListener('click', () => {
-                    hamburgerMenu.classList.toggle('active');
-                    historyLogSidebar.classList.toggle('open');
-                });
 
                 netlifyIdentity.on('init', (user) => {
                     updateUI(user);
