@@ -6,7 +6,7 @@
     <title>Sport</title>
     <link rel="shortcut icon" href="../images/logopage.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
         /* Réinitialisation des styles */
         * {
@@ -17,7 +17,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #141414;
+            background-color: #111;
             color: white;
         }
 
@@ -138,10 +138,31 @@
             border-bottom: none;
         }
 
-        /* Widget Netlify */
-        #netlify-identity-widget {
-            text-align: center;
+        /* Authentification */
+        .auth-container {
+            max-width: 400px;
+            margin: 20px auto;
             padding: 20px;
+            background: #1a1a1a;
+            border-radius: 8px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .auth-container button {
+            background: #ffb300;
+            border: none;
+            padding: 8px;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            color: #0a0a0a;
+            font-weight: 600;
+        }
+
+        .auth-container button:hover {
+            background: #e0a800;
         }
 
         /* Chronomètre */
@@ -256,6 +277,98 @@
             background-color: #e0a800;
         }
 
+        /* Hamburger menu */
+        .hamburger-menu {
+            cursor: pointer;
+            width: 30px;
+            height: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 10px auto;
+            z-index: 1000;
+        }
+
+        .hamburger-menu span {
+            display: block;
+            width: 100%;
+            height: 4px;
+            background: #ffb300;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger-menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Sidebar */
+        .history-log-sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100%;
+            background: #1a1a1a;
+            padding: 80px 20px 20px;
+            transition: left 0.3s ease;
+            z-index: 999;
+            overflow-y: auto;
+        }
+
+        .history-log-sidebar.open {
+            left: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .history-log-sidebar h2 {
+            color: #ffb300;
+            font-family: 'Pirata One', sans-serif;
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .history-log-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .history-log-list li {
+            background: #222;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+
+        .close-sidebar-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .close-sidebar-btn:hover {
+            background: #cc0000;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .hero-hamburger {
@@ -298,6 +411,16 @@
 
             .history-menu ul {
                 max-height: 300px;
+            }
+
+            .auth-container {
+                max-width: 90%;
+                padding: 15px;
+            }
+
+            .auth-container button {
+                width: 100%;
+                margin: 5px 0;
             }
         }
 
@@ -362,10 +485,26 @@
             .history-menu ul {
                 max-height: 250px;
             }
+
+            .auth-container {
+                padding: 10px;
+            }
+
+            .auth-container button {
+                font-size: 14px;
+                padding: 6px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="history-log-sidebar" id="history-log-sidebar">
+        <div class="sidebar-header">
+            <h2>Historique complet</h2>
+            <button class="close-sidebar-btn">Fermer</button>
+        </div>
+        <p>Aucun historique complet.</p>
+    </div>
     <section class="hero">
         <div class="hero-controls">
             <a href="../index.html" class="back-button">BACK</a>
@@ -382,9 +521,15 @@
         </div>
     </section>
 
-    <section id="netlify-identity-widget">
-        <div data-netlify-identity-menu></div>
-    </section>
+    <div class="auth-container">
+        <p id="user-status">Non connecté</p>
+        <button id="login-btn">Log In</button>
+        <button id="signup-btn">Sign Up</button>
+        <button id="logout-btn" style="display:none;">Log Out</button>
+    </div>
+
+    
+    </div>
 
     <section class="timer">
         <div class="timer-display" id="timer-display">00:00:00</div>
@@ -424,6 +569,17 @@
     <button id="back-to-top" title="Retour en haut"><i class="fas fa-arrow-up"></i></button>
 
     <script>
+        async function getIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip || 'Inconnue';
+            } catch (err) {
+                console.error('Erreur récupération IP:', err);
+                return 'Inconnue';
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             const heroHamburger = document.querySelector('.hero-hamburger');
             const historyMenu = document.querySelector('.history-menu');
@@ -433,6 +589,9 @@
             const stopButton = document.getElementById('stop-timer');
             const timerDisplay = document.getElementById('timer-display');
             const historyList = document.getElementById('history-list');
+            const historyContent = document.getElementById('history-content');
+            const hamburgerMenu = document.getElementById('hamburger-menu');
+            const historyLogSidebar = document.getElementById('history-log-sidebar');
 
             let timer;
             let timeElapsed = 0;
@@ -493,16 +652,17 @@
                 }
             });
 
-            stopButton.addEventListener('click', () => {
+            stopButton.addEventListener('click', async () => {
                 clearInterval(timer);
                 isRunning = false;
                 startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
                 stopButton.classList.add('hidden');
 
                 // Sauvegarder l'entrée dans l'historique si connecté
-                if (netlifyIdentity.currentUser()) {
+                const user = netlifyIdentity.currentUser();
+                if (user) {
                     const now = new Date();
-                    const dateTime = now.toLocaleString('fr-FR', {
+                    const timestamp = now.toLocaleString('fr-FR', {
                         day: '2-digit',
                         month: '2-digit',
                         year: 'numeric',
@@ -510,13 +670,29 @@
                         minute: '2-digit'
                     });
                     const finalTime = timerDisplay.textContent;
-                    const entry = { dateTime, finalTime };
+                    const ip = await getIP();
 
-                    // Sauvegarder dans localStorage (simule Netlify CMS)
-                    let history = JSON.parse(localStorage.getItem('workoutHistory') || '[]');
-                    history.push(entry);
-                    localStorage.setItem('workoutHistory', JSON.stringify(history));
-                    updateHistoryList();
+                    // Mise à jour de user_metadata
+                    const currentHistoryLog = (user.user_metadata && user.user_metadata.history_log) || [];
+                    user.update({
+                        data: {
+                            history_log: [
+                                {
+                                    type: 'workout',
+                                    time: finalTime,
+                                    timestamp,
+                                    ip
+                                },
+                                ...currentHistoryLog.slice(0, 49)
+                            ]
+                        }
+                    }).then(() => {
+                        console.log('Historique mis à jour');
+                        loadHistoryLog(user);
+                        updateHistoryList();
+                    }).catch(err => {
+                        console.error('Erreur mise à jour historique:', err);
+                    });
                 }
 
                 // Réinitialiser le chronomètre
@@ -526,29 +702,150 @@
 
             // Mettre à jour l'historique
             function updateHistoryList() {
-                const history = JSON.parse(localStorage.getItem('workoutHistory') || '[]');
+                const user = netlifyIdentity.currentUser();
+                if (!user) {
+                    historyList.innerHTML = '<li>Veuillez vous connecter pour voir l\'historique.</li>';
+                    historyContent.textContent = 'Non connecté';
+                    return;
+                }
+                const historyLog = (user.user_metadata && user.user_metadata.history_log) || [];
                 historyList.innerHTML = '';
-                history.forEach(entry => {
-                    const li = document.createElement('li');
-                    li.textContent = `${entry.dateTime} - Temps: ${entry.finalTime}`;
-                    historyList.appendChild(li);
+                historyContent.innerHTML = '';
+                if (historyLog.length === 0) {
+                    historyList.innerHTML = '<li>Aucun historique disponible.</li>';
+                    historyContent.textContent = 'Aucun historique.';
+                    return;
+                }
+                historyLog.forEach(entry => {
+                    if (entry.type === 'workout') {
+                        const li = document.createElement('li');
+                        li.textContent = `${entry.timestamp} - Temps: ${entry.time}`;
+                        historyList.appendChild(li);
+
+                        const card = document.createElement('div');
+                        card.className = 'history-card';
+                        card.innerHTML = `
+                            <div class="history-info">
+                                <h3>Workout</h3>
+                                <p>Temps: ${entry.time} - ${entry.timestamp}</p>
+                            </div>
+                        `;
+                        historyContent.appendChild(card);
+                    }
                 });
             }
 
             // Netlify Identity
-            netlifyIdentity.on('init', user => {
-                if (user) {
-                    updateHistoryList();
+            function initializeIdentity() {
+                const userStatus = document.getElementById('user-status');
+                const loginBtn = document.getElementById('login-btn');
+                const signupBtn = document.getElementById('signup-btn');
+                const logoutBtn = document.getElementById('logout-btn');
+                const historyContent = document.getElementById('history-content');
+
+                if (!userStatus || !loginBtn || !signupBtn || !logoutBtn || !historyContent) {
+                    console.error('Éléments du widget d’authentification manquants');
+                    return;
                 }
-            });
 
-            netlifyIdentity.on('login', () => {
-                updateHistoryList();
-            });
+                function updateUI(user) {
+                    if (user) {
+                        userStatus.textContent = `Connecté: ${user.email}`;
+                        loginBtn.style.display = 'none';
+                        signupBtn.style.display = 'none';
+                        logoutBtn.style.display = 'inline-block';
+                        loadHistoryLog(user);
+                        updateHistoryList();
+                    } else {
+                        userStatus.textContent = 'Non connecté';
+                        loginBtn.style.display = 'inline-block';
+                        signupBtn.style.display = 'inline-block';
+                        logoutBtn.style.display = 'none';
+                        historyContent.textContent = 'Aucun historique.';
+                        historyLogSidebar.innerHTML = '<p>Non connecté</p>';
+                    }
+                }
 
-            netlifyIdentity.on('logout', () => {
-                historyList.innerHTML = '<li>Veuillez vous connecter pour voir l\'historique.</li>';
-            });
+                function loadHistoryLog(user) {
+                    if (!user) {
+                        historyLogSidebar.innerHTML = '<p>Non connecté</p>';
+                        return;
+                    }
+                    const historyLog = (user.user_metadata && user.user_metadata.history_log) || [];
+                    if (!historyLogSidebar.querySelector('.history-log-list')) {
+                        historyLogSidebar.innerHTML = `
+                            <div class="sidebar-header">
+                                <h2>Historique complet</h2>
+                                <button class="close-sidebar-btn">Fermer</button>
+                            </div>
+                            <ul class="history-log-list"></ul>
+                        `;
+                    }
+
+                    const historyLogList = historyLogSidebar.querySelector('.history-log-list');
+                    if (historyLog.length === 0) {
+                        historyLogList.innerHTML = '<li>Aucun historique complet.</li>';
+                        return;
+                    }
+
+                    historyLogList.innerHTML = '';
+                    historyLog.forEach(log => {
+                        const li = document.createElement('li');
+                        if (log.type === 'workout') {
+                            li.textContent = `Workout, Temps: ${log.time}, ${log.timestamp}, IP: ${log.ip}`;
+                        } else if (log.episode) {
+                            li.textContent = `${log.season}, Episode ${log.episode}, ${log.timestamp}, IP: ${log.ip}`;
+                        } else if (log.chapter) {
+                            li.textContent = `${log.season}, Chapter ${log.chapter}, Page ${log.page}, ${log.timestamp}, IP: ${log.ip}`;
+                        }
+                        historyLogList.appendChild(li);
+                    });
+                }
+
+                historyLogSidebar.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('close-sidebar-btn')) {
+                        hamburgerMenu.classList.remove('active');
+                        historyLogSidebar.classList.remove('open');
+                    }
+                });
+
+                hamburgerMenu.addEventListener('click', () => {
+                    hamburgerMenu.classList.toggle('active');
+                    historyLogSidebar.classList.toggle('open');
+                });
+
+                netlifyIdentity.on('init', (user) => {
+                    updateUI(user);
+                });
+
+                netlifyIdentity.on('login', (user) => {
+                    updateUI(user);
+                    netlifyIdentity.close();
+                });
+
+                netlifyIdentity.on('logout', () => {
+                    updateUI(null);
+                });
+
+                netlifyIdentity.on('signup', (user) => {
+                    updateUI(user);
+                    netlifyIdentity.close();
+                });
+
+                const checkUser = () => {
+                    const user = netlifyIdentity.currentUser();
+                    updateUI(user);
+                };
+
+                checkUser();
+                setInterval(checkUser, 5000);
+
+                loginBtn.addEventListener('click', () => netlifyIdentity.open('login'));
+                signupBtn.addEventListener('click', () => netlifyIdentity.open('signup'));
+                logoutBtn.addEventListener('click', () => netlifyIdentity.logout());
+            }
+
+            initializeIdentity();
         });
     </script>
 </body>
