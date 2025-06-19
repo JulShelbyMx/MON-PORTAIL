@@ -18721,7 +18721,7 @@ window.generateStreamingLinks = function() {
                   },
 
                   {
-                      "chapter": 1152,
+                      "chapter": 1152.0,
                       "imageUrls": [
                         "https://drive.google.com/file/d/1p7WkYs-F4KIgDlPTKZaR5dqvSHi4DSx3/view",
                         "https://drive.google.com/file/d/1soFtWP63pgJnglSiGM1yypAFpnKnHUJA/view",
