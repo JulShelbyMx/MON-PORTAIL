@@ -18719,6 +18719,29 @@ window.generateStreamingLinks = function() {
                       "https://drive.google.com/file/d/1BiAJ1_jBMyEPawxOG69cGDO8tlX8PGfq/view"
                     ]
                   },
+
+                  {
+                      "chapter": 1152,
+                      "imageUrls": [
+                        "https://drive.google.com/file/d/1p7WkYs-F4KIgDlPTKZaR5dqvSHi4DSx3/view",
+                        "https://drive.google.com/file/d/1soFtWP63pgJnglSiGM1yypAFpnKnHUJA/view",
+                        "https://drive.google.com/file/d/1z3tSJnptO4GJlz-bvMSqAy18Ncbcu50m/view",
+                        "https://drive.google.com/file/d/1x39qBe4a6fEVK3p4e6ZuEHjt9l0N4C_x/view",
+                        "https://drive.google.com/file/d/1o_KX21VfIKjm5wky1a5uanXLdJdBIHLj/view",
+                        "https://drive.google.com/file/d/13dMSLZKVDS_dBUTzkHs9QrvOmXbf0xNc/view",
+                        "https://drive.google.com/file/d/1GQN7jaVXBCCA-_OeVvN1puq1RP_Z1TCQ/view",
+                        "https://drive.google.com/file/d/1EdICP6Plh4Gvm3RiSYf5-TjyPLBYRxE1/view",
+                        "https://drive.google.com/file/d/1y6IiBlXJTg0CN3gOfKFXEfr-YlwYKHQ8/view",
+                        "https://drive.google.com/file/d/1LDplJOTzmDHYX8klNODnYMj1joGyrthM/view",
+                        "https://drive.google.com/file/d/1Q5yiTStFb6GABtHacN85wPVtOpdwcRur/view",
+                        "https://drive.google.com/file/d/1f_bWltci30c7RhwNYAhXjsCtAJimCWvC/view",
+                        "https://drive.google.com/file/d/1LXUJetzUI1lctzesf2OkrRtitFTiewuo/view",
+                        "https://drive.google.com/file/d/1GN_p5kJzIVK04uBBKe9JoKMTmb83mKHB/view",
+                        "https://drive.google.com/file/d/1f5g_3yfZvEXmRSueJPqUSYavHyQKcniT/view",
+                        "https://drive.google.com/file/d/1CC2ry5h9VpTQBXJrFI_EcVQSTt57rBww/view",
+                        "https://drive.google.com/file/d/1Af8FoujEAixnwCstht1COjWdKvBKzMH1/view"
+                      ]
+                    },
             
 
             ]
