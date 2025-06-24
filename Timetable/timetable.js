@@ -1,14 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Global holidays array with one-based months (January = 1, May = 5, etc.)
     const holidays = [
-        { start: { year: 2025, month: 5, day: 24 }, end: { year: 2025, month: 6, day: 1 }, reason: 'Holidays' },
         { start: { year: 2025, month: 7, day: 24 }, end: { year: 2025, month: 9, day: 2 }, reason: 'Summer Holidays' },
         { start: { year: 2025, month: 10, day: 25 }, end: { year: 2025, month: 11, day: 2 }, reason: 'Holidays' },
         { start: { year: 2025, month: 12, day: 19 }, end: { year: 2026, month: 1, day: 4 }, reason: 'Christmas Holidays' },
         { start: { year: 2026, month: 2, day: 14 }, end: { year: 2026, month: 2, day: 22 }, reason: 'Holidays' },
         { start: { year: 2026, month: 4, day: 3 }, end: { year: 2026, month: 4, day: 19 }, reason: 'Easter Holidays' },
         { start: { year: 2026, month: 5, day: 23 }, end: { year: 2026, month: 5, day: 31 }, reason: 'Holidays' },
-        { start: { year: 2026, month: 7, day: 24 }, end: { year: 2026, month: 9, day: 2 }, reason: 'Summer Holidays' }
+        { start: { year: 2026, month: 7, day: 23 }, end: { year: 2026, month: 9, day: 2 }, reason: 'Summer Holidays' }
     ];
 
     const weekAContainer = document.getElementById('timetable-week-a');
@@ -180,11 +179,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         </tr>
                         <tr>
                             <td data-uk-time="12:55-13:55">12:55-13:55</td>
-                            <td>Lunch + R time<span class="classroom">B206</span></td>
-                            <td>Lunch + R time<span class="classroom">B206</span></td>
-                            <td>Lunch + R time<span class="classroom">B206</span></td>
-                            <td>Lunch + R time<span class="classroom">B206</span></td>
-                            <td>Lunch + R time<span class="classroom">B206</span></td>
+                            <td> R time then Lunch<span class="classroom">B206</span></td>
+                            <td> R time then Lunch<span class="classroom">B206</span></td>
+                            <td> R time then Lunch<span class="classroom">B206</span></td>
+                            <td> R time then Lunch<span class="classroom">B206</span></td>
+                            <td> R time then Lunch<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
@@ -265,11 +264,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         </tr>
                         <tr>
                             <td data-uk-time="12:55-13:55">12:55-13:55</td>
-                            <td>Lunch + R time<span class="classroom">B206</span></td>
-                            <td>Lunch + R time<span class="classroom">B206</span></td>
-                            <td>Lunch + R time<span class="classroom">B206</span></td>
-                            <td>Lunch + R time<span class="classroom">B206</span></td>
-                            <td>Lunch + R time<span class="classroom">B206</span></td>
+                            <td> R time then Lunch<span class="classroom">B206</span></td>
+                            <td> R time then Lunch<span class="classroom">B206</span></td>
+                            <td> R time then Lunch<span class="classroom">B206</span></td>
+                            <td> R time then Lunch<span class="classroom">B206</span></td>
+                            <td> R time then Lunch<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
