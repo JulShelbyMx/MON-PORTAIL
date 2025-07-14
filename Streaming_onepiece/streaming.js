@@ -20099,6 +20099,7 @@ window.generateStreamingLinks = function() {
         { episode: "EGGHEAD SP7", videoUrl: 'https://video.sibnet.ru/shell.php?videoid=5944378'},
         { episode: 1134, videoUrl: 'https://mega.nz/embed/11YU0RAb#gZFzaS-xbj_B87N6m2PUSOiiK9gqynxAsO6ZSButl2M'},
         { episode: 1135, videoUrl: 'https://mega.nz/embed/NowyQaBD#aWrQTl_JZfdR_O1J7bQm1Uhlr9Z3ukh_hngsUoqpfc8'},
+        { episode: 1136, videoUrl: 'https://mega.nz/embed/IgAy1K5R#I5oAdduacTevqMrTV_tD0iYSXUeLqGvA0mxwvyoPZII'},
 
 
 
