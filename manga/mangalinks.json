@@ -1,23 +1,36 @@
-[
-  {
-    "chapter": 1155,
-    "imageUrls": [
-      "https://drive.google.com/file/d/15_4O6KGM-ux--7W522PGv5_O-9QhAGE-/view",
-      "https://drive.google.com/file/d/1QTtcZjWCQVZ-M08xW6j7hcvQPi48qWB0/view",
-      "https://drive.google.com/file/d/1We5G7nkwV9Xy1bNmLYYzy1X9hUvJlhfa/view",
-      "https://drive.google.com/file/d/19TwFEZVEKwa5Xvszpo-H9Baw6FGfOWDu/view",
-      "https://drive.google.com/file/d/1VBgTGq1VN7cWPPliMdSQOhztjOfpC0ln/view",
-      "https://drive.google.com/file/d/1ttuDef19sM6N1kiGRHs0p-daNsVBTHxf/view",
-      "https://drive.google.com/file/d/1CGf8bW15_Zd2H-szEV8GcEirm0Lv8B8T/view",
-      "https://drive.google.com/file/d/1M9gJjFarIOjAXiGXMljBvyLfZGzDjADw/view",
-      "https://drive.google.com/file/d/1OPlMRZU1emYFB3iiXtYBE-DIrBDFz6Th/view",
-      "https://drive.google.com/file/d/15zcLOUvQnGvWnPLb6BFtplfZvyUZfRI8/view",
-      "https://drive.google.com/file/d/1VDXM4jZQtVoZzA-_RIwPRuHMJMtRK-hG/view",
-      "https://drive.google.com/file/d/1fAt93v5R1fZRHcNppcrI3FWPPm0RTtBJ/view",
-      "https://drive.google.com/file/d/1nBdXEO1CyLrmM5cYQoBPcgUK6JI54XYw/view",
-      "https://drive.google.com/file/d/1kZnSWAwU0okC9FwUVnlSOcyq_pfLxghT/view",
-      "https://drive.google.com/file/d/1W-2RaZgThoRH6_GVFwszjuI8BWOjE3O4/view",
-      "https://drive.google.com/file/d/1Y2z-kltauPEN_kUSKCtKXrj6wtV-O25O/view"
-    ]
-  }
-]
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import InstalledAppFlow
+from googleapiclient.discovery import build
+from googleapiclient.http import MediaFileUpload
+import os
+import json
+import zipfile
+import re
+import mimetypes
+
+# Config
+parent_folder_name = "One Piece scans"  # Nom du dossier parent sur Drive
+zip_folder = r"D:\HakuNeko Desktop\One Piece scans"  # Dossier contenant les ZIPs
+output_file = r"manga\mangalinks.json"
+credentials_file = r"D:\HakuNeko Desktop\Manga\credentials.json"
+token_file = r"D:\HakuNeko Desktop\Manga\token.json"
+
+# Authentification Google Drive API
+SCOPES = ['https://www.googleapis.com/auth/drive']
+creds = None
+
+# Étape 1 : Vérifier si token.json existe et est valide
+if os.path.exists(token_file):
+    try:
+        with open(token_file, 'r') as f:
+            token_data = f.read().strip()
+            if token_data:
+                creds = Credentials.from_authorized_user_file(token_file, SCOPES)
+                print(f"Credentials chargés depuis {token_file}")
+            else:
+                print(f"{token_file} est vide, nouvelle authentification requise")
+    except (json.JSONDecodeError, ValueError) as e:
+        print(f"Erreur lecture {token_file}: {e}, nouvelle authentification requise")
+        creds = None
+
+# Étape 2 : Si pa
