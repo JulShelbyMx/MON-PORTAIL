@@ -62,15 +62,15 @@ exports.handler = async (event) => {
                         throw error;
                     }
                 }
-                // Si toujours > 6 Mo, essayer un resize
+                // Si toujours > 6 Mo, resize agressif
                 if (buffer.length > maxSizeBytes && size === 'w1500') {
-                    console.log(`Resize à 1200px pour fileId: ${id}...`);
+                    console.log(`Resize à 1000px pour fileId: ${id}...`);
                     try {
                         buffer = await sharp(buffer)
-                            .resize({ width: 1200, fit: 'inside', withoutEnlargement: true })
-                            .jpeg({ quality: 60, progressive: true, force: true })
+                            .resize({ width: 1000, fit: 'inside', withoutEnlargement: true })
+                            .jpeg({ quality: 50, progressive: true, force: true })
                             .toBuffer();
-                        console.log(`Taille après resize (qualité=60): ${buffer.length} octets`);
+                        console.log(`Taille après resize (qualité=50): ${buffer.length} octets`);
                     } catch (error) {
                         console.error(`Erreur lors du resize pour fileId ${id}:`, error.message);
                         throw error;
@@ -99,7 +99,9 @@ exports.handler = async (event) => {
         for (let attempt = 0; attempt < sizes.length; attempt++) {
             const size = sizes[attempt];
             try {
-                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=${size}`, attempt + 1, size);
+                // Ajouter un timestamp pour bust le cache
+                const cacheBuster = Date.now();
+                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=${size}&t=${cacheBuster}`, attempt + 1, size);
                 break;
             } catch (error) {
                 console.warn(`Échec avec sz=${size} pour fileId ${id}: ${error.message}`);

@@ -2,4 +2,7 @@
   functions = "netlify/functions"
 
 [functions.proxy-image]
-  environment = { NODE_OPTIONS = "--max-old-space-size=256" }
+  node_bundler = "esbuild"
+  external_node_modules = ["sharp"]
+  included_files = ["node_modules/sharp/**"]
+  environment = { NODE_OPTIONS = "--max-old-space-size=512" }
