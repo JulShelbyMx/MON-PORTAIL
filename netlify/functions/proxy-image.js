@@ -1,4 +1,5 @@
 const fetch = require('node-fetch');
+const sharp = require('sharp');
 
 exports.handler = async (event) => {
     const { id } = event.queryStringParameters;
@@ -39,17 +40,31 @@ exports.handler = async (event) => {
                 throw new Error(`Type de contenu invalide: ${contentType}`);
             }
 
-            const buffer = await response.buffer();
-            console.log(`Taille du buffer: ${buffer.length} octets`);
+            let buffer = await response.buffer();
+            console.log(`Taille initiale du buffer: ${buffer.length} octets`);
 
-            if (buffer.length > 6_291_556) {
-                console.error(`Erreur: Taille du buffer (${buffer.length}) dépasse la limite Netlify (6 Mo)`);
-                throw new Error('Image trop grande pour la limite Netlify');
+            // Compresser si > 6 Mo
+            const maxSizeBytes = 6_291_556;
+            if (buffer.length > maxSizeBytes) {
+                console.log(`Compression de l'image pour fileId: ${id} (sz=${size})...`);
+                try {
+                    buffer = await sharp(buffer)
+                        .jpeg({ quality: 80, progressive: true, force: true })
+                        .toBuffer();
+                    console.log(`Taille après compression: ${buffer.length} octets`);
+                    if (buffer.length > maxSizeBytes) {
+                        console.error(`Erreur: Taille après compression (${buffer.length}) dépasse toujours la limite Netlify (6 Mo)`);
+                        throw new Error('Image trop grande même après compression');
+                    }
+                } catch (error) {
+                    console.error(`Erreur lors de la compression pour fileId ${id} (sz=${size}):`, error.message);
+                    throw error;
+                }
             }
 
             return {
                 buffer,
-                contentType,
+                contentType: 'image/jpeg', // Forcer JPEG après compression
                 size
             };
         } catch (error) {
