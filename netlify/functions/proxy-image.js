@@ -47,18 +47,24 @@ exports.handler = async (event) => {
             const maxSizeBytes = 6_291_556;
             if (buffer.length > maxSizeBytes) {
                 console.log(`Compression de l'image pour fileId: ${id} (sz=${size})...`);
-                try {
-                    buffer = await sharp(buffer)
-                        .jpeg({ quality: 80, progressive: true, force: true })
-                        .toBuffer();
-                    console.log(`Taille après compression: ${buffer.length} octets`);
-                    if (buffer.length > maxSizeBytes) {
-                        console.error(`Erreur: Taille après compression (${buffer.length}) dépasse toujours la limite Netlify (6 Mo)`);
-                        throw new Error('Image trop grande même après compression');
+                const qualities = [80, 60, 40, 20];
+                for (let quality of qualities) {
+                    try {
+                        buffer = await sharp(buffer)
+                            .jpeg({ quality: quality, progressive: true, force: true })
+                            .toBuffer();
+                        console.log(`Taille après compression (qualité=${quality}): ${buffer.length} octets`);
+                        if (buffer.length <= maxSizeBytes) {
+                            break; // Sortir si la taille est OK
+                        }
+                    } catch (error) {
+                        console.error(`Erreur lors de la compression à qualité=${quality} pour fileId ${id} (sz=${size}):`, error.message);
+                        throw error;
                     }
-                } catch (error) {
-                    console.error(`Erreur lors de la compression pour fileId ${id} (sz=${size}):`, error.message);
-                    throw error;
+                }
+                if (buffer.length > maxSizeBytes) {
+                    console.error(`Erreur: Taille après compression (${buffer.length}) dépasse toujours la limite Netlify (6 Mo)`);
+                    throw new Error('Image trop grande même après compression');
                 }
             }
 

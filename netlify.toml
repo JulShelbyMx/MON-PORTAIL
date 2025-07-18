@@ -1,2 +1,5 @@
 [build]
   functions = "netlify/functions"
+
+[functions.proxy-image]
+  environment = { NODE_OPTIONS = "--max-old-space-size=256" }
