@@ -60,28 +60,17 @@ exports.handler = async (event) => {
 
     try {
         let result;
-        // Forcer sz=w1000 pour la page 1 du chapitre 1149
-        if (id === '1P6lgDQXLN0iGj1lPYJBpKhs51R_YaUcU') {
+        // Essayer différentes tailles dans l'ordre : w1500, w1200, w1000, w800
+        const sizes = ['w1500', 'w1200', 'w1000', 'w800'];
+        for (let attempt = 0; attempt < sizes.length; attempt++) {
+            const size = sizes[attempt];
             try {
-                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1000`, 1, 'w1000');
+                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=${size}`, attempt + 1, size);
+                break; // Si ça marche, sortir de la boucle
             } catch (error) {
-                console.warn(`Échec avec sz=w1000 pour fileId ${id}: ${error.message}`);
-                // Fallback sur sz=w800
-                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w800`, 2, 'w800');
-            }
-        } else {
-            // Pour les autres images, essayer sz=w1500
-            try {
-                result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1500`, 1, 'w1500');
-            } catch (error) {
-                console.warn(`Échec avec sz=w1500 pour fileId ${id}: ${error.message}`);
-                try {
-                    // Fallback sur sz=w1000
-                    result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w1000`, 2, 'w1000');
-                } catch (error) {
-                    console.warn(`Échec avec sz=w1000 pour fileId ${id}: ${error.message}`);
-                    // Fallback sur sz=w800
-                    result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=w800`, 3, 'w800');
+                console.warn(`Échec avec sz=${size} pour fileId ${id}: ${error.message}`);
+                if (attempt === sizes.length - 1) {
+                    throw new Error(`Échec pour toutes les tailles pour fileId ${id}`);
                 }
             }
         }
