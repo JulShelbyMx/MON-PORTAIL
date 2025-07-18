@@ -18788,7 +18788,7 @@ window.generateStreamingLinks = function() {
                       ]
                     },
                       {
-                        "chapter": 1155,
+                        "chapter": 1155.0,
                         "imageUrls": [
                           "https://drive.google.com/file/d/1hgPhElxAMqfmtJ8jU5k3aeHjJ4DM6ig4/view",
                           "https://drive.google.com/file/d/1EtJJVNAY72v8OqkBYFdBvcz__VGAYUwK/view",
