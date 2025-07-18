@@ -47,7 +47,7 @@ exports.handler = async (event) => {
             const maxSizeBytes = 6_291_556;
             if (buffer.length > maxSizeBytes) {
                 console.log(`Compression de l'image pour fileId: ${id} (sz=${size})...`);
-                const qualities = [80, 60, 40, 20];
+                const qualities = [80, 60, 40, 20, 10];
                 for (let quality of qualities) {
                     try {
                         buffer = await sharp(buffer)
@@ -55,22 +55,36 @@ exports.handler = async (event) => {
                             .toBuffer();
                         console.log(`Taille après compression (qualité=${quality}): ${buffer.length} octets`);
                         if (buffer.length <= maxSizeBytes) {
-                            break; // Sortir si la taille est OK
+                            break;
                         }
                     } catch (error) {
                         console.error(`Erreur lors de la compression à qualité=${quality} pour fileId ${id} (sz=${size}):`, error.message);
                         throw error;
                     }
                 }
+                // Si toujours > 6 Mo, essayer un resize
+                if (buffer.length > maxSizeBytes && size === 'w1500') {
+                    console.log(`Resize à 1200px pour fileId: ${id}...`);
+                    try {
+                        buffer = await sharp(buffer)
+                            .resize({ width: 1200, fit: 'inside', withoutEnlargement: true })
+                            .jpeg({ quality: 60, progressive: true, force: true })
+                            .toBuffer();
+                        console.log(`Taille après resize (qualité=60): ${buffer.length} octets`);
+                    } catch (error) {
+                        console.error(`Erreur lors du resize pour fileId ${id}:`, error.message);
+                        throw error;
+                    }
+                }
                 if (buffer.length > maxSizeBytes) {
-                    console.error(`Erreur: Taille après compression (${buffer.length}) dépasse toujours la limite Netlify (6 Mo)`);
-                    throw new Error('Image trop grande même après compression');
+                    console.error(`Erreur: Taille après compression/resize (${buffer.length}) dépasse toujours la limite Netlify (6 Mo)`);
+                    throw new Error('Image trop grande même après compression et resize');
                 }
             }
 
             return {
                 buffer,
-                contentType: 'image/jpeg', // Forcer JPEG après compression
+                contentType: 'image/jpeg',
                 size
             };
         } catch (error) {
@@ -81,13 +95,12 @@ exports.handler = async (event) => {
 
     try {
         let result;
-        // Essayer différentes tailles dans l'ordre : w1500, w1200, w1000, w800
         const sizes = ['w1500', 'w1200', 'w1000', 'w800'];
         for (let attempt = 0; attempt < sizes.length; attempt++) {
             const size = sizes[attempt];
             try {
                 result = await tryFetchImage(`https://drive.google.com/thumbnail?id=${id}&sz=${size}`, attempt + 1, size);
-                break; // Si ça marche, sortir de la boucle
+                break;
             } catch (error) {
                 console.warn(`Échec avec sz=${size} pour fileId ${id}: ${error.message}`);
                 if (attempt === sizes.length - 1) {
