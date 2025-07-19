@@ -2,6 +2,7 @@ from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
+from PIL import Image
 import os
 import json
 import zipfile
@@ -9,11 +10,53 @@ import re
 import mimetypes
 
 # Config
-parent_folder_name = "One Piece scans"  # Nom du dossier parent sur Drive
-zip_folder = r"D:\HakuNeko Desktop\One Piece scans"  # Dossier contenant les ZIPs
+parent_folder_name = "One Piece scans"
+zip_folder = r"D:\HakuNeko Desktop\One Piece scans"
 output_file = r"D:\MON PORTAIL\manga\mangalinks.json"
 credentials_file = r"D:\HakuNeko Desktop\Manga\credentials.json"
 token_file = r"D:\HakuNeko Desktop\Manga\token.json"
+max_image_size_mb = 5  # Taille max après compression (en Mo)
+
+# Vérifier que Pillow est installé
+try:
+    from PIL import Image
+except ImportError:
+    print("Erreur : Pillow n'est pas installé. Installez-le avec :")
+    print("python -m pip install Pillow")
+    exit()
+
+# Compresser une image si > max_image_size_mb
+def compress_image(input_path, output_path, max_size_mb=max_image_size_mb):
+    max_size_bytes = max_size_mb * 1024 * 1024
+    file_size = os.path.getsize(input_path)
+    print(f"Taille initiale de {input_path}: {file_size} octets")
+    
+    if file_size <= max_size_bytes:
+        print(f"{input_path} est déjà sous {max_size_mb} Mo, pas de compression.")
+        # Copier l'image sans modification
+        with open(input_path, 'rb') as src, open(output_path, 'wb') as dst:
+            dst.write(src.read())
+        return True
+    
+    try:
+        with Image.open(input_path) as img:
+            # Convertir en RGB (nécessaire pour PNG/WebP)
+            if img.mode != 'RGB':
+                img = img.convert('RGB')
+            quality = 85
+            img.save(output_path, 'JPEG', quality=quality)
+            while os.path.getsize(output_path) > max_size_bytes and quality > 60:
+                quality -= 5
+                img.save(output_path, 'JPEG', quality=quality)
+                print(f"Compression de {input_path} à qualité={quality}, taille={os.path.getsize(output_path)} octets")
+            if os.path.getsize(output_path) > max_size_bytes:
+                print(f"Erreur : Impossible de compresser {input_path} sous {max_size_mb} Mo sans perte excessive de qualité")
+                return False
+            print(f"Image compressée : {input_path} -> {output_path}, taille={os.path.getsize(output_path)} octets")
+            return True
+    except Exception as e:
+        print(f"Erreur lors de la compression de {input_path} : {e}")
+        return False
 
 # Authentification Google Drive API
 SCOPES = ['https://www.googleapis.com/auth/drive']
@@ -202,17 +245,25 @@ for zip_file in zip_files:
         print(f"Erreur lors de la création du dossier {chapter_folder_name} : {e}")
         continue
 
-    # Étape 4 : Uploader les images .jpg
+    # Étape 4 : Uploader les images .jpg, .jpeg, .png, .webp
     image_urls = []
     for file_name in os.listdir(chapter_folder_path):
         if file_name.lower().endswith(('.jpg', '.jpeg', '.png', '.webp')):
             file_path = os.path.join(chapter_folder_path, file_name)
-            print(f"Upload de {file_name} vers {chapter_folder_name}...")
+            # Créer un chemin temporaire pour l'image compressée
+            compressed_path = os.path.join(chapter_folder_path, f"compressed_{file_name}.jpg")
+            
+            # Compresser si nécessaire
+            if not compress_image(file_path, compressed_path):
+                print(f"Échec de la compression de {file_name}, ignoré.")
+                continue
+            
+            print(f"Upload de {compressed_path} vers {chapter_folder_name}...")
             file_metadata = {
                 'name': file_name,
                 'parents': [chapter_folder_id]
             }
-            media = MediaFileUpload(file_path, mimetype='image/jpeg')
+            media = MediaFileUpload(compressed_path, mimetype='image/jpeg')
             try:
                 file = service.files().create(
                     body=file_metadata,
@@ -223,6 +274,8 @@ for zip_file in zip_files:
                 image_url = f"https://drive.google.com/file/d/{image_id}/view"
                 image_urls.append(image_url)
                 print(f"Image uploadée : {file_name} -> {image_url}")
+                # Supprimer l'image compressée temporaire
+                os.remove(compressed_path)
             except Exception as e:
                 print(f"Erreur lors de l'upload de {file_name} : {e}")
                 continue

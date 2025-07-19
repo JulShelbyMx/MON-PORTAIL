@@ -6,3 +6,9 @@
   external_node_modules = ["sharp"]
   included_files = ["node_modules/sharp/**"]
   environment = { NODE_OPTIONS = "--max-old-space-size=512" }
+
+  [[redirects]]
+  from = "/.netlify/functions/check-password"
+  to = "/.netlify/functions/check-password"
+  status = 200
+  force = true
