@@ -178,7 +178,7 @@ for zip_file in zip_files:
     # Extraire le numéro du chapitre depuis le nom du ZIP (ex: OP1148.zip -> 1148)
     match = re.match(r'(?i)OP(\d+)\.zip', zip_file)
     if not match:
-        print(f"Fichier ZIP ignoré (nom invalide) : {zip_file}")
+        print(f"Fichier ZIP ignorC� (nom invalide) : {zip_file}")
         continue
     chapter_num = float(match.group(1))
     if chapter_num <= last_chapter_num:
@@ -209,7 +209,7 @@ for zip_file in zip_files:
         print(f"Erreur : {zip_file} n'est pas un fichier ZIP valide ({str(e)}). Essayez de l'ouvrir avec 7-Zip ou retéléchargez-le.")
         continue
     except Exception as e:
-        print(f"Erreur inattendue lors de la vérification de {zip_file} : {str(e)}")
+        print(f"Erreur inattendue lors de la v�)rification de {zip_file} : {str(e)}")
         continue
 
     # Étape 1 : Extraire le ZIP
@@ -250,7 +250,7 @@ for zip_file in zip_files:
     for file_name in os.listdir(chapter_folder_path):
         if file_name.lower().endswith(('.jpg', '.jpeg', '.png', '.webp')):
             file_path = os.path.join(chapter_folder_path, file_name)
-            # Créer un chemin temporaire pour l'image compressée
+            # Créer un chemin temporaire pour l'image compress�)e
             compressed_path = os.path.join(chapter_folder_path, f"compressed_{file_name}.jpg")
             
             # Compresser si nécessaire
