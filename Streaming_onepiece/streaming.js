@@ -20170,6 +20170,7 @@ window.generateStreamingLinks = function() {
         { episode: 1138, videoUrl: 'https://mega.nz/embed/5oRWkJqT#M6Fi1EyjYmxymAxUJGg4UwvJ-xMoTo7OXPFvfhnAUJo'},
         { episode: 1139, videoUrl: 'https://vk.com/video_ext.php?oid=-232188821&id=456239019'},
         { episode: 1140, videoUrl: 'https://vk.com/video_ext.php?oid=-232188821&id=456239018'},
+        { episode: 1141, videoUrl: 'https://vk.com/video_ext.php?oid=-232188821&id=456239020'},
 
 
 
