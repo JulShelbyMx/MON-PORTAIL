@@ -7,7 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
         { start: { year: 2026, month: 2, day: 14 }, end: { year: 2026, month: 2, day: 22 }, reason: 'Holidays' },
         { start: { year: 2026, month: 4, day: 3 }, end: { year: 2026, month: 4, day: 19 }, reason: 'Easter Holidays' },
         { start: { year: 2026, month: 5, day: 23 }, end: { year: 2026, month: 5, day: 31 }, reason: 'Holidays' },
-        { start: { year: 2026, month: 7, day: 23 }, end: { year: 2026, month: 9, day: 2 }, reason: 'Summer Holidays' }
+        { start: { year: 2026, month: 7, day: 18 }, end: { year: 2026, month: 9, day: 1 }, reason: 'Summer Holidays' },
+        { start: { year: 2026, month: 10, day: 24 }, end: { year: 2026, month: 11, day: 1 }, reason: 'Holidays' },
+        { start: { year: 2026, month: 12, day: 19 }, end: { year: 2027, month: 1, day: 3 }, reason: 'Christmas Holidays' },
+        { start: { year: 2027, month: 2, day: 13 }, end: { year: 2027, month: 2, day: 21 }, reason: 'Holidays' },
+        { start: { year: 2027, month: 4, day: 3 }, end: { year: 2027, month: 4, day: 18 }, reason: 'Easter Holidays' },
+        { start: { year: 2027, month: 5, day: 3 }, end: { year: 2027, month: 5, day: 3 }, reason: 'BA?K HOLIDAY' },
+        { start: { year: 2027, month: 5, day: 23 }, end: { year: 2027, month: 5, day: 31 }, reason: 'Holidays' },
+        { start: { year: 2027, month: 7, day: 18 }, end: { year: 2027, month: 9, day: 1 }, reason: 'Summer Holidays' },
     ];
 
     const weekAContainer = document.getElementById('timetable-week-a');
