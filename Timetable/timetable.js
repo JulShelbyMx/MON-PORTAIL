@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { start: { year: 2026, month: 12, day: 19 }, end: { year: 2027, month: 1, day: 3 }, reason: 'Christmas Holidays' },
         { start: { year: 2027, month: 2, day: 13 }, end: { year: 2027, month: 2, day: 21 }, reason: 'Holidays' },
         { start: { year: 2027, month: 4, day: 3 }, end: { year: 2027, month: 4, day: 18 }, reason: 'Easter Holidays' },
-        { start: { year: 2027, month: 5, day: 3 }, end: { year: 2027, month: 5, day: 3 }, reason: 'BA?K HOLIDAY' },
+        { start: { year: 2027, month: 5, day: 3 }, end: { year: 2027, month: 5, day: 3 }, reason: 'BANK HOLIDAY: May Day' },
         { start: { year: 2027, month: 5, day: 23 }, end: { year: 2027, month: 5, day: 31 }, reason: 'Holidays' },
         { start: { year: 2027, month: 7, day: 18 }, end: { year: 2027, month: 9, day: 1 }, reason: 'Summer Holidays' },
     ];
@@ -472,7 +472,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
    function getWeekType(date) {
-    const termStart = new Date(Date.UTC(2025, 5, 2)); // 2 juin 2025
+    const termStart = new Date(Date.UTC(2025, 9, 1)); // 3 septembre 2025
     const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
     const dateOnly = new Date(Date.UTC(bstDate.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
 
