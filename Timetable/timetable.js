@@ -65,50 +65,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Function to populate holiday and bank holiday tables
     function populateHolidayTables() {
-        const holidaysTableBody = document.querySelector('#holidays-table tbody');
-        const bankHolidaysTableBody = document.querySelector('#bank-holidays-table tbody');
+    const holidaysTableBody = document.querySelector('#holidays-table tbody');
+    const bankHolidaysTableBody = document.querySelector('#bank-holidays-table tbody');
 
-        // Séparer les jours fériés multi-jours et single-day
-        const multiDayHolidays = holidays.filter(h => {
-            const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
-            const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
-            return startDate.getTime() !== endDate.getTime() || h.reason.includes('Holidays');
-        });
-        const singleDayHolidays = holidays.filter(h => {
-            const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
-            const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
-            return startDate.getTime() === endDate.getTime() && !h.reason.includes('Holidays');
-        });
+    const multiDayHolidays = holidays.filter(h => {
+        const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
+        const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
+        return startDate.getTime() !== endDate.getTime() || h.reason.includes('Holidays');
+    });
+    const singleDayHolidays = holidays.filter(h => {
+        const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
+        const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
+        return startDate.getTime() === endDate.getTime() && !h.reason.includes('Holidays');
+    });
 
-        console.log('Multi-day holidays:', multiDayHolidays);
-        console.log('Single-day holidays:', singleDayHolidays);
+    console.log('Multi-day holidays:', JSON.stringify(multiDayHolidays, null, 2));
+    console.log('Single-day holidays:', JSON.stringify(singleDayHolidays, null, 2));
 
-        try {
-            holidaysTableBody.innerHTML = multiDayHolidays.map(holiday => {
-                const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
-                const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
-                return `
-                    <tr>
-                        <td>${formatDate(startDate)}</td>
-                        <td>${formatDate(endDate)}</td>
-                        <td>${holiday.reason}</td>
-                    </tr>
-                `;
-            }).join('');
+    try {
+        holidaysTableBody.innerHTML = multiDayHolidays.map(holiday => {
+            const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
+            const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
+            return `
+                <tr>
+                    <td>${formatDate(startDate)}</td>
+                    <td>${formatDate(endDate)}</td>
+                    <td>${holiday.reason}</td>
+                </tr>
+            `;
+        }).join('');
 
-            bankHolidaysTableBody.innerHTML = singleDayHolidays.map(holiday => {
-                const startDate = new Date(Date.UTC(holiday.start.year, h.start.month - 1, h.start.day));
-                return `
-                    <tr>
-                        <td>${formatDate(startDate)}</td>
-                        <td>${holiday.reason}</td>
-                    </tr>
-                `;
-            }).join('');
-        } catch (error) {
-            console.error('Erreur dans populateHolidayTables:', error);
-        }
+        bankHolidaysTableBody.innerHTML = singleDayHolidays.map(holiday => {
+            const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
+            return `
+                <tr>
+                    <td>${formatDate(startDate)}</td>
+                    <td>${holiday.reason}</td>
+                </tr>
+            `;
+        }).join('');
+    } catch (error) {
+        console.error('Erreur dans populateHolidayTables:', error);
     }
+}
 
     // Function to generate timetables
     function generateTimetables() {
