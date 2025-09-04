@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Global holidays array with one-based months (January = 1, May = 5, etc.)
     const holidays = [
-        { start: { year: 2025, month: 7, day: 24 }, end: { year: 2025, month: 9, day: 2 }, reason: 'Summer Holidays' },
         { start: { year: 2025, month: 10, day: 25 }, end: { year: 2025, month: 11, day: 2 }, reason: 'Holidays' },
         { start: { year: 2025, month: 12, day: 19 }, end: { year: 2026, month: 1, day: 4 }, reason: 'Christmas Holidays' },
         { start: { year: 2026, month: 2, day: 14 }, end: { year: 2026, month: 2, day: 22 }, reason: 'Holidays' },
@@ -13,8 +12,15 @@ document.addEventListener('DOMContentLoaded', () => {
         { start: { year: 2027, month: 2, day: 13 }, end: { year: 2027, month: 2, day: 21 }, reason: 'Holidays' },
         { start: { year: 2027, month: 4, day: 3 }, end: { year: 2027, month: 4, day: 18 }, reason: 'Easter Holidays' },
         { start: { year: 2027, month: 5, day: 3 }, end: { year: 2027, month: 5, day: 3 }, reason: 'BANK HOLIDAY: May Day' },
-        { start: { year: 2027, month: 5, day: 23 }, end: { year: 2027, month: 5, day: 31 }, reason: 'Holidays' },
-        { start: { year: 2027, month: 7, day: 18 }, end: { year: 2027, month: 9, day: 1 }, reason: 'Summer Holidays' },
+        { start: { year: 2027, month: 5, day: 29 }, end: { year: 2027, month: 6, day: 6 }, reason: 'Holidays' },
+        { start: { year: 2027, month: 7, day: 23 }, end: { year: 2027, month: 9, day: 7 }, reason: 'Summer Holidays' },
+        { start: { year: 2027, month: 10, day: 23 }, end: { year: 2028, month: 10, day: 31 }, reason: 'Holidays' },
+        { start: { year: 2028, month: 12, day: 18 }, end: { year: 2028, month: 1, day: 2 }, reason: 'Christmas Holidays' },
+        { start: { year: 2028, month: 2, day: 19 }, end: { year: 2028, month: 2, day: 27 }, reason: 'Holidays' },
+        { start: { year: 2028, month: 4, day: 1 }, end: { year: 2028, month: 4, day: 19 }, reason: 'Easter Holidays' },
+        { start: { year: 2028, month: 5, day: 3 }, end: { year: 2028, month: 5, day: 3 }, reason: 'BANK HOLIDAY: May Day' },
+        { start: { year: 2028, month: 5, day: 27 }, end: { year: 2028, month: 6, day: 4 }, reason: 'Holidays' },
+        { start: { year: 2028, month: 7, day: 27 }, end: { year: 2028, month: 9, day: '?' }, reason: 'Summer Holidays' },
     ];
 
     const weekAContainer = document.getElementById('timetable-week-a');
@@ -139,35 +145,35 @@ document.addEventListener('DOMContentLoaded', () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
-                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
-                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
-                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
-                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
-                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                            <td data-uk-time="(ST) 08:30-08:40">(ST) 08:30-08:40</td>
+                            <td data-abbrev="PH/St" data-full="Form">PH/St<span class="classroom">B206</span></td>
+                            <td data-abbrev="PH/St" data-full="Form">PH/St<span class="classroom">B206</span></td>
+                            <td data-abbrev="PH/St" data-full="Form">PH/St<span class="classroom">B206</span></td>
+                            <td data-abbrev="PH/St" data-full="Form">PH/St<span class="classroom">B206</span></td>
+                            <td data-abbrev="PH/St" data-full="Form">PH/St<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                            <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A001</span></td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
-                            <td data-abbrev="CoE" data-full="ComputingE">CoE<span class="classroom">B101</span></td>
-                            <td data-abbrev="ArE" data-full="ArtE">ArE<span class="classroom">B206</span></td>
-                            <td data-abbrev="HiE" data-full="HistoryE">HiE<span class="classroom">A212</span></td>
-                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
+                            <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A005</span></td>
+                            <td data-abbrev="Hs" data-full="Health and Social">Hs<span class="classroom">B101</span></td>
+                            <td data-abbrev="Gg" data-full="Geography">Gg<span class="classroom">B207</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                            <td data-abbrev="PeR" data-full="PeR">PeR<span class="classroom">A012</span></td>
-                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
-                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
-                            <td data-abbrev="DmE" data-full="DramaE">DmE<span class="classroom">C101</span></td>
-                            <td data-abbrev="PsE" data-full="PSHE">PsE<span class="classroom">B210</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                            <td data-abbrev="Pe" data-full="Pe">Pe<span class="classroom">A009</span></td>
+                            <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="PsE" data-full="PSCHE">PsE<span class="classroom">A212</span></td>
+                            <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                            <td data-abbrev="SpE" data-full="SpanishE">SpE<span class="classroom">A210</span></td>
+                            <td data-abbrev="A FAIRE A PARTIR D'ICI" data-full="SciencesR">ScR<span class="classroom">B206</span></td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
                             <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">A109</span></td>
                             <td data-abbrev="ReE" data-full="ReligionE">ReE<span class="classroom">A110</span></td>
@@ -176,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </tr>
                         <tr>
                             <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="Gg" data-full="Geography">Gg<span class="classroom">B207</span></td>
                             <td data-abbrev="MuE" data-full="MusicE">MuE<span class="classroom">B201</span></td>
                             <td data-abbrev="Mess" data-full="Mess">Mess<span class="classroom">A005</span></td>
                             <td data-abbrev="FrE" data-full="FrenchE">FrE<span class="classroom">A205</span></td>
@@ -194,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         </tr>
                         <tr>
                             <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
+                            <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
                             <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
@@ -224,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td data-uk-time="(REG) 08:30-08:40">(REG) 08:30-08:40</td>
+                            <td data-uk-time="(ST) 08:30-08:40">(ST) 08:30-08:40</td>
                             <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
                             <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
                             <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
@@ -269,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                            <<td data-uk-time="12:55-13:55">12:55-13:55</td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
@@ -395,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function convertTime(timeStr) {
-        if (timeStr.includes('(REG)')) {
+        if (timeStr.includes('(ST)')) {
             const times = timeStr.match(/\d{2}:\d{2}-\d{2}:\d{2}/)[0].split('-');
             const start = times[0].split(':');
             const end = times[1].split(':');
@@ -409,7 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 endHour = (endHour + 1) % 24;
             }
 
-            return `(REG) ${startHour.toString().padStart(2, '0')}:${startMinutes}-${endHour.toString().padStart(2, '0')}:${endMinutes}`;
+            return `(ST) ${startHour.toString().padStart(2, '0')}:${startMinutes}-${endHour.toString().padStart(2, '0')}:${endMinutes}`;
         } else {
             const times = timeStr.split('-');
             const start = times[0].split(':');
@@ -471,7 +477,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
    function getWeekType(date) {
-    const termStart = new Date(Date.UTC(2025, 9, 1)); // 3 septembre 2025
+    const termStart = new Date(Date.UTC(2025, 8, 25)); // 3 septembre 2025
     const bstDate = manualDate ? date : new Date(date.getTime() + 3600000);
     const dateOnly = new Date(Date.UTC(bstDate.getUTCFullYear(), bstDate.getUTCMonth(), bstDate.getUTCDate()));
 
@@ -482,18 +488,16 @@ document.addEventListener('DOMContentLoaded', () => {
     mondayDate.setUTCDate(dateOnly.getUTCDate() - daysToMonday);
 
     // Calculer le nombre total de jours jusqu'au lundi
-    const diffTime = mondayDate - termStart; // Différence signée pour dates antérieures
+    const diffTime = mondayDate - termStart;
     let totalDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-    // Soustraire les jours de vacances (périodes où start ≠ end)
+    // Soustraire les jours de vacances
     let vacationDays = 0;
     for (const holiday of holidays) {
         if (!holiday.start.year || !holiday.start.month || !holiday.start.day) continue;
         const startDate = new Date(Date.UTC(holiday.start.year, holiday.start.month - 1, holiday.start.day));
         const endDate = new Date(Date.UTC(holiday.end.year, holiday.end.month - 1, holiday.end.day));
-        // Vérifier si c'est une période de vacances (pas un jour férié)
         if (startDate.getTime() !== endDate.getTime()) {
-            // Compter les jours de vacances avant ou jusqu'à mondayDate
             const vacationStart = startDate < termStart ? termStart : startDate;
             const vacationEnd = endDate > mondayDate ? mondayDate : endDate;
             if (vacationEnd >= vacationStart) {
@@ -503,12 +507,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Jours scolaires = total - vacances
     const schoolDays = totalDays - vacationDays;
     const diffWeeks = Math.floor(schoolDays / 7);
-    // 2 juin = Week A
-    const weekType = diffWeeks % 2 === 0 ? 'A' : 'B'; // Pair = A, Impair = B
-    console.log('Week type calculated:', weekType, 'Date:', bstDate.toISOString(), 'Monday:', mondayDate.toISOString(), 'School days:', schoolDays, 'Weeks:', diffWeeks);
+    const weekType = diffWeeks % 2 === 0 ? 'A' : 'B';
+
+    console.log('getWeekType debug:', {
+        inputDate: bstDate.toISOString(),
+        mondayDate: mondayDate.toISOString(),
+        totalDays,
+        vacationDays,
+        schoolDays,
+        diffWeeks,
+        weekType
+    });
+
     return weekType;
 }
 
