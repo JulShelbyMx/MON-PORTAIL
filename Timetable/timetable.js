@@ -146,15 +146,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <tbody>
                         <tr>
                             <td data-uk-time="(ST) 08:30-08:40">(ST) 08:30-08:40</td>
-                            <td data-abbrev="PH/St" data-full="Form">PH/St<span class="classroom">B206</span></td>
-                            <td data-abbrev="PH/St" data-full="Form">PH/St<span class="classroom">B206</span></td>
-                            <td data-abbrev="PH/St" data-full="Form">PH/St<span class="classroom">B206</span></td>
-                            <td data-abbrev="PH/St" data-full="Form">PH/St<span class="classroom">B206</span></td>
-                            <td data-abbrev="PH/St" data-full="Form">PH/St<span class="classroom">B206</span></td>
+                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
+                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
+                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
+                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
+                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="08:40-09:40">08:40-09:40</td>
+                            <td data-uk-time="(P1) 08:40-09:40">(P1) 08:40-09:40</td>
                             <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A001</span></td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
                             <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A005</span></td>
@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="09:40-10:40">09:40-10:40</td>
+                            <td data-uk-time="(P2) 09:40-10:40">(P2) 09:40-10:40</td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
                             <td data-abbrev="Pe" data-full="Pe">Pe<span class="classroom">A009</span></td>
                             <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
@@ -172,25 +172,25 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                            <td data-abbrev="A FAIRE A PARTIR D'ICI" data-full="SciencesR">ScR<span class="classroom">B206</span></td>
-                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
-                            <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">A109</span></td>
-                            <td data-abbrev="ReE" data-full="ReligionE">ReE<span class="classroom">A110</span></td>
-                            <td data-abbrev="HiE" data-full="HistoryE">HiE<span class="classroom">B203</span></td>
+                            <td data-uk-time="(P3) 10:55-11:55">(P3) 10:55-11:55</td>
+                            <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A101</span></td>
+                            <td data-abbrev="Sp" data-full="Spanish">Sp<span class="classroom">A204</span></td>
+                            <td data-abbrev="Gg" data-full="Geography">GgE<span class="classroom">B207</span></td>
+                            <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="Sp" data-full="Spanish">Sp<span class="classroom">A204</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="11:55-12:55">11:55-12:55</td>
+                            <td data-uk-time="(P4) 11:55-12:55">(P4) 11:55-12:55</td>
                             <td data-abbrev="Gg" data-full="Geography">Gg<span class="classroom">B207</span></td>
-                            <td data-abbrev="MuE" data-full="MusicE">MuE<span class="classroom">B201</span></td>
-                            <td data-abbrev="Mess" data-full="Mess">Mess<span class="classroom">A005</span></td>
-                            <td data-abbrev="FrE" data-full="FrenchE">FrE<span class="classroom">A205</span></td>
-                            <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">A211</span></td>
+                            <td data-abbrev="Hs" data-full="Health and Social">Hs<span class="classroom">B101</span></td>
+                            <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A101</span></td>
+                            <td data-abbrev="Sp" data-full="Spanish">Sp<span class="classroom">A204</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                            <td data-uk-time="(RT) 12:55-13:55">(RT) 12:55-13:55</td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
@@ -199,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="13:55-14:55">13:55-14:55</td>
+                            <td data-uk-time="(P5) 13:55-14:55">(P5) 13:55-14:55</td>
                             <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
                             <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
@@ -231,16 +231,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     <tbody>
                         <tr>
                             <td data-uk-time="(ST) 08:30-08:40">(ST) 08:30-08:40</td>
-                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
-                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
-                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
-                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
-                            <td data-abbrev="Tu" data-full="Tutor">Tu<span class="classroom">B206</span></td>
+                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
+                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
+                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
+                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
+                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
                             <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                            <td data-abbrev="PsE" data-full="PSHE">PsE<span class="classroom">A210</span></td>
+                            <td data-abbrev="REPRENDRE A PARTIR D'ICI" data-full="PSHE">PsE<span class="classroom">A210</span></td>
                             <td data-abbrev="TcE" data-full="TechE">TcE<span class="classroom">A005</span></td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A201</span></td>
                             <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A109</span></td>
@@ -275,7 +275,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <<td data-uk-time="12:55-13:55">12:55-13:55</td>
+                            <td data-uk-time="12:55-13:55">12:55-13:55</td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
@@ -400,39 +400,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    function convertTime(timeStr) {
-        if (timeStr.includes('(ST)')) {
-            const times = timeStr.match(/\d{2}:\d{2}-\d{2}:\d{2}/)[0].split('-');
-            const start = times[0].split(':');
-            const end = times[1].split(':');
-            let startHour = parseInt(start[0], 10);
-            let endHour = parseInt(end[0], 10);
-            const startMinutes = start[1];
-            const endMinutes = end[1];
+   function convertTime(timeStr) {
+    const match = timeStr.match(/(\(\w+\)\s*)?(\d{2}:\d{2})-(\d{2}:\d{2})/);
+    if (match) {
+        const label = match[1] || '';
+        const startTimeStr = match[2];
+        const endTimeStr = match[3];
 
-            if (!isUKTime) {
-                startHour = (startHour + 1) % 24;
-                endHour = (endHour + 1) % 24;
-            }
+        const start = startTimeStr.split(':');
+        const end = endTimeStr.split(':');
+        let startHour = parseInt(start[0], 10);
+        let endHour = parseInt(end[0], 10);
+        const startMinutes = start[1];
+        const endMinutes = end[1];
 
-            return `(ST) ${startHour.toString().padStart(2, '0')}:${startMinutes}-${endHour.toString().padStart(2, '0')}:${endMinutes}`;
-        } else {
-            const times = timeStr.split('-');
-            const start = times[0].split(':');
-            const end = times[1].split(':');
-            let startHour = parseInt(start[0], 10);
-            let endHour = parseInt(end[0], 10);
-            const startMinutes = start[1];
-            const endMinutes = end[1];
-
-            if (!isUKTime) {
-                startHour = (startHour + 1) % 24;
-                endHour = (endHour + 1) % 24;
-            }
-
-            return `${startHour.toString().padStart(2, '0')}:${startMinutes}-${endHour.toString().padStart(2, '0')}:${endMinutes}`;
+        if (!isUKTime) {
+            startHour = (startHour + 1) % 24;
+            endHour = (endHour + 1) % 24;
         }
+
+        const newStartTime = `${startHour.toString().padStart(2, '0')}:${startMinutes}`;
+        const newEndTime = `${endHour.toString().padStart(2, '0')}:${endMinutes}`;
+
+        return `${label}${newStartTime}-${newEndTime}`;
     }
+    return timeStr; // Fallback si format invalide
+}
 
     function updateTimes() {
         if (weekA) {
