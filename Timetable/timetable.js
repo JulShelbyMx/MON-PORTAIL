@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <td data-uk-time="(P3) 10:55-11:55">(P3) 10:55-11:55</td>
                             <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A101</span></td>
                             <td data-abbrev="Sp" data-full="Spanish">Sp<span class="classroom">A204</span></td>
-                            <td data-abbrev="Gg" data-full="Geography">GgE<span class="classroom">B207</span></td>
+                            <td data-abbrev="Gg" data-full="Geography">Gg<span class="classroom">B207</span></td>
                             <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
                             <td data-abbrev="Sp" data-full="Spanish">Sp<span class="classroom">A204</span></td>
                             ${extraColumn}
@@ -201,10 +201,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         <tr>
                             <td data-uk-time="(P5) 13:55-14:55">(P5) 13:55-14:55</td>
                             <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
-                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A105</span></td>
+                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A101</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A208</span></td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
-                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
-                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A103</span></td>
                             ${extraColumn}
                         </tr>
                     </tbody>
@@ -239,43 +239,43 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="08:40-09:40">08:40-09:40</td>
-                            <td data-abbrev="REPRENDRE A PARTIR D'ICI" data-full="PSHE">PsE<span class="classroom">A210</span></td>
-                            <td data-abbrev="TcE" data-full="TechE">TcE<span class="classroom">A005</span></td>
-                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A201</span></td>
-                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A109</span></td>
-                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A109</span></td>
+                            <td data-uk-time="(P1) 08:40-09:40">(P1) 08:40-09:40</td>
+                            <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A005</span></td>
+                            <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A106</span></td>
+                            <td data-abbrev="Sp" data-full="Spanish">Sp<span class="classroom">A204</span></td>
+                            <td data-abbrev="Hs" data-full="Health and Social">Hs<span class="classroom">B101</span></td>
+                            <td data-abbrev="Gg" data-full="Geography">Gg<span class="classroom">B207</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="09:40-10:40">09:40-10:40</td>
-                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
-                            <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">B202</span></td>
-                            <td data-abbrev="Mess" data-full="Mess">Mess<span class="classroom">A013</span></td>
-                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A202</span></td>
-                            <td data-abbrev="HiE" data-full="HistoryE">HiE<span class="classroom">B203</span></td>
+                            <td data-uk-time="(P2) 09:40-10:40">(P2) 09:40-10:40</td>
+                            <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                            <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A106</span></td>
+                            <td data-abbrev="PsE" data-full="PSCHE">PsE<span class="classroom">B201</span></td>
+                            <td data-abbrev="Pe" data-full="Pe">Pe<span class="classroom">A008</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="10:55-11:55">10:55-11:55</td>
-                            <td data-abbrev="CoE" data-full="ComputingE">CoE<span class="classroom">B101</span></td>
-                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A212</span></td>
-                            <td data-abbrev="ArE" data-full="ArtE">ArE<span class="classroom">B205</span></td>
-                            <td data-abbrev="DmE" data-full="DramaE">DmE<span class="classroom">C101</span></td>
-                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
+                            <td data-uk-time="(P3) 10:55-11:55">(P3) 10:55-11:55</td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                            <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A005</span></td>
+                            <td data-abbrev="Hs" data-full="Health and Social">Hs<span class="classroom">B101</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                            <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A106</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="11:55-12:55">11:55-12:55</td>
-                            <td data-abbrev="PeR" data-full="PeR">PeR<span class="classroom">A013</span></td>
-                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
-                            <td data-abbrev="SpE" data-full="SpanishE">SpE<span class="classroom">A212</span></td>
-                            <td data-abbrev="FrE" data-full="FrenchE">FrE<span class="classroom">A209</span></td>
-                            <td data-abbrev="GgE" data-full="GeographyE">GgE<span class="classroom">B207</span></td>
+                            <td data-uk-time="(P4) 11:55-12:55">(P4) 11:55-12:55</td>
+                            <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A106</span></td>
+                            <td data-abbrev="Gg" data-full="Geography">Gg<span class="classroom">B207</span></td>
+                            <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="Sp" data-full="Spanish">Sp<span class="classroom">A204</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="12:55-13:55">12:55-13:55</td>
+                            <td data-uk-time="(RT) 12:55-13:55">(RT) 12:55-13:55</td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
                             <td> R time then Lunch<span class="classroom">B206</span></td>
@@ -284,12 +284,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="13:55-14:55">13:55-14:55</td>
-                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A201</span></td>
-                            <td data-abbrev="MuE" data-full="MusicE">MuE<span class="classroom">B201</span></td>
-                            <td data-abbrev="ScR" data-full="ScienceR">ScR<span class="classroom">A109</span></td>
-                            <td data-abbrev="MaE" data-full="MathsE">MaE<span class="classroom">B110</span></td>
-                            <td data-abbrev="ReE" data-full="ReligionE">ReE<span class="classroom">B203</span></td>
+                            <td data-uk-time="(P5) 13:55-14:55">(P5) 13:55-14:55</td>
+                            <td data-abbrev="Hs" data-full="Health and Social">Hs<span class="classroom">B101</span></td>
+                            <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
+                            <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
+                            <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A001</span></td>
                             ${extraColumn}
                         </tr>
                     </tbody>
@@ -549,72 +549,59 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function highlightCurrentLesson() {
-        const allCells = document.querySelectorAll('.timetable-table td');
-        allCells.forEach(cell => cell.classList.remove('current-lesson'));
-        noClassMessage.style.display = 'none';
-        if (isManualDayChange || manualDate) return;
+    const allCells = document.querySelectorAll('.timetable-table td');
+    allCells.forEach(cell => cell.classList.remove('current-lesson'));
+    noClassMessage.style.display = 'none';
+    if (isManualDayChange || manualDate) return;
 
-        const now = new Date();
-        const bstNow = new Date(now.getTime() + 3600000);
-        const ukHours = bstNow.getUTCHours();
-        const currentMinutes = bstNow.getUTCMinutes();
-        const currentTimeInMinutes = ukHours * 60 + currentMinutes;
+    const now = new Date();
+    const bstNow = new Date(now.getTime() + 3600000);
+    const ukHours = bstNow.getUTCHours();
+    const currentMinutes = bstNow.getUTCMinutes();
+    const currentTimeInMinutes = ukHours * 60 + currentMinutes;
 
-        const activeTable = weekAContainer.style.display === 'block' ? weekA : weekB;
-        if (!activeTable) return;
+    const activeTable = weekAContainer.style.display === 'block' ? weekAContainer : weekBContainer;
+    if (!activeTable) return;
 
-        const holidayReason = isHolidayOrClosure(now);
-        console.log('highlightCurrentLesson:', { holidayReason, isWeekend: bstNow.getUTCDay() === 0 || bstNow.getUTCDay() === 6 });
+    const holidayReason = isHolidayOrClosure(now);
+    console.log('highlightCurrentLesson:', { holidayReason, isWeekend: bstNow.getUTCDay() === 0 || bstNow.getUTCDay() === 6 });
 
-        if (holidayReason) {
-            const currentHoliday = holidays.find(h => {
-                const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
-                const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
-                const dateOnly = new Date(Date.UTC(bstNow.getUTCFullYear(), bstNow.getUTCMonth(), bstNow.getUTCDate()));
-                return dateOnly >= startDate && dateOnly <= endDate;
-            });
+    if (holidayReason) {
+        const currentHoliday = holidays.find(h => {
+            const startDate = new Date(Date.UTC(h.start.year, h.start.month - 1, h.start.day));
+            const endDate = new Date(Date.UTC(h.end.year, h.end.month - 1, h.end.day));
+            const dateOnly = new Date(Date.UTC(bstNow.getUTCFullYear(), bstNow.getUTCMonth(), bstNow.getUTCDate()));
+            return dateOnly >= startDate && dateOnly <= endDate;
+        });
 
-            const isSingleDay = currentHoliday && new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)).getTime() ===
-                                new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)).getTime();
+        const isSingleDay = currentHoliday && new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)).getTime() === new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)).getTime();
 
-            if (isSingleDay) {
-                noClassMessage.textContent = `No classes today: Bank Holiday`;
-                noClassMessage.style.display = 'block';
-            } else {
-                noClassMessage.textContent = `No classes today: Holidays (${formatDate(new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)))} - ${formatDate(new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)))})`;
-                noClassMessage.style.display = 'block';
-            }
-            console.log('highlightCurrentLesson holiday:', { holidayReason, isSingleDay });
-            return;
-        }
+        noClassMessage.textContent = isSingleDay ? `No classes today: Bank Holiday` : `No classes today: Holidays (${formatDate(new Date(Date.UTC(currentHoliday.start.year, currentHoliday.start.month - 1, currentHoliday.start.day)))} - ${formatDate(new Date(Date.UTC(currentHoliday.end.year, currentHoliday.end.month - 1, currentHoliday.end.day)))})}`;
+        noClassMessage.style.display = 'block';
+        console.log('highlightCurrentLesson holiday:', { holidayReason, isSingleDay });
+        return;
+    }
 
-        const isWeekend = bstNow.getUTCDay() === 0 || bstNow.getUTCDay() === 6;
-        if (isWeekend) {
-            noClassMessage.textContent = "It's the weekend!";
-            noClassMessage.style.display = 'block';
-            console.log('highlightCurrentLesson weekend');
-            return;
-        }
+    const isWeekend = bstNow.getUTCDay() === 0 || bstNow.getUTCDay() === 6;
+    if (isWeekend) {
+        noClassMessage.textContent = "It's the weekend!";
+        noClassMessage.style.display = 'block';
+        console.log('highlightCurrentLesson weekend');
+        return;
+    }
 
-        const timeCells = activeTable.querySelectorAll('tbody td[data-uk-time]');
-        let currentLessonFound = false;
+    const timeCells = activeTable.querySelectorAll('tbody td[data-uk-time]');
+    let currentLessonFound = false;
 
-        timeCells.forEach((cell, index) => {
-            const ukTime = cell.getAttribute('data-uk-time');
-            let startHour, startMinutes, endHour, endMinutes;
-            if (ukTime.includes('(REG)')) {
-                const times = ukTime.match(/\d{2}:\d{2}-\d{2}:\d{2}/)[0].split('-');
-                startHour = parseInt(times[0].split(':')[0], 10);
-                startMinutes = parseInt(times[0].split(':')[1], 10);
-                endHour = parseInt(times[1].split(':')[0], 10);
-                endMinutes = parseInt(times[1].split(':')[1], 10);
-            } else {
-                const times = ukTime.split('-');
-                startHour = parseInt(times[0].split(':')[0], 10);
-                startMinutes = parseInt(times[0].split(':')[1], 10);
-                endHour = parseInt(times[1].split(':')[0], 10);
-                endMinutes = parseInt(times[1].split(':')[1], 10);
-            }
+    timeCells.forEach((cell, index) => {
+        const ukTime = cell.getAttribute('data-uk-time');
+        const timeMatch = ukTime.match(/\d{2}:\d{2}-\d{2}:\d{2}/);  // Extraire juste les heures, en ignorant le label
+        if (timeMatch) {
+            const times = timeMatch[0].split('-');
+            const startHour = parseInt(times[0].split(':')[0], 10);
+            const startMinutes = parseInt(times[0].split(':')[1], 10);
+            const endHour = parseInt(times[1].split(':')[0], 10);
+            const endMinutes = parseInt(times[1].split(':')[1], 10);
 
             const startTimeInMinutes = startHour * 60 + startMinutes;
             const endTimeInMinutes = endHour * 60 + endMinutes;
@@ -628,15 +615,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentLessonFound = true;
                 }
             }
-        });
-
-        if (!currentLessonFound) {
-            console.log('No current lesson at this time.');
-            noClassMessage.textContent = 'No class right now';
-            noClassMessage.style.display = 'block';
         }
-        console.log('Highlight current lesson checked, found:', currentLessonFound);
+    });
+
+    if (!currentLessonFound) {
+        console.log('No current lesson at this time.');
+        noClassMessage.textContent = 'No class right now';
+        noClassMessage.style.display = 'block';
     }
+    console.log('Highlight current lesson checked, found:', currentLessonFound);
+}
 
     function checkDayChange() {
         if (manualDate) return;
