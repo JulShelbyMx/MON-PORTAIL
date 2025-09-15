@@ -18897,6 +18897,28 @@ window.generateStreamingLinks = function() {
                             "https://drive.google.com/file/d/1UFexlzK5hI8pjyZbfArfKvY2baUaVucx/view"
                           ]
                         },
+                        {
+                          "chapter": 1160.0,
+                          "imageUrls": [
+                            "https://drive.google.com/file/d/1EirKxisCxsM1gUSnpE3mAdQC81X5iR7A/view",
+                            "https://drive.google.com/file/d/1QXPM8UW4RoMPwMdX_uqpEtJvTct1bP-0/view",
+                            "https://drive.google.com/file/d/1rZY6Z4m1ivkax_0HRHrGxxkMzNcx4lPt/view",
+                            "https://drive.google.com/file/d/1XzPjl8hIwd-kuOn2OS6vy7A0ATctNycN/view",
+                            "https://drive.google.com/file/d/1RmZ05Nd2zci7j22HJbFMFN4DMSc8WSg4/view",
+                            "https://drive.google.com/file/d/1zmbqBj_1iKcNY4uiV796EGAZ_uwtyPSw/view",
+                            "https://drive.google.com/file/d/1UGWsFgcQjHja8a_feZZxrKpagi0k7xd5/view",
+                            "https://drive.google.com/file/d/1jZiZd1MtPtyl7bjHiO5liPVdpcjhpNen/view",
+                            "https://drive.google.com/file/d/19xgs3uGizwdJJDFH0eoVGRr8pHbpHBy9/view",
+                            "https://drive.google.com/file/d/1jaDsQxULVcVjWfb_adARNB9G395qXa7O/view",
+                            "https://drive.google.com/file/d/1WiFISyM1pb2rRaTxZuotQyF8DB7SN6Yo/view",
+                            "https://drive.google.com/file/d/14FiA4NQrfVBchchvdIiTEJJPB-b_KGNR/view",
+                            "https://drive.google.com/file/d/1vnHXCkTfWE2vJuJWacLVcLpub7v8dpwn/view",
+                            "https://drive.google.com/file/d/1Txdbc3m1zPCnFtVt77QxWMiKWZuj3WH8/view",
+                            "https://drive.google.com/file/d/1HxFrRpOhtdGvMaqpBKMTpwZsGY4vNHqP/view",
+                            "https://drive.google.com/file/d/1lqJ8EVjcWgvVCwtFlthkiI5IbL8KAv4s/view",
+                            "https://drive.google.com/file/d/1kxNgE42AFW8yaoomOBSg0zvEWs1ZRaSB/view"
+                          ]
+                        }
             
 
             ]
@@ -20215,6 +20237,8 @@ window.generateStreamingLinks = function() {
         { episode: 1139, videoUrl: 'https://vk.com/video_ext.php?oid=-232188821&id=456239019'},
         { episode: 1140, videoUrl: 'https://vk.com/video_ext.php?oid=-232188821&id=456239018'},
         { episode: 1141, videoUrl: 'https://vk.com/video_ext.php?oid=-232188821&id=456239020'},
+        { episode: 1142, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294081'},
+        { episode: 1143, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294083'},
 
 
 
