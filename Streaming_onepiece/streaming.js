@@ -20239,6 +20239,7 @@ window.generateStreamingLinks = function() {
         { episode: 1141, videoUrl: 'https://vk.com/video_ext.php?oid=-232188821&id=456239020'},
         { episode: 1142, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294081'},
         { episode: 1143, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294083'},
+        { episode: 1144, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294084'},
 
 
 
