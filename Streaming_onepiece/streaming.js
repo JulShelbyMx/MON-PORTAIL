@@ -18919,7 +18919,7 @@ window.generateStreamingLinks = function() {
                             "https://drive.google.com/file/d/1kxNgE42AFW8yaoomOBSg0zvEWs1ZRaSB/view"
                           ]
                         },
-                                                {
+                        {
     "chapter": 1161.0,
     "imageUrls": [
       "https://drive.google.com/file/d/1H8PPurOfE8LsvNDxZeP-LtNYWXZr2O5e/view",
@@ -18942,6 +18942,7 @@ window.generateStreamingLinks = function() {
       "https://drive.google.com/file/d/1jwzoUYcIzMg8VQKqJT-rc76lgeosIV6f/view"
     ]
   },
+  
             
 
             ]
@@ -20261,12 +20262,10 @@ window.generateStreamingLinks = function() {
         { episode: 1140, videoUrl: 'https://vk.com/video_ext.php?oid=-232188821&id=456239018'},
         { episode: 1141, videoUrl: 'https://vk.com/video_ext.php?oid=-232188821&id=456239020'},
         { episode: 1142, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294081'},
-        { episode: 1143, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294083'},
-        { episode: 1144, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294084'},
+        { episode: 1143, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294083' }, 
+        { episode: 1144, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294084' }, 
         { episode: 1145, videoUrl: 'https://my.mail.ru/video/embed/7658044714469294085' }, 
         { episode: 1146, videoUrl: '' }
-
-
 
 
 
@@ -20275,7 +20274,7 @@ window.generateStreamingLinks = function() {
 
     ]
 
- // Vérification des fileName et des URLs
+   // Vérification des fileName et des URLs
     seasons.forEach((season, index) => {
         if (!season.fileName) {
             console.error(`Erreur : fileName manquant pour la saison à l'index ${index}`, season);
