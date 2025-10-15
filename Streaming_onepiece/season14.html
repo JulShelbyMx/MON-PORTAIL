@@ -167,16 +167,27 @@ body, main, section, #episode-list {
             });
 
             function loadEpisode(episodeNumber) {
-                const selectedEpisode = season.episodes.find(ep => ep.episode == episodeNumber);
-                if (!selectedEpisode) {
-                    console.error('Épisode non trouvé:', episodeNumber);
-                    episodeDetails.textContent = 'Erreur : épisode non trouvé';
-                    return;
-                }
-                episodeSelect.value = selectedEpisode.episode;
-                videoPlayer.innerHTML = `<iframe src="${selectedEpisode.videoUrl}" allowfullscreen></iframe>`;
-                episodeDetails.innerHTML = `<h2>Episode ${selectedEpisode.episode} - ${season.name}</h2>`;
-            }
+    const selectedEpisode = season.episodes.find(ep => ep.episode == episodeNumber);
+    if (!selectedEpisode) {
+        console.error('Épisode non trouvé:', episodeNumber);
+        episodeDetails.textContent = 'Erreur : épisode non trouvé';
+        return;
+    }
+    episodeSelect.value = selectedEpisode.episode;
+    
+    const isPCloud = selectedEpisode.videoUrl.includes('e.pcloud.link');
+    videoPlayer.innerHTML = `
+        <iframe 
+            src="${selectedEpisode.videoUrl}" 
+            class="${isPCloud ? 'pcloud-iframe' : ''}" 
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            webkitallowfullscreen 
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture">
+        </iframe>`;
+    episodeDetails.innerHTML = `<h2>Episode ${selectedEpisode.episode} - ${season.name}</h2>`;
+}
 
             const hash = window.location.hash;
             if (hash) {
