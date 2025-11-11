@@ -138,16 +138,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td data-uk-time="(ST) 08:30-08:40">(ST) 08:30-08:40</td>
-                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
-                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
-                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
-                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
-                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
+                            <td data-uk-time="(CLASS) 08:25-08:30">(CLASS) 08:30-08:30</td>
+                            <td data-abbrev="Be in the classroom" data-full="Be in the classroom">be in the classroom</td>
+                            <td data-abbrev="Be in the classroom" data-full="Be in the classroom">Be in the classroom</td>
+                            <td data-abbrev="Be in the classroom" data-full="Be in the classroom">Be in the classroom</td>
+                            <td data-abbrev="Be in the classroom" data-full="Be in the classroom">Be in the classroom</td>
+                            <td data-abbrev="Be in the classroom" data-full="Be in the classroom">Be in the classroom</td>
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="(P1) 08:40-09:40">(P1) 08:40-09:40</td>
+                            <td data-uk-time="(P1) 08:30-09:40">(P1) 08:30-09:40</td>
                             <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A001</span></td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
                             <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A005</span></td>
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="(P2) 09:40-10:40">(P2) 09:40-10:40</td>
+                            <td data-uk-time="(P2) 09:45-10:40">(P2) 09:45-10:40</td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
                             <td data-abbrev="Pe" data-full="Pe">Pe<span class="classroom">A009</span></td>
                             <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="(P3) 10:55-11:55">(P3) 10:55-11:55</td>
+                            <td data-uk-time="(P3) 10:55-11:50">(P3) 10:55-11:50</td>
                             <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A101</span></td>
                             <td data-abbrev="Sp" data-full="Spanish">Sp<span class="classroom">A204</span></td>
                             <td data-abbrev="Gg" data-full="Geography">Gg<span class="classroom">B207</span></td>
@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="(P4) 11:55-12:55">(P4) 11:55-12:55</td>
+                            <td data-uk-time="(P4) 11:50-12:50">(P4) 11:50-12:50</td>
                             <td data-abbrev="Gg" data-full="Geography">Gg<span class="classroom">B207</span></td>
                             <td data-abbrev="Hs" data-full="Health and Social">Hs<span class="classroom">B101</span></td>
                             <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A101</span></td>
@@ -183,12 +183,21 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="(RT) 12:55-13:55">(RT) 12:55-13:55</td>
-                            <td> R time then Lunch<span class="classroom">B206</span></td>
-                            <td> R time then Lunch<span class="classroom">B206</span></td>
-                            <td> R time then Lunch<span class="classroom">B206</span></td>
-                            <td> R time then Lunch<span class="classroom">B206</span></td>
-                            <td> R time then Lunch<span class="classroom">B206</span></td>
+                            <td data-uk-time="(FORM) 12:50-13:15">(FORM) 12:50-13:15</td>
+                            <td>Form<span class="classroom">B206</span></td>
+                            <td>Form<span class="classroom">B206</span></td>
+                            <td>Form<span class="classroom">B206</span></td>
+                            <td>Form<span class="classroom">B206</span></td>
+                            <td>Form<span class="classroom">B206</span></td>
+                            ${extraColumn}
+                        </tr>
+                        <tr>
+                            <td data-uk-time="(LUNCH) 13:15-13:55 '?' ">(LUNCH) 13:15-13:55 '?'</td>
+                            <td>Lunch</td>
+                            <td>Lunch</td>
+                            <td>Lunch</td>
+                            <td>Lunch</td>
+                            <td>Lunch</td>
                             ${extraColumn}
                         </tr>
                         <tr>
@@ -223,16 +232,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td data-uk-time="(ST) 08:30-08:40">(ST) 08:30-08:40</td>
-                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
-                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
-                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
-                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
-                            <td data-abbrev="St" data-full="Form">St<span class="classroom">B206</span></td>
+                            <td data-uk-time="(CLASS) 08:25-08:30">(CLASS) 08:30-08:30</td>
+                            <td data-abbrev="Be in the classroom" data-full="Be in the classroom">Be in the classroom</td>
+                            <td data-abbrev="Be in the classroom" data-full="Be in the classroom">Be in the classroom</td>
+                            <td data-abbrev="Be in the classroom" data-full="Be in the classroom">Be in the classroom</td>
+                            <td data-abbrev="Be in the classroom" data-full="Be in the classroom">Be in the classroom</td>
+                            <td data-abbrev="Be in the classroom" data-full="Be in the classroom">Be in the classroom</td>
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="(P1) 08:40-09:40">(P1) 08:40-09:40</td>
+                            <td data-uk-time="(P1) 08:30-09:40">(P1) 08:30-09:40</td>
                             <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A005</span></td>
                             <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A106</span></td>
                             <td data-abbrev="Sp" data-full="Spanish">Sp<span class="classroom">A204</span></td>
@@ -241,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="(P2) 09:40-10:40">(P2) 09:40-10:40</td>
+                            <td data-uk-time="(P2) 09:45-10:40">(P2) 09:45-10:40</td>
                             <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
                             <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A106</span></td>
@@ -250,7 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="(P3) 10:55-11:55">(P3) 10:55-11:55</td>
+                            <td data-uk-time="(P3) 10:55-11:50">(P3) 10:55-11:50</td>
                             <td data-abbrev="EnE" data-full="EnglishE">EnE<span class="classroom">A206</span></td>
                             <td data-abbrev="Ho" data-full="Cooking">Ho<span class="classroom">A005</span></td>
                             <td data-abbrev="Hs" data-full="Health and Social">Hs<span class="classroom">B101</span></td>
@@ -259,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="(P4) 11:55-12:55">(P4) 11:55-12:55</td>
+                            <td data-uk-time="(P4) 11:50-12:50">(P4) 11:50-12:50</td>
                             <td data-abbrev="ScR" data-full="SciencesR">ScR<span class="classroom">A106</span></td>
                             <td data-abbrev="Gg" data-full="Geography">Gg<span class="classroom">B207</span></td>
                             <td data-abbrev="MaE" data-full="Maths">MaE<span class="classroom">B110</span></td>
@@ -268,12 +277,21 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${extraColumn}
                         </tr>
                         <tr>
-                            <td data-uk-time="(RT) 12:55-13:55">(RT) 12:55-13:55</td>
-                            <td> R time then Lunch<span class="classroom">B206</span></td>
-                            <td> R time then Lunch<span class="classroom">B206</span></td>
-                            <td> R time then Lunch<span class="classroom">B206</span></td>
-                            <td> R time then Lunch<span class="classroom">B206</span></td>
-                            <td> R time then Lunch<span class="classroom">B206</span></td>
+                            <td data-uk-time="(FORM) 12:50-13:15">(FORM) 12:50-13:15</td>
+                            <td>Form<span class="classroom">B206</span></td>
+                            <td>Form<span class="classroom">B206</span></td>
+                            <td>Form<span class="classroom">B206</span></td>
+                            <td>Form<span class="classroom">B206</span></td>
+                            <td>Form<span class="classroom">B206</span></td>
+                            ${extraColumn}
+                        </tr>
+                        <tr>
+                            <td data-uk-time="(LUNCH) 13:15-13:55 '?' ">(LUNCH) 13:15-13:55 '?'</td>
+                            <td>Lunch</td>
+                            <td>Lunch</td>
+                            <td>Lunch</td>
+                            <td>Lunch</td>
+                            <td>Lunch</td>
                             ${extraColumn}
                         </tr>
                         <tr>
