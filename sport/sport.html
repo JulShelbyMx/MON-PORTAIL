@@ -436,7 +436,7 @@
 <body>
     <section class="hero">
         <div class="hero-controls">
-            <a href="../index.html" class="back-button">BACK</a>
+            <a class='back-button' href='/'>BACK</a>
             <button class="hero-hamburger">
                 <i class="fas fa-bars"></i>
             </button>
@@ -464,33 +464,33 @@
             <button id="start-pause-timer"><i class="fas fa-play"></i></button>
         </div>
     </section>
-
-    <main class="sport-container">
-        <h2>Programme de Musculation Quotidien</h2>
-        <div class="section">
-            <h3>Échauffement rapide (5 minutes)</h3>
-            <ul>
-                <li>Rotations des bras (avant/arrière) – 20 fois</li>
-                <li>Flexion/extension des coudes – poings serrés</li>
-                <li>Étirements légers des poignets et des épaules</li>
-            </ul>
-        </div>
-        <div class="section">
-            <h3>Circuit d’exercices (≈25 minutes)</h3>
-            <ul>
-                <li>Curl biceps (avec haltères 3 kg) – 3 × 15 répétitions</li>
-                <li>Hammer curls (3 kg) – 3 × 15 répétitions</li>
-                <li>Extensions triceps au-dessus de la tête (3 kg) – 3 × 15 répétitions</li>
-                <li>Overhead press (3 kg) – 1 × 15 répétitions</li>
-                <li>Sit-up (abdos) – 2 × 15 répétitions</li>
-                <li>Farmer's hold (3 kg par main) – 1 × 60 secondes</li>
-                <li>Pompes triceps normales – 1 × 3 répétitions</li>
-                <li>Gainage planche – 1 × 45 secondes</li>
-                <li>Ponts de hanches – 2 × 15 répétitions</li>
-                <li>Pianotage explosif (pour les doigts) – 1 à 2 minutes<br><small>Assieds-toi, mains à plat. Tape avec chaque doigt comme sur un clavier en accélérant progressivement. Reste précis et rapide.</small></li>
-            </ul>
-        </div>
-    </main>
+<main class="sport-container">
+    <h2>Programme Musculaire</h2>
+    <div class="section">
+        <h3>Échauffement rapide (5 minutes)</h3>
+        <ul>
+            <li>Rotations des bras (avant/arrière) – 20 fois</li>
+            <li>Flexion/extension des coudes – poings serrés</li>
+            <li>Étirements légers des poignets et des épaules</li>
+        </ul>
+    </div>
+    <div class="section">
+        <h3>Mini-Circuit Haut du Corps (Mercredi)</h3>
+        <ul>
+            <li>Superset Bras – 2 tours
+                <ul>
+                    <li>Curl Biceps (3 kg) – 12 répétitions</li>
+                    <li>Extensions Triceps (3 kg) – 12-15 répétitions</li>
+                </ul>
+            </li>
+            <li>Overhead Press (Épaules, 3 kg) – 1 × 12 répétitions</li>
+            <li>Gainage Planche – 1 × 45 secondes</li>
+            <li>Pianotage explosif (pour les doigts) – 1-2 minutes
+                <br><small>Assieds-toi, mains à plat. Tape avec chaque doigt comme sur un clavier en accélérant progressivement. Reste précis et rapide.</small>
+            </li>
+        </ul>
+    </div>
+</main>
 
     <button id="back-to-top" title="Retour en haut"><i class="fas fa-arrow-up"></i></button>
 
@@ -648,6 +648,7 @@
                     alert('Erreur lors de la suppression de l\'entrée. Veuillez réessayer.');
                 }
             }
+
 
             // Mettre à jour l'historique
             function updateHistoryList() {
