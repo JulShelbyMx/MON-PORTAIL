@@ -20396,6 +20396,7 @@ window.generateStreamingLinks = function() {
         { episode: 1148, videoUrl: 'https://mega.nz/embed/h1AAXBCA#c-AKM8FEbqpn1fZQY_zU6EL98IUFyxkDmy9wN-108PE' },
         { episode: 1149, videoUrl: 'https://mega.nz/embed/w0AgEYiY#rJrJZ-LpTESNQ92l79t-6OoJF-Czt7rPEvCfnhqa6OA' },
         { episode: 1150, videoUrl: 'https://mega.nz/embed/F4gzyTST#n3md4jJJXhGu4o2ibfXcQBf4o5x3RarWGcTL_EsI-Qc' },
+        { episode: 1151, videoUrl: 'https://mega.nz/embed/chJyDJhC#oZlFI5gegMbzH5KjPpMwSbmp__115CbHZ9zyJEr4LAw' },
 
 
 
