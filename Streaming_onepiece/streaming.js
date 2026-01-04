@@ -19090,6 +19090,51 @@ window.generateStreamingLinks = function() {
       "https://drive.google.com/file/d/1d9HmWiNRGETPpOVtnHckOqAufgqvQmq5/view"
     ]
   },
+    {
+    "chapter": 1169.0,
+    "imageUrls": [
+      "https://drive.google.com/file/d/14qXKQca3kk9_Ww6fYTr0nam7pg9j3mCs/view",
+      "https://drive.google.com/file/d/17ly20qf5XXjaWtJZj_WIjYa0Ce_lZQno/view",
+      "https://drive.google.com/file/d/1GhrOTxu8TJNpOTgr8hJM5LKmAdiMcHvB/view",
+      "https://drive.google.com/file/d/163liNO6g5nSS0nzcL4kHgexq5zCQNEOA/view",
+      "https://drive.google.com/file/d/1X6zJ72PAagGHVzBkVYdj3YZMIxzwrrek/view",
+      "https://drive.google.com/file/d/15eze6r1iZyFCS9vU_D3kDAJ6hM69XgMv/view",
+      "https://drive.google.com/file/d/1L85JOiVfASrIUDEyARbbrnQYRZZpzLR4/view",
+      "https://drive.google.com/file/d/1X4mdE2Fterd1hUhHjh_EXP2cgR7LkLcf/view",
+      "https://drive.google.com/file/d/1mTRf8_qLOW7NAeGT8HYTqQw12PbOe7Cp/view",
+      "https://drive.google.com/file/d/1NK6JT5JOMi6rDAUosn-hynJkA3nngj_R/view",
+      "https://drive.google.com/file/d/1sKx4GA7jj1rv3z9OiQuO5GwyF2LnWN8D/view",
+      "https://drive.google.com/file/d/10N5JErpM40eJVkW719pKFVWfuYeprnX8/view",
+      "https://drive.google.com/file/d/11yFrAJMniHdSuCP9yDaUqNekPVCdtadm/view",
+      "https://drive.google.com/file/d/1akEoq1lLQqxT2XFZKaaPeAgnR1XAvqih/view",
+      "https://drive.google.com/file/d/1XDjHmf-ms_HCpoSKAltGa9QkCXFSjlP5/view",
+      "https://drive.google.com/file/d/1YJ8CAwPaJS6J1lqmDjK0Pien5saGdFWl/view",
+      "https://drive.google.com/file/d/1xWGo1b-8SYqRxfh2ZpT-NDzoq7eYVjx0/view",
+      "https://drive.google.com/file/d/1UBgKJIk_--q2SUIe5CZT8kuLH7bLNn2p/view"
+    ]
+  },
+  {
+    "chapter": 1170.0,
+    "imageUrls": [
+      "https://drive.google.com/file/d/1wOkllk-iff_yotvxe6nwqucNuszjp-4I/view",
+      "https://drive.google.com/file/d/119hGT7S4ONllhTfG3GBKosM2Jm2wWYYC/view",
+      "https://drive.google.com/file/d/12vfTB43MMnDJ3S1tSNe4pd3NWdlaDqUm/view",
+      "https://drive.google.com/file/d/17sdhxkIX4DofqzndiO8zgyOjyCFqaj8R/view",
+      "https://drive.google.com/file/d/1Kers4Tz4cG3vJtqd1RYurhbBJxuacbbt/view",
+      "https://drive.google.com/file/d/1Jhpcl8docbJOzEbsoYdgkcVG8b8r3egu/view",
+      "https://drive.google.com/file/d/1G2x4rZKeYmA-ZJFASaop43di0zQ11RXK/view",
+      "https://drive.google.com/file/d/1OXIhdShiRFMfoQq3kc4QKfFHkQepG3ft/view",
+      "https://drive.google.com/file/d/1acJQkHaYcKC5wJM3btvwybT3FkgvtPm9/view",
+      "https://drive.google.com/file/d/13CkRDTSwkHn1NpVJ-QBQYj-iyqUb6vdT/view",
+      "https://drive.google.com/file/d/1eGdjkwS2gCYOx0v4hGigTHyuKwslw2Z1/view",
+      "https://drive.google.com/file/d/1yzuERFVBf74WFffnqz_s4KsjZLTz_U2r/view",
+      "https://drive.google.com/file/d/1tzpIrSZkFFulwZRxPeozb0VXrrvyG4SW/view",
+      "https://drive.google.com/file/d/1RGJygGlxGfwBAzwUdwssMEuSj--MRdD2/view",
+      "https://drive.google.com/file/d/1EOdEnLTg05hj7KH2LbPIPHkmeF-M7vln/view",
+      "https://drive.google.com/file/d/15REfZF41y2J5kfx0Co13N3CCp1yBr9BO/view",
+      "https://drive.google.com/file/d/1HUAGm4KKm4JKmuddxzkgaBGrVZ-SVJjo/view"
+    ]
+  },
             
 
             ]
@@ -20420,6 +20465,9 @@ window.generateStreamingLinks = function() {
         { episode: 1151, videoUrl: 'https://mega.nz/embed/chJyDJhC#oZlFI5gegMbzH5KjPpMwSbmp__115CbHZ9zyJEr4LAw' },
         { episode: 1152, videoUrl: 'https://mega.nz/embed/pgAHmIxK#Qs96KDkUvfvyO82jdt3iKguORSseN7YHEBrE7UM7MZ8' },
         { episode: 1153, videoUrl: 'https://mega.nz/embed/YpQADSaa#XtJwdXCtgWIfPp4UkJaycIa7SABngCsempv-8Df3QVc' },
+        { episode: 1154, videoUrl: 'https://mega.nz/file/VpRHkIxJ#Sna1VHpcA2gb5PExtCJTWeHetF-48m2UeD0FmjOUzys' },
+        { episode: 1155, videoUrl: 'https://mega.nz/file/swAmDSIA#D2bBuz8t9GUNK1OxhZUpI0oEMsApblZgQW3WZzyEOj4 ' },
+
 
 
 
