@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
     const holidays = [
-        { start: { year: 2025, month: 12, day: 19 }, end: { year: 2026, month: 1, day: 4 }, reason: 'Christmas Holidays' },
         { start: { year: 2026, month: 2, day: 14 }, end: { year: 2026, month: 2, day: 22 }, reason: 'Holidays' },
         { start: { year: 2026, month: 4, day: 3 }, end: { year: 2026, month: 4, day: 19 }, reason: 'Easter Holidays' },
         { start: { year: 2026, month: 5, day: 23 }, end: { year: 2026, month: 5, day: 31 }, reason: 'Holidays' },
@@ -485,8 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Définir les points de départ Week A (début de terme et lendemains de vacances)
         const weekAStartDates = [
-            new Date(2025, 10, 3), // 3 novembre 2025 = Week A (début terme)
-            new Date(2026, 0, 5),  // 5 janvier 2026 = Week A (après Christmas)
+            new Date(2025, 12, 29),  // 5 janvier 2026 = Week A (après Christmas)
             new Date(2026, 1, 23), // 23 février 2026 = Week A (après Feb holidays)
             new Date(2026, 3, 20), // 20 avril 2026 = Week A (après Easter)
             new Date(2026, 5, 1),  // 1 juin 2026 = Week A (après May holidays)
