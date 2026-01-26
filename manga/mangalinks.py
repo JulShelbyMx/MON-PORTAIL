@@ -11,10 +11,10 @@ import mimetypes
 
 # Config
 parent_folder_name = "One Piece scans"
-zip_folder = r"D:\HakuNeko Desktop\One Piece scans"
+zip_folder = r"D:\ONE PIECE\One Piece scans"
 output_file = r"D:\MON PORTAIL\manga\mangalinks.json"
-credentials_file = r"D:\HakuNeko Desktop\Manga\credentials.json"
-token_file = r"D:\HakuNeko Desktop\Manga\token.json"
+credentials_file = r"D:\ONE PIECE\credentials.json"
+token_file = r"D:\ONE PIECE\token.json"
 max_image_size_mb = 5  # Taille max après compression (en Mo)
 
 # Vérifier que Pillow est installé
