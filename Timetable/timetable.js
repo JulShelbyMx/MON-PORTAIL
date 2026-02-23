@@ -484,19 +484,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Définir les points de départ Week A (début de terme et lendemains de vacances)
         const weekAStartDates = [
-            new Date(2026, 1, 5),  // 5 janvier 2026 = Week A (après Christmas)
-            new Date(2026, 1, 23), // 23 février 2026 = Week A (après Feb holidays)
-            new Date(2026, 3, 20), // 20 avril 2026 = Week A (après Easter)
-            new Date(2026, 5, 1),  // 1 juin 2026 = Week A (après May holidays)
-            new Date(2026, 8, 2),  // 2 septembre 2026 = Week A (après Summer)
-            new Date(2026, 10, 2), // 2 novembre 2026 = Week A (après Oct holidays)
-            new Date(2027, 0, 4),  // 4 janvier 2027 = Week A (après Christmas)
-            new Date(2027, 1, 22), // 22 février 2027 = Week A (après Feb holidays)
-            new Date(2027, 3, 19), // 19 avril 2027 = Week A (après Easter)
-            new Date(2027, 5, 7),  // 7 juin 2027 = Week A (après May holidays)
-            new Date(2027, 8, 8),  // 8 septembre 2027 = Week A (après Summer)
-            new Date(2027, 10, 1), // 1 novembre 2027 = Week A (après Oct holidays)
-            new Date(2028, 0, 3),  // 3 janvier 2028 = Week A (après Christmas)
+            
+            new Date(2026, 2, 16), // 23 février 2026 = Week A (après Feb holidays)
+            new Date(2026, 4, 20), // 20 avril 2026 = Week A (après Easter)
+            new Date(2026, 6, 1),  // 1 juin 2026 = Week A (après May holidays)
+            new Date(2026, 9, 2),  // 2 septembre 2026 = Week A (après Summer)
+            new Date(2026, 11, 2), // 2 novembre 2026 = Week A (après Oct holidays)
+            new Date(2027, 1, 4),  // 4 janvier 2027 = Week A (après Christmas)
+            new Date(2027, 2, 22), // 22 février 2027 = Week A (après Feb holidays)
+            new Date(2027, 4, 19), // 19 avril 2027 = Week A (après Easter)
+            new Date(2027, 6, 7),  // 7 juin 2027 = Week A (après May holidays)
+            new Date(2027, 9, 8),  // 8 septembre 2027 = Week A (après Summer)
+            new Date(2027, 11, 1), // 1 novembre 2027 = Week A (après Oct holidays)
+            new Date(2028, 1, 3),  // 3 janvier 2028 = Week A (après Christmas)
         ];
 
         // Trouver le point de départ Week A le plus proche avant ou égal à la date actuelle
