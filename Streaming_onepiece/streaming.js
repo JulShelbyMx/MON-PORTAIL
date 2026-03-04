@@ -19215,6 +19215,23 @@ window.generateStreamingLinks = function() {
       "https://drive.google.com/file/d/1XSbF_4ay1FXodF79RK7z265EnI2EBUgW/view"
     ]
   },
+  {
+    "chapter": 1175.0,
+    "imageUrls": [
+      "https://drive.google.com/file/d/1yVgVZ9ZarC5FE4abzc8yKhO5AkTsH68G/view",
+      "https://drive.google.com/file/d/1B8M9cdrRa0YoHLfl35P3qw4CGKsFeph7/view",
+      "https://drive.google.com/file/d/1hN4GK_DqRFJbs-Aimg1DOvgnEYRFGCpJ/view",
+      "https://drive.google.com/file/d/1P68o-or5yR0BOUlJmrbrnwZ0mIM7ruSh/view",
+      "https://drive.google.com/file/d/1SinmXNbqu-9mh-jJX6DSvtN--MEw8iCa/view",
+      "https://drive.google.com/file/d/19fBDjobBuOlgMeAiUyTtNyA-CyrLHKvR/view",
+      "https://drive.google.com/file/d/1cTanigmOUadI0ItoHSBbBx9SlbYjFh3T/view",
+      "https://drive.google.com/file/d/1d7bD0N5D-DZq6aAUZsg8WWTUh1GXc2JO/view",
+      "https://drive.google.com/file/d/10aErc3x04ncX5ZThdu0JikjY4ePPoe04/view",
+      "https://drive.google.com/file/d/1FK_4WOLW0jtgpT8vIYxaH-v081orHAc6/view",
+      "https://drive.google.com/file/d/169djVu6apR-wSV0QdUHX2X1ujNVJ2h9d/view",
+      "https://drive.google.com/file/d/1XKfNPofi3zwW_-j_8n3ydRcDfjeE3X0L/view"
+    ]
+  },
             
 
             ]
