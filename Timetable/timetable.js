@@ -485,7 +485,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Définir les points de départ Week A (début de terme et lendemains de vacances)
         const weekAStartDates = [
             
-            new Date(2026, 2, 16), // 23 février 2026 = Week A (après Feb holidays)
+            new Date(2026, 3, 23), // 23 février 2026 = Week A (après Feb holidays)
             new Date(2026, 4, 20), // 20 avril 2026 = Week A (après Easter)
             new Date(2026, 6, 1),  // 1 juin 2026 = Week A (après May holidays)
             new Date(2026, 9, 2),  // 2 septembre 2026 = Week A (après Summer)
