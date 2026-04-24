@@ -250,7 +250,7 @@ for zip_file in zip_files:
     # Étape 4 : Uploader les images .jpg, .jpeg, .png, .webp
     image_urls = []
     for file_name in sorted(os.listdir(chapter_folder_path)):
-        if file_name.lower().endswith(('.jpg', '.jpeg', '.png', '.webp')):
+        if file_name.lower().endswith(('.jpg', '.jpeg', '.png', '.webp')) and not file_name.startswith('compressed_'):
             file_path = os.path.join(chapter_folder_path, file_name)
             # Créer un chemin temporaire pour l'image compress�)e
             compressed_path = os.path.join(chapter_folder_path, f"compressed_{file_name}.jpg")
