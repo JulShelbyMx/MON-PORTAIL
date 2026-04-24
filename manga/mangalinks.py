@@ -139,7 +139,7 @@ all_files = os.listdir(zip_folder)
 print(f"Fichiers trouvés dans {zip_folder} : {all_files}")
 
 # Filtrer les fichiers ZIP (insensible à la casse)
-zip_files = [f for f in all_files if f.lower().endswith('.zip') and f.lower().startswith('op')]
+zip_files = [f for f in all_files if re.match(r'(?i)op\d+(?:\.\d+)?\.zip', f)]
 if not zip_files:
     print("Aucun fichier ZIP trouvé commençant par 'OP' et finissant par '.zip'. Tout est à jour !")
     exit()
@@ -176,11 +176,13 @@ else:
 new_chapters = []
 for zip_file in zip_files:
     # Extraire le numéro du chapitre depuis le nom du ZIP (ex: OP1148.zip -> 1148)
-    match = re.match(r'(?i)OP(\d+)\.zip', zip_file)
+    match = re.match(r'(?i)OP(\d+(?:\.\d+)?)\.zip', zip_file)
     if not match:
-        print(f"Fichier ZIP ignorC� (nom invalide) : {zip_file}")
+        print(f"Fichier ZIP ignoré (nom invalide) : {zip_file}")
         continue
-    chapter_num = float(match.group(1))
+    chapter_str = match.group(1)  # "1181" ou "1181.5"
+    chapter_num = float(chapter_str)
+    chapter_display = float(chapter_str)
     if chapter_num <= last_chapter_num:
         print(f"Chapitre {chapter_num} déjà traité, ignoré.")
         continue
@@ -247,7 +249,7 @@ for zip_file in zip_files:
 
     # Étape 4 : Uploader les images .jpg, .jpeg, .png, .webp
     image_urls = []
-    for file_name in os.listdir(chapter_folder_path):
+    for file_name in sorted(os.listdir(chapter_folder_path)):
         if file_name.lower().endswith(('.jpg', '.jpeg', '.png', '.webp')):
             file_path = os.path.join(chapter_folder_path, file_name)
             # Créer un chemin temporaire pour l'image compress�)e
@@ -283,9 +285,10 @@ for zip_file in zip_files:
     # Étape 5 : Ajouter le chapitre à la liste des nouveaux chapitres
     if image_urls:
         new_chapters.append({
-            "chapter": int(chapter_num),
+            "chapter": chapter_display,
             "imageUrls": image_urls
-        })
+    })
+    
 
 # Étape 6 : Mettre à jour mangalinks.json si des nouveaux chapitres ont été traités
 if new_chapters:
