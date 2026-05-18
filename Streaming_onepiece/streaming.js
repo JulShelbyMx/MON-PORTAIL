@@ -20699,6 +20699,9 @@ window.generateStreamingLinks = function() {
         { episode: 1157, videoUrl: 'https://mega.nz/embed/B8wiRCCA#BUZMbasRWOgyQD7FtuALoA0y_e2SyXBcNcV1eb2HxpU ' },
         { episode: 1158, videoUrl: 'https://mega.nz/embed/8ggT3LSD#ebSv9WoXV9k-Km_DR_zPj0AOsvwKX1YS7xTEjtErqI8 ' },
         { episode: 1159, videoUrl: 'https://mega.nz/embed/poQWjRiT#DZtWWP5K8B4JOeGzx3pKQmJmo3jgYqk4mhaaA6nfmEg' },
+        { episode: 1160, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6184499' },
+        { episode: 1161, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6189474' },
+        { episode: 1162, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6194570' },
 
 
     ]
