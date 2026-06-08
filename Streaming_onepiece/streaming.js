@@ -19397,6 +19397,24 @@ window.generateStreamingLinks = function() {
       "https://drive.google.com/file/d/10zNnpgiBHVvpE-EUBYL3pwqqvtYgPxB6/view"
     ]
   },
+  {
+    "chapter": 1184.0,
+    "imageUrls": [
+      "https://drive.google.com/file/d/1cOU_oVX5xio3G2m7rYKxj9_VDNzyV0A2/view",
+      "https://drive.google.com/file/d/1L4cwKeBglfDQsoS6qOFy4dhyQlmfc43i/view",
+      "https://drive.google.com/file/d/1NKQn-yZkA9Tt7x-4C6848LEQUUPZiUpA/view",
+      "https://drive.google.com/file/d/1C08snO1EaBje1sJqF_CuYoKEVraHHrQ6/view",
+      "https://drive.google.com/file/d/1hQNKDLRRjf2yIUDUMkK-bWy_5UMZlOM5/view",
+      "https://drive.google.com/file/d/1Vht0fzzUkxh1MiTu6DRto8UQndB4J-f0/view",
+      "https://drive.google.com/file/d/1WAvUA80Y7c0Y8qDslbf3mUArTYMLVpfT/view",
+      "https://drive.google.com/file/d/1RN_lv8rZzNnOaAWTu_hzS08Y9wvwBDTx/view",
+      "https://drive.google.com/file/d/1PfEuMQJZCvuJHD8ZQDet8DzCVEQ_5_wU/view",
+      "https://drive.google.com/file/d/12WsiCE70ZA8NpHVE2C7O9u5GlBHePUFb/view",
+      "https://drive.google.com/file/d/1GewiSBis7Oqd827cv4QRu4zO8x8w3d8l/view",
+      "https://drive.google.com/file/d/1VLPMbgIyql2bgTSVpKLMswSDLfWWQZii/view",
+      "https://drive.google.com/file/d/1OX3q2SczxRfDqmMBP-nNhrIiKnwIFueG/view"
+    ]
+  },
             
 
             ]
@@ -20744,7 +20762,9 @@ window.generateStreamingLinks = function() {
         { episode: 1160, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6184499' },
         { episode: 1161, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6189474' },
         { episode: 1162, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6194570' },
-        { episode: 1163, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6194570' },
+        { episode: 1163, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6200495' },
+        { episode: 1164, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6207627' },
+        { episode: 1165, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6213153' },
 
 
     ]
