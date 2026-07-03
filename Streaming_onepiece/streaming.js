@@ -19415,6 +19415,50 @@ window.generateStreamingLinks = function() {
       "https://drive.google.com/file/d/1OX3q2SczxRfDqmMBP-nNhrIiKnwIFueG/view"
     ]
   },
+  {
+    "chapter": 1185.0,
+    "imageUrls": [
+      "https://drive.google.com/file/d/1ZCuRUSc0qH2CQmhv1BvgTgVSyBifWRqS/view",
+      "https://drive.google.com/file/d/1Clb06uOxxcAsMbaN2wZ74MyAbOyAwok4/view",
+      "https://drive.google.com/file/d/1eatd_O9UHGR9UqgGxGgc06lLeLEubcqa/view",
+      "https://drive.google.com/file/d/1OQIQ0uiqLjtcpuhCcVk3nOjuBRWvZ_X9/view",
+      "https://drive.google.com/file/d/1FbKVoPZjUWEUx8YAmbvRgydxpaG869Dg/view",
+      "https://drive.google.com/file/d/150STmaZbsfmS_A8ctQzudIxrgLgLfFFH/view",
+      "https://drive.google.com/file/d/13JDjA7HYjtibm_9VkphFRD84Y34wA9Pq/view",
+      "https://drive.google.com/file/d/1vqN8o4S0DtMCultPRDCAFU1niuJYWTzA/view",
+      "https://drive.google.com/file/d/1zkv3zKHTZCBn4w-rrfCVmKKrrOHqN6tJ/view",
+      "https://drive.google.com/file/d/1-ymn18lS0QYeHS6jCm4TqUbjbm3BrEXT/view",
+      "https://drive.google.com/file/d/1JNBPHrwa9ne3OOARPNm8Oj1q8pGQu4da/view",
+      "https://drive.google.com/file/d/1UUj79NyOjZUVW7gSm67vdSXMfULlLAIp/view",
+      "https://drive.google.com/file/d/1zy-d5OBAML5xJVUtj5wGw2nU3DcTY0Nh/view",
+      "https://drive.google.com/file/d/1RiZ3uLD8vJmsiQiDZfLFChJRANGCzW0Q/view",
+      "https://drive.google.com/file/d/13P3fuUzr6Wd9r_SB-CPYeRmVgCV1ocew/view",
+      "https://drive.google.com/file/d/1sz62zf14b3HYxOFr87fBpvgUGPmZhSJr/view"
+    ]
+  },
+  {
+    "chapter": 1186.0,
+    "imageUrls": [
+      "https://drive.google.com/file/d/10HEhEbIFfMiJl_awfhlDravZoUw_u2YU/view",
+      "https://drive.google.com/file/d/1YKmqG79CbKdIkt_AA4hyn16iZdDaycA3/view",
+      "https://drive.google.com/file/d/1Rm_Wi4xBYskP7ZOsB0ZVJzTnZMu64lsi/view",
+      "https://drive.google.com/file/d/1-8p7eaOkH1GKqx6iFoQi7DmZBdwpkbmR/view",
+      "https://drive.google.com/file/d/1t6-qpMTBhwJ4mCk6dL0hq1wJ21VqNDlU/view",
+      "https://drive.google.com/file/d/1PvHDZBmyFU47zTh6xtPZeX47aie8FZNw/view",
+      "https://drive.google.com/file/d/1sDmxw1KuLOc-HiyBJOO7Sp_jsv8zFAHC/view",
+      "https://drive.google.com/file/d/1gMNrGdLTeIhnD4vtH28HiNhuT2wx3pry/view",
+      "https://drive.google.com/file/d/1adUIXSPlseQOLNui-il79cxCVGBq8nYQ/view",
+      "https://drive.google.com/file/d/1nuzFciSzTxazcnLs0Cv4d6eA9zvzmEZA/view",
+      "https://drive.google.com/file/d/1CDL9k_FThKfyOXpIJolLKQOSvEsbGhwQ/view",
+      "https://drive.google.com/file/d/1322SsDfi9yaiIpzgMHo7h3eVuzk1AsX0/view",
+      "https://drive.google.com/file/d/1abVZd3Dn6q904Nrr5snLB7V03QL6E9CD/view",
+      "https://drive.google.com/file/d/1GZJ1resRtJXQrULiEYxilrijKbsanol9/view",
+      "https://drive.google.com/file/d/126uiCzUP1bkh_mlWXm1KxECbE-3rubt-/view",
+      "https://drive.google.com/file/d/1UaDS9_MU_rsOE0GNFvB6DiVthQgDR-rJ/view",
+      "https://drive.google.com/file/d/18bSAo-BuVYeZHycmKx9KfmxxSlnOLsii/view"
+    ]
+  },
+  
             
 
             ]
@@ -20765,6 +20809,9 @@ window.generateStreamingLinks = function() {
         { episode: 1163, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6200495' },
         { episode: 1164, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6207627' },
         { episode: 1165, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6213153' },
+        { episode: 1166, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6219535' },
+        { episode: 1166, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6219535' },
+        { episode: 1167, videoUrl: 'https://video.sibnet.ru/shell.php?videoid=6229847' },
 
 
     ]
