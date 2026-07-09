@@ -487,7 +487,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             new Date(2026, 3, 23), // 23 février 2026 = Week A (après Feb holidays)
             new Date(2026, 4, 20), // 20 avril 2026 = Week A (après Easter)
-            new Date(2026, 6, 1),  // 1 juin 2026 = Week A (après May holidays)
+            new Date(2026, 29, 6),  // 1 juin 2026 = Week A (après May holidays)
             new Date(2026, 9, 2),  // 2 septembre 2026 = Week A (après Summer)
             new Date(2026, 11, 2), // 2 novembre 2026 = Week A (après Oct holidays)
             new Date(2027, 1, 4),  // 4 janvier 2027 = Week A (après Christmas)
