@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jul's Portal</title>
+    <title>Jul's Portal — Portail personnel</title>
     <meta name="description" content="Portail personnel de Jul : accès rapide aux outils scolaires, comptes pro, streaming, réseaux sociaux, jeux et plus, avec emploi du temps, ranking d'anime et suivi Memento Mori.">
     <meta name="theme-color" content="#0b0d12">
     <meta property="og:title" content="Jul's Portal">
@@ -16,7 +16,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <script>try{var t=localStorage.getItem('jp-theme');if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches)t='light';if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 </head>
 <body>
     <header>
@@ -53,32 +52,48 @@
                 <span class="kbd-hint">/</span>
                 <ul id="search-suggestions" class="suggestions-list"></ul>
             </div>
-            <button id="theme-toggle" class="icon-button" aria-label="Changer de thème">
-                <i class="fas fa-sun"></i>
-            </button>
         </div>
     </header>
 
     <section class="hero">
+        <div class="hero-sky" aria-hidden="true">
+            <div class="sun"></div>
+            <div class="stars"></div>
+            <div class="cloud cloud-1"></div>
+            <div class="cloud cloud-2"></div>
+            <div class="cloud cloud-3"></div>
+        </div>
+
         <div class="hero-content">
             <span class="hero-eyebrow"><i class="fas fa-compass"></i> Portail personnel</span>
             <h2>Bienvenue sur mon portail</h2>
             <p class="hero-quote">« A man dies when he is forgotten. » — Eiichiro Oda</p>
             <nav class="hero-quicknav" aria-label="Accès rapide aux catégories">
-            <a href="#School">School</a>
-            <a href="#Professional">Professional</a>
-            <a href="#Eliya">Eliya</a>
-            <a href="#Streaming-websites">Streaming websites</a>
-            <a href="#Social-networks">Social networks</a>
-            <a href="#Gaming">Gaming</a>
-            <a href="#Others">Others</a>
+                <a href="#School">School</a>
+                <a href="#Professional">Professional</a>
+                <a href="#Eliya">Eliya</a>
+                <a href="#Streaming-websites">Streaming websites</a>
+                <a href="#Social-networks">Social networks</a>
+                <a href="#Gaming">Gaming</a>
+                <a href="#Others">Others</a>
             </nav>
-            <div class="hero-stats" id="hero-stats">
-                <div class="stat"><strong id="stat-links">—</strong><span>Liens</span></div>
-                <div class="stat"><strong id="stat-categories">—</strong><span>Catégories</span></div>
-                <div class="stat"><strong id="stat-favorites">—</strong><span>Favoris</span></div>
-                <div class="stat"><strong id="stat-clock">—</strong><span>Heure</span></div>
+        </div>
+
+        <div class="ocean" id="ocean">
+            <canvas class="sea" id="sea-back" aria-hidden="true"></canvas>
+            <div class="boat-rig" id="boat-rig">
+                <img class="boat" src="images/thousand-sunny.webp" width="544" height="643" alt="Le Thousand Sunny naviguant sur l'océan" decoding="async" fetchpriority="high">
             </div>
+            <canvas class="sea" id="sea-front" aria-hidden="true"></canvas>
+        </div>
+    </section>
+
+    <section class="stats-bar" aria-label="Chiffres du portail">
+        <div class="hero-stats" id="hero-stats">
+            <div class="stat"><strong id="stat-links">—</strong><span>Liens</span></div>
+            <div class="stat"><strong id="stat-categories">—</strong><span>Catégories</span></div>
+            <div class="stat"><strong id="stat-favorites">—</strong><span>Favoris</span></div>
+            <div class="stat"><strong id="stat-clock">—</strong><span>Heure</span></div>
         </div>
     </section>
 
@@ -654,6 +669,7 @@
     </button>
 
     <script src="script.js" defer></script>
+    <script src="ocean.js" defer></script>
 
     <footer>
         <p>© 2026 JulShelby — Portail personnel. Tous les logos et marques appartiennent à leurs propriétaires respectifs.</p>

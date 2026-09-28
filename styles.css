@@ -28,24 +28,6 @@
     --transition: 180ms cubic-bezier(.4,0,.2,1);
 }
 
-[data-theme="light"] {
-    --bg: #f5f6f9;
-    --bg-soft: #ffffff;
-    --surface: #ffffff;
-    --surface-hover: #eef1f6;
-    --border: #e2e5ec;
-    --border-soft: #ebedf2;
-    --text: #171a21;
-    --text-muted: #616a7a;
-    --accent: #c8791a;
-    --accent-strong: #a8630f;
-    --accent-contrast: #ffffff;
-    --accent-soft: rgba(200, 121, 26, 0.12);
-    --link: #0b6bb3;
-    --shadow: 0 10px 30px rgba(20, 24, 35, 0.08);
-    --shadow-sm: 0 4px 14px rgba(20, 24, 35, 0.06);
-}
-
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-h) + 16px); }
@@ -211,8 +193,7 @@ header {
     opacity: 0.8;
 }
 #search-button:hover { opacity: 1; background: var(--surface-hover); }
-#search-button img { width: 15px; height: 15px; object-fit: contain; filter: var(--icon-filter, none); }
-[data-theme="light"] #search-button img { filter: invert(1) opacity(0.7); }
+#search-button img { width: 15px; height: 15px; object-fit: contain;  }
 
 .kbd-hint {
     position: absolute;
@@ -287,23 +268,26 @@ header {
    Hero
    ========================================================= */
 .hero {
+    --ocean-h: clamp(210px, 27vw, 300px);
+    --boat-w: clamp(160px, 22vw, 270px);
     position: relative;
-    padding: 74px 24px 56px;
+    padding: 60px 0 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     overflow: hidden;
-    background:
-        radial-gradient(600px 300px at 15% 0%, var(--accent-soft), transparent 60%),
-        radial-gradient(500px 260px at 90% 10%, rgba(111, 195, 255, 0.10), transparent 60%),
-        var(--bg);
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-mid) 42%, var(--sky-low) 72%, var(--sky-horizon) 100%);
     border-bottom: 1px solid var(--border-soft);
+    isolation: isolate;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
-    max-width: 760px;
+    z-index: 3;
+    max-width: 900px;
+    padding: 0 24px;
     text-align: center;
+    margin-bottom: calc(var(--boat-w) * 1.18 - var(--ocean-h) * 0.72 + 14px);
 }
 
 .hero-eyebrow {
@@ -366,9 +350,12 @@ header {
     flex-wrap: wrap;
     justify-content: center;
     gap: 28px;
-    margin-top: 30px;
-    padding-top: 26px;
-    border-top: 1px solid var(--border-soft);
+}
+
+.stats-bar {
+    padding: 20px 16px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border-soft);
 }
 
 .hero-stats .stat {
@@ -391,6 +378,106 @@ header {
     text-transform: uppercase;
     letter-spacing: 0.6px;
 }
+
+/* =========================================================
+   Hero scene — Thousand Sunny sailing the ocean
+   ========================================================= */
+:root {
+    --sky-top: #060a15; --sky-mid: #172040; --sky-low: #4a3550; --sky-horizon: #d9834a;
+    --cloud: rgba(255, 196, 160, 0.13);
+    --star-opacity: 1;
+    --sun-core: #ffd58a; --sun-edge: #f2913f; --sun-glow: rgba(255, 160, 80, 0.45);
+    --sea-1a: #1c4a6b; --sea-1b: #0f2f4b;
+    --sea-2a: #15405e; --sea-2b: #0b2640;
+    --sea-3a: #103550; --sea-3b: #081d32;
+    --sea-4a: #0b2a42; --sea-4b: #051524;
+    --foam: rgba(235, 245, 255, 0.85);
+}
+
+.hero-sky { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+
+.sun {
+    position: absolute;
+    left: 71%;
+    bottom: calc(var(--ocean-h) * 0.5);
+    width: clamp(70px, 9vw, 120px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 50% 45%, var(--sun-core), var(--sun-edge) 78%);
+    box-shadow: 0 0 60px 26px var(--sun-glow), 0 0 160px 70px var(--sun-glow);
+    transform: translateX(-50%);
+}
+
+.stars {
+    position: absolute; inset: 0 0 45% 0;
+    opacity: var(--star-opacity);
+    background-image:
+        radial-gradient(1.4px 1.4px at 8% 22%, #fff, transparent),
+        radial-gradient(1px 1px at 17% 55%, #fff, transparent),
+        radial-gradient(1.6px 1.6px at 26% 12%, #fff, transparent),
+        radial-gradient(1px 1px at 34% 38%, #dfe8ff, transparent),
+        radial-gradient(1.3px 1.3px at 44% 18%, #fff, transparent),
+        radial-gradient(1px 1px at 53% 48%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 61% 10%, #fff, transparent),
+        radial-gradient(1px 1px at 72% 30%, #dfe8ff, transparent),
+        radial-gradient(1.4px 1.4px at 81% 14%, #fff, transparent),
+        radial-gradient(1px 1px at 90% 42%, #fff, transparent),
+        radial-gradient(1.2px 1.2px at 95% 20%, #fff, transparent),
+        radial-gradient(1px 1px at 3% 60%, #fff, transparent);
+    animation: twinkle 5s ease-in-out infinite alternate;
+}
+@keyframes twinkle { from { opacity: calc(var(--star-opacity) * .55); } to { opacity: var(--star-opacity); } }
+
+.cloud {
+    position: absolute;
+    width: 150px; height: 36px;
+    border-radius: 999px;
+    background: var(--cloud);
+    filter: blur(2px);
+    left: -220px;
+    animation: drift linear infinite;
+}
+.cloud::before, .cloud::after { content: ""; position: absolute; background: inherit; border-radius: 50%; }
+.cloud::before { width: 64px; height: 50px; left: 22px; top: -24px; }
+.cloud::after  { width: 84px; height: 62px; left: 60px; top: -32px; }
+.cloud-1 { top: 30%; animation-duration: 110s; animation-delay: -30s; }
+.cloud-2 { top: 46%; transform: scale(.7); animation-duration: 150s; animation-delay: -90s; opacity: .8; }
+.cloud-3 { top: 20%; transform: scale(1.25); animation-duration: 190s; animation-delay: -10s; opacity: .6; }
+@keyframes drift { to { translate: calc(100vw + 460px) 0; } }
+
+.ocean {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: var(--ocean-h);
+    isolation: isolate;
+    background: linear-gradient(180deg, transparent 30%, var(--sea-2b) 60%, var(--sea-4b));
+}
+
+.sea {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    pointer-events: none;
+}
+#sea-back  { z-index: 1; }
+#sea-front { z-index: 4; }
+
+/* The boat is moved every frame by ocean.js: it rides the wave surface */
+.boat-rig {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    top: 0;
+    width: var(--boat-w);
+    margin-left: calc(var(--boat-w) / -2);
+    transform-origin: 50% 88%;
+    will-change: transform;
+    pointer-events: none;
+}
+.boat { width: 100%; height: auto; display: block; filter: drop-shadow(0 8px 10px rgba(0, 0, 0, .35)); }
 
 /* =========================================================
    Category sections
@@ -811,7 +898,8 @@ footer a { color: var(--text-muted); }
     .logo-text { display: none; }
     .categories { padding: 26px 16px; }
     .carousel { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px; }
-    .hero { padding: 56px 18px 40px; }
+    .hero { padding-top: 44px; }
+    .hero-content { padding: 0 16px; }
     #search-bar { width: 120px; }
     #search-bar:focus { width: 150px; }
 

@@ -8,40 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const backToTopButton = document.getElementById('back-to-top');
     const hamburger = document.querySelector('.hamburger');
     const navButtons = document.querySelector('.nav-buttons');
-    const themeToggle = document.getElementById('theme-toggle');
-
-    /* -----------------------------------------------------------
-       Theme (dark/light, persisted)
-    ----------------------------------------------------------- */
-    const THEME_KEY = 'jp-theme';
-    const applyTheme = (theme) => {
-        document.documentElement.setAttribute('data-theme', theme);
-        if (themeToggle) {
-            themeToggle.innerHTML = theme === 'light'
-                ? '<i class="fas fa-moon"></i>'
-                : '<i class="fas fa-sun"></i>';
-            themeToggle.setAttribute('aria-label', theme === 'light' ? 'Activer le mode sombre' : 'Activer le mode clair');
-        }
-    };
-
-    const storedTheme = localStorage.getItem(THEME_KEY);
-    const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
-    const lockedTheme = document.documentElement.dataset.themeLock; // pages designed for dark only
-    if (lockedTheme) {
-        applyTheme(lockedTheme);
-        if (themeToggle) themeToggle.style.display = 'none';
-    } else {
-        applyTheme(storedTheme || (systemPrefersLight ? 'light' : 'dark'));
-    }
-
-    if (themeToggle && !lockedTheme) {
-        themeToggle.addEventListener('click', () => {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'light' ? 'dark' : 'light';
-            applyTheme(next);
-            localStorage.setItem(THEME_KEY, next);
-        });
-    }
 
     /* -----------------------------------------------------------
        Hamburger menu (mobile)
