@@ -1,683 +1,662 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jul's Portal</title>
+    <meta name="description" content="Portail personnel de Jul : accès rapide aux outils scolaires, comptes pro, streaming, réseaux sociaux, jeux et plus, avec emploi du temps, ranking d'anime et suivi Memento Mori.">
+    <meta name="theme-color" content="#0b0d12">
+    <meta property="og:title" content="Jul's Portal">
+    <meta property="og:description" content="Portail personnel : raccourcis, emploi du temps, ranking d'anime et plus.">
+    <meta property="og:type" content="website">
+    <link rel="shortcut icon" href="images/logopage.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="images/logopage.png" />
-    <!-- Ajout de Font Awesome pour les icônes -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script>try{var t=localStorage.getItem('jp-theme');if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches)t='light';if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="images/logopage.png" alt="Logo Icon" class="logo-icon">
-            <img src="images/Julsportal.png" alt="Jul's Portal Logo" class="logo-text">
-        </div>
-        <!-- Bouton hamburger pour mobile -->
-        <button class="hamburger" aria-label="Toggle menu">
-            <i class="fas fa-bars"></i>
-        </button>
-        <!-- Menu de navigation -->
-        <div class="nav-buttons">
-            <a href="Timetable/timetable.html" class="nav-button timetable-button">
-                <i class="fas fa-calendar-alt"></i> TIMETABLE
-            </a>
-            <a href="Streaming_onepiece/streaming.html" class="nav-button streaming-button">
-                <i class="fas fa-video"></i>ONE PIECE
-            </a>
-            </a>
-            <a href="Ranking/ranking.html" class="nav-button ranking-button">
-                <i class="fas fa-star"></i> RANKING
-            </a>
-
-            <a href="memento-mori/memento-mori.html" class="nav-button memento-button">
-                <i class="fas fa-skull"></i> MEMENTO MORI
-            </a>
-
-            <a href="sport/sport.html" class="nav-button sport-button">
-            <i class="fas fa-dumbbell"></i> SPORT
+        <a href="index.html" class="logo">
+            <img src="images/logopage.png" alt="" class="logo-icon">
+            <img src="images/Julsportal.png" alt="Jul's Portal" class="logo-text">
         </a>
 
-        </div>
-        <div class="search-container">
-            <input type="text" id="search-bar" placeholder="Rechercher..." autocomplete="off">
-            <button id="search-button">
-                <img src="images/search-bar-logo.png" alt="Search Logo">
+        <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav class="nav-buttons" aria-label="Navigation principale">
+            <a href="index.html" class="nav-button active">
+                <i class="fas fa-house"></i> Accueil
+            </a>
+            <a href="Timetable/timetable.html" class="nav-button">
+                <i class="fas fa-calendar-days"></i> Emploi du temps
+            </a>
+            <a href="Ranking/ranking.html" class="nav-button">
+                <i class="fas fa-ranking-star"></i> Ranking
+            </a>
+            <a href="memento-mori/memento-mori.html" class="nav-button">
+                <i class="fas fa-hourglass-half"></i> Memento Mori
+            </a>
+        </nav>
+
+        <div class="header-actions">
+            <div class="search-container">
+                <input type="text" id="search-bar" placeholder="Rechercher un lien..." autocomplete="off" aria-label="Rechercher un lien">
+                <button id="search-button" aria-label="Lancer la recherche">
+                    <img src="images/search-bar-logo.png" alt="">
+                </button>
+                <span class="kbd-hint">/</span>
+                <ul id="search-suggestions" class="suggestions-list"></ul>
+            </div>
+            <button id="theme-toggle" class="icon-button" aria-label="Changer de thème">
+                <i class="fas fa-sun"></i>
             </button>
-            <ul id="search-suggestions" class="suggestions-list"></ul>
         </div>
     </header>
 
-
-
     <section class="hero">
         <div class="hero-content">
-            <h2>Welcome to my personal portal</h2>
-            <p>"A man dies when he is forgotten!" Eiichirō Oda</p>
-            <img src="images/logosunnyop.png" class="bateau" alt="Sunny One Piece">
-            <svg class="vague" viewBox="0 0 1440 320">
-                <path fill="#0077be" fill-opacity="1" d="M0,256L60,256C120,256,240,256,360,234.7C480,213,600,171,720,144C840,117,960,107,1080,122.7C1200,139,1320,181,1380,202.7L1440,224L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
-            </svg>
+            <span class="hero-eyebrow"><i class="fas fa-compass"></i> Portail personnel</span>
+            <h2>Bienvenue sur mon portail</h2>
+            <p class="hero-quote">« A man dies when he is forgotten. » — Eiichiro Oda</p>
+            <nav class="hero-quicknav" aria-label="Accès rapide aux catégories">
+            <a href="#School">School</a>
+            <a href="#Professional">Professional</a>
+            <a href="#Eliya">Eliya</a>
+            <a href="#Streaming-websites">Streaming websites</a>
+            <a href="#Social-networks">Social networks</a>
+            <a href="#Gaming">Gaming</a>
+            <a href="#Others">Others</a>
+            </nav>
+            <div class="hero-stats" id="hero-stats">
+                <div class="stat"><strong id="stat-links">—</strong><span>Liens</span></div>
+                <div class="stat"><strong id="stat-categories">—</strong><span>Catégories</span></div>
+                <div class="stat"><strong id="stat-favorites">—</strong><span>Favoris</span></div>
+                <div class="stat"><strong id="stat-clock">—</strong><span>Heure</span></div>
+            </div>
         </div>
     </section>
-    
+
+    <section class="categories is-empty" id="Favorites">
+        <div class="categories-header">
+            <h2><i class="fas fa-star"></i> Favoris</h2>
+            <span class="categories-count">Vos liens épinglés</span>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel"></div>
+        </div>
+    </section>
 
     <section class="categories" id="School">
-        <h2>School</h2>
+        <div class="categories-header">
+            <h2><i class="fas fa-graduation-cap"></i> School</h2>
+            <span class="categories-count">9 liens · Comptes et outils de l'IUT</span>
+        </div>
         <div class="carousel-container">
             <div class="carousel">
                 <div class="site-card">
-                    <a href="https://ent.univ-reims.fr/" target="_blank">
-                        <img src="https://ent.univ-reims.fr/img/logo-urca-white.png" alt="ENT">
+                    <a href="https://ent.univ-reims.fr/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="https://ent.univ-reims.fr/img/logo-urca-white.png" alt="ENT" loading="lazy" decoding="async"></div>
                         <h3>Ent IUT</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="http://portal.office.com/" target="_blank">
-                        <img src="images/logooffice365.jpg" alt="Office 365/Copilot">
+                    <a href="https://www.iut-rcc.fr/media-files/41519/calendrier-2026-2027.pdf" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="https://ent.univ-reims.fr/img/logo-urca-white.png" alt="Calendrier vacances" loading="lazy" decoding="async"></div>
+                        <h3>Calendrier Vacances IUT</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://dossier-etudiant.univ-reims.fr/#!etatCivilView" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="https://ent.univ-reims.fr/img/logo-urca-white.png" alt="Dossier Etudiant" loading="lazy" decoding="async"></div>
+                        <h3>Dossier étudiant</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://vcsa.univ-reims.fr/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="https://ent.univ-reims.fr/img/logo-urca-white.png" alt="VCSA" loading="lazy" decoding="async"></div>
+                        <h3>VCSA</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://vdi.univ-reims.fr/portal/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="https://ent.univ-reims.fr/img/logo-urca-white.png" alt="VDI" loading="lazy" decoding="async"></div>
+                        <h3>VDI</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://planning.chalons.univ-reims.fr/group?ae=1&gp=TP2" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="https://ent.univ-reims.fr/img/logo-urca-white.png" alt="ENT VDI PLANNING" loading="lazy" decoding="async"></div>
+                        <h3>EDT VDI PLANNING</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://celcat-auth.univ-reims.fr/980983984/g1664876.html" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="https://ent.univ-reims.fr/img/logo-urca-white.png" alt="ENT CELCAT" loading="lazy" decoding="async"></div>
+                        <h3>EDT CELCAT</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="http://portal.office.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logooffice365.jpg" alt="Office 365/Copilot" loading="lazy" decoding="async"></div>
                         <h3>Office 365</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://teams.microsoft.com/v2/?ring=ring3_6" target="_blank">
-                        <img src="images/logoteams.jpg" alt="Teams">
-                        <h3>Teams</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://www.numworks.com/fr/simulateur/" target="_blank">
-                        <img src="images/logonumworks.jpg" alt="Calculatrice Numworks">
+                    <a href="https://www.numworks.com/fr/simulateur/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logonumworks.jpg" alt="Calculatrice Numworks" loading="lazy" decoding="async"></div>
                         <h3>Calculatrice Numworks</h3>
                     </a>
-                </div>    
- 
-
+                </div>
             </div>
-
-            </div>
-
         </div>
     </section>
 
     <section class="categories" id="Professional">
-        <h2>Professional</h2>
+        <div class="categories-header">
+            <h2><i class="fas fa-briefcase"></i> Professional</h2>
+            <span class="categories-count">5 liens · Démarches et services administratifs</span>
+        </div>
         <div class="carousel-container">
             <div class="carousel">
                 <div class="site-card">
-                    <a href="https://www.service-public.fr/compte/accueil" target="_blank">
-                        <img src="images/logogouvpardefaut.png" alt="Services publics">
+                    <a href="https://www.service-public.fr/compte/accueil" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logogouvpardefaut.png" alt="Services publics" loading="lazy" decoding="async"></div>
                         <h3>Services Publics</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://presaje.sga.defense.gouv.fr/administre/ma-jdc" target="_blank">
-                        <img src="images/logogouvpardefaut.png" alt="Ma Journée Défense et Citoyenneté">
-                        <h3>Ma Journée Défense et Citoyenneté </h3>
+                    <a href="https://presaje.sga.defense.gouv.fr/administre/ma-jdc" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logogouvpardefaut.png" alt="Ma Journée Défense et Citoyenneté" loading="lazy" decoding="async"></div>
+                        <h3>Ma Journée Défense et Citoyenneté</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://candidat.examens-concours.gouv.fr/cyccandidat/portal/secured/consulter_candidature/__pmall_view/__rpall_sousactivite/SEE0x1CANDI0x1GD0x1PUBLIC" target="_blank">
-                        <img src="images/logocyclades.png" alt="Cyclades">
+                    <a href="https://candidat.examens-concours.gouv.fr/cyccandidat/portal/secured/consulter_candidature/__pmall_view/__rpall_sousactivite/SEE0x1CANDI0x1GD0x1PUBLIC" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logocyclades.png" alt="Cyclades" loading="lazy" decoding="async"></div>
                         <h3>Cyclades</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.bloctel.gouv.fr/tableau-de-bord" target="_blank">
-                        <img src="images/logogouvpardefaut.png" alt="BlocTel">
-                        <h3>Bloctel</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://www.bouyguestelecom.fr/mon-compte" target="_blank">
-                        <img src="images/logobouyguestelecom.png" alt="Bouygues Telecom">
+                    <a href="https://www.bouyguestelecom.fr/mon-compte" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logobouyguestelecom.png" alt="Bouygues Telecom" loading="lazy" decoding="async"></div>
                         <h3>Bouygues Telecom</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.parcoursup.gouv.fr/" target="_blank">
-                        <img src="images/logogouvpardefaut.png" alt="Parcoursup">
+                    <a href="https://www.parcoursup.gouv.fr/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logogouvpardefaut.png" alt="Parcoursup" loading="lazy" decoding="async"></div>
                         <h3>Parcoursup</h3>
                     </a>
                 </div>
-
-
             </div>
-
-            </div>
-
         </div>
     </section>
 
-
     <section class="categories" id="Eliya">
-        <h2>Eliya</h2>
+        <div class="categories-header">
+            <h2><i class="fas fa-user-graduate"></i> Eliya</h2>
+            <span class="categories-count">5 liens · Suivi scolaire d'Eliya</span>
+        </div>
         <div class="carousel-container">
-        
             <div class="carousel">
                 <div class="site-card">
-                    <a href="https://www.moorsidehigh.co.uk/" target="_blank">
-                        <img src="images/logomoorsidehighschool.jpg" alt="Moorside High School">
+                    <a href="https://www.moorsidehigh.co.uk/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logomoorsidehighschool.jpg" alt="Moorside High School" loading="lazy" decoding="async"></div>
                         <h3>Moorside High School</h3>
                     </a>
                 </div>
-            
                 <div class="site-card">
-                    <a href="https://auth.sparxmaths.uk/oauth2/auth?client_id=sparx-maths-sw&hd=92154f01-aaef-49ad-a62a-604bb289132d&redirect_uri=https%3A%2F%2Fstudentapi.api.sparxmaths.uk%2Foauth%2Fcallback&response_type=code&scope=openid+profile+email&state=MsQRKOE3t5FOxznIz3jsStdzYS4-tiuLjN9TCu2AhXxoWU-Uf408NeLocYzblG77ek6ce3qud32RrnUBSo_N607FHitUa6sUKuQKUCAKLq9OdJMV4SETFcQmnZMFJYfirS97xHlTcVIenYaO_wx1QGHNm4Sk5nFZ_gCi7GC2ZJu97ciLw5dGQTo1C_DttoPA5gsnb2soMy3_mc4IFOL65jW0BGBnTCW-7sQAIfzXu5D9VpQgzW70GlhO5NX90DD7KGE_j62QYoOG-E0c8yiW-1S648gk2DDsZGbWvVM4IJU-TAbxwzxeVNd8B5xVvA%3D%3D" target="_blank">
-                        <img src="images/logosparxmaths.jpg" alt="Sparxmaths">
+                    <a href="https://auth.sparxmaths.uk/oauth2/auth?client_id=sparx-maths-sw&hd=92154f01-aaef-49ad-a62a-604bb289132d&redirect_uri=https%3A%2F%2Fstudentapi.api.sparxmaths.uk%2Foauth%2Fcallback&response_type=code&scope=openid+profile+email&state=MsQRKOE3t5FOxznIz3jsStdzYS4-tiuLjN9TCu2AhXxoWU-Uf408NeLocYzblG77ek6ce3qud32RrnUBSo_N607FHitUa6sUKuQKUCAKLq9OdJMV4SETFcQmnZMFJYfirS97xHlTcVIenYaO_wx1QGHNm4Sk5nFZ_gCi7GC2ZJu97ciLw5dGQTo1C_DttoPA5gsnb2soMy3_mc4IFOL65jW0BGBnTCW-7sQAIfzXu5D9VpQgzW70GlhO5NX90DD7KGE_j62QYoOG-E0c8yiW-1S648gk2DDsZGbWvVM4IJU-TAbxwzxeVNd8B5xVvA%3D%3D" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logosparxmaths.jpg" alt="Sparxmaths" loading="lazy" decoding="async"></div>
                         <h3>Sparxmaths</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.languagenut.com/resources/global/#/LoginScreen?packages=5,48,54,60,67&product=languagenut&conditions=10" target="_blank">
-                        <img src="images/logolanguagenut.jpg" alt="Languagenut">
+                    <a href="https://www.languagenut.com/resources/global/#/LoginScreen?packages=5,48,54,60,67&product=languagenut&conditions=10" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logolanguagenut.jpg" alt="Languagenut" loading="lazy" decoding="async"></div>
                         <h3>Languagenut</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://app.senecalearning.com/dashboard/assignments/todo" target="_blank">
-                        <img src="images/logoseneca.png" alt="Seneca">
+                    <a href="https://app.senecalearning.com/dashboard/assignments/todo" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoseneca.png" alt="Seneca" loading="lazy" decoding="async"></div>
                         <h3>Seneca</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://app.readingwise.com/" target="_blank">
-                        <img src="images/logoreadingwise.png" alt="readingwise">
+                    <a href="https://app.readingwise.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoreadingwise.png" alt="readingwise" loading="lazy" decoding="async"></div>
                         <h3>Readingwise</h3>
                     </a>
                 </div>
             </div>
-
-            </div>
-
         </div>
     </section>
 
-    <section class="categories" id="Streaming websites">
-        <h2>Streaming websites</h2>
+    <section class="categories" id="Streaming-websites">
+        <div class="categories-header">
+            <h2><i class="fas fa-clapperboard"></i> Streaming websites</h2>
+            <span class="categories-count">22 liens · Anime, manga, films et séries</span>
+        </div>
         <div class="carousel-container">
             <div class="carousel">
                 <div class="site-card">
-                    <a href="https://anime-sama.org/" target="_blank">
-                        <img src="images/logoanimesama.jpg" alt="Anime Sama">
+                    <a href="https://anime-sama.org/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoanimesama.jpg" alt="Anime Sama" loading="lazy" decoding="async"></div>
                         <h3>Anime Sama</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://mangamoins.com/" target="_blank">
-                        <img src="images/logomangamoins.jpg" alt="Manga Moins">
+                    <a href="https://mangamoins.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logomangamoins.jpg" alt="Manga Moins" loading="lazy" decoding="async"></div>
                         <h3>Manga Moins</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.crunchyroll.com/fr" target="_blank">
-                        <img src="images/logocrunchyroll.jpg" alt="Crunchyroll">
+                    <a href="https://www.crunchyroll.com/fr" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logocrunchyroll.jpg" alt="Crunchyroll" loading="lazy" decoding="async"></div>
                         <h3>Crunchyroll</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.netflix.com/" target="_blank">
-                        <img src="images/logonetflix.jpg" alt="Netflix">
+                    <a href="https://www.netflix.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logonetflix.jpg" alt="Netflix" loading="lazy" decoding="async"></div>
                         <h3>Netflix</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://v6.voiranime.com/" target="_blank">
-                        <img src="images/logovoiranime.jpg" alt="Voiranime">
+                    <a href="https://v6.voiranime.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logovoiranime.jpg" alt="Voiranime" loading="lazy" decoding="async"></div>
                         <h3>Voiranime</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://aniwatch.co.at/" target="_blank">
-                        <img src="images/logoaniwatch.avif" alt="Aniwatch">
+                    <a href="https://aniwatch.co.at/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoaniwatch.avif" alt="Aniwatch" loading="lazy" decoding="async"></div>
                         <h3>Aniwatch</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://animetsu.bz/" target="_blank">
-                        <img src="images/animetsu.png" alt="Animetsu">
+                    <a href="https://animetsu.bz/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/animetsu.png" alt="Animetsu" loading="lazy" decoding="async"></div>
                         <h3>Animetsu</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.miruro.com/" target="_blank">
-                        <img src="images/miruro.webp" alt="Miruro">
+                    <a href="https://www.miruro.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/miruro.webp" alt="Miruro" loading="lazy" decoding="async"></div>
                         <h3>Miruro</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://anikototv.to/" target="_blank">
-                        <img src="images/anikoto.webp" alt="Anikoto">
+                    <a href="https://anikototv.to/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/anikoto.webp" alt="Anikoto" loading="lazy" decoding="async"></div>
                         <h3>Anikoto</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://sflix.to/" target="_blank">
-                        <img src="images/logosflixstreaming.png" alt="Sflix">
+                    <a href="https://sflix.to/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logosflixstreaming.png" alt="Sflix" loading="lazy" decoding="async"></div>
                         <h3>Sflix</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.movix.site/" target="_blank">
-                        <img src="images/logomovix.gif" alt="Movix">
+                    <a href="https://www.movix.site/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logomovix.gif" alt="Movix" loading="lazy" decoding="async"></div>
                         <h3>Movix</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.flixbaba.com" target="_blank">
-                        <img src="images/logoflixbaba.png" alt="FlixBaba">
+                    <a href="https://www.flixbaba.com" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoflixbaba.png" alt="FlixBaba" loading="lazy" decoding="async"></div>
                         <h3>FlixBaba</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://animepahe.si/" target="_blank">
-                        <img src="images/animepahe.png" alt="AnimePahe">
+                    <a href="https://animepahe.si/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/animepahe.png" alt="AnimePahe" loading="lazy" decoding="async"></div>
                         <h3>AnimePahe</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://animepahe.pages.dev/" target="_blank">
-                        <img src="images/animepahedev.png" alt="AnimePaheDev">
+                    <a href="https://animepahe.pages.dev/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/animepahedev.png" alt="AnimePaheDev" loading="lazy" decoding="async"></div>
                         <h3>AnimePaheDev</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.disneyplus.com/" target="_blank">
-                        <img src="images/logodisney+.png" alt="Disney Plus">
+                    <a href="https://www.disneyplus.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logodisney+.png" alt="Disney Plus" loading="lazy" decoding="async"></div>
                         <h3>Disney Plus</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.scan-manga.com/?po" target="_blank">
-                        <img src="images/logomscansmanga.jpg" alt="Mscansmanga">
+                    <a href="https://www.scan-manga.com/?po" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logomscansmanga.jpg" alt="Mscansmanga" loading="lazy" decoding="async"></div>
                         <h3>MScansManga</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://fmteam.fr/" target="_blank">
-                        <img src="images/logofmteam.png" alt="FMTeam">
+                    <a href="https://fmteam.fr/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logofmteam.png" alt="FMTeam" loading="lazy" decoding="async"></div>
                         <h3>FMTeam</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://littlexgarden.com/" target="_blank">
-                        <img src="images/logolittlegarden.jpg" alt="Little Garden">
+                    <a href="https://littlexgarden.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logolittlegarden.jpg" alt="Little Garden" loading="lazy" decoding="async"></div>
                         <h3>LittleGarden</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://moviebox.ph/" target="_blank">
-                        <img src="images/logomoviebox.jpg" alt="MovieBox">
+                    <a href="https://moviebox.ph/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logomoviebox.jpg" alt="MovieBox" loading="lazy" decoding="async"></div>
                         <h3>MovieBox</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://nyaa.si/" target="_blank">
-                        <img src="images/logonyaasi.png" alt="Nyaa.si">
+                    <a href="https://nyaa.si/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logonyaasi.png" alt="Nyaa.si" loading="lazy" decoding="async"></div>
                         <h3>Nyaa.si - Torrents</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://everythingmoe.com/" target="_blank">
-                        <img src="images/everythingmoe.png" alt="EverythingMoe">
+                    <a href="https://everythingmoe.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/everythingmoe.png" alt="EverythingMoe" loading="lazy" decoding="async"></div>
                         <h3>EverythingMoe</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://yarrlist.com/" target="_blank">
-                        <img src="images/logoyarrlist.png" alt="Yarrlist">
+                    <a href="https://yarrlist.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoyarrlist.png" alt="Yarrlist" loading="lazy" decoding="async"></div>
                         <h3>Yarrlist - Portail vers streamings</h3>
                     </a>
                 </div>
-
             </div>
-
         </div>
     </section>
 
-
-
-
-    <!-- Section Réseaux -->
-    <section class="categories" id="Social networks">
-        <h2>Social networks</h2>
+    <section class="categories" id="Social-networks">
+        <div class="categories-header">
+            <h2><i class="fas fa-hashtag"></i> Social networks</h2>
+            <span class="categories-count">8 liens · Réseaux et messageries</span>
+        </div>
         <div class="carousel-container">
             <div class="carousel">
-
                 <div class="site-card">
-                    <a href="https://discord.com/channels/@me" target="_blank">
-                        <img src="images/logodiscord.jpg" alt="Discord">
+                    <a href="https://discord.com/channels/@me" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logodiscord.jpg" alt="Discord" loading="lazy" decoding="async"></div>
                         <h3>Discord</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.snapchat.com/fr-FR" target="_blank">
-                        <img src="images/logosnapchat.png" alt="Snapchat">
+                    <a href="https://www.snapchat.com/fr-FR" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logosnapchat.png" alt="Snapchat" loading="lazy" decoding="async"></div>
                         <h3>Snapchat</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.instagram.com/" target="_blank">
-                        <img src="images/logoinstagram.jpg" alt="Instagram">
+                    <a href="https://www.instagram.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoinstagram.jpg" alt="Instagram" loading="lazy" decoding="async"></div>
                         <h3>Instagram</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://x.com/home" target="_blank">
-                        <img src="images/logox.png" alt="X">
+                    <a href="https://x.com/home" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logox.png" alt="X" loading="lazy" decoding="async"></div>
                         <h3>X</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.tiktok.com/fr/" target="_blank">
-                        <img src="images/logotiktok.png" alt="Tiktok">
+                    <a href="https://www.tiktok.com/fr/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logotiktok.png" alt="Tiktok" loading="lazy" decoding="async"></div>
                         <h3>Tiktok</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://www.youtube.com/" target="_blank">
-                        <img src="images/logoyoutube.png" alt="YouTube">
+                    <a href="https://www.youtube.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoyoutube.png" alt="YouTube" loading="lazy" decoding="async"></div>
                         <h3>YouTube</h3>
                     </a>
                 </div>
-
-
                 <div class="site-card">
-                    <a href="https://www.twitch.tv/" target="_blank">
-                        <img src="images/logotwitch.png" alt="Twitch">
+                    <a href="https://www.twitch.tv/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logotwitch.png" alt="Twitch" loading="lazy" decoding="async"></div>
                         <h3>Twitch</h3>
                     </a>
                 </div>
-
                 <div class="site-card">
-                    <a href="https://ipromx.netlify.app" target="_blank">
-                        <img src="images/logo192.png" alt="L'univers d'iProMx">
+                    <a href="https://ipromx.netlify.app" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logo192.png" alt="L'univers d'iProMx" loading="lazy" decoding="async"></div>
                         <h3>L'univers d'iProMx</h3>
                     </a>
                 </div>
-    </div>
-</section>
-
-    <!-- Section Gaming -->
-        <section class="categories" id="Gaming">
-            <h2>Gaming</h2>
-            <div class="carousel-container">
-                <div class="carousel">
-
-                    <div class="site-card">
-                        <a href="https://www.playstation.com/fr-fr/" target="_blank">
-                            <img src="images/logoplaystation.png" alt="playstation">
-                            <h3>Playstation</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://www.roblox.com/fr/home" target="_blank">
-                            <img src="images/logoroblox.jpg" alt="Roblox">
-                            <h3>Roblox</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://www.epicgames.com/site/fr/home" target="_blank">
-                            <img src="images/logoepicgames.png" alt="Epic Games">
-                            <h3>Epic Games</h3>
-                        </a>
-                    </div>
-                    
-                    <div class="site-card">
-                        <a href="https://www.rockstargames.com/" target="_blank">
-                            <img src="images/logorockstargames.jpg" alt="RockstarGames">
-                            <h3>Rockstar Games</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://www.rockstargames.com/VI" target="_blank">
-                            <img src="images/logogtavi.jpg" alt="GTA VI SITE">
-                            <h3>GTA VI Site</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://store.steampowered.com/?l=french" target="_blank">
-                            <img src="images/logosteam.png" alt="Steam">
-                            <h3>Steam</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://account.bandainamcoent.eu/dashboard?redirect=https://fr.bandainamcoent.eu/rejoins-notre-communaute&lg=fr&_gl=1*1v9oj86*_gcl_au*MTUwMjU3NzEwNi4xNzQyNDY2MjM1" target="_blank">
-                            <img src="images/logobandainamco.jpg" alt="BandaiNamco">
-                            <h3>BandaiNamco</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://accounts.nintendo.com/?_gl=1*1x521dd*_gcl_au*MTMzNzc5ODE5My4xNzQyNDY3MDQ4*_ga*Nzk3NzE1Njc3LjE3NDI0NjcwNDk.*_ga_8CCMZ61YS8*MTc0MjQ2NzA0OC4xLjAuMTc0MjQ2NzA5Ny4wLjAuMA.." target="_blank">
-                            <img src="images/logonintendo.webp" alt="Nintendo">
-                            <h3>Nintendo</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://www.xbox.com/fr-FR/" target="_blank">
-                            <img src="images/logoxbox.png" alt="Xbox">
-                            <h3>Xbox</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://poki.com/fr#" target="_blank">
-                            <img src="images/logopoki.png" alt="Poki">
-                            <h3>Poki</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://drive.google.com/drive/folders/1Fa0E3128_Fq0UTCtHmctLFYdK7BNsH0O" target="_blank">
-                            <img src="images/logonotgamesdrive.png" alt="NotGames Drive (cracks)">
-                            <h3>NotGames Drive (cracks jeux)</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://koyso.com/" target="_blank">
-                            <img src="images/logokoyso.png" alt="Koyso (cracks)">
-                            <h3>Koyso (cracks jeux)</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://steamrip.com/" target="_blank">
-                            <img src="images/steamrip.jpg" alt="SteamRIP (cracks)">
-                            <h3>SteamRip (cracks jeux)</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://fitgirl-repacks.site/" target="_blank">
-                            <img src="images/fitgirl.jpg" alt="Fitgirl (cracks)">
-                            <h3>FitGirl (cracks jeux)</h3>
-                        </a>
-                    </div>
             </div>
-
-</section>
-
-
-    <!-- Section Autres -->
-    <section class="categories" id="Others">
-        <h2>Others</h2>
-        <div class="carousel-container">
-            <div class="carousel">
-
-                <div class="site-card">
-                    <a href="https://chat.openai.com/" target="_blank">
-                        <img src="images/logochatgpt.jpg" alt="ChatGPT">
-                        <h3>ChatGPT</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://grok.com/" target="_blank">
-                        <img src="images/logogrok.png" alt="Grok">
-                        <h3>Grok</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://x.com/i/grok" target="_blank">
-                        <img src="images/logogrokX.jpg" alt="Grok (X)">
-                        <h3>Grok (X)</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://gemini.google.com/?hl=fr" target="_blank">
-                        <img src="images/logogemini.png" alt="Gemini">
-                        <h3>Gemini</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://claude.ai/new" target="_blank">
-                        <img src="images/logoclaude.png" alt="Claude">
-                        <h3>Claude</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://one-piece.com/" target="_blank">
-                        <img src="images/logoonepiecesite.png" alt="One Piece Site">
-                        <h3>One Piece Site</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://open.spotify.com/intl-fr?flow_ctx=bcb43e4e-9a7b-467a-878d-ed12de41fecd%3A1738783350" target="_blank">
-                        <img src="images/logospotify.png" alt="Spotify">
-                        <h3>Spotify</h3>
-                    </a>
-                </div>
-
-                    <div class="site-card">
-                        <a href="https://eu.i.mi.com/" target="_blank">
-                            <img src="images/logocloudmi.png" alt="Cloud MI">
-                            <h3>Cloud MI</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://cgos.app.cadeaux.pluxee.fr" target="_blank">
-                            <img src="images/logopluxee.png" alt="Pluxee">
-                            <h3>Pluxee</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://www.virustotal.com/gui/home/url" target="_blank">
-                            <img src="images/logovirustotal.png" alt="VirusTotal">
-                            <h3>VirusTotal</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                        <a href="https://www.swisstransfer.com" target="_blank">
-                            <img src="images/logoswisstransfer.png" alt="Swiss Transfer">
-                            <h3>SwissTransfer</h3>
-                        </a>
-                    </div>
-
-                    <div class="site-card">
-                    <a href="https://www.wordreference.com/enfr/" target="_blank">
-                        <img src="images/logowordreference.jpg" alt="Wordreference">
-                        <h3>Wordreference</h3>
-                    </a>
-                </div> 
-                
-                <div class="site-card">
-                    <a href="https://www.myinstants.com/en/index/us/" target="_blank">
-                        <img src="images/logomyinstant.png" alt="Myinstants">
-                        <h3>Myinstants</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://drive.google.com/drive/my-drive" target="_blank">
-                        <img src="images/logogoogledrive.png" alt="Google Drive">
-                        <h3>Google Drive</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://github.com/JulShelbyMx/MON-PORTAIL" target="_blank">
-                        <img src="images/logogithub.png" alt="Github">
-                        <h3>Github</h3>
-                    </a>
-                </div>
-
-                <div class="site-card">
-                    <a href="https://app.netlify.com/sites/julportal/deploys" target="_blank">
-                        <img src="images/logonetlify.png" alt="Hébergement site (Netlify)">
-                        <h3>Hébergement site (Netlify)</h3>
-                    </a>
-                </div> 
-
-
-            </div>
-
         </div>
     </section>
 
+    <section class="categories" id="Gaming">
+        <div class="categories-header">
+            <h2><i class="fas fa-gamepad"></i> Gaming</h2>
+            <span class="categories-count">14 liens · Plateformes de jeu et ressources</span>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="site-card">
+                    <a href="https://www.playstation.com/fr-fr/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoplaystation.png" alt="playstation" loading="lazy" decoding="async"></div>
+                        <h3>Playstation</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://www.roblox.com/fr/home" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoroblox.jpg" alt="Roblox" loading="lazy" decoding="async"></div>
+                        <h3>Roblox</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://www.epicgames.com/site/fr/home" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoepicgames.png" alt="Epic Games" loading="lazy" decoding="async"></div>
+                        <h3>Epic Games</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://www.rockstargames.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logorockstargames.jpg" alt="RockstarGames" loading="lazy" decoding="async"></div>
+                        <h3>Rockstar Games</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://www.rockstargames.com/VI" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logogtavi.jpg" alt="GTA VI SITE" loading="lazy" decoding="async"></div>
+                        <h3>GTA VI Site</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://store.steampowered.com/?l=french" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logosteam.png" alt="Steam" loading="lazy" decoding="async"></div>
+                        <h3>Steam</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://account.bandainamcoent.eu/dashboard?redirect=https://fr.bandainamcoent.eu/rejoins-notre-communaute&lg=fr&_gl=1*1v9oj86*_gcl_au*MTUwMjU3NzEwNi4xNzQyNDY2MjM1" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logobandainamco.jpg" alt="BandaiNamco" loading="lazy" decoding="async"></div>
+                        <h3>BandaiNamco</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://accounts.nintendo.com/?_gl=1*1x521dd*_gcl_au*MTMzNzc5ODE5My4xNzQyNDY3MDQ4*_ga*Nzk3NzE1Njc3LjE3NDI0NjcwNDk.*_ga_8CCMZ61YS8*MTc0MjQ2NzA0OC4xLjAuMTc0MjQ2NzA5Ny4wLjAuMA.." target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logonintendo.webp" alt="Nintendo" loading="lazy" decoding="async"></div>
+                        <h3>Nintendo</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://www.xbox.com/fr-FR/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoxbox.png" alt="Xbox" loading="lazy" decoding="async"></div>
+                        <h3>Xbox</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://poki.com/fr#" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logopoki.png" alt="Poki" loading="lazy" decoding="async"></div>
+                        <h3>Poki</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://drive.google.com/drive/folders/1Fa0E3128_Fq0UTCtHmctLFYdK7BNsH0O" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logonotgamesdrive.png" alt="NotGames Drive (cracks)" loading="lazy" decoding="async"></div>
+                        <h3>NotGames Drive (cracks jeux)</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://koyso.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logokoyso.png" alt="Koyso (cracks)" loading="lazy" decoding="async"></div>
+                        <h3>Koyso (cracks jeux)</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://steamrip.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/steamrip.jpg" alt="SteamRIP (cracks)" loading="lazy" decoding="async"></div>
+                        <h3>SteamRip (cracks jeux)</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://fitgirl-repacks.site/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/fitgirl.jpg" alt="Fitgirl (cracks)" loading="lazy" decoding="async"></div>
+                        <h3>FitGirl (cracks jeux)</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<button id="back-to-top" aria-label="Back to top">⇈</button>
+    <section class="categories" id="Others">
+        <div class="categories-header">
+            <h2><i class="fas fa-layer-group"></i> Others</h2>
+            <span class="categories-count">17 liens · Outils divers et IA</span>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="site-card">
+                    <a href="https://chat.openai.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logochatgpt.jpg" alt="ChatGPT" loading="lazy" decoding="async"></div>
+                        <h3>ChatGPT</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://grok.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logogrok.png" alt="Grok" loading="lazy" decoding="async"></div>
+                        <h3>Grok</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://x.com/i/grok" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logogrokX.jpg" alt="Grok (X)" loading="lazy" decoding="async"></div>
+                        <h3>Grok (X)</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://gemini.google.com/?hl=fr" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logogemini.png" alt="Gemini" loading="lazy" decoding="async"></div>
+                        <h3>Gemini</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://claude.ai/new" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoclaude.png" alt="Claude" loading="lazy" decoding="async"></div>
+                        <h3>Claude</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://youtube.com/playlist?list=PLIVm-YyjTqSHpU58oIDggla4PNnBfMFRm&si=PyLu1SCZ_o52FW3G" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoplaylistytb.jpg" alt="Ma Playlist One Piece" loading="lazy" decoding="async"></div>
+                        <h3>Ma Playlist One Piece</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://one-piece.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoonepiecesite.png" alt="One Piece Site" loading="lazy" decoding="async"></div>
+                        <h3>One Piece Site</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://open.spotify.com/intl-fr?flow_ctx=bcb43e4e-9a7b-467a-878d-ed12de41fecd%3A1738783350" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logospotify.png" alt="Spotify" loading="lazy" decoding="async"></div>
+                        <h3>Spotify</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://eu.i.mi.com/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logocloudmi.png" alt="Cloud MI" loading="lazy" decoding="async"></div>
+                        <h3>Cloud MI</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://cgos.app.cadeaux.pluxee.fr" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logopluxee.png" alt="Pluxee" loading="lazy" decoding="async"></div>
+                        <h3>Pluxee</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://www.virustotal.com/gui/home/url" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logovirustotal.png" alt="VirusTotal" loading="lazy" decoding="async"></div>
+                        <h3>VirusTotal</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://www.swisstransfer.com" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logoswisstransfer.png" alt="Swiss Transfer" loading="lazy" decoding="async"></div>
+                        <h3>SwissTransfer</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://www.wordreference.com/enfr/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logowordreference.jpg" alt="Wordreference" loading="lazy" decoding="async"></div>
+                        <h3>Wordreference</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://www.myinstants.com/en/index/us/" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logomyinstant.png" alt="Myinstants" loading="lazy" decoding="async"></div>
+                        <h3>Myinstants</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://drive.google.com/drive/my-drive" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logogoogledrive.png" alt="Google Drive" loading="lazy" decoding="async"></div>
+                        <h3>Google Drive</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://github.com/JulShelbyMx/MON-PORTAIL" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logogithub.png" alt="Github" loading="lazy" decoding="async"></div>
+                        <h3>Github</h3>
+                    </a>
+                </div>
+                <div class="site-card">
+                    <a href="https://app.netlify.com/sites/julportal/deploys" target="_blank" rel="noopener">
+                        <div class="card-thumb"><img src="images/logonetlify.png" alt="Hébergement site (Netlify)" loading="lazy" decoding="async"></div>
+                        <h3>Hébergement site (Netlify)</h3>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script src="script.js"></script>
+    <button id="back-to-top" aria-label="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
-<footer>
-    <p>© 2025 JulShelby. Website created with ChatGPT (OpenAI) and Grok (xAI). All logos and trademarks belong to their respective owners.</p>
-</footer>
+    <script src="script.js" defer></script>
 
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'93442542c88e6753',t:'MTc0NTMxNDY3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
-
+    <footer>
+        <p>© 2026 JulShelby — Portail personnel. Tous les logos et marques appartiennent à leurs propriétaires respectifs.</p>
+    </footer>
 </body>
 </html>

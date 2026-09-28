@@ -1,41 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" data-theme="dark" data-theme-lock="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Memento Mori - Jul's Portal</title>
+    <meta name="description" content="Une vie en semaines : chaque case représente une semaine, pour se rappeler que le temps est compté.">
+    <meta name="theme-color" content="#0b0d12">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../styles.css">
     <link rel="shortcut icon" href="../images/logopage.png" />
     <script defer src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
  body {
-    background-color: #111;
+    background-color: var(--bg);
     color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     margin: 0;
     padding: 0;
+    padding-top: var(--header-h);
 }
 .memento-hero {
-    background: url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
+    background:
+        linear-gradient(180deg, rgba(11,13,18,0.35), var(--bg) 92%),
+        url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
     height: 30vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 .return-button {
     padding: 15px 25px;
-    background-color: #ffb300;
-    color: #0a0a0a;
+    background-color: var(--accent);
+    color: var(--bg);
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 999px;
     font-size: 20px;
-    font-family: 'Pirata One', sans-serif;
+    font-family: var(--font-display), sans-serif;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    border: 2px solid #0a0a0a;
+    border: 2px solid var(--bg);
 }
 .return-button:hover {
-    background-color: #e0a800;
+    background-color: var(--accent-strong);
     transform: scale(1.05);
 }
 .memento-container {
@@ -53,7 +63,7 @@
     display: grid;
             grid-template-columns: repeat(52, 12px);
             grid-gap: 2px;
-            background-color: #ffb300;
+            background-color: var(--accent);
             padding: 15px;
             width: 760px; /* 52 * 12px + 51 * 2px + 30px (padding) + 52 * 4px (bordures) */
             height: 1828px; /* 100 * 12px + 99 * 2px + 30px + 100 * 4px */
@@ -63,15 +73,15 @@
 .grid div {
     width: 12px;
     height: 12px;
-    background-color: #ffb300;
-    border: 2px solid #0a0a0a;
+    background-color: var(--accent);
+    border: 2px solid var(--bg);
     cursor: pointer;
     position: relative;
     box-sizing: border-box;
 }
 .grid div.filled {
     background-color: #000;
-    border: 2px solid #0a0a0a;
+    border: 2px solid var(--bg);
 }
 .grid div.selected {
     border: 2px solid #ff0000;
@@ -79,10 +89,10 @@
 .message-box {
     margin: 20px auto;
     padding: 10px;
-    background-color: #0a0a0a;
-    color: #ffb300;
+    background-color: var(--bg);
+    color: var(--accent);
     border-radius: 8px;
-    font-family: 'Pirata One', sans-serif;
+    font-family: var(--font-display), sans-serif;
     font-size: 16px;
     min-height: 30px;
     display: block;
@@ -91,29 +101,29 @@
 .delete-menu {
     margin-top: 20px;
     padding: 15px;
-    background-color: #1a1a1a;
+    background-color: var(--surface);
     border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 .delete-menu button {
-    background: #ffb300;
+    background: var(--accent);
     border: none;
     padding: 8px 15px;
     margin: 5px;
     cursor: pointer;
     border-radius: 5px;
-    font-family: 'Pirata One', sans-serif;
+    font-family: var(--font-display), sans-serif;
     font-size: 14px;
 }
 .delete-menu button:hover {
-    background: #e0a800;
+    background: var(--accent-strong);
 }
 .selected-cells {
-    color: #ffb300;
+    color: var(--accent);
     margin-bottom: 10px;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     font-size: 14px;
 }
 .years-labels {
@@ -123,8 +133,8 @@
     height: calc(100% - 30px);
     display: flex;
     flex-direction: column;
-    color: #ffb300;
-    font-family: 'Pirata One', sans-serif;
+    color: var(--accent);
+    font-family: var(--font-display), sans-serif;
     text-align: left;
 }
 .years-labels span {
@@ -143,20 +153,20 @@
     max-width: 400px;
     margin: 20px auto;
     padding: 20px;
-    background: #1a1a1a;
+    background: var(--surface);
     border-radius: 8px;
     color: #fff;
     text-align: center;
 }
 button {
-    background: #ffb300;
+    background: var(--accent);
     border: none;
     padding: 8px;
     margin: 5px;
     cursor: pointer;
 }
 button:hover {
-    background: #e0a800;
+    background: var(--accent-strong);
 }
 @media (max-width: 768px) {
     .memento-hero {
@@ -183,10 +193,10 @@ button:hover {
     .grid div {
         width: 8px;
         height: 8px;
-        border: 1px solid #0a0a0a;
+        border: 1px solid var(--bg);
     }
     .grid div.filled {
-        border: 1px solid #0a0a0a;
+        border: 1px solid var(--bg);
     }
     .grid div.selected {
         border: 1px solid #ff0000;
@@ -194,7 +204,7 @@ button:hover {
     .years-labels {
         left: -20px;
         top: 10px;
-        color: #ffb300;
+        color: var(--accent);
         text-align: left;
     }
     .years-labels span {
@@ -255,10 +265,10 @@ button:hover {
     .grid div {
         width: 6px;
         height: 6px;
-        border: 1px solid #0a0a0a;
+        border: 1px solid var(--bg);
     }
     .grid div.filled {
-        border: 1px solid #0a0a0a;
+        border: 1px solid var(--bg);
     }
     .grid div.selected {
         border: 1px solid #ff0000;
@@ -266,7 +276,7 @@ button:hover {
     .years-labels {
         left: -11px;
         top: 8px;
-        color: #ffb300;
+        color: var(--accent);
         text-align: left;
     }
     .years-labels span {
@@ -303,16 +313,50 @@ button:hover {
 }
 
 
-    </style>
+    
+/* ===== v2: aligned with the site design system ===== */
+.auth-container { border: 1px solid var(--border-soft); border-radius: var(--radius); box-shadow: var(--shadow-sm); display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; }
+.auth-container p { width:100%; color: var(--text-muted); font-size: 13px; margin-bottom: 4px; }
+button { font-family: var(--font-body), sans-serif; font-weight: 600; font-size: 13px; color: var(--accent-contrast); border-radius: 999px; padding: 9px 18px; transition: background .18s, transform .18s; }
+button:hover { transform: translateY(-1px); }
+.delete-menu { border: 1px solid var(--border-soft); border-radius: var(--radius); flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.delete-menu .selected-cells { width: 100%; text-align: center; }
+.delete-menu button { border-radius: 999px; padding: 9px 18px; }
+.message-box { background: var(--surface); border: 1px solid var(--border-soft); border-radius: 999px; padding: 10px 20px; font-family: var(--font-body), sans-serif; font-size: 14px; }
+.memento-container { padding-bottom: 50px; }
+</style>
 </head>
 <body>
     <header>
-        <div class="logo">Memento Mori</div>
+        <a href="../index.html" class="logo">
+            <img src="../images/logopage.png" alt="" class="logo-icon">
+            <img src="../images/Julsportal.png" alt="Jul's Portal" class="logo-text">
+        </a>
+
+        <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <nav class="nav-buttons" aria-label="Navigation principale">
+            <a href="../index.html" class="nav-button"><i class="fas fa-house"></i> Accueil</a>
+            <a href="../Timetable/timetable.html" class="nav-button"><i class="fas fa-calendar-days"></i> Emploi du temps</a>
+            <a href="../Ranking/ranking.html" class="nav-button"><i class="fas fa-ranking-star"></i> Ranking</a>
+            <a href="../memento-mori/memento-mori.html" class="nav-button active"><i class="fas fa-hourglass-half"></i> Memento Mori</a>
+        </nav>
+
+        <div class="header-actions">
+            <button id="theme-toggle" class="icon-button" aria-label="Changer de thème">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
     </header>
 
-    <section class="memento-hero">
-        <div class="memento-hero-content">
-            <a href="../index.html" class="return-button">BACK</a>
+    <section class="page-hero has-image">
+        <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Accueil</a>
+        <div class="page-hero-inner">
+            <span class="hero-eyebrow"><i class="fas fa-hourglass-half"></i> Memento Mori</span>
+            <h1>Une vie en semaines</h1>
+            <p>Chaque case représente une semaine de vie. Une façon simple et un peu brutale de se rappeler que le temps est compté — et d'en profiter.</p>
         </div>
     </section>
 
@@ -336,6 +380,9 @@ button:hover {
         </div>
     </div>
 
+        <button id="back-to-top" aria-label="Retour en haut"><i class="fas fa-arrow-up"></i></button>
+    <footer><p>© 2026 JulShelby — Portail personnel.</p></footer>
+    <script src="../script.js" defer></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const grid = document.getElementById('memento-grid');

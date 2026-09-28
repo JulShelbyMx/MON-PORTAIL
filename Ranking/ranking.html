@@ -1,9 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr" data-theme="dark" data-theme-lock="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ranking - Jul's Portal</title>
+    <meta name="description" content="Classement personnel d'animes et de séries, avec favoris et pépites cachées.">
+    <meta name="theme-color" content="#0b0d12">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="../styles.css">
     <link rel="shortcut icon" href="../images/logopage.png" />
     
@@ -17,13 +23,14 @@
 
         /* Styles de base */
         body {
-            background: #0a0a0a url('../images/images-ranking/background.jpg') repeat;
+            background: var(--bg) url('../images/images-ranking/background.jpg') repeat;
             background-size: 100% auto;
             color: #fff;
-            font-family: 'Arial', sans-serif;
+            font-family: var(--font-body), sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
+            padding-top: var(--header-h);
         }
 
         /* Header et bouton Back */
@@ -45,7 +52,7 @@
             background: rgba(0, 0, 0, 0.85);
             padding: 2px;
             border-radius: 20px;
-            border: 2px solid #ffb300;
+            border: 2px solid var(--accent);
             position: absolute;
             bottom: 20px;
             left: 50%;
@@ -59,26 +66,26 @@
             top: 20px;
             left: 20px;
             padding: 12px 25px;
-            background-color: #ffb300;
-            color: #0a0a0a;
+            background-color: var(--accent);
+            color: var(--bg);
             text-decoration: none;
-            border-radius: 10px;
-            font-family: 'Pirata One', sans-serif;
+            border-radius: 999px;
+            font-family: var(--font-display), sans-serif;
             font-size: 20px;
-            border: 3px solid #0a0a0a;
+            border: 3px solid var(--bg);
             transition: background-color 0.3s ease, transform 0.3s ease;
             cursor: pointer;
             z-index: 1003;
         }
 
         .return-button:hover {
-            background-color: #e0a800;
+            background-color: var(--accent-strong);
             transform: scale(1.1);
         }
 
         .return-button:focus {
             outline: none;
-            box-shadow: 0 0 5px 2px #ffb300;
+            box-shadow: 0 0 5px 2px var(--accent);
         }
 
         /* Bordures jaunes */
@@ -92,7 +99,7 @@
             margin-right: 5px;
             width: auto;
             height: 6px;
-            background: #ffb300;
+            background: var(--accent);
             box-shadow: 0 0 10px rgba(255, 179, 0, 0.8);
             z-index: 1002;
         }
@@ -107,15 +114,15 @@
             margin-right: 5px;
             width: auto;
             height: 6px;
-            background: #ffb300;
+            background: var(--accent);
             box-shadow: 0 0 10px rgba(255, 179, 0, 0.8);
             z-index: 1002;
         }
 
         .ranking-hero h2 {
-            font-family: 'Pirata One', sans-serif;
+            font-family: var(--font-display), sans-serif;
             font-size: 30px;
-            color: #ffb300;
+            color: var(--accent);
             text-shadow: 3px 3px 8px #000;
             margin: 0;
             padding: 8px;
@@ -135,13 +142,13 @@
             border-radius: 15px;
             background: rgba(34, 34, 34, 0.95);
             box-shadow: 0 0 20px rgba(255, 179, 0, 0.6);
-            border: 2px solid #ffb300;
+            border: 2px solid var(--accent);
         }
 
         .tier h3 {
-            font-family: 'Pirata One', sans-serif;
+            font-family: var(--font-display), sans-serif;
             font-size: 32px;
-            color: #ffb300;
+            color: var(--accent);
             text-align: center;
             margin: 0 0 25px;
             background: url('../images/images-ranking/tier-background.jpg') repeat;
@@ -161,7 +168,7 @@
             display: flex;
             align-items: flex-start;
             background: rgba(0, 0, 0, 0.6);
-            border-radius: 10px;
+            border-radius: 14px;
             margin-bottom: 20px;
             padding: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
@@ -173,7 +180,7 @@
             object-fit: cover;
             border-radius: 8px;
             margin-right: 25px;
-            border: 2px solid #ffb300;
+            border: 2px solid var(--accent);
             box-shadow: 0 0 10px rgba(255, 179, 0, 0.5);
         }
 
@@ -282,7 +289,7 @@
             padding: 10px;
             background: rgba(255, 179, 0, 0.1);
             border-radius: 8px;
-            border-left: 3px solid #ffb300;
+            border-left: 3px solid var(--accent);
         }
 
         .tier ul ul li {
@@ -545,13 +552,77 @@
                 font-size: 9px;
             }
         }
+    
+        /* ===== v2: aligned with the site design system ===== */
+        body { background: var(--bg) !important; }
+        .ranking-container { max-width: 900px; margin: 34px auto 60px; padding: 0 20px; }
+        .tier {
+            --tier-color: var(--accent);
+            background: var(--surface);
+            border: 1px solid var(--border-soft);
+            border-left: 4px solid var(--tier-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+            padding: 22px;
+            margin-bottom: 26px;
+        }
+        .tier h3 {
+            background: none; box-shadow: none; text-shadow: none;
+            text-align: left; font-size: 20px; letter-spacing: -0.2px;
+            color: var(--tier-color); margin: 0 0 16px; padding: 0 0 12px;
+            border-bottom: 1px solid var(--border-soft); border-radius: 0;
+        }
+        .tier li {
+            background: var(--bg-soft); border: 1px solid var(--border-soft);
+            border-radius: var(--radius); box-shadow: none; padding: 14px; margin-bottom: 12px;
+            transition: border-color .18s, transform .18s;
+        }
+        .tier li:hover { border-color: color-mix(in srgb, var(--tier-color) 60%, transparent); transform: translateY(-2px); }
+        .ssss-tier { --tier-color: #ff5c8a; }
+        .sss-tier  { --tier-color: #ff7a45; }
+        .ss-tier   { --tier-color: #f2b04c; }
+        .s-tier    { --tier-color: #5fd068; }
+        .a-tier    { --tier-color: #38bdf8; }
+        .b-tier    { --tier-color: #6b8cff; }
+        .c-tier    { --tier-color: #a86bff; }
+        .d-tier    { --tier-color: #f062b8; }
+        .e-tier    { --tier-color: #2dd4bf; }
+        .f-tier    { --tier-color: #7bb67b; }
+        .todo-tier { --tier-color: #ff8a6b; }
+        .ssss-tier, .sss-tier, .ss-tier, .s-tier, .a-tier, .b-tier, .c-tier, .d-tier, .e-tier, .f-tier, .todo-tier { background: var(--surface); }
     </style>
 </head>
 <body>
-    <section class="ranking-hero">
-        <a href="../index.html" class="return-button">BACK</a>
-        <div class="ranking-hero-content">
-            <h2>Manga/Anime Ranking</h2>
+<header>
+    <a href="../index.html" class="logo">
+        <img src="../images/logopage.png" alt="" class="logo-icon">
+        <img src="../images/Julsportal.png" alt="Jul's Portal" class="logo-text">
+    </a>
+
+    <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <nav class="nav-buttons" aria-label="Navigation principale">
+        <a href="../index.html" class="nav-button"><i class="fas fa-house"></i> Accueil</a>
+        <a href="../Timetable/timetable.html" class="nav-button"><i class="fas fa-calendar-days"></i> Emploi du temps</a>
+        <a href="../Ranking/ranking.html" class="nav-button active"><i class="fas fa-ranking-star"></i> Ranking</a>
+        <a href="../memento-mori/memento-mori.html" class="nav-button"><i class="fas fa-hourglass-half"></i> Memento Mori</a>
+    </nav>
+
+    <div class="header-actions">
+        <button id="theme-toggle" class="icon-button" aria-label="Changer de thème">
+            <i class="fas fa-sun"></i>
+        </button>
+    </div>
+</header>
+
+    <section class="page-hero has-image">
+        <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Accueil</a>
+        <div class="page-hero-inner">
+            <span class="hero-eyebrow"><i class="fas fa-ranking-star"></i> Ranking</span>
+            <h1>Mon classement manga / anime</h1>
+            <p>Un tier list perso, des pépites cachées, et quelques easter eggs à débusquer en survolant les images.</p>
         </div>
     </section>
 
@@ -561,7 +632,7 @@
             <h3>✧ SSSS (God-tier)</h3>
             <ul>
                 <li>
-                    <img src="../images/images-ranking/one-piece.gif" alt="One Piece">
+                    <img src="../images/images-ranking/one-piece.gif" alt="One Piece" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>ONE PIECE</strong>
@@ -571,7 +642,7 @@
                         <div class="author">Auteur : Eiichiro Oda</div>
                         <ul>
                             <li>
-                                <img src="../images/images-ranking/opmonsters.webp" alt="Monsters">
+                                <img src="../images/images-ranking/opmonsters.webp" alt="Monsters" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>OAV Monsters</strong>
                                     <div class="author">Auteur : Eiichiro Oda</div>
@@ -579,7 +650,7 @@
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/oplogfishman.jpg" alt="Fishman">
+                                <img src="../images/images-ranking/oplogfishman.jpg" alt="Fishman" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>One Piece Log: Fish-man Island</strong>
                                     <div class="author">Par : Toei Animation</div>
@@ -587,7 +658,7 @@
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/opwanted.jpg" alt="Wanted">
+                                <img src="../images/images-ranking/opwanted.jpg" alt="Wanted" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>Wanted</strong>
                                     <div class="author">Auteur : Eiichiro Oda</div>
@@ -595,7 +666,7 @@
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/opliveaction.jpg" alt="Live Action">
+                                <img src="../images/images-ranking/opliveaction.jpg" alt="Live Action" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>One Piece Live Action</strong>
                                     <div class="author">Par : Eiichiro Oda / Netflix</div>
@@ -605,7 +676,7 @@
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/theonepiece.webp" alt="TheOnePiece">
+                                <img src="../images/images-ranking/theonepiece.webp" alt="TheOnePiece" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>The One Piece</strong>
                                     <div class="author">Par : Wit Studio</div>
@@ -680,7 +751,7 @@
             <h3>★★★ SSS</h3>
             <ul>
                 <li>
-                    <img src="../images/images-ranking/naruto.jpg" alt="Naruto">
+                    <img src="../images/images-ranking/naruto.jpg" alt="Naruto" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>NARUTO</strong>
@@ -711,7 +782,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/bleach.gif" alt="Bleach">
+                    <img src="../images/images-ranking/bleach.gif" alt="Bleach" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>BLEACH</strong>
@@ -781,7 +852,7 @@
             <h3>★★ SS</h3>
             <ul>
                 <li>
-                    <img src="../images/images-ranking/snk.jpg" alt="Shingeki no Kyojin">
+                    <img src="../images/images-ranking/snk.jpg" alt="Shingeki no Kyojin" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>SHINGEKI NO KYOJIN</strong>
@@ -792,7 +863,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/vinland-saga.webp" alt="Vinland Saga">
+                    <img src="../images/images-ranking/vinland-saga.webp" alt="Vinland Saga" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>VINLAND SAGA</strong>
@@ -803,7 +874,7 @@
                     </div>
                 </li>   
                 <li>
-                    <img src="../images/images-ranking/berserk.jpg" alt="Berserk">
+                    <img src="../images/images-ranking/berserk.jpg" alt="Berserk" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>BERSERK</strong>
@@ -826,7 +897,7 @@
             <h3>★ S</h3>
             <ul>
                 <li>
-                    <img src="../images/images-ranking/jojo.webp" alt="JoJo's Bizarre Adventure" class="interactive-img" data-alt-src="../images/images-ranking/jojo.gif" data-audio-id="dio-audio">
+                    <img src="../images/images-ranking/jojo.webp" alt="JoJo's Bizarre Adventure" class="interactive-img" data-alt-src="../images/images-ranking/jojo.gif" data-audio-id="dio-audio" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>JOJO'S BIZARRE ADVENTURES</strong>
@@ -836,49 +907,49 @@
                         <div class="author">Auteur : Hirohiko Araki</div>
                         <ul>
                             <li>
-                                <img src="../images/images-ranking/jojopart1.webp" alt="JoJo's Bizarre Adventure Part 1">
+                                <img src="../images/images-ranking/jojopart1.webp" alt="JoJo's Bizarre Adventure Part 1" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>Phantom Blood (Jonathan Joestar) - Part1</strong>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span>Fini</span>
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/jojopart2.jpg" alt="JoJo's Bizarre Adventure Part 2">
+                                <img src="../images/images-ranking/jojopart2.jpg" alt="JoJo's Bizarre Adventure Part 2" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>Battle Tendency (Joseph Joestar) - Part2</strong>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/jojopart3.avif" alt="JoJo's Bizarre Adventure Part 3" class="interactive-img" data-alt-src="../images/images-ranking/jojopart3.gif" data-audio-id="jotaro-audio">
+                                <img src="../images/images-ranking/jojopart3.avif" alt="JoJo's Bizarre Adventure Part 3" class="interactive-img" data-alt-src="../images/images-ranking/jojopart3.gif" data-audio-id="jotaro-audio" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>Stardust Crusaders (Kujo Jotaro) - Part3</strong>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/jojopart4.jpg" alt="JoJo's Bizarre Adventure Part 4">
+                                <img src="../images/images-ranking/jojopart4.jpg" alt="JoJo's Bizarre Adventure Part 4" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>Diamond is Unbreakable (Higashikata Josuke) - Part4</strong>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/jojopart5.webp" alt="JoJo's Bizarre Adventure Part 5">
+                                <img src="../images/images-ranking/jojopart5.webp" alt="JoJo's Bizarre Adventure Part 5" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>Golden Wind (Giorno Giovanna) - Part5</strong>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/jojopart6.webp" alt="JoJo's Bizarre Adventure Part 6">
+                                <img src="../images/images-ranking/jojopart6.webp" alt="JoJo's Bizarre Adventure Part 6" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>Stone Ocean (Kujo Jolyne) - Part6</strong>
                                     <span class="status-fini status-anime"><span class="status-fini-dot status-dot"></span> Fini</span>
                                 </div>
                             </li>
                             <li>
-                                <img src="../images/images-ranking/jojopart7.webp" alt="JoJo's Bizarre Adventure Part 7">
+                                <img src="../images/images-ranking/jojopart7.webp" alt="JoJo's Bizarre Adventure Part 7" loading="lazy" decoding="async">
                                 <div class="title-status">
                                     <strong>Steel Ball Run (Johnny Joestar) - Part7</strong>
                                     <span class="status-a-voir status-anime"><span class="status-a-voir-dot status-dot"></span>A voir</span>
@@ -904,7 +975,7 @@
             <h3>A</h3>
             <ul>
                 <li>
-                    <img src="../images/images-ranking/black-clover.webp" alt="Black Clover">
+                    <img src="../images/images-ranking/black-clover.webp" alt="Black Clover" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>BLACK CLOVER</strong>
@@ -916,7 +987,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/fairy-tail.webp" alt="Fairy Tail">
+                    <img src="../images/images-ranking/fairy-tail.webp" alt="Fairy Tail" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>FAIRY TAIL</strong>
@@ -937,7 +1008,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/my-hero-academia.jpg" alt="My Hero Academia">
+                    <img src="../images/images-ranking/my-hero-academia.jpg" alt="My Hero Academia" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>MY HERO ACADEMIA</strong>
@@ -949,7 +1020,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/hunter-x-hunter.jpg" alt="Hunter x Hunter">
+                    <img src="../images/images-ranking/hunter-x-hunter.jpg" alt="Hunter x Hunter" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>HUNTER X HUNTER</strong>
@@ -960,7 +1031,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/knymovie.webp" alt="Demon Slayer">
+                    <img src="../images/images-ranking/knymovie.webp" alt="Demon Slayer" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>DEMON SLAYER</strong>
@@ -973,7 +1044,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/jujutsu-kaisen.jpg" alt="Jujutsu Kaisen">
+                    <img src="../images/images-ranking/jujutsu-kaisen.jpg" alt="Jujutsu Kaisen" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>JUJUTSU KAISEN</strong>
@@ -984,7 +1055,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/dr-stone.webp" alt="Dr. Stone">
+                    <img src="../images/images-ranking/dr-stone.webp" alt="Dr. Stone" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>DR. STONE</strong>
@@ -1005,7 +1076,7 @@
             <h3>B</h3>
             <ul>
                 <li>
-                    <img src="../images/images-ranking/death-note.webp" alt="Death Note">
+                    <img src="../images/images-ranking/death-note.webp" alt="Death Note" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>DEATH NOTE</strong>
@@ -1016,7 +1087,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/high-school-dxd.jpg" alt="High School DxD">
+                    <img src="../images/images-ranking/high-school-dxd.jpg" alt="High School DxD" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>HIGH SCHOOL DXD</strong>
@@ -1027,7 +1098,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/fire-force.webp" alt="Fire Force">
+                    <img src="../images/images-ranking/fire-force.webp" alt="Fire Force" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>FIRE FORCE</strong>
@@ -1038,7 +1109,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/assassination-classroom.jpg" alt="Assassination Classroom">
+                    <img src="../images/images-ranking/assassination-classroom.jpg" alt="Assassination Classroom" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>ASSASSINATION CLASSROOM</strong>
@@ -1049,7 +1120,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/tokyo-ghoul.jpg" alt="Tokyo Ghoul">
+                    <img src="../images/images-ranking/tokyo-ghoul.jpg" alt="Tokyo Ghoul" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>TOKYO GHOUL</strong>
@@ -1060,7 +1131,7 @@
                          </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/solo-leveling.webp" alt="Solo Leveling">
+                    <img src="../images/images-ranking/solo-leveling.webp" alt="Solo Leveling" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>SOLO LEVELING</strong>
@@ -1073,7 +1144,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/nana.jpg" alt="Nana">
+                    <img src="../images/images-ranking/nana.jpg" alt="Nana" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>NANA</strong>
@@ -1096,7 +1167,7 @@
             <ul>
 
                 <li>
-                    <img src="../images/images-ranking/chainsawman.gif" alt="Chainsaw Man">
+                    <img src="../images/images-ranking/chainsawman.gif" alt="Chainsaw Man" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>CHAINSAW MAN</strong>
@@ -1109,7 +1180,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/tokyo-revengers.webp" alt="Tokyo Revengers">
+                    <img src="../images/images-ranking/tokyo-revengers.webp" alt="Tokyo Revengers" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>TOKYO REVENGERS</strong>
@@ -1121,7 +1192,7 @@
                         <div class="author">Auteur : Ken Wakui</div>
                     </li>
                 <li>
-                    <img src="../images/images-ranking/eminence-in-shadow.webp" alt="The Eminence in Shadow">
+                    <img src="../images/images-ranking/eminence-in-shadow.webp" alt="The Eminence in Shadow" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>THE EMINENCE IN SHADOW</strong>
@@ -1132,7 +1203,7 @@
                     </div>
                 </li>
                  <li>
-                    <img src="../images/images-ranking/mirai-nikki.webp" alt="Mirai Nikki">
+                    <img src="../images/images-ranking/mirai-nikki.webp" alt="Mirai Nikki" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>MIRAI NIKKI</strong>
@@ -1143,7 +1214,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/carnets-de-l'apothicaire.webp" alt="Les Carnets de l’Apothicaire">
+                    <img src="../images/images-ranking/carnets-de-l'apothicaire.webp" alt="Les Carnets de l’Apothicaire" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>LES CARNETS DE L’APOTHICAIRE</strong>
@@ -1156,7 +1227,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/promised-neverland.webp" alt="The Promised Neverland">
+                    <img src="../images/images-ranking/promised-neverland.webp" alt="The Promised Neverland" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>THE PROMISED NEVERLAND</strong>
@@ -1167,7 +1238,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/ouran-host-club.jpg" alt="Ouran High School Host Club">
+                    <img src="../images/images-ranking/ouran-host-club.jpg" alt="Ouran High School Host Club" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>OURAN HIGH SCHOOL HOST CLUB</strong>
@@ -1178,7 +1249,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/maid-sama.jpg" alt="The President is a Maid">
+                    <img src="../images/images-ranking/maid-sama.jpg" alt="The President is a Maid" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>KAICHOU WA MAID-SAMA / CLASS PRESIDENT IS A MAID</strong>
@@ -1189,7 +1260,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/kaifuku.jpg" alt="Kaifuku Jutsushi no Yarinaoshi">
+                    <img src="../images/images-ranking/kaifuku.jpg" alt="Kaifuku Jutsushi no Yarinaoshi" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>KAIFUKU JUTSUSHI NO YARINAOSHI / REDO OF HEALER</strong>
@@ -1212,7 +1283,7 @@
             <ul>
                 
                 <li>
-                    <img src="../images/images-ranking/one-punch-man.webp" alt="One Punch Man">
+                    <img src="../images/images-ranking/one-punch-man.webp" alt="One Punch Man" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>ONE PUNCH MAN</strong>
@@ -1225,7 +1296,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/mashle.png" alt="Mashle">
+                    <img src="../images/images-ranking/mashle.png" alt="Mashle" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>MASHLE</strong>
@@ -1238,7 +1309,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/failure-frame.webp" alt="Failure Frame">
+                    <img src="../images/images-ranking/failure-frame.webp" alt="Failure Frame" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>FAILURE FRAME</strong>
@@ -1249,7 +1320,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/dandadan.webp" alt="Dandadan">
+                    <img src="../images/images-ranking/dandadan.webp" alt="Dandadan" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>DANDADAN</strong>
@@ -1262,7 +1333,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/bunny-girl-senpai.jpg" alt="Rascal Does Not Dream">
+                    <img src="../images/images-ranking/bunny-girl-senpai.jpg" alt="Rascal Does Not Dream" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>RASCAL DOES NOT DREAM OF BUNNY GIRL SENPAI</strong>
@@ -1275,7 +1346,7 @@
                     </div>
                 </li>
                  <li>
-                    <img src="../images/images-ranking/overflow.webp" alt="Overflow">
+                    <img src="../images/images-ranking/overflow.webp" alt="Overflow" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>JITSU WA IMA HAITTEMASU... OFURO DE ONII-CHAN NO KATAI ARE GA... / OVERFLOW</strong>
@@ -1286,7 +1357,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/ashhir.jpg" alt="ASHHIR">
+                    <img src="../images/images-ranking/ashhir.jpg" alt="ASHHIR" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>ALYA SOMETIMES HIDES HER FEELINGS IN RUSSIAN</strong>
@@ -1299,7 +1370,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/testamentsisnewdevil.jpg" alt="TTSND">
+                    <img src="../images/images-ranking/testamentsisnewdevil.jpg" alt="TTSND" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>THE TESTAMENT OF SISTER NEW DEVIL</strong>
@@ -1325,7 +1396,7 @@
             <ul>
 
                 <li>
-                    <img src="../images/images-ranking/my-dress-up-darling.webp" alt="My Dress-Up Darling">
+                    <img src="../images/images-ranking/my-dress-up-darling.webp" alt="My Dress-Up Darling" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>MY DRESS UP DARLING</strong>
@@ -1338,7 +1409,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/nagatoro.webp" alt="Nagatoro">
+                    <img src="../images/images-ranking/nagatoro.webp" alt="Nagatoro" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>NAGATORO</strong>
@@ -1349,7 +1420,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/edens-zero.jpg" alt="Edens Zero">
+                    <img src="../images/images-ranking/edens-zero.jpg" alt="Edens Zero" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>EDENS ZERO</strong>
@@ -1360,7 +1431,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/hells-paradise.gif" alt="Hell's Paradise">
+                    <img src="../images/images-ranking/hells-paradise.gif" alt="Hell's Paradise" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>HELL'S PARADISE</strong>
@@ -1371,7 +1442,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/ninja-kamui.webp" alt="Ninja Kamui">
+                    <img src="../images/images-ranking/ninja-kamui.webp" alt="Ninja Kamui" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>NINJA KAMUI</strong>
@@ -1381,7 +1452,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/peach-girl.webp" alt="Peach Girl">
+                    <img src="../images/images-ranking/peach-girl.webp" alt="Peach Girl" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>PEACH GIRL</strong>
@@ -1392,7 +1463,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/servamp.webp" alt="Servamp">
+                    <img src="../images/images-ranking/servamp.webp" alt="Servamp" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>SERVAMP</strong>
@@ -1416,7 +1487,7 @@
             <h3>F</h3>
             <ul>
                 <li>
-                    <img src="../images/images-ranking/hyoka.webp" alt="Hyōka">
+                    <img src="../images/images-ranking/hyoka.webp" alt="Hyōka" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>HYŌKA</strong>
@@ -1426,7 +1497,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/fuufu-miman.webp" alt="Fuufu Ijou Koibito Miman">
+                    <img src="../images/images-ranking/fuufu-miman.webp" alt="Fuufu Ijou Koibito Miman" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>FUUFU IJOU KOIBITO MIMAN</strong>
@@ -1437,7 +1508,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/inukai-san.jpg" alt="My Life as Inukai-san's Dog">
+                    <img src="../images/images-ranking/inukai-san.jpg" alt="My Life as Inukai-san's Dog" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>MY LIFE AS INUKAI-SAN'S DOG</strong>
@@ -1448,7 +1519,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/tenpuru.webp" alt="Tenpuru">
+                    <img src="../images/images-ranking/tenpuru.webp" alt="Tenpuru" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>TENPURU</strong>
@@ -1459,7 +1530,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/100-girlfriends.jpg" alt="The 100 Girlfriends">
+                    <img src="../images/images-ranking/100-girlfriends.jpg" alt="The 100 Girlfriends" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>THE 100 GIRLFRIENDS</strong>
@@ -1472,7 +1543,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/demon-slave.webp" alt="Demon Slave">
+                    <img src="../images/images-ranking/demon-slave.webp" alt="Demon Slave" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>DEMON SLAVE</strong>
@@ -1483,7 +1554,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/yosuga-no-sora.webp" alt="Yosuga no Sora">
+                    <img src="../images/images-ranking/yosuga-no-sora.webp" alt="Yosuga no Sora" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>YOSUGA NO SORA</strong>
@@ -1493,7 +1564,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/gods-games-we-play.webp" alt="God's Games We Play">
+                    <img src="../images/images-ranking/gods-games-we-play.webp" alt="God's Games We Play" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>GOD'S GAMES WE PLAY</strong>
@@ -1504,7 +1575,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/kiss-him-not-me.webp" alt="Kiss Him, Not Me">
+                    <img src="../images/images-ranking/kiss-him-not-me.webp" alt="Kiss Him, Not Me" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>KISS HIM NOT ME!</strong>
@@ -1515,7 +1586,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/bgatahkei.jpg" alt="B Gata H Kei">
+                    <img src="../images/images-ranking/bgatahkei.jpg" alt="B Gata H Kei" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>B GATA H KEI</strong>
@@ -1526,7 +1597,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/kissxsis.jpg" alt="Kiss X Sis">
+                    <img src="../images/images-ranking/kissxsis.jpg" alt="Kiss X Sis" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>KISS X SIS</strong>
@@ -1537,7 +1608,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/nukitashi.webp" alt="NUKITASHI">
+                    <img src="../images/images-ranking/nukitashi.webp" alt="NUKITASHI" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>NUKITASHI THE ANIMATION</strong>
@@ -1548,7 +1619,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/velvetkiss.jpg" alt="Velvet Kiss">
+                    <img src="../images/images-ranking/velvetkiss.jpg" alt="Velvet Kiss" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>Velvet Kiss</strong>
@@ -1571,7 +1642,7 @@
             <h3>ANIMES À VOIR + SCANS À LIRE + FILMS</h3>
             <ul>
                 <li>
-                    <img src="../images/images-ranking/sao.webp" alt="SAO">
+                    <img src="../images/images-ranking/sao.webp" alt="SAO" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>SWORD ART ONLINE</strong>
@@ -1582,7 +1653,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/fma.jpg" alt="FMA">
+                    <img src="../images/images-ranking/fma.jpg" alt="FMA" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>FULLMETAL ALCHEMIST</strong>
@@ -1593,7 +1664,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/7ds.png" alt="7DS">
+                    <img src="../images/images-ranking/7ds.png" alt="7DS" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>THE SEVEN DEADLY SINS</strong>
@@ -1604,7 +1675,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/akamegakill.webp" alt="AGK">
+                    <img src="../images/images-ranking/akamegakill.webp" alt="AGK" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>AKAME GA KILL</strong>
@@ -1615,7 +1686,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/yourlieinapril.jpg" alt="Your lie in april">
+                    <img src="../images/images-ranking/yourlieinapril.jpg" alt="Your lie in april" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>YOUR LIE IN APRIL (film)</strong>
@@ -1626,7 +1697,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/ayanokoji.avif" alt="COE">
+                    <img src="../images/images-ranking/ayanokoji.avif" alt="COE" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>CLASSROOM OF THE ELITE</strong>
@@ -1637,7 +1708,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/foodwars.jpg" alt="Food Wars">
+                    <img src="../images/images-ranking/foodwars.jpg" alt="Food Wars" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>FOOD WARS</strong>
@@ -1648,7 +1719,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/bloodc.jpg" alt="Blood-C">
+                    <img src="../images/images-ranking/bloodc.jpg" alt="Blood-C" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>BLOOD-C</strong>
@@ -1659,7 +1730,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/fruitsbasket.jpg" alt="fruitsbasket">
+                    <img src="../images/images-ranking/fruitsbasket.jpg" alt="fruitsbasket" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>FRUITS BASKET</strong>
@@ -1670,7 +1741,7 @@
                     </div>
                 </li>
                 <li>
-                    <img src="../images/images-ranking/aoharuride.avif" alt="aoharuride">
+                    <img src="../images/images-ranking/aoharuride.avif" alt="aoharuride" loading="lazy" decoding="async">
                     <div class="content">
                         <div class="title-status">
                             <strong>AO HARU RIDE</strong>
@@ -1691,6 +1762,9 @@
         <audio id="dio-audio" src="../audio/dio.mp3" preload="auto"></audio>
         <audio id="jotaro-audio" src="../audio/jotaro.mp3" preload="auto"></audio>
 
+           <button id="back-to-top" aria-label="Retour en haut"><i class="fas fa-arrow-up"></i></button>
+    <footer><p>© 2026 JulShelby — Portail personnel.</p></footer>
+    <script src="../script.js" defer></script>
        <script>
     // Gestion des images interactives (ex: JoJo avec changement d'image et son)
     document.querySelectorAll('.interactive-img').forEach(img => {

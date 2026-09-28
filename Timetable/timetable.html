@@ -1,79 +1,157 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliya's Timetable - Year 10 [2025-2024]</title>
+    <meta name="description" content="Emploi du temps interactif d'Eliya avec vacances et jours fériés.">
+    <meta name="theme-color" content="#0b0d12">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="timetable.css">
-    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="../images/logopage.png" />
+    <script>try{var t=localStorage.getItem('jp-theme');if(!t&&window.matchMedia('(prefers-color-scheme: light)').matches)t='light';if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 </head>
 <body>
-    <div class="timetable-hero">
-        <a href="../index.html" class="return-button">BACK</a>
-        <button class="hamburger-menu" id="hamburger-menu">
-            <span></span>
-            <span></span>
-            <span></span>
+    <header>
+        <a href="../index.html" class="logo">
+            <img src="../images/logopage.png" alt="" class="logo-icon">
+            <img src="../images/Julsportal.png" alt="Jul's Portal" class="logo-text">
+        </a>
+
+        <button class="hamburger" aria-label="Ouvrir le menu" aria-expanded="false">
+            <i class="fas fa-bars"></i>
         </button>
-    </div>
 
-    <div class="sidebar" id="sidebar">
-        <button class="close-sidebar" id="close-sidebar">✕</button>
-        <div class="sidebar-tabs">
-            <button class="tab-button active" data-tab="holidays">Holidays</button>
-            <button class="tab-button" data-tab="bank-holidays">Bank Holidays</button>
+        <nav class="nav-buttons" aria-label="Navigation principale">
+            <a href="../index.html" class="nav-button"><i class="fas fa-house"></i> Accueil</a>
+            <a href="../Timetable/timetable.html" class="nav-button active"><i class="fas fa-calendar-days"></i> Emploi du temps</a>
+            <a href="../Ranking/ranking.html" class="nav-button"><i class="fas fa-ranking-star"></i> Ranking</a>
+            <a href="../memento-mori/memento-mori.html" class="nav-button"><i class="fas fa-hourglass-half"></i> Memento Mori</a>
+        </nav>
+
+        <div class="header-actions">
+            <button id="theme-toggle" class="icon-button" aria-label="Changer de thème">
+                <i class="fas fa-sun"></i>
+            </button>
         </div>
-        <div class="sidebar-content">
-            <div class="tab-content active" id="holidays">
-                <h2>Holidays</h2>
-                <table class="holiday-table" id="holidays-table">
-                    <thead>
-                        <tr>
-                            <th>Start Date</th>
-                            <th>End Date</th>
-                            <th>Reason</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div class="tab-content" id="bank-holidays">
-                <h2>Bank Holidays</h2>
-                <table class="holiday-table" id="bank-holidays-table">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Reason</th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+    </header>
+
+    <section class="page-hero has-image">
+        <a href="../index.html" class="back-link"><i class="fas fa-arrow-left"></i> Accueil</a>
+        <div class="page-hero-inner">
+            <span class="hero-eyebrow"><i class="fas fa-calendar-days"></i> Emploi du temps</span>
+            <h1 id="timetable-title">Emploi du temps</h1>
+            <p id="timetable-subtitle">Choisis l'emploi du temps à afficher.</p>
+            <div class="tab-switch" role="tablist" aria-label="Choix de l'emploi du temps">
+                <button type="button" class="active" data-target="tab-eliya" role="tab" aria-selected="true">
+                    <i class="fas fa-child-reaching"></i> Eliya
+                </button>
+                <button type="button" data-target="tab-mine" role="tab" aria-selected="false">
+                    <i class="fas fa-user-graduate"></i> My timetable
+                </button>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="timetable-container">
-        <div class="holiday-message" id="holiday-message" style="display: none;">
-            No classes today
-            <div class="holiday-options" id="holiday-options">
-                <button class="toggle-button" id="show-return-timetable">Show the timetable for the first week back</button>
-                <button class="toggle-button" id="show-week-timetable">Show the timetable for this week</button>
+    <!-- ================= ELIYA'S TIMETABLE ================= -->
+    <div class="tab-panel active" id="tab-eliya">
+        <div style="display:flex; justify-content:center; padding: 14px 20px 0;">
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="Vacances et jours fériés"><i class="fas fa-umbrella-beach"></i> Vacances &amp; jours fériés</button>
+        </div>
+
+        <div class="sidebar" id="sidebar">
+            <button class="close-sidebar" id="close-sidebar">✕</button>
+            <div class="sidebar-tabs">
+                <button class="tab-button active" data-tab="holidays">Holidays</button>
+                <button class="tab-button" data-tab="bank-holidays">Bank Holidays</button>
+            </div>
+            <div class="sidebar-content">
+                <div class="tab-content active" id="holidays">
+                    <h2>Holidays</h2>
+                    <table class="holiday-table" id="holidays-table">
+                        <thead>
+                            <tr>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="tab-content" id="bank-holidays">
+                    <h2>Bank Holidays</h2>
+                    <table class="holiday-table" id="bank-holidays-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Reason</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <div id="timetable-message" style="display: none; text-align: center; margin-bottom: 10px;"></div>
-         <div class="timetable-toggle">
-            <button id="toggle-button" class="toggle-button">Switch to Week B</button>
+        <div class="timetable-container">
+            <div class="holiday-message" id="holiday-message" style="display: none;">
+                No classes today
+                <div class="holiday-options" id="holiday-options">
+                    <button class="toggle-button" id="show-return-timetable">Show the timetable for the first week back</button>
+                    <button class="toggle-button" id="show-week-timetable">Show the timetable for this week</button>
+                </div>
+            </div>
+
+            <div id="timetable-message" style="display: none; text-align: center; margin-bottom: 10px;"></div>
+             <div class="timetable-toggle">
+                <button id="toggle-button" class="toggle-button">Switch to Week B</button>
+            </div>
+
+            <div id="timetable-week-a"></div>
+            <div id="timetable-week-b" style="display: none;"></div>
+
+            <div class="no-class-message" id="no-class-message">NO CLASS RN</div>
         </div>
-
-        <div id="timetable-week-a"></div>
-        <div id="timetable-week-b" style="display: none;"></div>
-
-        <div class="no-class-message" id="no-class-message">NO CLASS RN</div>
     </div>
 
+    <!-- ================= MY (URCA) TIMETABLE ================= -->
+    <div class="tab-panel" id="tab-mine">
+        <div class="uni-toolbar">
+            <button type="button" class="uni-nav-btn" id="uni-prev-week" aria-label="Semaine précédente">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="uni-range-label" id="uni-range-label">—</span>
+            <button type="button" class="uni-nav-btn" id="uni-next-week" aria-label="Semaine suivante">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            <button type="button" class="uni-nav-btn" id="uni-today" aria-label="Revenir à cette semaine" title="Cette semaine">
+                <i class="fas fa-calendar-day"></i>
+            </button>
+            <button type="button" class="uni-nav-btn" id="uni-refresh" aria-label="Rafraîchir" title="Rafraîchir">
+                <i class="fas fa-arrows-rotate"></i>
+            </button>
+        </div>
+        <div class="uni-status" id="uni-status"></div>
+        <div class="uni-week" id="uni-week"></div>
+    </div>
+
+    <button id="back-to-top" aria-label="Retour en haut">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <footer>
+        <p>© 2026 JulShelby — Portail personnel.</p>
+    </footer>
+
+    <script src="../script.js" defer></script>
     <script src="timetable.js"></script>
+    <script src="ics-parser.js" defer></script>
+    <script src="my-timetable.js" defer></script>
     <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'942a80f07e9622bd',t:'MTc0NzczMDE1OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>

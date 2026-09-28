@@ -1,13 +1,16 @@
 body {
-    background-color: #111;
-    color: white;
-    font-family: 'Arial', sans-serif;
+    background-color: var(--accent-contrast);
+    color: var(--text);
+    font-family: var(--font-body), sans-serif;
     margin: 0;
     padding: 0;
+    padding-top: var(--header-h);
 }
 
 .timetable-hero {
-    background: url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
+    background:
+        linear-gradient(180deg, rgba(11,13,18,0.35), var(--bg) 92%),
+        url('../images/onepiece-hero-background.jpg') no-repeat center center/cover;
     height: 30vh;
     display: flex;
     justify-content: center;
@@ -17,19 +20,19 @@ body {
 
 .return-button {
     padding: 15px 25px;
-    background-color: #ffb300;
-    color: #0a0a0a;
+    background-color: var(--accent);
+    color: var(--accent-contrast);
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 999px;
     font-size: 20px;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    border: 2px solid #0a0a0a;
+    border: 2px solid var(--bg);
 }
 
 .return-button:hover {
-    background-color: #e0a800;
+    background-color: var(--accent-strong);
     transform: scale(1.05);
 }
 
@@ -46,18 +49,18 @@ body {
 
 .toggle-button {
     padding: 10px 20px;
-    background-color: #87CEEB;
-    color: #0a0a0a;
+    background-color: var(--accent);
+    color: var(--accent-contrast);
     border: none;
     border-radius: 5px;
     font-size: 16px;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .toggle-button:hover {
-    background-color: #ADD8E6;
+    background-color: var(--accent-strong);
 }
 
 #toggle-button {
@@ -74,63 +77,63 @@ body {
 .timetable-table {
     width: 100%;
     border-collapse: collapse;
-    background: #222;
+    background: var(--surface);
     border-radius: 8px;
     overflow: hidden;
 }
 
 .timetable-table th, .timetable-table td {
     padding: 10px;
-    border: 1px solid #87CEEB;
+    border: 1px solid var(--accent);
     text-align: center;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     font-size: 14px;
 }
 
 .timetable-table th {
-    background-color: #87CEEB;
-    color: #0a0a0a;
+    background-color: var(--accent);
+    color: var(--accent-contrast);
     font-size: 16px;
 }
 
 .classroom {
     font-size: 12px;
-    color: #87CEEB;
+    color: var(--accent);
     font-weight: bold;
     margin-top: 3px;
     display: block;
 }
 
 .holiday-message {
-    background: #222;
+    background: var(--surface);
     padding: 20px;
     border-radius: 8px;
-    border: 2px solid #87CEEB;
+    border: 2px solid var(--accent);
     font-size: 18px;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     margin-bottom: 20px;
 }
 
 #timetable-message {
-    background: #222;
+    background: var(--surface);
     padding: 15px;
     border-radius: 8px;
-    border: 2px solid #87CEEB;
+    border: 2px solid var(--accent);
     font-size: 16px;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     margin-bottom: 20px;
-    color: #87CEEB;
+    color: var(--accent);
 }
 
 .no-class-message {
-    background: #222;
+    background: var(--surface);
     padding: 15px;
     border-radius: 8px;
-    border: 2px solid #87CEEB;
+    border: 2px solid var(--accent);
     font-size: 16px;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     margin-top: 20px;
-    color: #87CEEB;
+    color: var(--accent);
     display: none;
 }
 
@@ -144,18 +147,18 @@ body {
 .time-toggle-button {
     margin-left: 5px;
     padding: 3px 8px;
-    background-color: #1a6482;
-    color: white;
+    background-color: var(--accent-soft);
+    color: var(--text);
     border: none;
     border-radius: 5px;
     font-size: 14px;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .time-toggle-button:hover {
-    background-color: #ADD8E6;
+    background-color: var(--accent-strong);
 }
 
 #time-zone-a, #time-zone-b {
@@ -188,10 +191,10 @@ body {
 .hamburger-menu span {
     width: 100%;
     height: 3px;
-    background-color: #fff;
+    background-color: var(--text);
     border-radius: 2px;
     transition: all 0.3s ease;
-    border: 1px solid #87CEEB;
+    border: 1px solid var(--accent);
 }
 
 .hamburger-menu.active span:nth-child(1) {
@@ -211,11 +214,11 @@ body {
     top: 0;
     width: 300px;
     height: 100vh;
-    background: #222;
-    border-right: 2px solid #87CEEB;
+    background: var(--surface);
+    border-right: 2px solid var(--accent);
     display: none;
     z-index: 1000;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
 }
 
 .sidebar.active {
@@ -226,8 +229,8 @@ body {
     position: absolute;
     top: 8px;
     right: 8px;
-    background: #87CEEB;
-    color: #0a0a0a;
+    background: var(--accent);
+    color: var(--accent-contrast);
     border: none;
     border-radius: 5px;
     font-size: 16px;
@@ -237,35 +240,35 @@ body {
 }
 
 .close-sidebar:hover {
-    background-color: #ADD8E6;
+    background-color: var(--accent-strong);
 }
 
 .sidebar-tabs {
     display: flex;
-    border-bottom: 2px solid #87CEEB;
+    border-bottom: 2px solid var(--accent);
     margin: 10px;
 }
 
 .tab-button {
     flex: 1;
     padding: 10px;
-    background: #333;
-    color: #87CEEB;
+    background: var(--surface-hover);
+    color: var(--accent);
     border: none;
     border-radius: 5px 5px 0 0;
     font-size: 16px;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .tab-button.active {
-    background: #87CEEB;
-    color: #0a0a0a;
+    background: var(--accent);
+    color: var(--accent-contrast);
 }
 
 .tab-button:hover {
-    background: #ADD8E6;
+    background: var(--accent-strong);
 }
 
 .sidebar-content {
@@ -285,38 +288,38 @@ body {
 
 .tab-content h2 {
     font-size: 22px;
-    color: #87CEEB;
+    color: var(--accent);
     margin-bottom: 15px;
 }
 
 .holiday-table {
     width: 100%;
     border-collapse: collapse;
-    background: #333;
+    background: var(--surface-hover);
     border-radius: 6px;
     overflow: hidden;
 }
 
 .holiday-table th, .holiday-table td {
     padding: 8px;
-    border: 1px solid #87CEEB;
+    border: 1px solid var(--accent);
     text-align: left;
     font-size: 14px;
 }
 
 #timetable-message {
-    background: #222;
+    background: var(--surface);
     padding: 20px;
     border-radius: 8px;
-    border: 2px solid #87CEEB;
+    border: 2px solid var(--accent);
     font-size: 18px;
-    font-family: 'Arial', sans-serif;
+    font-family: var(--font-body), sans-serif;
     margin-bottom: 20px;
 }
 
 .holiday-table th {
-    background: #87CEEB;
-    color: #0a0a0a;
+    background: var(--accent);
+    color: var(--accent-contrast);
     font-size: 16px;
 }
 
@@ -352,11 +355,11 @@ body {
         left: 0;
         z-index: 2;
         min-width: 120px;
-        background: #222;
+        background: var(--surface);
     }
 
     .timetable-table th:first-child {
-        background-color: #87CEEB;
+        background-color: var(--accent);
         z-index: 3;
     }
 
@@ -386,7 +389,7 @@ body {
 
     .hamburger-menu span {
         height: 4px;
-        border: 1px solid #87CEEB;
+        border: 1px solid var(--accent);
     }
 
     .sidebar {
@@ -487,7 +490,7 @@ body {
 
     .hamburger-menu span {
         height: 3px;
-        border: 1px solid #87CEEB;
+        border: 1px solid var(--accent);
     }
 
     .sidebar {
@@ -535,3 +538,38 @@ body {
         font-size: 11px;
     }
 }
+/* ---------- v2 overrides: aligned with the site design system ---------- */
+.hamburger-menu {
+    position: static;
+    transform: none;
+    width: auto;
+    height: auto;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    font-family: var(--font-body), sans-serif;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    transition: border-color .18s, background .18s;
+}
+.hamburger-menu:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+.sidebar { top: var(--header-h) !important; height: calc(100% - var(--header-h)) !important; z-index: 1500; background: var(--bg-soft); border-color: var(--border); }
+
+#time-zone-a, #time-zone-b { color: var(--accent-contrast); }
+
+.timetable-container { text-align: center; }
+.timetable-table { border-radius: var(--radius); border: 1px solid var(--border-soft); }
+.timetable-table th, .timetable-table td { border: 1px solid var(--border-soft); }
+.timetable-table th { background: var(--surface-hover); color: var(--text); font-family: var(--font-display), sans-serif; }
+.timetable-table td { background: var(--surface); color: var(--text); }
+.toggle-button { border-radius: 999px; font-weight: 600; padding: 10px 22px; }
+.holiday-message, #timetable-message, .no-class-message { border: 1px solid var(--border); border-radius: var(--radius); }
+.classroom { color: var(--accent-strong); }
+.current-lesson { border: 2px solid var(--accent) !important; background-color: var(--accent-soft) !important; box-shadow: 0 0 14px var(--accent-soft) !important; }
